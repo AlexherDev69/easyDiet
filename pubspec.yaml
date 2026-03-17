@@ -52,6 +52,14 @@ dev_dependencies:
   freezed: ^2.5.8
   json_serializable: ^6.9.5
   injectable_generator: ^2.7.0
+  flutter_launcher_icons: ^0.14.3
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "easydiet_icon_raw.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "easydiet_icon_raw.png"
 
 flutter:
   uses-material-design: true
