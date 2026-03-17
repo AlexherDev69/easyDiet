@@ -83,12 +83,13 @@ class _DashboardContent extends StatelessWidget {
     final theme = Theme.of(context);
     final s = state;
 
+    final topPadding = MediaQuery.of(context).padding.top;
+
     return SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.only(left: 20, right: 20, top: topPadding + 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16),
 
           // Header
           DashboardHeader(
