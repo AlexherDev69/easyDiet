@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/date_utils.dart';
@@ -36,67 +37,71 @@ class SettingsCubit extends Cubit<SettingsState> {
   Object? _originalDietFields;
 
   Future<void> _loadProfile() async {
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
 
-    final allergies = _parseStringList(profile.allergies)
-        .map((n) => Allergy.values.where((a) => a.name == n).firstOrNull)
-        .whereType<Allergy>()
-        .toSet();
+      final allergies = _parseStringList(profile.allergies)
+          .map((n) => Allergy.values.where((a) => a.name == n).firstOrNull)
+          .whereType<Allergy>()
+          .toSet();
 
-    final freeDaysList = _parseIntList(profile.freeDays).toSet();
+      final freeDaysList = _parseIntList(profile.freeDays).toSet();
 
-    final excludedMeats = _parseStringList(profile.excludedMeats)
-        .map(
-            (n) => ExcludedMeat.values.where((m) => m.name == n).firstOrNull)
-        .whereType<ExcludedMeat>()
-        .toSet();
+      final excludedMeats = _parseStringList(profile.excludedMeats)
+          .map(
+              (n) => ExcludedMeat.values.where((m) => m.name == n).firstOrNull)
+          .whereType<ExcludedMeat>()
+          .toSet();
 
-    final enabledMealTypes = _parseEnabledMealTypes(profile.enabledMealTypes);
+      final enabledMealTypes = _parseEnabledMealTypes(profile.enabledMealTypes);
 
-    final dietStartDate = AppDateUtils.fromEpochMillis(profile.dietStartDate);
+      final dietStartDate = AppDateUtils.fromEpochMillis(profile.dietStartDate);
 
-    emit(state.copyWith(
-      name: profile.name,
-      age: profile.age.toString(),
-      sex: Sex.values.firstWhere(
-        (s) => s.name == profile.sex,
-        orElse: () => Sex.male,
-      ),
-      heightCm: profile.heightCm.toString(),
-      weightKg: profile.weightKg.toString(),
-      targetWeightKg: profile.targetWeightKg.toString(),
-      lossPace: LossPace.values.firstWhere(
-        (lp) => lp.name == profile.lossPace,
-        orElse: () => LossPace.moderate,
-      ),
-      activityLevel: ActivityLevel.values.firstWhere(
-        (al) => al.name == profile.activityLevel,
-        orElse: () => ActivityLevel.sedentary,
-      ),
-      dietType: DietType.values.firstWhere(
-        (d) => d.name == profile.dietType,
-        orElse: () => DietType.omnivore,
-      ),
-      freeDays: freeDaysList,
-      batchCookingSessions: profile.batchCookingSessionsPerWeek,
-      shoppingTrips: profile.shoppingTripsPerWeek,
-      distinctBreakfasts: profile.distinctBreakfasts,
-      distinctLunches: profile.distinctLunches,
-      distinctDinners: profile.distinctDinners,
-      distinctSnacks: profile.distinctSnacks,
-      enabledMealTypes: enabledMealTypes,
-      dietStartDate: dietStartDate,
-      batchCookingBeforeDiet: profile.batchCookingBeforeDiet,
-      selectedAllergies: allergies,
-      excludedMeats: excludedMeats,
-      customAllergies: profile.customAllergies,
-      economicMode: profile.economicMode,
-      calculatedCalories: profile.dailyCalorieTarget,
-      calculatedWaterMl: profile.dailyWaterMl,
-      isLoading: false,
-    ));
-    _originalDietFields = extractDietFields(state);
+      emit(state.copyWith(
+        name: profile.name,
+        age: profile.age.toString(),
+        sex: Sex.values.firstWhere(
+          (s) => s.name == profile.sex,
+          orElse: () => Sex.male,
+        ),
+        heightCm: profile.heightCm.toString(),
+        weightKg: profile.weightKg.toString(),
+        targetWeightKg: profile.targetWeightKg.toString(),
+        lossPace: LossPace.values.firstWhere(
+          (lp) => lp.name == profile.lossPace,
+          orElse: () => LossPace.moderate,
+        ),
+        activityLevel: ActivityLevel.values.firstWhere(
+          (al) => al.name == profile.activityLevel,
+          orElse: () => ActivityLevel.sedentary,
+        ),
+        dietType: DietType.values.firstWhere(
+          (d) => d.name == profile.dietType,
+          orElse: () => DietType.omnivore,
+        ),
+        freeDays: freeDaysList,
+        batchCookingSessions: profile.batchCookingSessionsPerWeek,
+        shoppingTrips: profile.shoppingTripsPerWeek,
+        distinctBreakfasts: profile.distinctBreakfasts,
+        distinctLunches: profile.distinctLunches,
+        distinctDinners: profile.distinctDinners,
+        distinctSnacks: profile.distinctSnacks,
+        enabledMealTypes: enabledMealTypes,
+        dietStartDate: dietStartDate,
+        batchCookingBeforeDiet: profile.batchCookingBeforeDiet,
+        selectedAllergies: allergies,
+        excludedMeats: excludedMeats,
+        customAllergies: profile.customAllergies,
+        economicMode: profile.economicMode,
+        calculatedCalories: profile.dailyCalorieTarget,
+        calculatedWaterMl: profile.dailyWaterMl,
+        isLoading: false,
+      ));
+      _originalDietFields = extractDietFields(state);
+    } catch (e) {
+      debugPrint('Error in _loadProfile: $e');
+    }
   }
 
   // ── Field updaters ──────────────────────────────────────────────────
@@ -189,89 +194,93 @@ class SettingsCubit extends Cubit<SettingsState> {
   // ── Save ────────────────────────────────────────────────────────────
 
   Future<void> saveProfile() async {
-    final weight = double.tryParse(state.weightKg);
-    final height = int.tryParse(state.heightCm);
-    final age = int.tryParse(state.age);
-    final targetWeight = double.tryParse(state.targetWeightKg);
-    if (weight == null || height == null || age == null ||
-        targetWeight == null) {
-      return;
-    }
+    try {
+      final weight = double.tryParse(state.weightKg);
+      final height = int.tryParse(state.heightCm);
+      final age = int.tryParse(state.age);
+      final targetWeight = double.tryParse(state.targetWeightKg);
+      if (weight == null || height == null || age == null ||
+          targetWeight == null) {
+        return;
+      }
 
-    if (targetWeight >= weight) {
+      if (targetWeight >= weight) {
+        emit(state.copyWith(
+          targetWeightError:
+              'Le poids cible doit etre inferieur au poids actuel',
+        ));
+        return;
+      }
+      emit(state.copyWith(clearTargetWeightError: true));
+
+      final calories = _calorieCalculator.calculateDailyTarget(
+        weightKg: weight,
+        heightCm: height,
+        age: age,
+        sex: state.sex,
+        activityLevel: state.activityLevel,
+        lossPace: state.lossPace,
+      );
+      final waterMl = _calorieCalculator.calculateDailyWater(
+        weightKg: weight,
+        heightCm: height,
+        age: age,
+        sex: state.sex,
+        activityLevel: state.activityLevel,
+      );
+
+      final startDate = state.dietStartDate ?? AppDateUtils.today();
+
+      await _userProfileRepository.saveProfile(
+        UserProfilesCompanion(
+          id: const Value(1),
+          name: Value(state.name),
+          age: Value(age),
+          sex: Value(state.sex.name),
+          heightCm: Value(height),
+          weightKg: Value(weight),
+          targetWeightKg: Value(targetWeight),
+          lossPace: Value(state.lossPace.name),
+          activityLevel: Value(state.activityLevel.name),
+          dietType: Value(state.dietType.name),
+          dietDaysPerWeek: Value(state.dietDaysPerWeek),
+          freeDays: Value(json.encode(state.freeDays.toList())),
+          batchCookingSessionsPerWeek: Value(state.batchCookingSessions),
+          shoppingTripsPerWeek: Value(state.shoppingTrips),
+          distinctBreakfasts: Value(state.distinctBreakfasts),
+          distinctLunches: Value(state.distinctLunches),
+          distinctDinners: Value(state.distinctDinners),
+          distinctSnacks: Value(state.distinctSnacks),
+          enabledMealTypes: Value(
+              json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
+          allergies: Value(
+              json.encode(state.selectedAllergies.map((a) => a.name).toList())),
+          customAllergies: Value(state.customAllergies),
+          excludedMeats: Value(
+              json.encode(state.excludedMeats.map((m) => m.name).toList())),
+          dietStartDate: Value(AppDateUtils.toEpochMillis(startDate)),
+          batchCookingBeforeDiet: Value(state.batchCookingBeforeDiet),
+          economicMode: Value(state.economicMode),
+          dailyCalorieTarget: Value(calories),
+          dailyWaterMl: Value(waterMl),
+          onboardingCompleted: const Value(true),
+          createdAt: Value(DateTime.now().millisecondsSinceEpoch),
+        ),
+      );
+
+      final currentDietFields = extractDietFields(state);
+      final dietChanged =
+          _originalDietFields != null && currentDietFields != _originalDietFields;
+
       emit(state.copyWith(
-        targetWeightError:
-            'Le poids cible doit etre inferieur au poids actuel',
+        calculatedCalories: calories,
+        calculatedWaterMl: waterMl,
+        isSaved: true,
+        showRegenerateDialog: dietChanged,
       ));
-      return;
+    } catch (e) {
+      debugPrint('Error in saveProfile: $e');
     }
-    emit(state.copyWith(clearTargetWeightError: true));
-
-    final calories = _calorieCalculator.calculateDailyTarget(
-      weightKg: weight,
-      heightCm: height,
-      age: age,
-      sex: state.sex,
-      activityLevel: state.activityLevel,
-      lossPace: state.lossPace,
-    );
-    final waterMl = _calorieCalculator.calculateDailyWater(
-      weightKg: weight,
-      heightCm: height,
-      age: age,
-      sex: state.sex,
-      activityLevel: state.activityLevel,
-    );
-
-    final startDate = state.dietStartDate ?? AppDateUtils.today();
-
-    await _userProfileRepository.saveProfile(
-      UserProfilesCompanion(
-        id: const Value(1),
-        name: Value(state.name),
-        age: Value(age),
-        sex: Value(state.sex.name),
-        heightCm: Value(height),
-        weightKg: Value(weight),
-        targetWeightKg: Value(targetWeight),
-        lossPace: Value(state.lossPace.name),
-        activityLevel: Value(state.activityLevel.name),
-        dietType: Value(state.dietType.name),
-        dietDaysPerWeek: Value(state.dietDaysPerWeek),
-        freeDays: Value(json.encode(state.freeDays.toList())),
-        batchCookingSessionsPerWeek: Value(state.batchCookingSessions),
-        shoppingTripsPerWeek: Value(state.shoppingTrips),
-        distinctBreakfasts: Value(state.distinctBreakfasts),
-        distinctLunches: Value(state.distinctLunches),
-        distinctDinners: Value(state.distinctDinners),
-        distinctSnacks: Value(state.distinctSnacks),
-        enabledMealTypes: Value(
-            json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
-        allergies: Value(
-            json.encode(state.selectedAllergies.map((a) => a.name).toList())),
-        customAllergies: Value(state.customAllergies),
-        excludedMeats: Value(
-            json.encode(state.excludedMeats.map((m) => m.name).toList())),
-        dietStartDate: Value(AppDateUtils.toEpochMillis(startDate)),
-        batchCookingBeforeDiet: Value(state.batchCookingBeforeDiet),
-        economicMode: Value(state.economicMode),
-        dailyCalorieTarget: Value(calories),
-        dailyWaterMl: Value(waterMl),
-        onboardingCompleted: const Value(true),
-        createdAt: Value(DateTime.now().millisecondsSinceEpoch),
-      ),
-    );
-
-    final currentDietFields = extractDietFields(state);
-    final dietChanged =
-        _originalDietFields != null && currentDietFields != _originalDietFields;
-
-    emit(state.copyWith(
-      calculatedCalories: calories,
-      calculatedWaterMl: waterMl,
-      isSaved: true,
-      showRegenerateDialog: dietChanged,
-    ));
   }
 
   // ── Reset ───────────────────────────────────────────────────────────
@@ -282,10 +291,14 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(state.copyWith(showResetDialog: false));
 
   Future<void> resetApp() async {
-    await _userProfileRepository.deleteAll();
-    await _mealPlanRepository.deleteWeekPlans();
-    await _weightLogRepository.deleteAll();
-    hideResetDialog();
+    try {
+      await _userProfileRepository.deleteAll();
+      await _mealPlanRepository.deleteWeekPlans();
+      await _weightLogRepository.deleteAll();
+      hideResetDialog();
+    } catch (e) {
+      debugPrint('Error in resetApp: $e');
+    }
   }
 
   // ── Regenerate dialog ───────────────────────────────────────────────

@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/quantity_formatter.dart';
 import '../../../../data/local/database.dart';
+import '../../../../data/local/models/day_plan_with_meals.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
 import '../../../../data/local/models/week_plan_with_days.dart';
 import '../../../onboarding/domain/models/meal_type.dart';
@@ -44,51 +46,69 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   Future<void> regenerateWeekPlan() async {
-    emit(state.copyWith(isRegenerating: true));
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
-    await _mealPlanRepository.deleteWeekPlans();
-    await _mealPlanGenerator.generateWeekPlan(profile);
-    emit(state.copyWith(isRegenerating: false));
+    try {
+      emit(state.copyWith(isRegenerating: true));
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
+      await _mealPlanRepository.deleteWeekPlans();
+      await _mealPlanGenerator.generateWeekPlan(profile);
+      emit(state.copyWith(isRegenerating: false));
+    } catch (e) {
+      debugPrint('Error in regenerateWeekPlan: $e');
+      emit(state.copyWith(isRegenerating: false));
+    }
   }
 
   Future<void> toggleMealConsumed(int mealId, bool currentlyConsumed) async {
-    await _mealPlanRepository.toggleMealConsumed(mealId, !currentlyConsumed);
+    try {
+      await _mealPlanRepository.toggleMealConsumed(mealId, !currentlyConsumed);
+    } catch (e) {
+      debugPrint('Error in toggleMealConsumed: $e');
+    }
   }
 
   Future<void> shiftByOneDay() async {
-    await _mealPlanRepository.shiftProgramByOneDay();
+    try {
+      await _mealPlanRepository.shiftProgramByOneDay();
+    } catch (e) {
+      debugPrint('Error in shiftByOneDay: $e');
+    }
   }
 
   // ── Swap dialog ───────────────────────────────────────────────────
 
   Future<void> openSwapDialog(Meal meal) async {
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
-    final weekPlan = state.weekPlan;
-    if (weekPlan == null) return;
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
+      final weekPlan = state.weekPlan;
+      if (weekPlan == null) return;
 
-    final mealType = _parseMealType(meal.mealType);
-    if (mealType == null) return;
+      final mealType = _parseMealType(meal.mealType);
+      if (mealType == null) return;
 
-    final alternatives = await _mealPlanGenerator.getAlternativeRecipes(
-      meal.recipeId,
-      mealType,
-      profile,
-    );
+      final alternatives = await _mealPlanGenerator.getAlternativeRecipes(
+        meal.recipeId,
+        mealType,
+        profile,
+      )
+        ..sort((a, b) => a.name.compareTo(b.name));
 
-    final todayMillis = AppDateUtils.todayMillis();
-    final otherOccurrences = weekPlan.days
-        .where((d) => d.dayPlan.date >= todayMillis)
-        .expand((d) => d.meals)
-        .where((m) => m.meal.id != meal.id && m.meal.recipeId == meal.recipeId)
-        .length;
+      final todayMillis = AppDateUtils.todayMillis();
+      final otherOccurrences = weekPlan.days
+          .where((d) => d.dayPlan.date >= todayMillis)
+          .expand((d) => d.meals)
+          .where((m) => m.meal.id != meal.id && m.meal.recipeId == meal.recipeId)
+          .length;
 
-    emit(state.copyWith(
-      swapDialogMeal: meal,
-      swapAlternatives: alternatives,
-      swapOtherOccurrencesCount: otherOccurrences,
-    ));
+      emit(state.copyWith(
+        swapDialogMeal: meal,
+        swapAlternatives: alternatives,
+        swapOtherOccurrencesCount: otherOccurrences,
+      ));
+    } catch (e) {
+      debugPrint('Error in openSwapDialog: $e');
+    }
   }
 
   void closeSwapDialog() {
@@ -96,45 +116,49 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   Future<void> swapMeal(Recipe newRecipe, {required bool replaceAll}) async {
-    final meal = state.swapDialogMeal;
-    final weekPlan = state.weekPlan;
-    if (meal == null || weekPlan == null) return;
+    try {
+      final meal = state.swapDialogMeal;
+      final weekPlan = state.weekPlan;
+      if (meal == null || weekPlan == null) return;
 
-    // Close dialog immediately to avoid race conditions with .then() callback.
-    closeSwapDialog();
+      // Close dialog immediately to avoid race conditions with .then() callback.
+      closeSwapDialog();
 
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
 
-    final todayMillis = AppDateUtils.todayMillis();
+      final todayMillis = AppDateUtils.todayMillis();
 
-    final List<Meal> mealsToUpdate;
-    if (replaceAll) {
-      final otherMeals = weekPlan.days
-          .where((d) => d.dayPlan.date >= todayMillis)
-          .expand((d) => d.meals)
-          .where((m) =>
-              m.meal.recipeId == meal.recipeId && m.meal.id != meal.id)
-          .map((m) => m.meal)
-          .toList();
-      mealsToUpdate = [meal, ...otherMeals];
-    } else {
-      mealsToUpdate = [meal];
+      final List<Meal> mealsToUpdate;
+      if (replaceAll) {
+        final otherMeals = weekPlan.days
+            .where((d) => d.dayPlan.date >= todayMillis)
+            .expand((d) => d.meals)
+            .where((m) =>
+                m.meal.recipeId == meal.recipeId && m.meal.id != meal.id)
+            .map((m) => m.meal)
+            .toList();
+        mealsToUpdate = [meal, ...otherMeals];
+      } else {
+        mealsToUpdate = [meal];
+      }
+
+      final updates = <Meal>[];
+      for (final m in mealsToUpdate) {
+        final mealType = _parseMealType(m.mealType);
+        if (mealType == null) continue;
+        final servings = _mealPlanGenerator.calculateServings(
+          newRecipe,
+          profile.dailyCalorieTarget,
+          mealType,
+        );
+        updates.add(m.copyWith(recipeId: newRecipe.id, servings: servings));
+      }
+
+      await _mealPlanRepository.updateMeals(updates);
+    } catch (e) {
+      debugPrint('Error in swapMeal: $e');
     }
-
-    final updates = <Meal>[];
-    for (final m in mealsToUpdate) {
-      final mealType = _parseMealType(m.mealType);
-      if (mealType == null) continue;
-      final servings = _mealPlanGenerator.calculateServings(
-        newRecipe,
-        profile.dailyCalorieTarget,
-        mealType,
-      );
-      updates.add(m.copyWith(recipeId: newRecipe.id, servings: servings));
-    }
-
-    await _mealPlanRepository.updateMeals(updates);
   }
 
   // ── Move dialog ───────────────────────────────────────────────────
@@ -161,59 +185,68 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   Future<void> moveMealToDay(int targetDayPlanId) async {
-    final meal = state.movingMeal;
-    if (meal == null) return;
-    await _mealPlanRepository.swapMealsBetweenDays(
-      meal.meal.id,
-      targetDayPlanId,
-    );
-    closeMoveDialog();
+    try {
+      final meal = state.movingMeal;
+      if (meal == null) return;
+      await _mealPlanRepository.swapMealsBetweenDays(
+        meal.meal.id,
+        targetDayPlanId,
+      );
+      closeMoveDialog();
+    } catch (e) {
+      debugPrint('Error in moveMealToDay: $e');
+    }
   }
 
   // ── Export JSON ───────────────────────────────────────────────────
 
   Future<String> exportWeekPlanJson() async {
-    final weekPlan = state.weekPlan;
-    if (weekPlan == null) return '';
+    try {
+      final weekPlan = state.weekPlan;
+      if (weekPlan == null) return '';
 
-    final sorted = state.sortedDays;
-    final daysJson = <Map<String, dynamic>>[];
+      final sorted = state.sortedDays;
+      final daysJson = <Map<String, dynamic>>[];
 
-    for (final day in sorted) {
-      daysJson.add(await _buildDayPlanJson(day));
-    }
-
-    // Week totals
-    var totalCal = 0;
-    var totalProt = 0.0;
-    var totalCarbs = 0.0;
-    var totalFat = 0.0;
-    var dietDays = 0;
-
-    for (final day in sorted) {
-      if (day.dayPlan.isFreeDay) continue;
-      dietDays++;
-      for (final m in day.meals) {
-        totalCal += (m.recipe.caloriesPerServing * m.meal.servings).round();
-        totalProt += m.recipe.proteinGrams * m.meal.servings;
-        totalCarbs += m.recipe.carbsGrams * m.meal.servings;
-        totalFat += m.recipe.fatGrams * m.meal.servings;
+      for (final day in sorted) {
+        daysJson.add(await _buildDayPlanJson(day));
       }
+
+      // Week totals
+      var totalCal = 0;
+      var totalProt = 0.0;
+      var totalCarbs = 0.0;
+      var totalFat = 0.0;
+      var dietDays = 0;
+
+      for (final day in sorted) {
+        if (day.dayPlan.isFreeDay) continue;
+        dietDays++;
+        for (final m in day.meals) {
+          totalCal += (m.recipe.caloriesPerServing * m.meal.servings).round();
+          totalProt += m.recipe.proteinGrams * m.meal.servings;
+          totalCarbs += m.recipe.carbsGrams * m.meal.servings;
+          totalFat += m.recipe.fatGrams * m.meal.servings;
+        }
+      }
+
+      final root = <String, dynamic>{
+        'weekPlan': daysJson,
+        'weekTotals': {
+          'dietDays': dietDays,
+          'totalCalories': totalCal,
+          if (dietDays > 0) 'avgCaloriesPerDay': totalCal ~/ dietDays,
+          'totalProteinGrams': totalProt.toStringAsFixed(1),
+          'totalCarbsGrams': totalCarbs.toStringAsFixed(1),
+          'totalFatGrams': totalFat.toStringAsFixed(1),
+        },
+      };
+
+      return const JsonEncoder.withIndent('  ').convert(root);
+    } catch (e) {
+      debugPrint('Error in exportWeekPlanJson: $e');
+      return '';
     }
-
-    final root = <String, dynamic>{
-      'weekPlan': daysJson,
-      'weekTotals': {
-        'dietDays': dietDays,
-        'totalCalories': totalCal,
-        if (dietDays > 0) 'avgCaloriesPerDay': totalCal ~/ dietDays,
-        'totalProteinGrams': totalProt.toStringAsFixed(1),
-        'totalCarbsGrams': totalCarbs.toStringAsFixed(1),
-        'totalFatGrams': totalFat.toStringAsFixed(1),
-      },
-    };
-
-    return const JsonEncoder.withIndent('  ').convert(root);
   }
 
   // ── Private ───────────────────────────────────────────────────────
@@ -221,15 +254,28 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   void _loadWeekPlan() {
     _planSubscription =
         _mealPlanRepository.watchCurrentWeekPlan().listen((plan) {
-      emit(state.copyWith(weekPlan: plan, isLoading: false));
+      final newState = state.copyWith(weekPlan: plan, isLoading: false);
+
+      // On first load, select today's tab.
+      if (state.isLoading && plan != null) {
+        final todayMillis = AppDateUtils.todayMillis();
+        final sorted = newState.sortedDays;
+        final todayIndex =
+            sorted.indexWhere((d) => d.dayPlan.date == todayMillis);
+        emit(newState.copyWith(
+          selectedDayIndex: todayIndex >= 0 ? todayIndex : 0,
+        ));
+      } else {
+        emit(newState);
+      }
     });
   }
 
   Future<Map<String, dynamic>> _buildDayPlanJson(
-    dynamic dayPlanWithMeals,
+    DayPlanWithMeals dayPlanWithMeals,
   ) async {
     final dayPlan = dayPlanWithMeals.dayPlan;
-    final meals = dayPlanWithMeals.meals as List<MealWithRecipe>;
+    final meals = dayPlanWithMeals.meals;
     final date = AppDateUtils.fromEpochMillis(dayPlan.date);
 
     const mealOrder = ['BREAKFAST', 'LUNCH', 'DINNER', 'SNACK'];

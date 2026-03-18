@@ -3,6 +3,7 @@ import 'package:drift/drift.dart';
 import 'week_plan_table.dart';
 
 /// Shopping list items derived from week plans.
+@TableIndex(name: 'idx_shopping_items_week', columns: {#weekPlanId})
 class ShoppingItems extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get weekPlanId =>

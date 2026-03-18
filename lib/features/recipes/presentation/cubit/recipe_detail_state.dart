@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/models/recipe_with_details.dart';
 
 /// Timer state for a cooking step.
-class CookingTimerState {
+class CookingTimerState extends Equatable {
   const CookingTimerState({
     required this.stepIndex,
     required this.totalSeconds,
@@ -13,6 +15,14 @@ class CookingTimerState {
   final int totalSeconds;
   final int remainingSeconds;
   final bool isRunning;
+
+  @override
+  List<Object?> get props => [
+        stepIndex,
+        totalSeconds,
+        remainingSeconds,
+        isRunning,
+      ];
 
   CookingTimerState copyWith({
     int? remainingSeconds,
@@ -28,7 +38,7 @@ class CookingTimerState {
 }
 
 /// State for the recipe detail / cooking mode screen.
-class RecipeDetailState {
+class RecipeDetailState extends Equatable {
   const RecipeDetailState({
     this.recipe,
     this.servings = 1,
@@ -42,6 +52,15 @@ class RecipeDetailState {
   final bool isLoading;
   final Map<int, CookingTimerState> activeTimers;
   final Set<int> completedSteps;
+
+  @override
+  List<Object?> get props => [
+        recipe,
+        servings,
+        isLoading,
+        activeTimers,
+        completedSteps,
+      ];
 
   RecipeDetailState copyWith({
     RecipeWithDetails? recipe,

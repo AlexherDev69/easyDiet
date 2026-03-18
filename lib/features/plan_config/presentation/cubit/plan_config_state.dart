@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../onboarding/domain/models/models.dart';
 
 /// State for the plan configuration screen.
-class PlanConfigState {
+class PlanConfigState extends Equatable {
   const PlanConfigState({
     this.isLoading = true,
     this.dietType = DietType.omnivore,
@@ -28,6 +30,19 @@ class PlanConfigState {
   final int distinctLunches;
   final int distinctDinners;
   final int distinctSnacks;
+
+  @override
+  List<Object?> get props => [
+        isLoading,
+        dietType,
+        freeDays,
+        dietStartDate,
+        enabledMealTypes,
+        distinctBreakfasts,
+        distinctLunches,
+        distinctDinners,
+        distinctSnacks,
+      ];
 
   int get dietDaysPerWeek => 7 - freeDays.length;
 

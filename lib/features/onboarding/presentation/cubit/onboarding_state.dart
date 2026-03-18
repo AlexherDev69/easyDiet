@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../../../data/local/database.dart';
 import '../../../../data/local/models/day_plan_with_meals.dart';
@@ -7,7 +7,7 @@ import '../../../../data/local/models/week_plan_with_days.dart';
 import '../../domain/models/models.dart';
 
 /// Onboarding UI state — mirrors OnboardingUiState from Kotlin.
-class OnboardingState {
+class OnboardingState extends Equatable {
   const OnboardingState({
     this.currentStep = 0,
     this.name = '',
@@ -96,6 +96,49 @@ class OnboardingState {
   final MealWithRecipe? replacingMeal;
   final List<Recipe> replacementCandidates;
   final int otherOccurrencesCount;
+
+  @override
+  List<Object?> get props => [
+        currentStep,
+        name,
+        age,
+        sex,
+        heightCm,
+        weightKg,
+        targetWeightKg,
+        lossPace,
+        activityLevel,
+        dietType,
+        freeDays,
+        batchCookingEnabled,
+        showBatchCookingInfo,
+        batchCookingSessions,
+        shoppingTrips,
+        distinctBreakfasts,
+        distinctLunches,
+        distinctDinners,
+        distinctSnacks,
+        enabledMealTypes,
+        dietStartDate,
+        batchCookingBeforeDiet,
+        selectedAllergies,
+        excludedMeats,
+        economicMode,
+        calculatedCalories,
+        calculatedWaterMl,
+        isLoading,
+        isOnboardingCompleted,
+        totalSteps,
+        generatedWeekPlan,
+        showMoveDialog,
+        movingMeal,
+        movingSourceDayPlanId,
+        moveTargetDays,
+        showReplaceDialog,
+        replacingMeal,
+        replacementCandidates,
+        otherOccurrencesCount,
+      ];
 
   int get dietDaysPerWeek => 7 - freeDays.length;
 
@@ -222,62 +265,4 @@ class OnboardingState {
           otherOccurrencesCount ?? this.otherOccurrencesCount,
     );
   }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is OnboardingState &&
-          runtimeType == other.runtimeType &&
-          currentStep == other.currentStep &&
-          name == other.name &&
-          age == other.age &&
-          sex == other.sex &&
-          heightCm == other.heightCm &&
-          weightKg == other.weightKg &&
-          targetWeightKg == other.targetWeightKg &&
-          lossPace == other.lossPace &&
-          activityLevel == other.activityLevel &&
-          dietType == other.dietType &&
-          setEquals(freeDays, other.freeDays) &&
-          batchCookingEnabled == other.batchCookingEnabled &&
-          showBatchCookingInfo == other.showBatchCookingInfo &&
-          batchCookingSessions == other.batchCookingSessions &&
-          shoppingTrips == other.shoppingTrips &&
-          distinctBreakfasts == other.distinctBreakfasts &&
-          distinctLunches == other.distinctLunches &&
-          distinctDinners == other.distinctDinners &&
-          distinctSnacks == other.distinctSnacks &&
-          setEquals(enabledMealTypes, other.enabledMealTypes) &&
-          dietStartDate == other.dietStartDate &&
-          batchCookingBeforeDiet == other.batchCookingBeforeDiet &&
-          setEquals(selectedAllergies, other.selectedAllergies) &&
-          setEquals(excludedMeats, other.excludedMeats) &&
-          economicMode == other.economicMode &&
-          calculatedCalories == other.calculatedCalories &&
-          calculatedWaterMl == other.calculatedWaterMl &&
-          isLoading == other.isLoading &&
-          isOnboardingCompleted == other.isOnboardingCompleted &&
-          generatedWeekPlan == other.generatedWeekPlan &&
-          showMoveDialog == other.showMoveDialog &&
-          showReplaceDialog == other.showReplaceDialog &&
-          otherOccurrencesCount == other.otherOccurrencesCount;
-
-  @override
-  int get hashCode => Object.hash(
-        currentStep,
-        name,
-        age,
-        sex,
-        heightCm,
-        weightKg,
-        targetWeightKg,
-        lossPace,
-        activityLevel,
-        dietType,
-        isLoading,
-        isOnboardingCompleted,
-        calculatedCalories,
-        showMoveDialog,
-        showReplaceDialog,
-      );
 }

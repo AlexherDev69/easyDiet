@@ -10,9 +10,7 @@ class RecipeDetailCubit extends Cubit<RecipeDetailState> {
   RecipeDetailCubit({
     required RecipeRepository recipeRepository,
   })  : _recipeRepository = recipeRepository,
-        super(const RecipeDetailState()) {
-    _startTimerTicker();
-  }
+        super(const RecipeDetailState());
 
   final RecipeRepository _recipeRepository;
 
@@ -61,6 +59,7 @@ class RecipeDetailCubit extends Cubit<RecipeDetailState> {
       isRunning: true,
     );
     emit(state.copyWith(activeTimers: timers));
+    _ensureTickerRunning();
   }
 
   void toggleTimer(int stepIndex) {
@@ -75,6 +74,9 @@ class RecipeDetailCubit extends Cubit<RecipeDetailState> {
     final timers = Map.of(state.activeTimers);
     timers.remove(stepIndex);
     emit(state.copyWith(activeTimers: timers));
+    if (timers.isEmpty) {
+      _stopTicker();
+    }
   }
 
   void toggleStepCompleted(int stepIndex) {
@@ -92,28 +94,41 @@ class RecipeDetailCubit extends Cubit<RecipeDetailState> {
 
   // ── Private ───────────────────────────────────────────────────────
 
-  void _startTimerTicker() {
+  void _ensureTickerRunning() {
+    if (_ticker != null) return;
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       final timers = Map.of(state.activeTimers);
       var changed = false;
+      var hasRunning = false;
       for (final entry in timers.entries.toList()) {
         final timer = entry.value;
         if (timer.isRunning && timer.remainingSeconds > 0) {
           timers[entry.key] =
               timer.copyWith(remainingSeconds: timer.remainingSeconds - 1);
           changed = true;
+          hasRunning = true;
+        } else if (timer.isRunning && timer.remainingSeconds > 0) {
+          hasRunning = true;
         }
       }
       if (changed) {
         emit(state.copyWith(activeTimers: timers));
       }
+      if (!hasRunning) {
+        _stopTicker();
+      }
     });
+  }
+
+  void _stopTicker() {
+    _ticker?.cancel();
+    _ticker = null;
   }
 
   @override
   Future<void> close() {
     _recipeSubscription?.cancel();
-    _ticker?.cancel();
+    _stopTicker();
     return super.close();
   }
 }

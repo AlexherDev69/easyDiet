@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
@@ -58,8 +59,12 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   }
 
   Future<void> _loadAllRecipesWithDetails() async {
-    final recipes = await _recipeRepository.getAllRecipesWithDetails();
-    emit(state.copyWith(allRecipes: recipes, isLoading: false));
+    try {
+      final recipes = await _recipeRepository.getAllRecipesWithDetails();
+      emit(state.copyWith(allRecipes: recipes, isLoading: false));
+    } catch (e) {
+      debugPrint('Error in _loadAllRecipesWithDetails: $e');
+    }
   }
 
   @override

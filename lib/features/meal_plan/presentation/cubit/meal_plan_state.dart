@@ -1,10 +1,12 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/database.dart';
 import '../../../../data/local/models/day_plan_with_meals.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
 import '../../../../data/local/models/week_plan_with_days.dart';
 
 /// UI state for the weekly meal plan screen.
-class MealPlanState {
+class MealPlanState extends Equatable {
   const MealPlanState({
     this.weekPlan,
     this.isLoading = true,
@@ -36,6 +38,21 @@ class MealPlanState {
   final MealWithRecipe? movingMeal;
   final int movingSourceDayPlanId;
   final List<DayPlanWithMeals> moveTargetDays;
+
+  @override
+  List<Object?> get props => [
+        weekPlan,
+        isLoading,
+        isRegenerating,
+        selectedDayIndex,
+        swapDialogMeal,
+        swapAlternatives,
+        swapOtherOccurrencesCount,
+        showMoveDialog,
+        movingMeal,
+        movingSourceDayPlanId,
+        moveTargetDays,
+      ];
 
   /// Sorted days from the plan.
   List<DayPlanWithMeals> get sortedDays {

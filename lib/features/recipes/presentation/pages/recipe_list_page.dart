@@ -150,10 +150,13 @@ class _RecipeListBody extends StatelessWidget {
       );
     }
 
-    // Group by category
+    // Group by category, sorted alphabetically within each group
     final grouped = <String, List<RecipeWithDetails>>{};
     for (final recipe in sortedRecipes) {
       grouped.putIfAbsent(recipe.recipe.category, () => []).add(recipe);
+    }
+    for (final list in grouped.values) {
+      list.sort((a, b) => a.recipe.name.compareTo(b.recipe.name));
     }
 
     final orderedGroups = _mealTypeOrder

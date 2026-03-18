@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/ingredient_normalizer.dart';
@@ -22,52 +23,56 @@ class BatchCookingCubit extends Cubit<BatchCookingState> {
   final RecipeRepository _recipeRepository;
 
   Future<void> loadBatchCooking(int dayPlanId) async {
-    final dayPlan = await _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
-    if (dayPlan == null) {
-      emit(state.copyWith(isLoading: false));
-      return;
+    try {
+      final dayPlan = await _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
+      if (dayPlan == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
+
+      final recipes = <BatchCookingRecipeInfo>[];
+      final allRecipeDetails = <(BatchCookingRecipeInfo, RecipeWithDetails)>[];
+
+      for (final mealWithRecipe in dayPlan.meals) {
+        final details = await _recipeRepository
+            .getRecipeWithDetails(mealWithRecipe.recipe.id);
+        if (details == null) continue;
+
+        final info = BatchCookingRecipeInfo(
+          recipeId: mealWithRecipe.recipe.id,
+          recipeName: mealWithRecipe.recipe.name,
+          servings: mealWithRecipe.meal.servings,
+          baseServings: mealWithRecipe.recipe.servings,
+          prepTimeMinutes: mealWithRecipe.recipe.prepTimeMinutes,
+          cookTimeMinutes: mealWithRecipe.recipe.cookTimeMinutes,
+          totalTimeMinutes:
+              mealWithRecipe.recipe.prepTimeMinutes +
+              mealWithRecipe.recipe.cookTimeMinutes,
+          ingredients: details.ingredients,
+          mealType: mealWithRecipe.meal.mealType,
+        );
+        recipes.add(info);
+        allRecipeDetails.add((info, details));
+      }
+
+      final mergedIngredients = _mergeIngredients(allRecipeDetails);
+      final commonIngredients =
+          mergedIngredients.where((i) => i.fromRecipes.length > 1).toList();
+
+      emit(state.copyWith(
+        sessionNumber: dayPlan.dayPlan.batchCookingSession ?? 1,
+        recipes: recipes,
+        commonIngredients: commonIngredients,
+        allIngredients: mergedIngredients,
+        totalPrepTime: recipes.isEmpty
+            ? 0
+            : recipes.map((r) => r.prepTimeMinutes).reduce(max),
+        totalCookTime: recipes.fold<int>(0, (sum, r) => sum + r.cookTimeMinutes),
+        isLoading: false,
+      ));
+    } catch (e) {
+      debugPrint('Error in loadBatchCooking: $e');
     }
-
-    final recipes = <BatchCookingRecipeInfo>[];
-    final allRecipeDetails = <(BatchCookingRecipeInfo, RecipeWithDetails)>[];
-
-    for (final mealWithRecipe in dayPlan.meals) {
-      final details = await _recipeRepository
-          .getRecipeWithDetails(mealWithRecipe.recipe.id);
-      if (details == null) continue;
-
-      final info = BatchCookingRecipeInfo(
-        recipeId: mealWithRecipe.recipe.id,
-        recipeName: mealWithRecipe.recipe.name,
-        servings: mealWithRecipe.meal.servings,
-        baseServings: mealWithRecipe.recipe.servings,
-        prepTimeMinutes: mealWithRecipe.recipe.prepTimeMinutes,
-        cookTimeMinutes: mealWithRecipe.recipe.cookTimeMinutes,
-        totalTimeMinutes:
-            mealWithRecipe.recipe.prepTimeMinutes +
-            mealWithRecipe.recipe.cookTimeMinutes,
-        ingredients: details.ingredients,
-        mealType: mealWithRecipe.meal.mealType,
-      );
-      recipes.add(info);
-      allRecipeDetails.add((info, details));
-    }
-
-    final mergedIngredients = _mergeIngredients(allRecipeDetails);
-    final commonIngredients =
-        mergedIngredients.where((i) => i.fromRecipes.length > 1).toList();
-
-    emit(state.copyWith(
-      sessionNumber: dayPlan.dayPlan.batchCookingSession ?? 1,
-      recipes: recipes,
-      commonIngredients: commonIngredients,
-      allIngredients: mergedIngredients,
-      totalPrepTime: recipes.isEmpty
-          ? 0
-          : recipes.map((r) => r.prepTimeMinutes).reduce(max),
-      totalCookTime: recipes.fold<int>(0, (sum, r) => sum + r.cookTimeMinutes),
-      isLoading: false,
-    ));
   }
 
   List<MergedIngredient> _mergeIngredients(

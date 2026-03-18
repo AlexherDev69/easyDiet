@@ -5301,6 +5301,26 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $MealsTable meals = $MealsTable(this);
   late final $ShoppingItemsTable shoppingItems = $ShoppingItemsTable(this);
   late final $WeightLogsTable weightLogs = $WeightLogsTable(this);
+  late final Index idxRecipeStepsRecipe = Index(
+    'idx_recipe_steps_recipe',
+    'CREATE INDEX idx_recipe_steps_recipe ON recipe_steps (recipe_id)',
+  );
+  late final Index idxIngredientsRecipe = Index(
+    'idx_ingredients_recipe',
+    'CREATE INDEX idx_ingredients_recipe ON ingredients (recipe_id)',
+  );
+  late final Index idxDayPlansWeekDate = Index(
+    'idx_day_plans_week_date',
+    'CREATE INDEX idx_day_plans_week_date ON day_plans (week_plan_id, date)',
+  );
+  late final Index idxMealsDayPlan = Index(
+    'idx_meals_day_plan',
+    'CREATE INDEX idx_meals_day_plan ON meals (day_plan_id)',
+  );
+  late final Index idxShoppingItemsWeek = Index(
+    'idx_shopping_items_week',
+    'CREATE INDEX idx_shopping_items_week ON shopping_items (week_plan_id)',
+  );
   late final UserProfileDao userProfileDao = UserProfileDao(
     this as AppDatabase,
   );
@@ -5326,6 +5346,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     meals,
     shoppingItems,
     weightLogs,
+    idxRecipeStepsRecipe,
+    idxIngredientsRecipe,
+    idxDayPlansWeekDate,
+    idxMealsDayPlan,
+    idxShoppingItemsWeek,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([

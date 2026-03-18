@@ -1,10 +1,12 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/database.dart';
 import '../../../../data/local/models/day_plan_with_meals.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
 import '../../domain/models/dashboard_models.dart';
 
 /// Dashboard UI state — mirrors DashboardUiState from Kotlin.
-class DashboardState {
+class DashboardState extends Equatable {
   const DashboardState({
     this.userName = '',
     this.todayMeals,
@@ -55,9 +57,37 @@ class DashboardState {
   final List<MealWithRecipe> selectedDayMeals;
   final bool selectedDayIsFreeDay;
 
+  @override
+  List<Object?> get props => [
+        userName,
+        todayMeals,
+        todayCalories,
+        todayProtein,
+        todayCarbs,
+        todayFat,
+        dailyTarget,
+        currentWeight,
+        targetWeight,
+        initialWeight,
+        totalLost,
+        kgRemaining,
+        estimatedGoalDate,
+        dailyWaterMl,
+        nextMeal,
+        nextBatchCooking,
+        weekSchedule,
+        recentWeightLogs,
+        isLoading,
+        isPlanExpired,
+        selectedDayIndex,
+        selectedDayMeals,
+        selectedDayIsFreeDay,
+      ];
+
   DashboardState copyWith({
     String? userName,
     DayPlanWithMeals? todayMeals,
+    bool clearTodayMeals = false,
     int? todayCalories,
     double? todayProtein,
     double? todayCarbs,
@@ -69,9 +99,12 @@ class DashboardState {
     double? totalLost,
     double? kgRemaining,
     DateTime? estimatedGoalDate,
+    bool clearEstimatedGoalDate = false,
     int? dailyWaterMl,
     NextMealInfo? nextMeal,
+    bool clearNextMeal = false,
     NextBatchCookingInfo? nextBatchCooking,
+    bool clearNextBatchCooking = false,
     List<DayScheduleItem>? weekSchedule,
     List<WeightLog>? recentWeightLogs,
     bool? isLoading,
@@ -82,7 +115,8 @@ class DashboardState {
   }) {
     return DashboardState(
       userName: userName ?? this.userName,
-      todayMeals: todayMeals ?? this.todayMeals,
+      todayMeals:
+          clearTodayMeals ? null : (todayMeals ?? this.todayMeals),
       todayCalories: todayCalories ?? this.todayCalories,
       todayProtein: todayProtein ?? this.todayProtein,
       todayCarbs: todayCarbs ?? this.todayCarbs,
@@ -93,10 +127,14 @@ class DashboardState {
       initialWeight: initialWeight ?? this.initialWeight,
       totalLost: totalLost ?? this.totalLost,
       kgRemaining: kgRemaining ?? this.kgRemaining,
-      estimatedGoalDate: estimatedGoalDate ?? this.estimatedGoalDate,
+      estimatedGoalDate: clearEstimatedGoalDate
+          ? null
+          : (estimatedGoalDate ?? this.estimatedGoalDate),
       dailyWaterMl: dailyWaterMl ?? this.dailyWaterMl,
-      nextMeal: nextMeal ?? this.nextMeal,
-      nextBatchCooking: nextBatchCooking ?? this.nextBatchCooking,
+      nextMeal: clearNextMeal ? null : (nextMeal ?? this.nextMeal),
+      nextBatchCooking: clearNextBatchCooking
+          ? null
+          : (nextBatchCooking ?? this.nextBatchCooking),
       weekSchedule: weekSchedule ?? this.weekSchedule,
       recentWeightLogs: recentWeightLogs ?? this.recentWeightLogs,
       isLoading: isLoading ?? this.isLoading,

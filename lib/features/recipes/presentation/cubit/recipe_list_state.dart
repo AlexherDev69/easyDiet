@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/models/recipe_with_details.dart';
 
 /// State for the recipe list screen.
-class RecipeListState {
+class RecipeListState extends Equatable {
   const RecipeListState({
     this.allRecipes = const [],
     this.weekRecipeIds = const {},
@@ -15,6 +17,15 @@ class RecipeListState {
   final int selectedTab;
   final String? selectedCategory;
   final bool isLoading;
+
+  @override
+  List<Object?> get props => [
+        allRecipes,
+        weekRecipeIds,
+        selectedTab,
+        selectedCategory,
+        isLoading,
+      ];
 
   RecipeListState copyWith({
     List<RecipeWithDetails>? allRecipes,

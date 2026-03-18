@@ -113,19 +113,23 @@ class DayPlanDao extends DatabaseAccessor<AppDatabase>
     return result.read(maxDate);
   }
 
+  /// Loads all recipes for a day's meals in one bulk query instead of N+1.
   Future<List<MealWithRecipe>> _getMealsWithRecipes(int dayPlanId) async {
     final mealRows = await (select(meals)
           ..where((t) => t.dayPlanId.equals(dayPlanId)))
         .get();
 
-    final result = <MealWithRecipe>[];
-    for (final meal in mealRows) {
-      final recipe = await (select(recipes)
-            ..where((t) => t.id.equals(meal.recipeId)))
-          .getSingleOrNull();
-      if (recipe == null) continue;
-      result.add(MealWithRecipe(meal: meal, recipe: recipe));
-    }
-    return result;
+    if (mealRows.isEmpty) return [];
+
+    final recipeIds = mealRows.map((m) => m.recipeId).toSet().toList();
+    final recipeList =
+        await (select(recipes)..where((t) => t.id.isIn(recipeIds))).get();
+    final recipeMap = {for (final r in recipeList) r.id: r};
+
+    return mealRows
+        .where((meal) => recipeMap.containsKey(meal.recipeId))
+        .map((meal) =>
+            MealWithRecipe(meal: meal, recipe: recipeMap[meal.recipeId]!))
+        .toList();
   }
 }

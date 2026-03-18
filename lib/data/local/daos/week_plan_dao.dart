@@ -49,31 +49,42 @@ class WeekPlanDao extends DatabaseAccessor<AppDatabase>
   /// Delete all week plans (cascade deletes days + meals).
   Future<void> deleteAll() => delete(weekPlans).go();
 
+  /// Builds a [WeekPlanWithDays] using bulk queries instead of N+1.
   Future<WeekPlanWithDays> _buildWeekPlanWithDays(WeekPlan wp) async {
     final dayList = await (select(dayPlans)
           ..where((t) => t.weekPlanId.equals(wp.id))
           ..orderBy([(t) => OrderingTerm.asc(t.date)]))
         .get();
 
-    final daysWithMeals = <DayPlanWithMeals>[];
-    for (final day in dayList) {
-      final mealRows = await (select(meals)
-            ..where((t) => t.dayPlanId.equals(day.id)))
-          .get();
+    // Load ALL meals for ALL days in one query.
+    final dayIds = dayList.map((d) => d.id).toList();
+    final allMeals = dayIds.isEmpty
+        ? <Meal>[]
+        : await (select(meals)..where((t) => t.dayPlanId.isIn(dayIds))).get();
 
-      final mealsWithRecipes = <MealWithRecipe>[];
-      for (final meal in mealRows) {
-        final recipe = await (select(recipes)
-              ..where((t) => t.id.equals(meal.recipeId)))
-            .getSingleOrNull();
-        if (recipe == null) continue;
-        mealsWithRecipes.add(MealWithRecipe(meal: meal, recipe: recipe));
-      }
+    // Load ALL recipes referenced by meals in one query.
+    final recipeIds = allMeals.map((m) => m.recipeId).toSet().toList();
+    final allRecipes = recipeIds.isEmpty
+        ? <Recipe>[]
+        : await (select(recipes)..where((t) => t.id.isIn(recipeIds))).get();
+    final recipeMap = {for (final r in allRecipes) r.id: r};
 
-      daysWithMeals.add(
-        DayPlanWithMeals(dayPlan: day, meals: mealsWithRecipes),
-      );
+    // Group meals by dayPlanId.
+    final mealsByDay = <int, List<MealWithRecipe>>{};
+    for (final meal in allMeals) {
+      final recipe = recipeMap[meal.recipeId];
+      if (recipe == null) continue;
+      mealsByDay
+          .putIfAbsent(meal.dayPlanId, () => [])
+          .add(MealWithRecipe(meal: meal, recipe: recipe));
     }
+
+    final daysWithMeals = dayList
+        .map((day) => DayPlanWithMeals(
+              dayPlan: day,
+              meals: mealsByDay[day.id] ?? [],
+            ))
+        .toList();
 
     return WeekPlanWithDays(weekPlan: wp, days: daysWithMeals);
   }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/quantity_formatter.dart';
@@ -62,17 +63,29 @@ class ShoppingCubit extends Cubit<ShoppingState> {
   }
 
   Future<void> toggleItemChecked(int itemId, bool currentlyChecked) async {
-    await _shoppingRepository.updateChecked(itemId, !currentlyChecked);
+    try {
+      await _shoppingRepository.updateChecked(itemId, !currentlyChecked);
+    } catch (e) {
+      debugPrint('Error in toggleItemChecked: $e');
+    }
   }
 
   Future<void> deleteItem(int itemId) async {
-    await _shoppingRepository.deleteItem(itemId);
+    try {
+      await _shoppingRepository.deleteItem(itemId);
+    } catch (e) {
+      debugPrint('Error in deleteItem: $e');
+    }
   }
 
   Future<void> resetChecks() async {
-    final weekPlanId = state.weekPlanId;
-    if (weekPlanId == null) return;
-    await _shoppingRepository.uncheckAll(weekPlanId);
+    try {
+      final weekPlanId = state.weekPlanId;
+      if (weekPlanId == null) return;
+      await _shoppingRepository.uncheckAll(weekPlanId);
+    } catch (e) {
+      debugPrint('Error in resetChecks: $e');
+    }
   }
 
   void showItemDetail(ShoppingItem item) {
@@ -95,29 +108,34 @@ class ShoppingCubit extends Cubit<ShoppingState> {
     String unit,
     String section,
   ) async {
-    final weekPlanId = state.weekPlanId;
-    if (weekPlanId == null) return;
+    try {
+      final weekPlanId = state.weekPlanId;
+      if (weekPlanId == null) return;
 
-    await _shoppingRepository.insertItem(
-      ShoppingItemsCompanion.insert(
-        weekPlanId: weekPlanId,
-        name: name,
-        quantity: quantity,
-        unit: unit,
-        supermarketSection: section,
-        isManuallyAdded: const Value(true),
-        tripNumber: Value(state.selectedTrip),
-      ),
-    );
+      await _shoppingRepository.insertItem(
+        ShoppingItemsCompanion.insert(
+          weekPlanId: weekPlanId,
+          name: name,
+          quantity: quantity,
+          unit: unit,
+          supermarketSection: section,
+          isManuallyAdded: const Value(true),
+          tripNumber: Value(state.selectedTrip),
+        ),
+      );
+    } catch (e) {
+      debugPrint('Error in addItem: $e');
+    }
   }
 
   // ── Private ───────────────────────────────────────────────────────
 
   Future<void> _loadShoppingList() async {
-    final profile = await _userProfileRepository.getProfile();
-    final tripsPerWeek = profile?.shoppingTripsPerWeek ?? 1;
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      final tripsPerWeek = profile?.shoppingTripsPerWeek ?? 1;
 
-    _planSubscription =
+      _planSubscription =
         _mealPlanRepository.watchCurrentWeekPlan().listen((weekPlan) {
       if (weekPlan == null) {
         emit(state.copyWith(isLoading: false));
@@ -156,18 +174,26 @@ class ShoppingCubit extends Cubit<ShoppingState> {
         }
       });
     });
+    } catch (e) {
+      debugPrint('Error in _loadShoppingList: $e');
+    }
   }
 
   Future<void> _regenerateList(
     WeekPlanWithDays weekPlan,
     int tripsPerWeek,
   ) async {
-    _isGenerating = true;
-    await _shoppingListGenerator.generateShoppingList(
-      weekPlan,
-      shoppingTripsPerWeek: tripsPerWeek,
-    );
-    _isGenerating = false;
+    try {
+      _isGenerating = true;
+      await _shoppingListGenerator.generateShoppingList(
+        weekPlan,
+        shoppingTripsPerWeek: tripsPerWeek,
+      );
+      _isGenerating = false;
+    } catch (e) {
+      _isGenerating = false;
+      debugPrint('Error in _regenerateList: $e');
+    }
   }
 
   List<ShoppingItem> _deduplicateItems(List<ShoppingItem> items) {

@@ -44,7 +44,7 @@ Future<void> configureDependencies() async {
 
   // ── Seeder ──────────────────────────────────────────────────────────
   getIt.registerSingleton<DatabaseSeeder>(
-    DatabaseSeeder(getIt<RecipeDao>()),
+    DatabaseSeeder(getIt<AppDatabase>()),
   );
 
   // ── Repositories ────────────────────────────────────────────────────

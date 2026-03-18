@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../domain/usecases/batch_step_optimizer.dart';
 
 /// Timer state for batch cooking mode.
-class BatchTimerState {
+class BatchTimerState extends Equatable {
   const BatchTimerState({
     required this.timerKey,
     required this.totalSeconds,
@@ -15,6 +17,15 @@ class BatchTimerState {
   final int remainingSeconds;
   final bool isRunning;
   final String recipeName;
+
+  @override
+  List<Object?> get props => [
+        timerKey,
+        totalSeconds,
+        remainingSeconds,
+        isRunning,
+        recipeName,
+      ];
 
   BatchTimerState copyWith({
     int? remainingSeconds,
@@ -31,7 +42,7 @@ class BatchTimerState {
 }
 
 /// State for the batch cooking mode screen.
-class BatchCookingModeState {
+class BatchCookingModeState extends Equatable {
   const BatchCookingModeState({
     this.pages = const [],
     this.currentPageIndex = 0,
@@ -47,6 +58,16 @@ class BatchCookingModeState {
   final Set<String> completedSteps;
   final bool isLoading;
   final int sessionNumber;
+
+  @override
+  List<Object?> get props => [
+        pages,
+        currentPageIndex,
+        activeTimers,
+        completedSteps,
+        isLoading,
+        sessionNumber,
+      ];
 
   BatchCookingModeState copyWith({
     List<BatchPage>? pages,

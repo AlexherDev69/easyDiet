@@ -1,8 +1,10 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/database.dart';
 import '../../domain/models/ingredient_source.dart';
 
 /// UI state for the shopping list screen.
-class ShoppingState {
+class ShoppingState extends Equatable {
   const ShoppingState({
     this.allItems = const [],
     this.items = const [],
@@ -30,6 +32,22 @@ class ShoppingState {
   final int selectedTrip;
   final Map<int, String> tripDaySummaries;
   final Set<String> collapsedSections;
+
+  @override
+  List<Object?> get props => [
+        allItems,
+        items,
+        weekPlanId,
+        isLoading,
+        estimatedWeight,
+        selectedItemName,
+        selectedItemQuantity,
+        selectedItemSources,
+        totalTrips,
+        selectedTrip,
+        tripDaySummaries,
+        collapsedSections,
+      ];
 
   ShoppingState copyWith({
     List<ShoppingItem>? allItems,

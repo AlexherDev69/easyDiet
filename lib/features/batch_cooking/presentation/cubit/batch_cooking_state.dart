@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../domain/models/batch_cooking_models.dart';
 
 /// State for the batch cooking overview screen.
-class BatchCookingState {
+class BatchCookingState extends Equatable {
   const BatchCookingState({
     this.sessionNumber = 1,
     this.recipes = const [],
@@ -19,6 +21,17 @@ class BatchCookingState {
   final int totalPrepTime;
   final int totalCookTime;
   final bool isLoading;
+
+  @override
+  List<Object?> get props => [
+        sessionNumber,
+        recipes,
+        commonIngredients,
+        allIngredients,
+        totalPrepTime,
+        totalCookTime,
+        isLoading,
+      ];
 
   BatchCookingState copyWith({
     int? sessionNumber,

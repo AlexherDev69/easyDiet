@@ -4,6 +4,7 @@ import 'day_plan_table.dart';
 import 'recipe_table.dart';
 
 /// Meal assignment within a day (N:1 to DayPlan, N:1 to Recipe).
+@TableIndex(name: 'idx_meals_day_plan', columns: {#dayPlanId})
 class Meals extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get dayPlanId =>

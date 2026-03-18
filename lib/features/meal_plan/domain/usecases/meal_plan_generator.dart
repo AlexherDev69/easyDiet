@@ -22,13 +22,7 @@ class MealPlanGenerator {
   final RecipeRepository _recipeRepository;
 
   Future<void> generateWeekPlan(UserProfile profile) async {
-    var allRecipes = await _recipeRepository.getAllRecipes();
-    var retries = 0;
-    while (allRecipes.isEmpty && retries < 10) {
-      await Future<void>.delayed(const Duration(seconds: 1));
-      allRecipes = await _recipeRepository.getAllRecipes();
-      retries++;
-    }
+    final allRecipes = await _recipeRepository.getAllRecipes();
     if (allRecipes.isEmpty) return;
 
     final userAllergies =

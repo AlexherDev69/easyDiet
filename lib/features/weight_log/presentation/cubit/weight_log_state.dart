@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/database.dart';
 
 /// State for the weight log screen.
-class WeightLogState {
+class WeightLogState extends Equatable {
   WeightLogState({
     this.allLogs = const [],
     this.totalLost = 0.0,
@@ -36,6 +38,23 @@ class WeightLogState {
 
   /// Selected date for the weight entry.
   final DateTime selectedDate;
+
+  @override
+  List<Object?> get props => [
+        allLogs,
+        totalLost,
+        avgLossPerWeek,
+        projectedGoalDate,
+        initialProjectedDate,
+        selectedPeriod,
+        showAddDialog,
+        weightInput,
+        targetWeight,
+        showDuplicateDialog,
+        outlierWarning,
+        isLoading,
+        selectedDate,
+      ];
 
   WeightLogState copyWith({
     List<WeightLog>? allLogs,

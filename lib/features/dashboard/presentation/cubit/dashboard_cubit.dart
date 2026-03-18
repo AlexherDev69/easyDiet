@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/date_utils.dart';
@@ -46,63 +47,75 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   Future<void> toggleMealConsumed(int mealId, bool currentlyConsumed) async {
-    await _mealPlanRepository.toggleMealConsumed(mealId, !currentlyConsumed);
+    try {
+      await _mealPlanRepository.toggleMealConsumed(mealId, !currentlyConsumed);
+    } catch (e) {
+      debugPrint('Error in toggleMealConsumed: $e');
+    }
   }
 
   Future<void> shiftByOneDay() async {
-    await _mealPlanRepository.shiftProgramByOneDay();
+    try {
+      await _mealPlanRepository.shiftProgramByOneDay();
+    } catch (e) {
+      debugPrint('Error in shiftByOneDay: $e');
+    }
   }
 
   // ── Private loading ─────────────────────────────────────────────────
 
   Future<void> _loadDashboard() async {
-    // Load profile + weight data
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
+    try {
+      // Load profile + weight data
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
 
-    final latestWeight = await _weightLogRepository.getLatestLog();
-    final firstLog = await _weightLogRepository.getFirstLog();
-    final currentWeight = latestWeight?.weightKg ?? profile.weightKg;
-    final initialWeight = firstLog?.weightKg ?? profile.weightKg;
+      final latestWeight = await _weightLogRepository.getLatestLog();
+      final firstLog = await _weightLogRepository.getFirstLog();
+      final currentWeight = latestWeight?.weightKg ?? profile.weightKg;
+      final initialWeight = firstLog?.weightKg ?? profile.weightKg;
 
-    final lossPace = LossPace.values.firstWhere(
-      (p) => p.name == profile.lossPace,
-      orElse: () => LossPace.moderate,
-    );
-    final goalDate = _weightProjectionCalculator.calculateEstimatedGoalDate(
-      currentWeight: currentWeight,
-      targetWeight: profile.targetWeightKg,
-      lossPace: lossPace,
-      dietDaysPerWeek: profile.dietDaysPerWeek,
-    );
+      final lossPace = LossPace.values.firstWhere(
+        (p) => p.name == profile.lossPace,
+        orElse: () => LossPace.moderate,
+      );
+      final goalDate = _weightProjectionCalculator.calculateEstimatedGoalDate(
+        currentWeight: currentWeight,
+        targetWeight: profile.targetWeightKg,
+        lossPace: lossPace,
+        dietDaysPerWeek: profile.dietDaysPerWeek,
+      );
 
-    final planExpired = await _mealPlanRepository.isCurrentPlanExpired();
+      final planExpired = await _mealPlanRepository.isCurrentPlanExpired();
 
-    emit(state.copyWith(
-      userName: profile.name,
-      dailyTarget: profile.dailyCalorieTarget,
-      dailyWaterMl: profile.dailyWaterMl,
-      currentWeight: currentWeight,
-      targetWeight: profile.targetWeightKg,
-      initialWeight: initialWeight,
-      totalLost: initialWeight - currentWeight,
-      kgRemaining: (currentWeight - profile.targetWeightKg)
-          .clamp(0, double.infinity),
-      estimatedGoalDate: goalDate,
-      isPlanExpired: planExpired,
-      isLoading: false,
-    ));
+      emit(state.copyWith(
+        userName: profile.name,
+        dailyTarget: profile.dailyCalorieTarget,
+        dailyWaterMl: profile.dailyWaterMl,
+        currentWeight: currentWeight,
+        targetWeight: profile.targetWeightKg,
+        initialWeight: initialWeight,
+        totalLost: initialWeight - currentWeight,
+        kgRemaining: (currentWeight - profile.targetWeightKg)
+            .clamp(0, double.infinity),
+        estimatedGoalDate: goalDate,
+        isPlanExpired: planExpired,
+        isLoading: false,
+      ));
 
-    // Watch the week plan stream
-    _planSubscription =
-        _mealPlanRepository.watchCurrentWeekPlan().listen(_onWeekPlanUpdate);
+      // Watch the week plan stream
+      _planSubscription =
+          _mealPlanRepository.watchCurrentWeekPlan().listen(_onWeekPlanUpdate);
 
-    // Watch recent weight logs
-    _weightSubscription =
-        _weightLogRepository.watchRecentLogs().listen((logs) {
-      final sorted = List.of(logs)..sort((a, b) => a.date.compareTo(b.date));
-      emit(state.copyWith(recentWeightLogs: sorted));
-    });
+      // Watch recent weight logs
+      _weightSubscription =
+          _weightLogRepository.watchRecentLogs().listen((logs) {
+        final sorted = List.of(logs)..sort((a, b) => a.date.compareTo(b.date));
+        emit(state.copyWith(recentWeightLogs: sorted));
+      });
+    } catch (e) {
+      debugPrint('Error in _loadDashboard: $e');
+    }
   }
 
   void _onWeekPlanUpdate(WeekPlanWithDays? weekPlan) {

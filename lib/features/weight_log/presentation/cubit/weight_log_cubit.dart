@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/local/database.dart';
@@ -37,54 +38,58 @@ class WeightLogCubit extends Cubit<WeightLogState> {
   StreamSubscription<List<WeightLog>>? _logSubscription;
 
   Future<void> _loadData() async {
-    final profile = await _userProfileRepository.getProfile();
-    if (profile != null) {
-      emit(state.copyWith(targetWeight: profile.targetWeightKg));
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      if (profile != null) {
+        emit(state.copyWith(targetWeight: profile.targetWeightKg));
 
-      final lossPace = LossPace.values.firstWhere(
-        (lp) => lp.name == profile.lossPace,
-        orElse: () => LossPace.moderate,
-      );
-      final latestLog = await _weightLogRepository.getLatestLog();
-      final latestWeight = latestLog?.weightKg ?? profile.weightKg;
+        final lossPace = LossPace.values.firstWhere(
+          (lp) => lp.name == profile.lossPace,
+          orElse: () => LossPace.moderate,
+        );
+        final latestLog = await _weightLogRepository.getLatestLog();
+        final latestWeight = latestLog?.weightKg ?? profile.weightKg;
 
-      final initialDate =
-          _weightProjectionCalculator.calculateEstimatedGoalDate(
-        currentWeight: latestWeight,
-        targetWeight: profile.targetWeightKg,
-        lossPace: lossPace,
-        dietDaysPerWeek: profile.dietDaysPerWeek,
-      );
-      emit(state.copyWith(initialProjectedDate: initialDate));
+        final initialDate =
+            _weightProjectionCalculator.calculateEstimatedGoalDate(
+          currentWeight: latestWeight,
+          targetWeight: profile.targetWeightKg,
+          lossPace: lossPace,
+          dietDaysPerWeek: profile.dietDaysPerWeek,
+        );
+        emit(state.copyWith(initialProjectedDate: initialDate));
+      }
+
+      _logSubscription = _weightLogRepository.watchAllLogs().listen((logs) {
+        final sorted = List.of(logs)..sort((a, b) => a.date.compareTo(b.date));
+
+        final totalLost = sorted.length >= 2
+            ? sorted.first.weightKg - sorted.last.weightKg
+            : 0.0;
+
+        final avgLoss =
+            _weightProjectionCalculator.calculateAverageWeeklyLoss(sorted);
+
+        final currentWeight = sorted.lastOrNull?.weightKg ?? 0.0;
+        final projectedDate =
+            _weightProjectionCalculator.calculateProjectedDateAtCurrentPace(
+          currentWeight: currentWeight,
+          targetWeight: state.targetWeight,
+          averageWeeklyLoss: avgLoss,
+        );
+
+        emit(state.copyWith(
+          allLogs: sorted,
+          totalLost: totalLost,
+          avgLossPerWeek: avgLoss,
+          projectedGoalDate: projectedDate,
+          clearProjectedGoalDate: projectedDate == null,
+          isLoading: false,
+        ));
+      });
+    } catch (e) {
+      debugPrint('Error in _loadData: $e');
     }
-
-    _logSubscription = _weightLogRepository.watchAllLogs().listen((logs) {
-      final sorted = List.of(logs)..sort((a, b) => a.date.compareTo(b.date));
-
-      final totalLost = sorted.length >= 2
-          ? sorted.first.weightKg - sorted.last.weightKg
-          : 0.0;
-
-      final avgLoss =
-          _weightProjectionCalculator.calculateAverageWeeklyLoss(sorted);
-
-      final currentWeight = sorted.lastOrNull?.weightKg ?? 0.0;
-      final projectedDate =
-          _weightProjectionCalculator.calculateProjectedDateAtCurrentPace(
-        currentWeight: currentWeight,
-        targetWeight: state.targetWeight,
-        averageWeeklyLoss: avgLoss,
-      );
-
-      emit(state.copyWith(
-        allLogs: sorted,
-        totalLost: totalLost,
-        avgLossPerWeek: avgLoss,
-        projectedGoalDate: projectedDate,
-        clearProjectedGoalDate: projectedDate == null,
-        isLoading: false,
-      ));
-    });
   }
 
   void selectPeriod(int period) {
@@ -112,42 +117,50 @@ class WeightLogCubit extends Cubit<WeightLogState> {
   }
 
   Future<void> addWeightLog() async {
-    final weight = double.tryParse(state.weightInput);
-    if (weight == null) return;
+    try {
+      final weight = double.tryParse(state.weightInput);
+      if (weight == null) return;
 
-    final selectedDate = DateTime(
-      state.selectedDate.year,
-      state.selectedDate.month,
-      state.selectedDate.day,
-    );
-    final dateMillis = selectedDate.millisecondsSinceEpoch;
-    final existingLog = await _weightLogRepository.getLogByDate(dateMillis);
+      final selectedDate = DateTime(
+        state.selectedDate.year,
+        state.selectedDate.month,
+        state.selectedDate.day,
+      );
+      final dateMillis = selectedDate.millisecondsSinceEpoch;
+      final existingLog = await _weightLogRepository.getLogByDate(dateMillis);
 
-    if (existingLog != null) {
-      emit(state.copyWith(showDuplicateDialog: true));
-      return;
+      if (existingLog != null) {
+        emit(state.copyWith(showDuplicateDialog: true));
+        return;
+      }
+
+      await _insertWeightLog(weight, dateMillis);
+    } catch (e) {
+      debugPrint('Error in addWeightLog: $e');
     }
-
-    await _insertWeightLog(weight, dateMillis);
   }
 
   Future<void> confirmReplaceDuplicate() async {
-    final weight = double.tryParse(state.weightInput);
-    if (weight == null) return;
+    try {
+      final weight = double.tryParse(state.weightInput);
+      if (weight == null) return;
 
-    final selectedDate = DateTime(
-      state.selectedDate.year,
-      state.selectedDate.month,
-      state.selectedDate.day,
-    );
-    final dateMillis = selectedDate.millisecondsSinceEpoch;
-    final existingLog = await _weightLogRepository.getLogByDate(dateMillis);
-    if (existingLog != null) {
-      await _weightLogRepository.deleteLog(existingLog);
+      final selectedDate = DateTime(
+        state.selectedDate.year,
+        state.selectedDate.month,
+        state.selectedDate.day,
+      );
+      final dateMillis = selectedDate.millisecondsSinceEpoch;
+      final existingLog = await _weightLogRepository.getLogByDate(dateMillis);
+      if (existingLog != null) {
+        await _weightLogRepository.deleteLog(existingLog);
+      }
+
+      await _insertWeightLog(weight, dateMillis);
+      emit(state.copyWith(showDuplicateDialog: false));
+    } catch (e) {
+      debugPrint('Error in confirmReplaceDuplicate: $e');
     }
-
-    await _insertWeightLog(weight, dateMillis);
-    emit(state.copyWith(showDuplicateDialog: false));
   }
 
   void dismissDuplicateDialog() {
@@ -159,74 +172,86 @@ class WeightLogCubit extends Cubit<WeightLogState> {
   }
 
   Future<void> _insertWeightLog(double weight, int date) async {
-    final latestLog = await _weightLogRepository.getLatestLog();
+    try {
+      final latestLog = await _weightLogRepository.getLatestLog();
 
-    await _weightLogRepository.insertLog(
-      WeightLogsCompanion.insert(
-        date: date,
-        weightKg: weight,
-        createdAt: DateTime.now().millisecondsSinceEpoch,
-      ),
-    );
-    hideAddDialog();
+      await _weightLogRepository.insertLog(
+        WeightLogsCompanion.insert(
+          date: date,
+          weightKg: weight,
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+        ),
+      );
+      hideAddDialog();
 
-    // Sync profile weight and recalculate calories.
-    await _syncProfileWeight(weight);
+      // Sync profile weight and recalculate calories.
+      await _syncProfileWeight(weight);
 
-    if (latestLog != null) {
-      final diff = (weight - latestLog.weightKg).abs();
-      if (diff > _outlierThresholdKg) {
-        emit(state.copyWith(
-          outlierWarning:
-              'Ecart important detecte (${diff.toStringAsFixed(1)} kg). '
-              'Verifiez la valeur.',
-        ));
+      if (latestLog != null) {
+        final diff = (weight - latestLog.weightKg).abs();
+        if (diff > _outlierThresholdKg) {
+          emit(state.copyWith(
+            outlierWarning:
+                'Ecart important detecte (${diff.toStringAsFixed(1)} kg). '
+                'Verifiez la valeur.',
+          ));
+        }
       }
+    } catch (e) {
+      debugPrint('Error in _insertWeightLog: $e');
     }
   }
 
   Future<void> _syncProfileWeight(double newWeight) async {
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
 
-    final sex = Sex.values.firstWhere(
-      (s) => s.name == profile.sex,
-      orElse: () => Sex.male,
-    );
-    final activityLevel = ActivityLevel.values.firstWhere(
-      (a) => a.name == profile.activityLevel,
-      orElse: () => ActivityLevel.moderatelyActive,
-    );
-    final lossPace = LossPace.values.firstWhere(
-      (lp) => lp.name == profile.lossPace,
-      orElse: () => LossPace.moderate,
-    );
+      final sex = Sex.values.firstWhere(
+        (s) => s.name == profile.sex,
+        orElse: () => Sex.male,
+      );
+      final activityLevel = ActivityLevel.values.firstWhere(
+        (a) => a.name == profile.activityLevel,
+        orElse: () => ActivityLevel.moderatelyActive,
+      );
+      final lossPace = LossPace.values.firstWhere(
+        (lp) => lp.name == profile.lossPace,
+        orElse: () => LossPace.moderate,
+      );
 
-    final newCalories = _calorieCalculator.calculateDailyTarget(
-      weightKg: newWeight,
-      heightCm: profile.heightCm,
-      age: profile.age,
-      sex: sex,
-      activityLevel: activityLevel,
-      lossPace: lossPace,
-    );
-    final newWater = _calorieCalculator.calculateDailyWater(
-      weightKg: newWeight,
-      heightCm: profile.heightCm,
-      age: profile.age,
-      sex: sex,
-      activityLevel: activityLevel,
-    );
+      final newCalories = _calorieCalculator.calculateDailyTarget(
+        weightKg: newWeight,
+        heightCm: profile.heightCm,
+        age: profile.age,
+        sex: sex,
+        activityLevel: activityLevel,
+        lossPace: lossPace,
+      );
+      final newWater = _calorieCalculator.calculateDailyWater(
+        weightKg: newWeight,
+        heightCm: profile.heightCm,
+        age: profile.age,
+        sex: sex,
+        activityLevel: activityLevel,
+      );
 
-    await _userProfileRepository.updateWeightAndCalories(
-      weightKg: newWeight,
-      calories: newCalories,
-      waterMl: newWater,
-    );
+      await _userProfileRepository.updateWeightAndCalories(
+        weightKg: newWeight,
+        calories: newCalories,
+        waterMl: newWater,
+      );
+    } catch (e) {
+      debugPrint('Error in _syncProfileWeight: $e');
+    }
   }
 
   Future<void> deleteLog(WeightLog log) async {
-    await _weightLogRepository.deleteLog(log);
+    try {
+      await _weightLogRepository.deleteLog(log);
+    } catch (e) {
+      debugPrint('Error in deleteLog: $e');
+    }
   }
 
   @override

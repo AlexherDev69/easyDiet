@@ -1,10 +1,12 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../../data/local/database.dart';
 import '../../../../data/local/models/day_plan_with_meals.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
 import '../../../../data/local/models/week_plan_with_days.dart';
 
 /// State for the standalone plan preview screen.
-class PlanPreviewState {
+class PlanPreviewState extends Equatable {
   const PlanPreviewState({
     this.isLoading = false,
     this.weekPlan,
@@ -28,6 +30,20 @@ class PlanPreviewState {
   final MealWithRecipe? replacingMeal;
   final List<Recipe> replacementCandidates;
   final int otherOccurrencesCount;
+
+  @override
+  List<Object?> get props => [
+        isLoading,
+        weekPlan,
+        showMoveDialog,
+        movingMeal,
+        movingSourceDayPlanId,
+        moveTargetDays,
+        showReplaceDialog,
+        replacingMeal,
+        replacementCandidates,
+        otherOccurrencesCount,
+      ];
 
   PlanPreviewState copyWith({
     bool? isLoading,

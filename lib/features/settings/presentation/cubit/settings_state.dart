@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../onboarding/domain/models/models.dart';
 
 /// State for the settings screen — port of SettingsUiState.
-class SettingsState {
+class SettingsState extends Equatable {
   const SettingsState({
     this.name = '',
     this.age = '',
@@ -70,6 +72,40 @@ class SettingsState {
   final bool showRegenerateDialog;
   final bool isSaved;
   final bool isLoading;
+
+  @override
+  List<Object?> get props => [
+        name,
+        age,
+        sex,
+        heightCm,
+        weightKg,
+        targetWeightKg,
+        lossPace,
+        activityLevel,
+        dietType,
+        freeDays,
+        batchCookingSessions,
+        shoppingTrips,
+        distinctBreakfasts,
+        distinctLunches,
+        distinctDinners,
+        distinctSnacks,
+        enabledMealTypes,
+        dietStartDate,
+        batchCookingBeforeDiet,
+        selectedAllergies,
+        excludedMeats,
+        customAllergies,
+        economicMode,
+        calculatedCalories,
+        calculatedWaterMl,
+        targetWeightError,
+        showResetDialog,
+        showRegenerateDialog,
+        isSaved,
+        isLoading,
+      ];
 
   int get dietDaysPerWeek => 7 - freeDays.length;
 
@@ -146,7 +182,7 @@ class SettingsState {
 }
 
 /// Tracks diet-related fields to detect changes requiring plan regeneration.
-class DietFields {
+class DietFields extends Equatable {
   const DietFields({
     required this.dietType,
     required this.freeDays,
@@ -182,40 +218,23 @@ class DietFields {
   final bool economicMode;
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is DietFields &&
-          dietType == other.dietType &&
-          freeDays.length == other.freeDays.length &&
-          freeDays.containsAll(other.freeDays) &&
-          enabledMealTypes.length == other.enabledMealTypes.length &&
-          enabledMealTypes.containsAll(other.enabledMealTypes) &&
-          distinctBreakfasts == other.distinctBreakfasts &&
-          distinctLunches == other.distinctLunches &&
-          distinctDinners == other.distinctDinners &&
-          distinctSnacks == other.distinctSnacks &&
-          batchCookingSessions == other.batchCookingSessions &&
-          batchCookingBeforeDiet == other.batchCookingBeforeDiet &&
-          dietStartDate == other.dietStartDate &&
-          selectedAllergies.length == other.selectedAllergies.length &&
-          selectedAllergies.containsAll(other.selectedAllergies) &&
-          excludedMeats.length == other.excludedMeats.length &&
-          excludedMeats.containsAll(other.excludedMeats) &&
-          customAllergies == other.customAllergies &&
-          shoppingTrips == other.shoppingTrips &&
-          economicMode == other.economicMode;
-
-  @override
-  int get hashCode => Object.hash(
+  List<Object?> get props => [
         dietType,
-        freeDays.length,
-        enabledMealTypes.length,
+        freeDays,
+        enabledMealTypes,
         distinctBreakfasts,
         distinctLunches,
+        distinctDinners,
+        distinctSnacks,
         batchCookingSessions,
+        batchCookingBeforeDiet,
+        dietStartDate,
+        selectedAllergies,
+        excludedMeats,
+        customAllergies,
         shoppingTrips,
         economicMode,
-      );
+      ];
 }
 
 /// Extract diet fields from settings state for change detection.

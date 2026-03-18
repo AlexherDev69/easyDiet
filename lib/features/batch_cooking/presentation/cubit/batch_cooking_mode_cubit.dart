@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/local/daos/day_plan_dao.dart';
@@ -17,9 +18,7 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
   })  : _dayPlanDao = dayPlanDao,
         _recipeRepository = recipeRepository,
         _batchStepOptimizer = batchStepOptimizer,
-        super(const BatchCookingModeState()) {
-    _startTimerTicker();
-  }
+        super(const BatchCookingModeState());
 
   final DayPlanDao _dayPlanDao;
   final RecipeRepository _recipeRepository;
@@ -29,35 +28,39 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
   // ── Public actions ──────────────────────────────────────────────────
 
   Future<void> loadBatchSteps(int dayPlanId) async {
-    final dayPlan = await _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
-    if (dayPlan == null) {
-      emit(state.copyWith(isLoading: false));
-      return;
+    try {
+      final dayPlan = await _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
+      if (dayPlan == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
+
+      final recipePairs = <(BatchRecipeInfo, RecipeWithDetails)>[];
+      for (final mealWithRecipe in dayPlan.meals) {
+        final details = await _recipeRepository
+            .getRecipeWithDetails(mealWithRecipe.recipe.id);
+        if (details == null) continue;
+
+        final info = BatchRecipeInfo(
+          recipeId: mealWithRecipe.recipe.id,
+          recipeName: mealWithRecipe.recipe.name,
+          servings: mealWithRecipe.meal.servings,
+          servingsMultiplier:
+              mealWithRecipe.meal.servings / mealWithRecipe.recipe.servings,
+        );
+        recipePairs.add((info, details));
+      }
+
+      final pages = _batchStepOptimizer.optimizeSteps(recipePairs);
+
+      emit(state.copyWith(
+        pages: pages,
+        sessionNumber: dayPlan.dayPlan.batchCookingSession ?? 1,
+        isLoading: false,
+      ));
+    } catch (e) {
+      debugPrint('Error in loadBatchSteps: $e');
     }
-
-    final recipePairs = <(BatchRecipeInfo, RecipeWithDetails)>[];
-    for (final mealWithRecipe in dayPlan.meals) {
-      final details = await _recipeRepository
-          .getRecipeWithDetails(mealWithRecipe.recipe.id);
-      if (details == null) continue;
-
-      final info = BatchRecipeInfo(
-        recipeId: mealWithRecipe.recipe.id,
-        recipeName: mealWithRecipe.recipe.name,
-        servings: mealWithRecipe.meal.servings,
-        servingsMultiplier:
-            mealWithRecipe.meal.servings / mealWithRecipe.recipe.servings,
-      );
-      recipePairs.add((info, details));
-    }
-
-    final pages = _batchStepOptimizer.optimizeSteps(recipePairs);
-
-    emit(state.copyWith(
-      pages: pages,
-      sessionNumber: dayPlan.dayPlan.batchCookingSession ?? 1,
-      isLoading: false,
-    ));
   }
 
   void nextPage() {
@@ -102,6 +105,7 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
       recipeName: recipeName,
     );
     emit(state.copyWith(activeTimers: timers));
+    _ensureTickerRunning();
   }
 
   void toggleTimer(String timerKey) {
@@ -116,31 +120,47 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
     final timers = Map.of(state.activeTimers);
     timers.remove(timerKey);
     emit(state.copyWith(activeTimers: timers));
+    if (timers.isEmpty) {
+      _stopTicker();
+    }
   }
 
   // ── Private ───────────────────────────────────────────────────────
 
-  void _startTimerTicker() {
+  void _ensureTickerRunning() {
+    if (_ticker != null) return;
     _ticker = Timer.periodic(const Duration(seconds: 1), (_) {
       final timers = Map.of(state.activeTimers);
       var changed = false;
+      var hasRunning = false;
       for (final entry in timers.entries.toList()) {
         final timer = entry.value;
         if (timer.isRunning && timer.remainingSeconds > 0) {
           timers[entry.key] =
               timer.copyWith(remainingSeconds: timer.remainingSeconds - 1);
           changed = true;
+          hasRunning = true;
+        } else if (timer.isRunning && timer.remainingSeconds > 0) {
+          hasRunning = true;
         }
       }
       if (changed) {
         emit(state.copyWith(activeTimers: timers));
       }
+      if (!hasRunning) {
+        _stopTicker();
+      }
     });
+  }
+
+  void _stopTicker() {
+    _ticker?.cancel();
+    _ticker = null;
   }
 
   @override
   Future<void> close() {
-    _ticker?.cancel();
+    _stopTicker();
     return super.close();
   }
 }

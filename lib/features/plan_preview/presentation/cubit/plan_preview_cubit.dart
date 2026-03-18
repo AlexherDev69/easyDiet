@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../data/local/database.dart';
@@ -30,28 +31,38 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   final ShoppingListGenerator _shoppingListGenerator;
 
   Future<void> _generateNewPlan() async {
-    emit(state.copyWith(isLoading: true));
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
+    try {
+      emit(state.copyWith(isLoading: true));
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
 
-    await _mealPlanRepository.deleteWeekPlans();
-    await _mealPlanGenerator.generateWeekPlan(profile);
+      await _mealPlanRepository.deleteWeekPlans();
+      await _mealPlanGenerator.generateWeekPlan(profile);
 
-    final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
-    emit(state.copyWith(isLoading: false, weekPlan: weekPlan));
+      final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      emit(state.copyWith(isLoading: false, weekPlan: weekPlan));
+    } catch (e) {
+      debugPrint('Error in _generateNewPlan: $e');
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> confirmPlan() async {
-    emit(state.copyWith(isLoading: true));
-    final profile = await _userProfileRepository.getProfile();
-    final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
-    if (weekPlan != null) {
-      await _shoppingListGenerator.generateShoppingList(
-        weekPlan,
-        shoppingTripsPerWeek: profile?.shoppingTripsPerWeek ?? 1,
-      );
+    try {
+      emit(state.copyWith(isLoading: true));
+      final profile = await _userProfileRepository.getProfile();
+      final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      if (weekPlan != null) {
+        await _shoppingListGenerator.generateShoppingList(
+          weekPlan,
+          shoppingTripsPerWeek: profile?.shoppingTripsPerWeek ?? 1,
+        );
+      }
+      emit(state.copyWith(isLoading: false));
+    } catch (e) {
+      debugPrint('Error in confirmPlan: $e');
+      emit(state.copyWith(isLoading: false));
     }
-    emit(state.copyWith(isLoading: false));
   }
 
   // ── Move meal between days ──────────────────────────────────────
@@ -81,49 +92,57 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   }
 
   Future<void> moveMealToDay(int targetDayPlanId) async {
-    final meal = state.movingMeal;
-    if (meal == null) return;
+    try {
+      final meal = state.movingMeal;
+      if (meal == null) return;
 
-    await _mealPlanRepository.swapMealsBetweenDays(
-        meal.meal.id, targetDayPlanId);
-    final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
-    emit(state.copyWith(
-      weekPlan: updatedPlan,
-      showMoveDialog: false,
-      moveTargetDays: const [],
-    ));
+      await _mealPlanRepository.swapMealsBetweenDays(
+          meal.meal.id, targetDayPlanId);
+      final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      emit(state.copyWith(
+        weekPlan: updatedPlan,
+        showMoveDialog: false,
+        moveTargetDays: const [],
+      ));
+    } catch (e) {
+      debugPrint('Error in moveMealToDay: $e');
+    }
   }
 
   // ── Replace recipe ──────────────────────────────────────────────
 
   Future<void> openReplaceDialog(MealWithRecipe meal) async {
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
-    final weekPlan = state.weekPlan;
-    if (weekPlan == null) return;
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
+      final weekPlan = state.weekPlan;
+      if (weekPlan == null) return;
 
-    final usedRecipeIds = weekPlan.days
-        .expand((d) => d.meals)
-        .map((m) => m.recipe.id)
-        .toSet();
+      final usedRecipeIds = weekPlan.days
+          .expand((d) => d.meals)
+          .map((m) => m.recipe.id)
+          .toSet();
 
-    final candidates = await _mealPlanGenerator.getCompatibleReplacements(
-      meal.recipe.category,
-      usedRecipeIds,
-      profile,
-    );
+      final candidates = await _mealPlanGenerator.getCompatibleReplacements(
+        meal.recipe.category,
+        usedRecipeIds,
+        profile,
+      );
 
-    final otherOccurrences = weekPlan.days
-        .expand((d) => d.meals)
-        .where((m) => m.meal.id != meal.meal.id && m.recipe.id == meal.recipe.id)
-        .length;
+      final otherOccurrences = weekPlan.days
+          .expand((d) => d.meals)
+          .where((m) => m.meal.id != meal.meal.id && m.recipe.id == meal.recipe.id)
+          .length;
 
-    emit(state.copyWith(
-      showReplaceDialog: true,
-      replacingMeal: meal,
-      replacementCandidates: candidates,
-      otherOccurrencesCount: otherOccurrences,
-    ));
+      emit(state.copyWith(
+        showReplaceDialog: true,
+        replacingMeal: meal,
+        replacementCandidates: candidates,
+        otherOccurrencesCount: otherOccurrences,
+      ));
+    } catch (e) {
+      debugPrint('Error in openReplaceDialog: $e');
+    }
   }
 
   void dismissReplaceDialog() {
@@ -135,54 +154,58 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   }
 
   Future<void> replaceRecipe(Recipe newRecipe, bool replaceAll) async {
-    final currentMeal = state.replacingMeal;
-    final weekPlan = state.weekPlan;
-    if (currentMeal == null || weekPlan == null) return;
+    try {
+      final currentMeal = state.replacingMeal;
+      final weekPlan = state.weekPlan;
+      if (currentMeal == null || weekPlan == null) return;
 
-    final profile = await _userProfileRepository.getProfile();
-    if (profile == null) return;
+      final profile = await _userProfileRepository.getProfile();
+      if (profile == null) return;
 
-    final mealType = MealType.values.firstWhere(
-      (m) => m.name.toUpperCase() == currentMeal.meal.mealType,
-      orElse: () => MealType.lunch,
-    );
-
-    final mealsToUpdate = replaceAll
-        ? weekPlan.days
-            .expand((d) => d.meals)
-            .where((m) => m.recipe.id == currentMeal.recipe.id)
-            .map((m) => m.meal)
-            .toList()
-        : [currentMeal.meal];
-
-    for (final meal in mealsToUpdate) {
-      final type = MealType.values.firstWhere(
-        (m) => m.name.toUpperCase() == meal.mealType,
-        orElse: () => mealType,
+      final mealType = MealType.values.firstWhere(
+        (m) => m.name.toUpperCase() == currentMeal.meal.mealType,
+        orElse: () => MealType.lunch,
       );
-      final servings = _mealPlanGenerator.calculateServings(
-        newRecipe,
-        profile.dailyCalorieTarget,
-        type,
-      );
-      await _mealPlanRepository.updateMeal(
-        Meal(
-          id: meal.id,
-          dayPlanId: meal.dayPlanId,
-          mealType: meal.mealType,
-          recipeId: newRecipe.id,
-          servings: servings,
-          isConsumed: meal.isConsumed,
-        ),
-      );
+
+      final mealsToUpdate = replaceAll
+          ? weekPlan.days
+              .expand((d) => d.meals)
+              .where((m) => m.recipe.id == currentMeal.recipe.id)
+              .map((m) => m.meal)
+              .toList()
+          : [currentMeal.meal];
+
+      for (final meal in mealsToUpdate) {
+        final type = MealType.values.firstWhere(
+          (m) => m.name.toUpperCase() == meal.mealType,
+          orElse: () => mealType,
+        );
+        final servings = _mealPlanGenerator.calculateServings(
+          newRecipe,
+          profile.dailyCalorieTarget,
+          type,
+        );
+        await _mealPlanRepository.updateMeal(
+          Meal(
+            id: meal.id,
+            dayPlanId: meal.dayPlanId,
+            mealType: meal.mealType,
+            recipeId: newRecipe.id,
+            servings: servings,
+            isConsumed: meal.isConsumed,
+          ),
+        );
+      }
+
+      final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      emit(state.copyWith(
+        weekPlan: updatedPlan,
+        showReplaceDialog: false,
+        replacementCandidates: const [],
+        otherOccurrencesCount: 0,
+      ));
+    } catch (e) {
+      debugPrint('Error in replaceRecipe: $e');
     }
-
-    final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
-    emit(state.copyWith(
-      weekPlan: updatedPlan,
-      showReplaceDialog: false,
-      replacementCandidates: const [],
-      otherOccurrencesCount: 0,
-    ));
   }
 }

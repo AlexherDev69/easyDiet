@@ -56,25 +56,31 @@ class RecipeDao extends DatabaseAccessor<AppDatabase> with _$RecipeDaoMixin {
   }
 
   /// Get all recipes with details (one-shot).
+  /// Loads all steps and ingredients in 2 bulk queries, then groups in memory.
   Future<List<RecipeWithDetails>> getAllRecipesWithDetails() async {
     final allRecipes = await select(recipes).get();
-    final results = <RecipeWithDetails>[];
+    final allSteps = await (select(recipeSteps)
+          ..orderBy([(t) => OrderingTerm.asc(t.stepNumber)]))
+        .get();
+    final allIngredients = await select(ingredients).get();
 
-    for (final recipe in allRecipes) {
-      final stepsList = await (select(recipeSteps)
-            ..where((t) => t.recipeId.equals(recipe.id))
-            ..orderBy([(t) => OrderingTerm.asc(t.stepNumber)]))
-          .get();
-      final ingredientsList = await (select(ingredients)
-            ..where((t) => t.recipeId.equals(recipe.id)))
-          .get();
-      results.add(RecipeWithDetails(
-        recipe: recipe,
-        steps: stepsList,
-        ingredients: ingredientsList,
-      ));
+    final stepsMap = <int, List<RecipeStep>>{};
+    for (final step in allSteps) {
+      stepsMap.putIfAbsent(step.recipeId, () => []).add(step);
     }
-    return results;
+
+    final ingredientsMap = <int, List<Ingredient>>{};
+    for (final ing in allIngredients) {
+      ingredientsMap.putIfAbsent(ing.recipeId, () => []).add(ing);
+    }
+
+    return allRecipes
+        .map((recipe) => RecipeWithDetails(
+              recipe: recipe,
+              steps: stepsMap[recipe.id] ?? [],
+              ingredients: ingredientsMap[recipe.id] ?? [],
+            ))
+        .toList();
   }
 
   /// Watch all recipes (without details).
