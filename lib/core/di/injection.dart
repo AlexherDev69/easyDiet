@@ -59,6 +59,7 @@ Future<void> configureDependencies() async {
       getIt<WeekPlanDao>(),
       getIt<DayPlanDao>(),
       getIt<MealDao>(),
+      getIt<AppDatabase>(),
     ),
   );
   getIt.registerSingleton<ShoppingRepository>(

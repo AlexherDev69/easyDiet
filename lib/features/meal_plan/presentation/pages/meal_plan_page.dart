@@ -82,16 +82,17 @@ class MealPlanPage extends StatelessWidget {
 
     showDialog<void>(
       context: context,
-      builder: (_) => SwapMealDialog(
+      useRootNavigator: false,
+      builder: (dialogContext) => SwapMealDialog(
         alternatives: state.swapAlternatives,
         otherOccurrencesCount: state.swapOtherOccurrencesCount,
         currentRecipeName: currentRecipeName,
         onSelectRecipe: (recipe, replaceAll) {
-          Navigator.pop(context);
+          Navigator.pop(dialogContext);
           cubit.swapMeal(recipe, replaceAll: replaceAll);
         },
         onDismiss: () {
-          Navigator.pop(context);
+          Navigator.pop(dialogContext);
           cubit.closeSwapDialog();
         },
       ),
@@ -110,15 +111,16 @@ class MealPlanPage extends StatelessWidget {
   ) {
     showDialog<void>(
       context: context,
-      builder: (_) => MoveMealDialog(
+      useRootNavigator: false,
+      builder: (dialogContext) => MoveMealDialog(
         movingMeal: state.movingMeal!,
         targetDays: state.moveTargetDays,
         onSelectDay: (dayPlanId) {
-          Navigator.pop(context);
+          Navigator.pop(dialogContext);
           cubit.moveMealToDay(dayPlanId);
         },
         onDismiss: () {
-          Navigator.pop(context);
+          Navigator.pop(dialogContext);
           cubit.closeMoveDialog();
         },
       ),
@@ -218,6 +220,7 @@ class _MealPlanContent extends StatelessWidget {
   void _showShiftDialog(BuildContext context, MealPlanCubit cubit) {
     showDialog<void>(
       context: context,
+      useRootNavigator: false,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
           'Decaler le programme ?',
@@ -247,6 +250,7 @@ class _MealPlanContent extends StatelessWidget {
   void _showRegenerateDialog(BuildContext context) {
     showDialog<void>(
       context: context,
+      useRootNavigator: false,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
           'Regenerer le plan ?',

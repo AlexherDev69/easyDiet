@@ -288,6 +288,7 @@ class MealPlanGenerator {
       MealType.snack => 1.5,
     };
     final targetCalories = dailyTarget * mealCalorieShare;
+    if (recipe.caloriesPerServing <= 0) return 1.0;
     final servings = targetCalories / recipe.caloriesPerServing;
     return ((servings * 4).round() / 4.0).clamp(0.5, maxServings);
   }
@@ -380,10 +381,14 @@ class MealPlanGenerator {
   ) {
     if (userAllergies.isEmpty) return recipes;
     return recipes.where((recipe) {
-      final allergens =
-          (json.decode(recipe.allergens) as List?)?.cast<String>() ??
-              <String>[];
-      return allergens.none((a) => userAllergies.contains(a));
+      try {
+        final allergens =
+            (json.decode(recipe.allergens) as List?)?.cast<String>() ??
+                <String>[];
+        return allergens.none((a) => userAllergies.contains(a));
+      } catch (_) {
+        return true;
+      }
     }).toList();
   }
 
@@ -392,27 +397,16 @@ class MealPlanGenerator {
     Set<String> excludedMeats,
   ) {
     if (excludedMeats.isEmpty) return recipes;
-    final expanded = _expandExclusions(excludedMeats);
     return recipes.where((recipe) {
-      final meats =
-          (json.decode(recipe.meatTypes) as List?)?.cast<String>() ??
-              <String>[];
-      return meats.none((m) => expanded.contains(m));
+      try {
+        final meats =
+            (json.decode(recipe.meatTypes) as List?)?.cast<String>() ??
+                <String>[];
+        return meats.none((m) => excludedMeats.contains(m));
+      } catch (_) {
+        return true;
+      }
     }).toList();
-  }
-
-  Set<String> _expandExclusions(Set<String> excludedMeats) {
-    final expanded = {...excludedMeats};
-    if (expanded.contains('ALL_MEAT')) {
-      expanded.addAll(['PORK', 'BEEF', 'LAMB', 'POULTRY', 'VEAL']);
-    }
-    if (expanded.contains('ALL_FISH')) {
-      expanded.addAll(['FISH', 'SHELLFISH']);
-    }
-    if (expanded.contains('SHELLFISH_MEAT')) {
-      expanded.add('SHELLFISH');
-    }
-    return expanded;
   }
 
   // ── Batch cooking helpers ────────────────────────────────────────────

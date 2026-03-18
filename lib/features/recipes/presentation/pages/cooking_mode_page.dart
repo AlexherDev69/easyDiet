@@ -182,7 +182,7 @@ class _CookingModePageState extends State<CookingModePage> {
 
     showDialog<void>(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: const Text('Quitter la cuisson ?'),
         content: Text(
           'Vous avez $timerCount minuteur${timerCount > 1 ? 's' : ''} '
@@ -190,12 +190,12 @@ class _CookingModePageState extends State<CookingModePage> {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(dialogContext),
             child: const Text('Continuer'),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // close dialog
+              Navigator.pop(dialogContext); // close dialog
               Navigator.pop(context); // exit cooking
             },
             child: const Text(

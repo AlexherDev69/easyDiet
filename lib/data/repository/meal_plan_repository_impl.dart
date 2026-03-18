@@ -9,11 +9,17 @@ import '../../core/utils/date_utils.dart';
 import '../../features/meal_plan/domain/repositories/meal_plan_repository.dart';
 
 class MealPlanRepositoryImpl implements MealPlanRepository {
-  MealPlanRepositoryImpl(this._weekPlanDao, this._dayPlanDao, this._mealDao);
+  MealPlanRepositoryImpl(
+    this._weekPlanDao,
+    this._dayPlanDao,
+    this._mealDao,
+    this._db,
+  );
 
   final WeekPlanDao _weekPlanDao;
   final DayPlanDao _dayPlanDao;
   final MealDao _mealDao;
+  final AppDatabase _db;
 
   @override
   Stream<WeekPlanWithDays?> watchCurrentWeekPlan() =>
@@ -37,6 +43,9 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
 
   @override
   Future<void> updateMeal(Meal meal) => _mealDao.updateMeal(meal);
+
+  @override
+  Future<void> updateMeals(List<Meal> meals) => _mealDao.updateAll(meals);
 
   @override
   Future<void> deleteWeekPlans() => _weekPlanDao.deleteAll();
@@ -81,40 +90,42 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
     );
     if (futureDays.length < 2) return;
 
-    // Create a new day after the last one to receive its meals.
-    final lastDay = futureDays.last;
-    final lastDate = DateTime.fromMillisecondsSinceEpoch(lastDay.date);
-    final newDate = lastDate.add(const Duration(days: 1));
-    final newDayId = await _dayPlanDao.insertDayPlan(
-      DayPlansCompanion.insert(
-        weekPlanId: weekPlan.weekPlan.id,
-        date: AppDateUtils.toEpochMillis(newDate),
-        dayOfWeek: newDate.weekday,
-        isFreeDay: const Value(false),
-      ),
-    );
-
-    // Move last day's meals to the new day, copy its status.
-    await _mealDao.reassignMeals(lastDay.id, newDayId);
-    await _dayPlanDao.updateDayPlanStatus(
-      newDayId,
-      lastDay.isFreeDay,
-      lastDay.batchCookingSession,
-    );
-
-    // Move meals forward for the remaining days (end → start).
-    for (var i = futureDays.length - 1; i >= 1; i--) {
-      await _mealDao.deleteByDayPlan(futureDays[i].id);
-      await _mealDao.reassignMeals(futureDays[i - 1].id, futureDays[i].id);
-      await _dayPlanDao.updateDayPlanStatus(
-        futureDays[i].id,
-        futureDays[i - 1].isFreeDay,
-        futureDays[i - 1].batchCookingSession,
+    await _db.transaction(() async {
+      // Create a new day after the last one to receive its meals.
+      final lastDay = futureDays.last;
+      final lastDate = DateTime.fromMillisecondsSinceEpoch(lastDay.date);
+      final newDate = lastDate.add(const Duration(days: 1));
+      final newDayId = await _dayPlanDao.insertDayPlan(
+        DayPlansCompanion.insert(
+          weekPlanId: weekPlan.weekPlan.id,
+          date: AppDateUtils.toEpochMillis(newDate),
+          dayOfWeek: newDate.weekday,
+          isFreeDay: const Value(false),
+        ),
       );
-    }
 
-    // Today becomes a free day (its meals were moved to tomorrow).
-    await _dayPlanDao.updateDayPlanStatus(futureDays.first.id, true, null);
+      // Move last day's meals to the new day, copy its status.
+      await _mealDao.reassignMeals(lastDay.id, newDayId);
+      await _dayPlanDao.updateDayPlanStatus(
+        newDayId,
+        lastDay.isFreeDay,
+        lastDay.batchCookingSession,
+      );
+
+      // Move meals forward for the remaining days (end → start).
+      for (var i = futureDays.length - 1; i >= 1; i--) {
+        await _mealDao.deleteByDayPlan(futureDays[i].id);
+        await _mealDao.reassignMeals(futureDays[i - 1].id, futureDays[i].id);
+        await _dayPlanDao.updateDayPlanStatus(
+          futureDays[i].id,
+          futureDays[i - 1].isFreeDay,
+          futureDays[i - 1].batchCookingSession,
+        );
+      }
+
+      // Today becomes a free day (its meals were moved to tomorrow).
+      await _dayPlanDao.updateDayPlanStatus(futureDays.first.id, true, null);
+    });
   }
 
   @override

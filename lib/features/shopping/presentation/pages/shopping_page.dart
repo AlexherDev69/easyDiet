@@ -48,12 +48,13 @@ class ShoppingPage extends StatelessWidget {
     final cubit = context.read<ShoppingCubit>();
     showDialog<void>(
       context: context,
-      builder: (_) => ItemDetailDialog(
+      useRootNavigator: false,
+      builder: (dialogContext) => ItemDetailDialog(
         itemName: state.selectedItemName ?? '',
         totalQuantity: state.selectedItemQuantity ?? '',
         sources: state.selectedItemSources ?? [],
         onDismiss: () {
-          Navigator.pop(context);
+          Navigator.pop(dialogContext);
           cubit.hideItemDetail();
         },
       ),
@@ -175,12 +176,13 @@ class _ShoppingContent extends StatelessWidget {
   void _showAddDialog(BuildContext context, ShoppingCubit cubit) {
     showDialog<void>(
       context: context,
-      builder: (_) => AddItemDialog(
+      useRootNavigator: false,
+      builder: (dialogContext) => AddItemDialog(
         onAdd: (name, qty, unit, section) {
-          Navigator.pop(context);
+          Navigator.pop(dialogContext);
           cubit.addItem(name, qty, unit, section);
         },
-        onDismiss: () => Navigator.pop(context),
+        onDismiss: () => Navigator.pop(dialogContext),
       ),
     );
   }
@@ -205,7 +207,7 @@ class _TripTabs extends StatelessWidget {
 
     return DefaultTabController(
       length: totalTrips,
-      initialIndex: selectedTrip - 1,
+      initialIndex: (selectedTrip - 1).clamp(0, totalTrips - 1),
       child: TabBar(
         isScrollable: true,
         onTap: (index) => onSelectTrip(index + 1),

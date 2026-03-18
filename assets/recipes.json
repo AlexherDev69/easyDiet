@@ -5,9 +5,9 @@
       "description": "Un porridge onctueux aux flocons d'avoine garni de fruits rouges frais et d'un filet de miel",
       "category": "BREAKFAST",
       "caloriesPerServing": 350,
-      "proteinGrams": 12.0,
-      "carbsGrams": 55.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 12,
+      "carbsGrams": 55,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 8,
@@ -42,31 +42,31 @@
       "ingredients": [
         {
           "name": "flocons d'avoine",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "fruits rouges (frais ou surgeles)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "graines de chia",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -79,9 +79,9 @@
       "description": "Des oeufs brouilles crémeux agrémentés de ciboulette, persil et servis sur du pain complet",
       "category": "BREAKFAST",
       "caloriesPerServing": 320,
-      "proteinGrams": 22.0,
-      "carbsGrams": 24.0,
-      "fatGrams": 15.0,
+      "proteinGrams": 22,
+      "carbsGrams": 24,
+      "fatGrams": 15,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 5,
@@ -122,43 +122,43 @@
       "ingredients": [
         {
           "name": "oeufs",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "beurre",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "ciboulette fraiche",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "persil frais",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "pain complet",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "tranche",
           "section": "PANTRY"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         },
         {
           "name": "poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -171,9 +171,9 @@
       "description": "Des pancakes moelleux a la banane et au fromage blanc, riches en proteines et faibles en sucre",
       "category": "BREAKFAST",
       "caloriesPerServing": 380,
-      "proteinGrams": 28.0,
-      "carbsGrams": 45.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 28,
+      "carbsGrams": 45,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 10,
@@ -214,25 +214,25 @@
       "ingredients": [
         {
           "name": "banane mure",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "oeuf",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "fromage blanc 0%",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "farine complete",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PANTRY"
         },
@@ -244,7 +244,7 @@
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -257,9 +257,9 @@
       "description": "Un smoothie bowl tropical a la mangue et banane, garni de granola et fruits frais",
       "category": "BREAKFAST",
       "caloriesPerServing": 340,
-      "proteinGrams": 14.0,
-      "carbsGrams": 52.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 14,
+      "carbsGrams": 52,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 0,
@@ -295,7 +295,7 @@
       "ingredients": [
         {
           "name": "mangue surgelee",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "FROZEN"
         },
@@ -307,25 +307,25 @@
         },
         {
           "name": "yaourt nature",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "granola",
-          "quantity": 25.0,
+          "quantity": 25,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "kiwi",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "graines de chia",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -338,9 +338,9 @@
       "description": "Des tartines de pain complet avec de l'avocat ecrase et un oeuf poche parfaitement coulant",
       "category": "BREAKFAST",
       "caloriesPerServing": 380,
-      "proteinGrams": 16.0,
-      "carbsGrams": 30.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 16,
+      "carbsGrams": 30,
+      "fatGrams": 22,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 5,
@@ -380,7 +380,7 @@
       "ingredients": [
         {
           "name": "pain complet",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "tranche",
           "section": "PANTRY"
         },
@@ -392,31 +392,31 @@
         },
         {
           "name": "oeuf",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PRODUCE"
         },
         {
           "name": "vinaigre blanc",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "graines de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -429,9 +429,9 @@
       "description": "Un yaourt nature accompagne de granola maison croustillant aux amandes et miel",
       "category": "BREAKFAST",
       "caloriesPerServing": 310,
-      "proteinGrams": 15.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 10.0,
+      "proteinGrams": 15,
+      "carbsGrams": 40,
+      "fatGrams": 10,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -468,31 +468,31 @@
       "ingredients": [
         {
           "name": "yaourt nature",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "granola maison",
-          "quantity": 35.0,
+          "quantity": 35,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "amandes effilees",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "myrtilles",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -505,9 +505,9 @@
       "description": "Une salade Cesar classique avec du poulet grille, des croutons et une sauce legere au parmesan",
       "category": "LUNCH",
       "caloriesPerServing": 420,
-      "proteinGrams": 35.0,
-      "carbsGrams": 22.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 35,
+      "carbsGrams": 22,
+      "fatGrams": 22,
       "servings": 1,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 12,
@@ -553,43 +553,43 @@
       "ingredients": [
         {
           "name": "blanc de poulet",
-          "quantity": 130.0,
+          "quantity": 130,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "salade romaine",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "parmesan rape",
-          "quantity": 15.0,
+          "quantity": 15,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "pain complet (croutons)",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "yaourt nature",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
@@ -610,9 +610,9 @@
       "description": "Un bowl complet et colore avec quinoa, pois chiches rotis, legumes frais et sauce tahini",
       "category": "LUNCH",
       "caloriesPerServing": 480,
-      "proteinGrams": 18.0,
-      "carbsGrams": 58.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 18,
+      "carbsGrams": 58,
+      "fatGrams": 20,
       "servings": 1,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 20,
@@ -656,13 +656,13 @@
       "ingredients": [
         {
           "name": "quinoa",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "pois chiches (en conserve)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
@@ -674,7 +674,7 @@
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -686,13 +686,13 @@
         },
         {
           "name": "tahini",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
@@ -711,9 +711,9 @@
       "description": "Un wrap leger avec du poulet grille, des crudites croquantes et une sauce au yaourt",
       "category": "LUNCH",
       "caloriesPerServing": 390,
-      "proteinGrams": 30.0,
-      "carbsGrams": 38.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 30,
+      "carbsGrams": 38,
+      "fatGrams": 12,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 8,
@@ -754,19 +754,19 @@
       "ingredients": [
         {
           "name": "tortilla complete",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PANTRY"
         },
         {
           "name": "blanc de poulet",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -778,19 +778,19 @@
         },
         {
           "name": "salade verte",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "yaourt nature",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "moutarde de Dijon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -805,9 +805,9 @@
       "description": "Une quiche lorraine revisitee avec une pate legere, des lardons et une garniture au fromage blanc",
       "category": "LUNCH",
       "caloriesPerServing": 420,
-      "proteinGrams": 24.0,
-      "carbsGrams": 32.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 24,
+      "carbsGrams": 32,
+      "fatGrams": 22,
       "servings": 4,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 35,
@@ -853,43 +853,43 @@
       "ingredients": [
         {
           "name": "pate brisee",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PANTRY"
         },
         {
           "name": "lardons fumes",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "oeufs",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "fromage blanc 0%",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "gruyere rape",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "muscade",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -904,9 +904,9 @@
       "description": "Une soupe veloutee aux lentilles corail parfumee au cumin et au curcuma",
       "category": "LUNCH",
       "caloriesPerServing": 320,
-      "proteinGrams": 18.0,
-      "carbsGrams": 45.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 18,
+      "carbsGrams": 45,
+      "fatGrams": 6,
       "servings": 4,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -945,37 +945,37 @@
       "ingredients": [
         {
           "name": "lentilles corail",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "bouillon de legumes",
-          "quantity": 800.0,
+          "quantity": 800,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "cumin moulu",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
@@ -987,7 +987,7 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -1000,9 +1000,9 @@
       "description": "Des pates completes sautees avec des legumes de saison, de l'ail et du parmesan",
       "category": "LUNCH",
       "caloriesPerServing": 450,
-      "proteinGrams": 16.0,
-      "carbsGrams": 62.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 16,
+      "carbsGrams": 62,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 15,
@@ -1048,25 +1048,25 @@
       "ingredients": [
         {
           "name": "pates completes",
-          "quantity": 160.0,
+          "quantity": 160,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "courgette",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -1078,13 +1078,13 @@
         },
         {
           "name": "parmesan rape",
-          "quantity": 20.0,
+          "quantity": 20,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "basilic frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -1097,9 +1097,9 @@
       "description": "Un taboule frais au quinoa avec menthe, persil, tomates cerises et concombre",
       "category": "LUNCH",
       "caloriesPerServing": 360,
-      "proteinGrams": 12.0,
-      "carbsGrams": 48.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 12,
+      "carbsGrams": 48,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 15,
@@ -1136,13 +1136,13 @@
       "ingredients": [
         {
           "name": "quinoa",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tomates cerises",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -1154,25 +1154,25 @@
         },
         {
           "name": "menthe fraiche",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "persil plat",
-          "quantity": 15.0,
+          "quantity": 15,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         }
@@ -1185,9 +1185,9 @@
       "description": "Un risotto crémeux aux champignons de Paris et shiitake, parfume au thym",
       "category": "LUNCH",
       "caloriesPerServing": 440,
-      "proteinGrams": 12.0,
-      "carbsGrams": 60.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 12,
+      "carbsGrams": 60,
+      "fatGrams": 16,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -1231,49 +1231,49 @@
       "ingredients": [
         {
           "name": "riz arborio",
-          "quantity": 160.0,
+          "quantity": 160,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "champignons de Paris",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "bouillon de legumes",
-          "quantity": 500.0,
+          "quantity": 500,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "parmesan rape",
-          "quantity": 25.0,
+          "quantity": 25,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "beurre",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "thym frais",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -1286,9 +1286,9 @@
       "description": "Des hauts de cuisse de poulet rotis aux herbes de Provence avec des pommes de terre fondantes",
       "category": "DINNER",
       "caloriesPerServing": 480,
-      "proteinGrams": 38.0,
-      "carbsGrams": 32.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 38,
+      "carbsGrams": 32,
+      "fatGrams": 22,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 45,
@@ -1330,43 +1330,43 @@
       "ingredients": [
         {
           "name": "hauts de cuisse de poulet",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "pommes de terre",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "herbes de Provence",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "SPICES"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         },
         {
           "name": "poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -1381,9 +1381,9 @@
       "description": "Un pave de saumon grille avec une sauce legere au citron et a l'aneth, accompagne d'asperges",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 34.0,
-      "carbsGrams": 12.0,
-      "fatGrams": 26.0,
+      "proteinGrams": 34,
+      "carbsGrams": 12,
+      "fatGrams": 26,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 12,
@@ -1420,7 +1420,7 @@
       "ingredients": [
         {
           "name": "pave de saumon",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
@@ -1432,25 +1432,25 @@
         },
         {
           "name": "aneth frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "asperges vertes",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -1465,9 +1465,9 @@
       "description": "Un wok colore de legumes croquants et de tofu marine a la sauce soja et au gingembre",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 22.0,
-      "carbsGrams": 35.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 22,
+      "carbsGrams": 35,
+      "fatGrams": 18,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 12,
@@ -1511,43 +1511,43 @@
       "ingredients": [
         {
           "name": "tofu ferme",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "brocoli",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce soja",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "gingembre frais",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "huile de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -1560,9 +1560,9 @@
       "description": "Un gratin leger de courgettes avec une bechamel allegee au fromage et des herbes",
       "category": "DINNER",
       "caloriesPerServing": 350,
-      "proteinGrams": 18.0,
-      "carbsGrams": 22.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 18,
+      "carbsGrams": 22,
+      "fatGrams": 20,
       "servings": 4,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 30,
@@ -1607,43 +1607,43 @@
       "ingredients": [
         {
           "name": "courgettes",
-          "quantity": 600.0,
+          "quantity": 600,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "beurre",
-          "quantity": 15.0,
+          "quantity": 15,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "farine",
-          "quantity": 15.0,
+          "quantity": 15,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "gruyere rape",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "muscade",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -1656,9 +1656,9 @@
       "description": "Un chili con carne savoureux avec du boeuf haché maigre, des haricots rouges et des epices",
       "category": "DINNER",
       "caloriesPerServing": 450,
-      "proteinGrams": 32.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 32,
+      "carbsGrams": 40,
+      "fatGrams": 16,
       "servings": 4,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 40,
@@ -1700,49 +1700,49 @@
       "ingredients": [
         {
           "name": "boeuf hache 5% MG",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "haricots rouges (en conserve)",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tomates concassees",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "cumin moulu",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "paprika",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "concentre de tomate",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -1757,9 +1757,9 @@
       "description": "Un curry vegetarien onctueux aux pois chiches, lait de coco et epices indiennes",
       "category": "DINNER",
       "caloriesPerServing": 400,
-      "proteinGrams": 14.0,
-      "carbsGrams": 42.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 14,
+      "carbsGrams": 42,
+      "fatGrams": 20,
       "servings": 4,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -1796,49 +1796,49 @@
       "ingredients": [
         {
           "name": "pois chiches (en conserve)",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait de coco light",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "tomates concassees",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "epinards frais",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "pate de curry",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "SPICES"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -1851,9 +1851,9 @@
       "description": "Un filet de cabillaud cuit en papillote avec des legumes, du citron et des herbes fraiches",
       "category": "DINNER",
       "caloriesPerServing": 300,
-      "proteinGrams": 32.0,
-      "carbsGrams": 16.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 32,
+      "carbsGrams": 16,
+      "fatGrams": 12,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -1895,7 +1895,7 @@
       "ingredients": [
         {
           "name": "filet de cabillaud",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
@@ -1907,7 +1907,7 @@
         },
         {
           "name": "tomates cerises",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -1919,13 +1919,13 @@
         },
         {
           "name": "thym frais",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -1940,9 +1940,9 @@
       "description": "Une ratatouille traditionnelle avec aubergine, courgette, poivrons et tomates mijotes lentement",
       "category": "DINNER",
       "caloriesPerServing": 310,
-      "proteinGrams": 6.0,
-      "carbsGrams": 28.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 6,
+      "carbsGrams": 28,
+      "fatGrams": 18,
       "servings": 4,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 45,
@@ -1984,55 +1984,55 @@
       "ingredients": [
         {
           "name": "aubergine",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "courgette",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "poivron jaune",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "tomates concassees",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "basilic frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -2045,9 +2045,9 @@
       "description": "Des boules d'energie au cacao, flocons d'avoine et beurre de cacahuete, sans cuisson",
       "category": "SNACK",
       "caloriesPerServing": 150,
-      "proteinGrams": 5.0,
-      "carbsGrams": 16.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 5,
+      "carbsGrams": 16,
+      "fatGrams": 8,
       "servings": 8,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 0,
@@ -2087,31 +2087,31 @@
       "ingredients": [
         {
           "name": "flocons d'avoine",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "cacao en poudre non sucre",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "beurre de cacahuete",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "miel",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "graines de chia",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -2124,9 +2124,9 @@
       "description": "Un houmous maison onctueux servi avec des batonnets de legumes frais a tremper",
       "category": "SNACK",
       "caloriesPerServing": 180,
-      "proteinGrams": 8.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 9.0,
+      "proteinGrams": 8,
+      "carbsGrams": 18,
+      "fatGrams": 9,
       "servings": 4,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 0,
@@ -2165,31 +2165,31 @@
       "ingredients": [
         {
           "name": "pois chiches (en conserve)",
-          "quantity": 240.0,
+          "quantity": 240,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tahini",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "carottes (batonnets)",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -2201,7 +2201,7 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -2214,9 +2214,9 @@
       "description": "Du fromage blanc onctueux garni de fruits frais de saison et d'un trait de vanille",
       "category": "SNACK",
       "caloriesPerServing": 130,
-      "proteinGrams": 12.0,
-      "carbsGrams": 15.0,
-      "fatGrams": 2.0,
+      "proteinGrams": 12,
+      "carbsGrams": 15,
+      "fatGrams": 2,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -2250,13 +2250,13 @@
       "ingredients": [
         {
           "name": "fromage blanc 0%",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "fraises",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -2288,7 +2288,7 @@
       "category": "SNACK",
       "caloriesPerServing": 100,
       "proteinGrams": 0.5,
-      "carbsGrams": 24.0,
+      "carbsGrams": 24,
       "fatGrams": 0.5,
       "servings": 4,
       "prepTimeMinutes": 10,
@@ -2328,25 +2328,25 @@
       "ingredients": [
         {
           "name": "pommes (type Golden ou Gala)",
-          "quantity": 4.0,
+          "quantity": 4,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "cannelle moulue",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "eau",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         }
@@ -2359,9 +2359,9 @@
       "description": "Un melange energetique d'amandes, noix de cajou, raisins secs et cranberries",
       "category": "SNACK",
       "caloriesPerServing": 190,
-      "proteinGrams": 6.0,
-      "carbsGrams": 16.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 6,
+      "carbsGrams": 16,
+      "fatGrams": 12,
       "servings": 4,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -2391,25 +2391,25 @@
       "ingredients": [
         {
           "name": "amandes entieres",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "noix de cajou",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "raisins secs",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "cranberries sechees",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PANTRY"
         }
@@ -2422,9 +2422,9 @@
       "description": "Une salade nicoise legere avec thon, haricots verts, oeuf et olives sans mayonnaise",
       "category": "LUNCH",
       "caloriesPerServing": 380,
-      "proteinGrams": 30.0,
-      "carbsGrams": 20.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 30,
+      "carbsGrams": 20,
+      "fatGrams": 20,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 12,
@@ -2463,25 +2463,25 @@
       "ingredients": [
         {
           "name": "thon en conserve (au naturel)",
-          "quantity": 160.0,
+          "quantity": 160,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "haricots verts",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "oeufs",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "tomates",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -2493,19 +2493,19 @@
         },
         {
           "name": "olives noires",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         }
@@ -2520,9 +2520,9 @@
       "description": "Un bowl colore et epice avec haricots noirs, mais, avocat, poivrons et sauce salsa maison",
       "category": "LUNCH",
       "caloriesPerServing": 450,
-      "proteinGrams": 18.0,
-      "carbsGrams": 55.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 18,
+      "carbsGrams": 55,
+      "fatGrams": 18,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 10,
@@ -2559,55 +2559,55 @@
       "ingredients": [
         {
           "name": "riz complet",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "haricots noirs (en conserve)",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "mais en grains",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "avocat",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "tomate",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "citron vert (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "cumin moulu",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "coriandre fraiche",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -2620,9 +2620,9 @@
       "description": "Un croque-monsieur allegee au jambon blanc et fromage, cuit au four sans beurre",
       "category": "LUNCH",
       "caloriesPerServing": 370,
-      "proteinGrams": 24.0,
-      "carbsGrams": 35.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 24,
+      "carbsGrams": 35,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 12,
@@ -2662,31 +2662,31 @@
       "ingredients": [
         {
           "name": "pain de mie complet",
-          "quantity": 4.0,
+          "quantity": 4,
           "unit": "tranche",
           "section": "PANTRY"
         },
         {
           "name": "jambon blanc",
-          "quantity": 4.0,
+          "quantity": 4,
           "unit": "tranche",
           "section": "MEAT"
         },
         {
           "name": "emmental rape",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "moutarde de Dijon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "salade verte",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -2701,9 +2701,9 @@
       "description": "Une soupe italienne genereuse aux legumes varies, haricots blancs et petites pates",
       "category": "LUNCH",
       "caloriesPerServing": 320,
-      "proteinGrams": 14.0,
-      "carbsGrams": 45.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 14,
+      "carbsGrams": 45,
+      "fatGrams": 8,
       "servings": 4,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 30,
@@ -2743,67 +2743,67 @@
       "ingredients": [
         {
           "name": "carottes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "courgettes",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "celeri branche",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "haricots blancs (en conserve)",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "petites pates (ditalini)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tomates concassees",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "bouillon de legumes",
-          "quantity": 800.0,
+          "quantity": 800,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "basilic frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -2816,9 +2816,9 @@
       "description": "Une galette bretonne croustillante garnie de jambon, champignons et fromage",
       "category": "LUNCH",
       "caloriesPerServing": 400,
-      "proteinGrams": 22.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 22,
+      "carbsGrams": 40,
+      "fatGrams": 16,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 15,
@@ -2858,37 +2858,37 @@
       "ingredients": [
         {
           "name": "farine de sarrasin",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "jambon blanc",
-          "quantity": 4.0,
+          "quantity": 4,
           "unit": "tranche",
           "section": "MEAT"
         },
         {
           "name": "champignons de Paris",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "emmental rape",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "eau",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -2903,9 +2903,9 @@
       "description": "Une salade tiede de lentilles vertes avec chevre frais, noix et vinaigrette au miel",
       "category": "LUNCH",
       "caloriesPerServing": 420,
-      "proteinGrams": 22.0,
-      "carbsGrams": 42.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 22,
+      "carbsGrams": 42,
+      "fatGrams": 18,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -2945,43 +2945,43 @@
       "ingredients": [
         {
           "name": "lentilles vertes",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "chevre frais",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "cerneaux de noix",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "echalote",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "vinaigre balsamique",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -2994,9 +2994,9 @@
       "description": "Un tartare frais de saumon cru marine au citron vert avec avocat et concombre croquant",
       "category": "LUNCH",
       "caloriesPerServing": 400,
-      "proteinGrams": 28.0,
-      "carbsGrams": 12.0,
-      "fatGrams": 28.0,
+      "proteinGrams": 28,
+      "carbsGrams": 12,
+      "fatGrams": 28,
       "servings": 2,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 0,
@@ -3035,13 +3035,13 @@
       "ingredients": [
         {
           "name": "pave de saumon frais (qualite sushi)",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "avocat",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -3053,25 +3053,25 @@
         },
         {
           "name": "citron vert (jus)",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "sauce soja",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "graines de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -3086,9 +3086,9 @@
       "description": "Un poke bowl hawaien avec thon frais marine, riz vinaigre, edamame et legumes croquants",
       "category": "LUNCH",
       "caloriesPerServing": 480,
-      "proteinGrams": 32.0,
-      "carbsGrams": 52.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 32,
+      "carbsGrams": 52,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 15,
@@ -3127,49 +3127,49 @@
       "ingredients": [
         {
           "name": "thon frais (qualite sushi)",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "riz a sushi",
-          "quantity": 160.0,
+          "quantity": 160,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "edamame (decortiques)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "FROZEN"
         },
         {
           "name": "concombre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "avocat",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce soja",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "vinaigre de riz",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -3184,9 +3184,9 @@
       "description": "Une blanquette de veau traditionnelle allegee avec une sauce onctueuse a la creme legere",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 35.0,
-      "carbsGrams": 25.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 35,
+      "carbsGrams": 25,
+      "fatGrams": 20,
       "servings": 4,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 90,
@@ -3194,7 +3194,8 @@
       "difficulty": "HARD",
       "allergens": [
         "LACTOSE",
-        "BIRCH_POLLEN"
+        "BIRCH_POLLEN",
+        "GLUTEN"
       ],
       "steps": [
         {
@@ -3231,49 +3232,49 @@
       "ingredients": [
         {
           "name": "epaule de veau",
-          "quantity": 600.0,
+          "quantity": 600,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "carottes",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "champignons de Paris",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "creme legere (15%)",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "bouillon de volaille",
-          "quantity": 500.0,
+          "quantity": 500,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "farine",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         }
@@ -3288,15 +3289,17 @@
       "description": "Un tajine marocain parfume au poulet tendre, olives vertes et citron confit",
       "category": "DINNER",
       "caloriesPerServing": 450,
-      "proteinGrams": 38.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 24.0,
+      "proteinGrams": 38,
+      "carbsGrams": 18,
+      "fatGrams": 24,
       "servings": 4,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 60,
       "isBatchFriendly": true,
       "difficulty": "MEDIUM",
-      "allergens": [],
+      "allergens": [
+        "GLUTEN"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -3327,37 +3330,37 @@
       "ingredients": [
         {
           "name": "cuisses de poulet",
-          "quantity": 800.0,
+          "quantity": 800,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "olives vertes denoyautees",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "citron confit",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "bouillon de volaille",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "curcuma moulu",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
@@ -3369,13 +3372,13 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
@@ -3387,13 +3390,13 @@
         },
         {
           "name": "coriandre fraiche",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "semoule",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         }
@@ -3408,9 +3411,9 @@
       "description": "Un pave de saumon recouvert d'une croute croustillante aux herbes fraiches et chapelure",
       "category": "DINNER",
       "caloriesPerServing": 440,
-      "proteinGrams": 36.0,
-      "carbsGrams": 12.0,
-      "fatGrams": 28.0,
+      "proteinGrams": 36,
+      "carbsGrams": 12,
+      "fatGrams": 28,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 18,
@@ -3449,49 +3452,49 @@
       "ingredients": [
         {
           "name": "paves de saumon",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "chapelure",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "persil frais",
-          "quantity": 15.0,
+          "quantity": 15,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "aneth frais",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "moutarde de Dijon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "gousses",
           "section": "PRODUCE"
         }
@@ -3506,9 +3509,9 @@
       "description": "Des poivrons colores farcis d'un melange de quinoa, legumes et feta, gratines au four",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 16.0,
-      "carbsGrams": 42.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 16,
+      "carbsGrams": 42,
+      "fatGrams": 16,
       "servings": 3,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 35,
@@ -3547,49 +3550,49 @@
       "ingredients": [
         {
           "name": "poivrons (rouge, jaune, vert)",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "quinoa",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "feta",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "courgette",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "tomates concassees",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "basilic frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -3602,9 +3605,9 @@
       "description": "Un gratin dauphinois allegee avec creme legere et lait, dore et fondant au four",
       "category": "DINNER",
       "caloriesPerServing": 350,
-      "proteinGrams": 12.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 15.0,
+      "proteinGrams": 12,
+      "carbsGrams": 40,
+      "fatGrams": 15,
       "servings": 4,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 50,
@@ -3643,31 +3646,31 @@
       "ingredients": [
         {
           "name": "pommes de terre (type charlotte)",
-          "quantity": 800.0,
+          "quantity": 800,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "creme legere (15%)",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "gousse d'ail",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "noix de muscade",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -3680,9 +3683,9 @@
       "description": "Des crevettes sautees a l'ail avec des brocolis croquants, servies avec du riz parfume",
       "category": "DINNER",
       "caloriesPerServing": 390,
-      "proteinGrams": 32.0,
-      "carbsGrams": 38.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 32,
+      "carbsGrams": 38,
+      "fatGrams": 12,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 15,
@@ -3722,43 +3725,43 @@
       "ingredients": [
         {
           "name": "crevettes decortiquees",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "FROZEN"
         },
         {
           "name": "brocolis",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "riz basmati",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "gousses d'ail",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce soja",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "citron (jus)",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PRODUCE"
         }
@@ -3773,9 +3776,9 @@
       "description": "Des escalopes de dinde poelees nappees d'une sauce cremeuse aux champignons",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 38.0,
-      "carbsGrams": 10.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 38,
+      "carbsGrams": 10,
+      "fatGrams": 20,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -3814,43 +3817,43 @@
       "ingredients": [
         {
           "name": "escalopes de dinde",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "champignons de Paris",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "creme legere (15%)",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "echalote",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "vin blanc sec",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "persil frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -3865,9 +3868,9 @@
       "description": "Des lasagnes vegetariennes aux courgettes, aubergines et sauce tomate maison gratinees",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 20.0,
-      "carbsGrams": 42.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 20,
+      "carbsGrams": 42,
+      "fatGrams": 18,
       "servings": 4,
       "prepTimeMinutes": 25,
       "cookTimeMinutes": 45,
@@ -3912,49 +3915,49 @@
       "ingredients": [
         {
           "name": "feuilles de lasagne",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "courgettes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "aubergine",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce tomate",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "mozzarella",
-          "quantity": 125.0,
+          "quantity": 125,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "farine",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -3967,9 +3970,9 @@
       "description": "Des flocons d'avoine prepares la veille avec du lait vegetal, de la banane et du beurre de cacahuete pour un petit-dejeuner proteine",
       "category": "BREAKFAST",
       "caloriesPerServing": 380,
-      "proteinGrams": 14.0,
-      "carbsGrams": 48.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 14,
+      "carbsGrams": 48,
+      "fatGrams": 14,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -4004,31 +4007,31 @@
       "ingredients": [
         {
           "name": "flocons d'avoine",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait d'avoine",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "graines de chia",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "beurre de cacahuete",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "banane",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         }
@@ -4041,15 +4044,17 @@
       "description": "Un smoothie bowl vegan aux fruits rouges, enrichi en proteines vegetales avec des graines de chanvre et de la banane",
       "category": "BREAKFAST",
       "caloriesPerServing": 340,
-      "proteinGrams": 16.0,
-      "carbsGrams": 52.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 16,
+      "carbsGrams": 52,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 0,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "GLUTEN"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -4070,31 +4075,31 @@
       "ingredients": [
         {
           "name": "banane congelee",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "FROZEN"
         },
         {
           "name": "fruits rouges congeles",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "FROZEN"
         },
         {
           "name": "lait d'avoine",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "graines de chanvre",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "flocons de noix de coco",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -4107,9 +4112,9 @@
       "description": "Une alternative vegan aux oeufs brouilles, avec du tofu soyeux assaisonne au curcuma et des legumes frais",
       "category": "BREAKFAST",
       "caloriesPerServing": 280,
-      "proteinGrams": 18.0,
-      "carbsGrams": 12.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 18,
+      "carbsGrams": 12,
+      "fatGrams": 16,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 10,
@@ -4143,7 +4148,7 @@
       "ingredients": [
         {
           "name": "tofu ferme",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "DAIRY"
         },
@@ -4155,7 +4160,7 @@
         },
         {
           "name": "epinards frais",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -4173,13 +4178,13 @@
         },
         {
           "name": "levure nutritionnelle",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -4192,9 +4197,9 @@
       "description": "Des muffins proteines a base de blancs d'oeufs et de dinde hachee avec des legumes, parfaits pour le meal prep",
       "category": "BREAKFAST",
       "caloriesPerServing": 290,
-      "proteinGrams": 28.0,
-      "carbsGrams": 8.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 28,
+      "carbsGrams": 8,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -4233,13 +4238,13 @@
       "ingredients": [
         {
           "name": "oeufs",
-          "quantity": 4.0,
+          "quantity": 4,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "dinde hachee",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "MEAT_FISH"
         },
@@ -4251,7 +4256,7 @@
         },
         {
           "name": "epinards frais",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -4263,7 +4268,7 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -4278,9 +4283,9 @@
       "description": "Une omelette legere aux blancs d'oeufs garnie de tomates, epinards et champignons pour un petit-dejeuner riche en proteines",
       "category": "BREAKFAST",
       "caloriesPerServing": 280,
-      "proteinGrams": 22.0,
-      "carbsGrams": 8.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 22,
+      "carbsGrams": 8,
+      "fatGrams": 12,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 8,
@@ -4319,31 +4324,31 @@
       "ingredients": [
         {
           "name": "blancs d'oeufs",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "champignons",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "epinards frais",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "tomate",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -4356,15 +4361,17 @@
       "description": "Un porridge sans gluten a base de quinoa cuit dans du lait vegetal, garni de fruits frais et de graines",
       "category": "BREAKFAST",
       "caloriesPerServing": 360,
-      "proteinGrams": 14.0,
-      "carbsGrams": 50.0,
-      "fatGrams": 10.0,
+      "proteinGrams": 14,
+      "carbsGrams": 50,
+      "fatGrams": 10,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 15,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "GLUTEN"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -4390,31 +4397,31 @@
       "ingredients": [
         {
           "name": "quinoa",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait d'avoine",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "myrtilles",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "fraises",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "graines de tournesol",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -4427,9 +4434,9 @@
       "description": "Un hash de patate douce aux legumes colores, sans aucun allergene majeur, ideal pour un petit-dejeuner energetique",
       "category": "BREAKFAST",
       "caloriesPerServing": 310,
-      "proteinGrams": 8.0,
-      "carbsGrams": 42.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 8,
+      "carbsGrams": 42,
+      "fatGrams": 12,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -4461,13 +4468,13 @@
       "ingredients": [
         {
           "name": "patate douce",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -4479,13 +4486,13 @@
         },
         {
           "name": "haricots noirs (en conserve)",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "cumin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
@@ -4497,7 +4504,7 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -4510,9 +4517,9 @@
       "description": "Un bowl genereux de lentilles corail dans une sauce tikka masala onctueuse avec du riz basmati",
       "category": "LUNCH",
       "caloriesPerServing": 420,
-      "proteinGrams": 18.0,
-      "carbsGrams": 58.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 18,
+      "carbsGrams": 58,
+      "fatGrams": 12,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -4549,43 +4556,43 @@
       "ingredients": [
         {
           "name": "lentilles corail",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tomates concassees",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait de coco",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "riz basmati",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "garam masala",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
@@ -4603,13 +4610,13 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "coriandre fraiche",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -4622,9 +4629,9 @@
       "description": "Une salade fraiche et croquante avec du poulet grille, des edamames et une vinaigrette thai au citron vert",
       "category": "LUNCH",
       "caloriesPerServing": 380,
-      "proteinGrams": 32.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 20.0,
+      "proteinGrams": 32,
+      "carbsGrams": 18,
+      "fatGrams": 20,
       "servings": 1,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 10,
@@ -4663,25 +4670,25 @@
       "ingredients": [
         {
           "name": "filet de poulet",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT_FISH"
         },
         {
           "name": "salade melangee",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "chou rouge",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "edamames",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "FROZEN"
         },
@@ -4693,31 +4700,31 @@
         },
         {
           "name": "citron vert",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce soja",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "CONDIMENTS"
         },
         {
           "name": "huile de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "CONDIMENTS"
         },
         {
           "name": "gingembre frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "coriandre fraiche",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         }
@@ -4732,9 +4739,9 @@
       "description": "Une soupe miso traditionnelle japonaise legere avec du tofu soyeux et des algues wakame",
       "category": "LUNCH",
       "caloriesPerServing": 180,
-      "proteinGrams": 12.0,
-      "carbsGrams": 14.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 12,
+      "carbsGrams": 14,
+      "fatGrams": 6,
       "servings": 2,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 10,
@@ -4773,31 +4780,31 @@
       "ingredients": [
         {
           "name": "pate miso",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "CONDIMENTS"
         },
         {
           "name": "tofu soyeux",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "wakame deshydrate",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon vert",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "eau",
-          "quantity": 600.0,
+          "quantity": 600,
           "unit": "ml",
           "section": "PANTRY"
         }
@@ -4810,9 +4817,9 @@
       "description": "Une salade coloree au quinoa, feta emiettee, grenade et herbes fraiches avec une vinaigrette au citron",
       "category": "LUNCH",
       "caloriesPerServing": 400,
-      "proteinGrams": 14.0,
-      "carbsGrams": 45.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 14,
+      "carbsGrams": 45,
+      "fatGrams": 18,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 15,
@@ -4851,13 +4858,13 @@
       "ingredients": [
         {
           "name": "quinoa",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "feta",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "DAIRY"
         },
@@ -4869,31 +4876,31 @@
         },
         {
           "name": "concombre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "menthe fraiche",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "persil plat",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "citron",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -4906,9 +4913,9 @@
       "description": "Un poke bowl hawaien au thon frais marine, avocat, edamames et riz vinaigre sur un lit de riz",
       "category": "LUNCH",
       "caloriesPerServing": 450,
-      "proteinGrams": 30.0,
-      "carbsGrams": 48.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 30,
+      "carbsGrams": 48,
+      "fatGrams": 14,
       "servings": 1,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 15,
@@ -4947,13 +4954,13 @@
       "ingredients": [
         {
           "name": "thon frais (sushi grade)",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "MEAT_FISH"
         },
         {
           "name": "riz a sushi",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
@@ -4965,7 +4972,7 @@
         },
         {
           "name": "edamames",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "FROZEN"
         },
@@ -4983,13 +4990,13 @@
         },
         {
           "name": "huile de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "CONDIMENTS"
         },
         {
           "name": "graines de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -5004,9 +5011,9 @@
       "description": "Des feuilles de laitue garnies de pois chiches rotis aux epices, houmous et crudites croquantes",
       "category": "LUNCH",
       "caloriesPerServing": 350,
-      "proteinGrams": 16.0,
-      "carbsGrams": 38.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 16,
+      "carbsGrams": 38,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -5038,25 +5045,25 @@
       "ingredients": [
         {
           "name": "pois chiches (en conserve)",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "laitue iceberg",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "houmous",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -5068,7 +5075,7 @@
         },
         {
           "name": "cumin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
@@ -5080,7 +5087,7 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -5093,9 +5100,9 @@
       "description": "Un ragout reconfortant aux champignons, lentilles vertes et lait de coco, riche en proteines vegetales",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 19.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 19,
+      "carbsGrams": 40,
+      "fatGrams": 14,
       "servings": 4,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 40,
@@ -5137,73 +5144,73 @@
       "ingredients": [
         {
           "name": "champignons",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "lentilles vertes",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait de coco",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "bouillon de legumes",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "echalotes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "carottes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "concentre de tomate",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "chou kale",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "cumin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "citron vert",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -5216,9 +5223,9 @@
       "description": "Des filets de poulet marines au citron et herbes, rotis au four avec des patates douces et des legumes",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 38.0,
-      "carbsGrams": 30.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 38,
+      "carbsGrams": 30,
+      "fatGrams": 14,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 35,
@@ -5255,49 +5262,49 @@
       "ingredients": [
         {
           "name": "filets de poulet",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "MEAT_FISH"
         },
         {
           "name": "patate douce",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "brocoli",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "citron",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "thym",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "romarin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -5312,9 +5319,9 @@
       "description": "Des tranches d'aubergine gratinees avec une sauce tomate maison et de la mozzarella allegee, inspirees de la parmigiana",
       "category": "DINNER",
       "caloriesPerServing": 320,
-      "proteinGrams": 16.0,
-      "carbsGrams": 22.0,
-      "fatGrams": 18.0,
+      "proteinGrams": 16,
+      "carbsGrams": 22,
+      "fatGrams": 18,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 30,
@@ -5353,43 +5360,43 @@
       "ingredients": [
         {
           "name": "aubergines",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce tomate",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "mozzarella allegee",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "basilic frais",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "origan",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -5402,9 +5409,9 @@
       "description": "Un filet de saumon cuit au four avec du citron, de l'ail et des herbes, accompagne de legumes verts",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 34.0,
-      "carbsGrams": 12.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 34,
+      "carbsGrams": 12,
+      "fatGrams": 22,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -5441,37 +5448,37 @@
       "ingredients": [
         {
           "name": "filets de saumon",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "MEAT_FISH"
         },
         {
           "name": "citron",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "haricots verts",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "persil plat",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -5486,9 +5493,9 @@
       "description": "Un dhal indien onctueux aux lentilles corail et epinards, parfume au curcuma et au gingembre",
       "category": "DINNER",
       "caloriesPerServing": 350,
-      "proteinGrams": 18.0,
-      "carbsGrams": 45.0,
-      "fatGrams": 10.0,
+      "proteinGrams": 18,
+      "carbsGrams": 45,
+      "fatGrams": 10,
       "servings": 4,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -5525,61 +5532,61 @@
       "ingredients": [
         {
           "name": "lentilles corail",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "epinards frais",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "tomates concassees",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "gingembre frais",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "curcuma",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "cumin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "huile de coco",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "coriandre moulue",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         }
@@ -5592,9 +5599,9 @@
       "description": "Des boulettes de boeuf haché maigre cuites dans une sauce tomate aux herbes de Provence",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 32.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 24.0,
+      "proteinGrams": 32,
+      "carbsGrams": 18,
+      "fatGrams": 24,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 25,
@@ -5631,43 +5638,43 @@
       "ingredients": [
         {
           "name": "boeuf hache 5% MG",
-          "quantity": 250.0,
+          "quantity": 250,
           "unit": "g",
           "section": "MEAT_FISH"
         },
         {
           "name": "sauce tomate",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "persil plat",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "herbes de Provence",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -5682,9 +5689,9 @@
       "description": "Des courgettes evidees et farcies d'un melange de quinoa, tomates sechees et herbes fraiches",
       "category": "DINNER",
       "caloriesPerServing": 330,
-      "proteinGrams": 14.0,
-      "carbsGrams": 38.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 14,
+      "carbsGrams": 38,
+      "fatGrams": 12,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 30,
@@ -5721,43 +5728,43 @@
       "ingredients": [
         {
           "name": "courgettes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "quinoa",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tomates sechees",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "basilic frais",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "persil plat",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -5770,9 +5777,9 @@
       "description": "Des crevettes sautees au wok avec des legumes croquants et une sauce gingembre-soja legere",
       "category": "DINNER",
       "caloriesPerServing": 340,
-      "proteinGrams": 28.0,
-      "carbsGrams": 20.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 28,
+      "carbsGrams": 20,
+      "fatGrams": 16,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 10,
@@ -5812,49 +5819,49 @@
       "ingredients": [
         {
           "name": "crevettes crues",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "MEAT_FISH"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "pois mange-tout",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "sauce soja",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "c. a soupe",
           "section": "CONDIMENTS"
         },
         {
           "name": "gingembre frais",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "CONDIMENTS"
         },
         {
           "name": "graines de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -5869,9 +5876,9 @@
       "description": "Un curry vert thai au lait de coco avec du tofu croustillant, des courgettes et des pois chiches",
       "category": "DINNER",
       "caloriesPerServing": 370,
-      "proteinGrams": 16.0,
-      "carbsGrams": 28.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 16,
+      "carbsGrams": 28,
+      "fatGrams": 22,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -5910,13 +5917,13 @@
       "ingredients": [
         {
           "name": "tofu ferme",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "lait de coco",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
@@ -5928,31 +5935,31 @@
         },
         {
           "name": "courgette",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "pois chiches (en conserve)",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "basilic thai",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -5965,9 +5972,9 @@
       "description": "Des galettes croustillantes a base de haricots noirs, avoine et epices, servies avec une salade verte",
       "category": "DINNER",
       "caloriesPerServing": 340,
-      "proteinGrams": 16.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 12.0,
+      "proteinGrams": 16,
+      "carbsGrams": 40,
+      "fatGrams": 12,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 15,
@@ -6006,13 +6013,13 @@
       "ingredients": [
         {
           "name": "haricots noirs (en conserve)",
-          "quantity": 240.0,
+          "quantity": 240,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "flocons d'avoine",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PANTRY"
         },
@@ -6024,7 +6031,7 @@
         },
         {
           "name": "cumin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "SPICES"
         },
@@ -6036,13 +6043,13 @@
         },
         {
           "name": "salade melangee",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -6055,9 +6062,9 @@
       "description": "Des barres energetiques maison sans cuisson a base de dattes, flocons d'avoine et noix de coco rapee",
       "category": "SNACK",
       "caloriesPerServing": 160,
-      "proteinGrams": 4.0,
-      "carbsGrams": 28.0,
-      "fatGrams": 4.0,
+      "proteinGrams": 4,
+      "carbsGrams": 28,
+      "fatGrams": 4,
       "servings": 6,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 0,
@@ -6091,25 +6098,25 @@
       "ingredients": [
         {
           "name": "dattes medjool",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "flocons d'avoine",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "noix de coco rapee",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "cacao en poudre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -6122,9 +6129,9 @@
       "description": "Un yaourt grec nature garni de graines de chia, de lin et d'un filet de miel pour un en-cas proteine",
       "category": "SNACK",
       "caloriesPerServing": 170,
-      "proteinGrams": 15.0,
-      "carbsGrams": 14.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 15,
+      "carbsGrams": 14,
+      "fatGrams": 6,
       "servings": 1,
       "prepTimeMinutes": 3,
       "cookTimeMinutes": 0,
@@ -6153,25 +6160,25 @@
       "ingredients": [
         {
           "name": "yaourt grec 0%",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "graines de chia",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "graines de lin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -6184,9 +6191,9 @@
       "description": "Un en-cas simple et proteine avec un oeuf dur et des batonnets de legumes croquants",
       "category": "SNACK",
       "caloriesPerServing": 130,
-      "proteinGrams": 10.0,
-      "carbsGrams": 8.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 10,
+      "carbsGrams": 8,
+      "fatGrams": 6,
       "servings": 1,
       "prepTimeMinutes": 2,
       "cookTimeMinutes": 10,
@@ -6215,13 +6222,13 @@
       "ingredients": [
         {
           "name": "oeuf",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "DAIRY"
         },
         {
           "name": "carotte",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -6240,9 +6247,9 @@
       "description": "Des edamames cuits a la vapeur et sales, un en-cas japonais riche en proteines vegetales",
       "category": "SNACK",
       "caloriesPerServing": 120,
-      "proteinGrams": 12.0,
-      "carbsGrams": 8.0,
-      "fatGrams": 5.0,
+      "proteinGrams": 12,
+      "carbsGrams": 8,
+      "fatGrams": 5,
       "servings": 1,
       "prepTimeMinutes": 2,
       "cookTimeMinutes": 5,
@@ -6271,7 +6278,7 @@
       "ingredients": [
         {
           "name": "edamames surgeles (en cosses)",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "FROZEN"
         },
@@ -6290,9 +6297,9 @@
       "description": "Des rondelles de concombre garnies de houmous et de paprika, un en-cas frais et leger",
       "category": "SNACK",
       "caloriesPerServing": 110,
-      "proteinGrams": 5.0,
-      "carbsGrams": 10.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 5,
+      "carbsGrams": 10,
+      "fatGrams": 6,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -6319,13 +6326,13 @@
       "ingredients": [
         {
           "name": "concombre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "houmous",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "DAIRY"
         },
@@ -6344,9 +6351,9 @@
       "description": "Des galettes de riz soufflé tartinees de beurre de cacahuete avec des rondelles de banane",
       "category": "SNACK",
       "caloriesPerServing": 200,
-      "proteinGrams": 7.0,
-      "carbsGrams": 26.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 7,
+      "carbsGrams": 26,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 3,
       "cookTimeMinutes": 0,
@@ -6375,13 +6382,13 @@
       "ingredients": [
         {
           "name": "galettes de riz soufflé",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PANTRY"
         },
         {
           "name": "beurre de cacahuete",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
@@ -6406,9 +6413,9 @@
       "description": "Des batonnets de carotte croquants accompagnes d'un guacamole maison frais et cremeux",
       "category": "SNACK",
       "caloriesPerServing": 160,
-      "proteinGrams": 3.0,
-      "carbsGrams": 14.0,
-      "fatGrams": 10.0,
+      "proteinGrams": 3,
+      "carbsGrams": 14,
+      "fatGrams": 10,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 0,
@@ -6453,7 +6460,7 @@
         },
         {
           "name": "carottes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "unite",
           "section": "PRODUCE"
         },
@@ -6472,16 +6479,17 @@
       "description": "Un smoothie vert energisant aux epinards, banane et beurre de cacahuete sans allergenes majeurs",
       "category": "SNACK",
       "caloriesPerServing": 220,
-      "proteinGrams": 9.0,
-      "carbsGrams": 30.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 9,
+      "carbsGrams": 30,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
       "isBatchFriendly": false,
       "difficulty": "EASY",
       "allergens": [
-        "TREE_NUTS"
+        "TREE_NUTS",
+        "GLUTEN"
       ],
       "steps": [
         {
@@ -6503,25 +6511,25 @@
       "ingredients": [
         {
           "name": "epinards frais",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "banane",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "unite",
           "section": "PRODUCE"
         },
         {
           "name": "beurre de cacahuete",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "lait d'avoine",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "DAIRY"
         }
@@ -6534,9 +6542,9 @@
       "description": "Du cottage cheese assaisonne avec des tomates cerises, du basilic et un filet d'huile d'olive",
       "category": "SNACK",
       "caloriesPerServing": 140,
-      "proteinGrams": 14.0,
-      "carbsGrams": 6.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 14,
+      "carbsGrams": 6,
+      "fatGrams": 6,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -6565,19 +6573,19 @@
       "ingredients": [
         {
           "name": "cottage cheese",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "tomates cerises",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "basilic frais",
-          "quantity": 5.0,
+          "quantity": 5,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -6596,9 +6604,9 @@
       "description": "Souris d agneau fondante cuite lentement avec romarin, thym et ail, accompagnee de legumes racines",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 38.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 22.0,
+      "proteinGrams": 38,
+      "carbsGrams": 18,
+      "fatGrams": 22,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 150,
@@ -6639,55 +6647,55 @@
       "ingredients": [
         {
           "name": "souris d agneau",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "carottes",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "navets",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "piece",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "romarin frais",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "branches",
           "section": "PRODUCE"
         },
         {
           "name": "thym frais",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "branches",
           "section": "PRODUCE"
         },
         {
           "name": "bouillon de volaille",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "huile d olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
@@ -6698,9 +6706,9 @@
       "description": "Filet mignon de porc tendre cuit au four avec des pommes caramelisees et une touche de moutarde",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 35.0,
-      "carbsGrams": 22.0,
-      "fatGrams": 16.0,
+      "proteinGrams": 35,
+      "carbsGrams": 22,
+      "fatGrams": 16,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 35,
@@ -6748,43 +6756,43 @@
       "ingredients": [
         {
           "name": "filet mignon de porc",
-          "quantity": 400.0,
+          "quantity": 400,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "pommes",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "pieces",
           "section": "PRODUCE"
         },
         {
           "name": "moutarde a l ancienne",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "beurre",
-          "quantity": 10.0,
+          "quantity": 10,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "thym frais",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "branches",
           "section": "PRODUCE"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -6795,16 +6803,16 @@
       "description": "Galettes de sarrasin garnies d'un oeuf et de jambon de dinde, faibles en gras et riches en proteines",
       "category": "BREAKFAST",
       "caloriesPerServing": 320,
-      "proteinGrams": 22.0,
-      "carbsGrams": 38.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 22,
+      "carbsGrams": 38,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 10,
       "isBatchFriendly": true,
       "difficulty": "EASY",
       "allergens": [
-        "EGG"
+        "EGGS"
       ],
       "steps": [
         {
@@ -6831,31 +6839,31 @@
       "ingredients": [
         {
           "name": "farine de sarrasin",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oeuf",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "pieces",
           "section": "DAIRY"
         },
         {
           "name": "jambon de dinde",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "tranches",
           "section": "MEAT"
         },
         {
           "name": "eau",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -6870,9 +6878,9 @@
       "description": "Un bowl de quinoa cuit au lait, garni de yaourt nature et de fruits rouges frais",
       "category": "BREAKFAST",
       "caloriesPerServing": 340,
-      "proteinGrams": 14.0,
-      "carbsGrams": 56.0,
-      "fatGrams": 5.0,
+      "proteinGrams": 14,
+      "carbsGrams": 56,
+      "fatGrams": 5,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 15,
@@ -6906,31 +6914,31 @@
       "ingredients": [
         {
           "name": "quinoa",
-          "quantity": 60.0,
+          "quantity": 60,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "yaourt nature",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "fruits rouges (frais ou surgeles)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -6943,16 +6951,16 @@
       "description": "Riz de konjac tres leger accompagne d'un oeuf poche et d'epinards sautes a l'ail",
       "category": "BREAKFAST",
       "caloriesPerServing": 250,
-      "proteinGrams": 16.0,
-      "carbsGrams": 22.0,
-      "fatGrams": 7.0,
+      "proteinGrams": 16,
+      "carbsGrams": 22,
+      "fatGrams": 7,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 10,
       "isBatchFriendly": false,
       "difficulty": "EASY",
       "allergens": [
-        "EGG"
+        "EGGS"
       ],
       "steps": [
         {
@@ -6979,37 +6987,37 @@
       "ingredients": [
         {
           "name": "riz de konjac",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oeuf",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pieces",
           "section": "DAIRY"
         },
         {
           "name": "epinards frais",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "gousse",
           "section": "PRODUCE"
         },
         {
           "name": "vinaigre blanc",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7022,9 +7030,9 @@
       "description": "Filet de poulet grille avec du riz complet et des haricots verts vapeur, un classique equilibre et leger",
       "category": "LUNCH",
       "caloriesPerServing": 420,
-      "proteinGrams": 38.0,
-      "carbsGrams": 48.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 38,
+      "carbsGrams": 48,
+      "fatGrams": 6,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -7056,19 +7064,19 @@
       "ingredients": [
         {
           "name": "filet de poulet",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "riz complet",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "haricots verts",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -7080,13 +7088,13 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7101,15 +7109,17 @@
       "description": "Un bowl frais avec du thon en conserve, du riz basmati, des edamames et une sauce soja legere",
       "category": "LUNCH",
       "caloriesPerServing": 410,
-      "proteinGrams": 35.0,
-      "carbsGrams": 50.0,
-      "fatGrams": 7.0,
+      "proteinGrams": 35,
+      "carbsGrams": 50,
+      "fatGrams": 7,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 15,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "SOY"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -7135,19 +7145,19 @@
       "ingredients": [
         {
           "name": "thon en conserve (au naturel)",
-          "quantity": 130.0,
+          "quantity": 130,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "riz basmati",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "edamames (surgeles)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "FROZEN"
         },
@@ -7159,13 +7169,13 @@
         },
         {
           "name": "sauce soja",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "graines de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -7180,9 +7190,9 @@
       "description": "Escalope de dinde marinee au citron avec un assortiment de legumes rotis au four",
       "category": "LUNCH",
       "caloriesPerServing": 380,
-      "proteinGrams": 36.0,
-      "carbsGrams": 32.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 36,
+      "carbsGrams": 32,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 30,
@@ -7219,19 +7229,19 @@
       "ingredients": [
         {
           "name": "escalope de dinde",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "courgette",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pieces",
           "section": "PRODUCE"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pieces",
           "section": "PRODUCE"
         },
@@ -7243,13 +7253,13 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7264,9 +7274,9 @@
       "description": "Un curry de crevettes leger au lait de coco allege, avec du riz basmati et des legumes croquants",
       "category": "LUNCH",
       "caloriesPerServing": 400,
-      "proteinGrams": 30.0,
-      "carbsGrams": 48.0,
-      "fatGrams": 9.0,
+      "proteinGrams": 30,
+      "carbsGrams": 48,
+      "fatGrams": 9,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -7310,49 +7320,49 @@
       "ingredients": [
         {
           "name": "crevettes decortiquees",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "SEAFOOD"
         },
         {
           "name": "lait de coco allege",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "riz basmati",
-          "quantity": 140.0,
+          "quantity": 140,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "poivron rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pieces",
           "section": "PRODUCE"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pieces",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "pate de curry rouge",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "coriandre fraiche",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "bouquet",
           "section": "PRODUCE"
         }
@@ -7367,17 +7377,15 @@
       "description": "Dos de cabillaud cuit a la vapeur avec brocoli, carottes et une sauce citron legere",
       "category": "DINNER",
       "caloriesPerServing": 320,
-      "proteinGrams": 35.0,
-      "carbsGrams": 20.0,
-      "fatGrams": 5.0,
+      "proteinGrams": 35,
+      "carbsGrams": 20,
+      "fatGrams": 5,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [
-        "FISH"
-      ],
+      "allergens": [],
       "steps": [
         {
           "stepNumber": 1,
@@ -7408,19 +7416,19 @@
       "ingredients": [
         {
           "name": "dos de cabillaud",
-          "quantity": 180.0,
+          "quantity": 180,
           "unit": "g",
           "section": "SEAFOOD"
         },
         {
           "name": "brocoli",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "carotte",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "pieces",
           "section": "PRODUCE"
         },
@@ -7432,19 +7440,19 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "persil frais",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "bouquet",
           "section": "PRODUCE"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7459,9 +7467,9 @@
       "description": "Filet de poulet mijote dans une sauce tomate parfumee au cumin, servi avec du couscous",
       "category": "DINNER",
       "caloriesPerServing": 400,
-      "proteinGrams": 36.0,
-      "carbsGrams": 44.0,
-      "fatGrams": 7.0,
+      "proteinGrams": 36,
+      "carbsGrams": 44,
+      "fatGrams": 7,
       "servings": 2,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -7500,49 +7508,49 @@
       "ingredients": [
         {
           "name": "filet de poulet",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "sauce tomate",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "PANTRY"
         },
         {
           "name": "couscous",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "oignon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pieces",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
         {
           "name": "cumin",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7557,9 +7565,9 @@
       "description": "Crevettes grillees a l'ail sur un lit de quinoa avec du brocoli vapeur",
       "category": "DINNER",
       "caloriesPerServing": 380,
-      "proteinGrams": 34.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 7.0,
+      "proteinGrams": 34,
+      "carbsGrams": 40,
+      "fatGrams": 7,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
@@ -7593,25 +7601,25 @@
       "ingredients": [
         {
           "name": "crevettes decortiquees",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "SEAFOOD"
         },
         {
           "name": "quinoa",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "brocoli",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "ail",
-          "quantity": 2.0,
+          "quantity": 2,
           "unit": "gousses",
           "section": "PRODUCE"
         },
@@ -7623,13 +7631,13 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7644,9 +7652,9 @@
       "description": "Escalope de veau poelée accompagnee d'une puree de patate douce onctueuse et legere",
       "category": "DINNER",
       "caloriesPerServing": 390,
-      "proteinGrams": 32.0,
-      "carbsGrams": 42.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 32,
+      "carbsGrams": 42,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 25,
@@ -7680,31 +7688,31 @@
       "ingredients": [
         {
           "name": "escalope de veau",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "patate douce",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 30.0,
+          "quantity": 30,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7719,15 +7727,17 @@
       "description": "Pave de thon frais grille avec du riz basmati et une salade de concombre au vinaigre de riz",
       "category": "DINNER",
       "caloriesPerServing": 400,
-      "proteinGrams": 38.0,
-      "carbsGrams": 44.0,
-      "fatGrams": 6.0,
+      "proteinGrams": 38,
+      "carbsGrams": 44,
+      "fatGrams": 6,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 20,
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
-      "allergens": [],
+      "allergens": [
+        "SOY"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -7753,13 +7763,13 @@
       "ingredients": [
         {
           "name": "pave de thon frais",
-          "quantity": 160.0,
+          "quantity": 160,
           "unit": "g",
           "section": "SEAFOOD"
         },
         {
           "name": "riz basmati",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
@@ -7771,25 +7781,25 @@
         },
         {
           "name": "vinaigre de riz",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "graines de sesame",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sauce soja",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7804,9 +7814,9 @@
       "description": "Steak hache de boeuf a 5% de matiere grasse avec du riz complet et du brocoli vapeur",
       "category": "DINNER",
       "caloriesPerServing": 420,
-      "proteinGrams": 36.0,
-      "carbsGrams": 46.0,
-      "fatGrams": 8.0,
+      "proteinGrams": 36,
+      "carbsGrams": 46,
+      "fatGrams": 8,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 20,
@@ -7838,25 +7848,25 @@
       "ingredients": [
         {
           "name": "steak hache 5%",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "riz complet",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "brocoli",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "sel et poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
@@ -7871,9 +7881,9 @@
       "description": "Yaourt grec nature avec des fruits frais de saison et un filet de miel",
       "category": "SNACK",
       "caloriesPerServing": 150,
-      "proteinGrams": 12.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 2.0,
+      "proteinGrams": 12,
+      "carbsGrams": 18,
+      "fatGrams": 2,
       "servings": 1,
       "prepTimeMinutes": 3,
       "cookTimeMinutes": 0,
@@ -7902,19 +7912,19 @@
       "ingredients": [
         {
           "name": "yaourt grec 0%",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "fruits rouges (frais ou surgeles)",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }
@@ -7927,9 +7937,9 @@
       "description": "Galettes de riz soufflé agrémentées d'un filet de miel et d'une pincee de cannelle",
       "category": "SNACK",
       "caloriesPerServing": 120,
-      "proteinGrams": 2.0,
-      "carbsGrams": 26.0,
-      "fatGrams": 1.0,
+      "proteinGrams": 2,
+      "carbsGrams": 26,
+      "fatGrams": 1,
       "servings": 1,
       "prepTimeMinutes": 2,
       "cookTimeMinutes": 0,
@@ -7951,24 +7961,24 @@
       "ingredients": [
         {
           "name": "galettes de riz soufflé",
-          "quantity": 3.0,
+          "quantity": 3,
           "unit": "pieces",
           "section": "PANTRY"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "cannelle",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "PANTRY"
         }
       ],
-      "dietType": "VEGAN",
+      "dietType": "VEGETARIAN",
       "meatTypes": []
     },
     {
@@ -7976,9 +7986,9 @@
       "description": "Sardines fraiches grillees au citron avec tomates cerises roties et riz complet, riches en omega-3",
       "category": "DINNER",
       "caloriesPerServing": 410,
-      "proteinGrams": 32.0,
-      "carbsGrams": 38.0,
-      "fatGrams": 14.0,
+      "proteinGrams": 32,
+      "carbsGrams": 38,
+      "fatGrams": 14,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 12,
@@ -8015,19 +8025,19 @@
       "ingredients": [
         {
           "name": "sardines fraiches",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "riz complet",
-          "quantity": 70.0,
+          "quantity": 70,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "tomates cerises",
-          "quantity": 100.0,
+          "quantity": 100,
           "unit": "g",
           "section": "PRODUCE"
         },
@@ -8039,19 +8049,19 @@
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         },
         {
           "name": "poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -8066,17 +8076,15 @@
       "description": "Filet de maquereau cuit au four avec une marinade moutarde-miel, accompagne de brocolis et carottes vapeur",
       "category": "DINNER",
       "caloriesPerServing": 430,
-      "proteinGrams": 30.0,
-      "carbsGrams": 22.0,
-      "fatGrams": 24.0,
+      "proteinGrams": 30,
+      "carbsGrams": 22,
+      "fatGrams": 24,
       "servings": 1,
       "prepTimeMinutes": 10,
       "cookTimeMinutes": 15,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [
-        "MUSTARD"
-      ],
+      "allergens": [],
       "steps": [
         {
           "stepNumber": 1,
@@ -8112,19 +8120,19 @@
       "ingredients": [
         {
           "name": "filets de maquereau",
-          "quantity": 150.0,
+          "quantity": 150,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "moutarde de Dijon",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
@@ -8136,19 +8144,19 @@
         },
         {
           "name": "brocoli",
-          "quantity": 120.0,
+          "quantity": 120,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "carottes",
-          "quantity": 80.0,
+          "quantity": 80,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -8163,9 +8171,9 @@
       "description": "Gratin leger de saumon et epinards frais avec une bechamel allegee au fromage rape, riche en omega-3 et calcium",
       "category": "DINNER",
       "caloriesPerServing": 450,
-      "proteinGrams": 36.0,
-      "carbsGrams": 18.0,
-      "fatGrams": 26.0,
+      "proteinGrams": 36,
+      "carbsGrams": 18,
+      "fatGrams": 26,
       "servings": 2,
       "prepTimeMinutes": 15,
       "cookTimeMinutes": 25,
@@ -8210,61 +8218,61 @@
       "ingredients": [
         {
           "name": "pave de saumon",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "g",
           "section": "MEAT"
         },
         {
           "name": "epinards frais",
-          "quantity": 300.0,
+          "quantity": 300,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "lait demi-ecreme",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "ml",
           "section": "DAIRY"
         },
         {
           "name": "farine de ble",
-          "quantity": 20.0,
+          "quantity": 20,
           "unit": "g",
           "section": "PANTRY"
         },
         {
           "name": "beurre",
-          "quantity": 15.0,
+          "quantity": 15,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "fromage rape",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "huile d'olive",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         },
         {
           "name": "sel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         },
         {
           "name": "poivre",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         },
         {
           "name": "noix de muscade",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "pincee",
           "section": "SPICES"
         }
@@ -8279,9 +8287,9 @@
       "description": "Fromage blanc onctueux avec granola croquant maison et fruits frais de saison, riche en calcium et proteines",
       "category": "BREAKFAST",
       "caloriesPerServing": 310,
-      "proteinGrams": 20.0,
-      "carbsGrams": 40.0,
-      "fatGrams": 7.0,
+      "proteinGrams": 20,
+      "carbsGrams": 40,
+      "fatGrams": 7,
       "servings": 1,
       "prepTimeMinutes": 5,
       "cookTimeMinutes": 0,
@@ -8311,13 +8319,13 @@
       "ingredients": [
         {
           "name": "fromage blanc 0%",
-          "quantity": 200.0,
+          "quantity": 200,
           "unit": "g",
           "section": "DAIRY"
         },
         {
           "name": "granola",
-          "quantity": 40.0,
+          "quantity": 40,
           "unit": "g",
           "section": "PANTRY"
         },
@@ -8329,13 +8337,13 @@
         },
         {
           "name": "fruits rouges (frais ou surgeles)",
-          "quantity": 50.0,
+          "quantity": 50,
           "unit": "g",
           "section": "PRODUCE"
         },
         {
           "name": "miel",
-          "quantity": 1.0,
+          "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
         }

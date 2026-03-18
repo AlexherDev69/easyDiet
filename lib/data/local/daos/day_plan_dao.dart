@@ -122,7 +122,8 @@ class DayPlanDao extends DatabaseAccessor<AppDatabase>
     for (final meal in mealRows) {
       final recipe = await (select(recipes)
             ..where((t) => t.id.equals(meal.recipeId)))
-          .getSingle();
+          .getSingleOrNull();
+      if (recipe == null) continue;
       result.add(MealWithRecipe(meal: meal, recipe: recipe));
     }
     return result;

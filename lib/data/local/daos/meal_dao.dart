@@ -24,6 +24,15 @@ class MealDao extends DatabaseAccessor<AppDatabase> with _$MealDaoMixin {
     return update(meals).replace(meal);
   }
 
+  /// Update multiple meals in a single batch.
+  Future<void> updateAll(List<Meal> items) {
+    return batch((b) {
+      for (final meal in items) {
+        b.replace(meals, meal);
+      }
+    });
+  }
+
   /// Get meals for a day plan.
   Future<List<Meal>> getMealsForDay(int dayPlanId) {
     return (select(meals)..where((t) => t.dayPlanId.equals(dayPlanId))).get();

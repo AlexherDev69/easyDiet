@@ -100,20 +100,29 @@ class MealPlanCubit extends Cubit<MealPlanState> {
     final weekPlan = state.weekPlan;
     if (meal == null || weekPlan == null) return;
 
+    // Close dialog immediately to avoid race conditions with .then() callback.
+    closeSwapDialog();
+
     final profile = await _userProfileRepository.getProfile();
     if (profile == null) return;
 
     final todayMillis = AppDateUtils.todayMillis();
 
-    final mealsToUpdate = replaceAll
-        ? weekPlan.days
-            .where((d) => d.dayPlan.date >= todayMillis)
-            .expand((d) => d.meals)
-            .where((m) => m.meal.recipeId == meal.recipeId)
-            .map((m) => m.meal)
-            .toList()
-        : [meal];
+    final List<Meal> mealsToUpdate;
+    if (replaceAll) {
+      final otherMeals = weekPlan.days
+          .where((d) => d.dayPlan.date >= todayMillis)
+          .expand((d) => d.meals)
+          .where((m) =>
+              m.meal.recipeId == meal.recipeId && m.meal.id != meal.id)
+          .map((m) => m.meal)
+          .toList();
+      mealsToUpdate = [meal, ...otherMeals];
+    } else {
+      mealsToUpdate = [meal];
+    }
 
+    final updates = <Meal>[];
     for (final m in mealsToUpdate) {
       final mealType = _parseMealType(m.mealType);
       if (mealType == null) continue;
@@ -122,11 +131,10 @@ class MealPlanCubit extends Cubit<MealPlanState> {
         profile.dailyCalorieTarget,
         mealType,
       );
-      await _mealPlanRepository.updateMeal(
-        m.copyWith(recipeId: newRecipe.id, servings: servings),
-      );
+      updates.add(m.copyWith(recipeId: newRecipe.id, servings: servings));
     }
-    closeSwapDialog();
+
+    await _mealPlanRepository.updateMeals(updates);
   }
 
   // ── Move dialog ───────────────────────────────────────────────────
