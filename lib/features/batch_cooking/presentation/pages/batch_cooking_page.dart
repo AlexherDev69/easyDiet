@@ -425,7 +425,7 @@ class _RecipeCard extends StatelessWidget {
                     ),
                     _Badge(
                       label:
-                          '${QuantityFormatter.format(recipe.servings)} portions',
+                          '${QuantityFormatter.formatServings(recipe.servings)} portions',
                       color: AppColors.accentAmber,
                     ),
                     Row(

@@ -277,14 +277,15 @@ class MealPlanGenerator {
     };
     final maxServings = switch (mealType) {
       MealType.breakfast => 1.5,
-      MealType.lunch => 2.0,
-      MealType.dinner => 2.0,
-      MealType.snack => 1.5,
+      MealType.lunch => 1.5,
+      MealType.dinner => 1.5,
+      MealType.snack => 1.0,
     };
     final targetCalories = dailyTarget * mealCalorieShare;
     if (recipe.caloriesPerServing <= 0) return 1.0;
     final servings = targetCalories / recipe.caloriesPerServing;
-    return ((servings * 4).round() / 4.0).clamp(0.5, maxServings);
+    // Round down to nearest 0.25 to avoid oversized portions.
+    return ((servings * 4).floor() / 4.0).clamp(0.5, maxServings);
   }
 
   // ── Parsing helpers ──────────────────────────────────────────────────

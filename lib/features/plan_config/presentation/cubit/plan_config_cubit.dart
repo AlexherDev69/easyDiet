@@ -43,6 +43,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
         distinctLunches: profile.distinctLunches,
         distinctDinners: profile.distinctDinners,
         distinctSnacks: profile.distinctSnacks,
+        economicMode: profile.economicMode,
       ));
     } catch (e) {
       debugPrint('Error in _loadProfile: $e');
@@ -83,6 +84,9 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
   void updateDistinctSnacks(int v) =>
       emit(state.copyWith(distinctSnacks: v));
 
+  void toggleEconomicMode(bool v) =>
+      emit(state.copyWith(economicMode: v));
+
   /// Saves config and proceeds to plan preview.
   Future<void> saveAndProceed() async {
     try {
@@ -119,7 +123,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
           excludedMeats: Value(profile.excludedMeats),
           dietStartDate: Value(AppDateUtils.toEpochMillis(startDate)),
           batchCookingBeforeDiet: Value(profile.batchCookingBeforeDiet),
-          economicMode: Value(profile.economicMode),
+          economicMode: Value(state.economicMode),
           dailyCalorieTarget: Value(profile.dailyCalorieTarget),
           dailyWaterMl: Value(profile.dailyWaterMl),
           onboardingCompleted: const Value(true),

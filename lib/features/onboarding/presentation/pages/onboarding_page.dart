@@ -56,7 +56,14 @@ class OnboardingPage extends StatelessWidget {
             );
           }
 
-          return Scaffold(
+          return PopScope(
+            canPop: state.currentStep == 0,
+            onPopInvokedWithResult: (didPop, _) {
+              if (!didPop && state.currentStep > 0) {
+                context.read<OnboardingCubit>().previousStep();
+              }
+            },
+            child: Scaffold(
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(24),
@@ -91,6 +98,7 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
             ),
+          ),
           );
         },
       ),

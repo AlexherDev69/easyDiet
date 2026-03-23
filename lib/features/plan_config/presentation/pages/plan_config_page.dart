@@ -178,6 +178,46 @@ class PlanConfigPage extends StatelessWidget {
                         max: 5,
                         onChanged: cubit.updateDistinctSnacks,
                       ),
+                      const SizedBox(height: 20),
+
+                      // Economic mode.
+                      SolidCard(
+                        elevation: 1,
+                        cornerRadius: 12,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Liste economique',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                  Text(
+                                    'Privilegier les ingredients abordables.',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Switch(
+                              value: state.economicMode,
+                              onChanged: cubit.toggleEconomicMode,
+                            ),
+                          ],
+                        ),
+                      ),
+
                       const SizedBox(height: 24),
                     ],
                   ),

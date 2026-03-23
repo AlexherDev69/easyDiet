@@ -13,6 +13,7 @@ import '../../../../data/local/models/week_plan_with_days.dart';
 import '../../../onboarding/domain/models/meal_type.dart';
 import '../../../recipes/domain/repositories/recipe_repository.dart';
 import '../../../settings/domain/repositories/user_profile_repository.dart';
+import '../../../shopping/domain/usecases/shopping_list_generator.dart';
 import '../../domain/repositories/meal_plan_repository.dart';
 import '../../domain/usecases/meal_plan_generator.dart';
 import 'meal_plan_state.dart';
@@ -24,10 +25,12 @@ class MealPlanCubit extends Cubit<MealPlanState> {
     required UserProfileRepository userProfileRepository,
     required RecipeRepository recipeRepository,
     required MealPlanGenerator mealPlanGenerator,
+    required ShoppingListGenerator shoppingListGenerator,
   })  : _mealPlanRepository = mealPlanRepository,
         _userProfileRepository = userProfileRepository,
         _recipeRepository = recipeRepository,
         _mealPlanGenerator = mealPlanGenerator,
+        _shoppingListGenerator = shoppingListGenerator,
         super(const MealPlanState()) {
     _loadWeekPlan();
   }
@@ -36,6 +39,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   final UserProfileRepository _userProfileRepository;
   final RecipeRepository _recipeRepository;
   final MealPlanGenerator _mealPlanGenerator;
+  final ShoppingListGenerator _shoppingListGenerator;
 
   StreamSubscription<WeekPlanWithDays?>? _planSubscription;
 
@@ -156,6 +160,9 @@ class MealPlanCubit extends Cubit<MealPlanState> {
       }
 
       await _mealPlanRepository.updateMeals(updates);
+
+      // Regenerate shopping list to reflect the recipe change.
+      await _regenerateShoppingList();
     } catch (e) {
       debugPrint('Error in swapMeal: $e');
     }
@@ -250,6 +257,20 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   // ── Private ───────────────────────────────────────────────────────
+
+  Future<void> _regenerateShoppingList() async {
+    try {
+      final profile = await _userProfileRepository.getProfile();
+      final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      if (weekPlan == null || profile == null) return;
+      await _shoppingListGenerator.generateShoppingList(
+        weekPlan,
+        shoppingTripsPerWeek: profile.shoppingTripsPerWeek,
+      );
+    } catch (e) {
+      debugPrint('Error regenerating shopping list: $e');
+    }
+  }
 
   void _loadWeekPlan() {
     _planSubscription =

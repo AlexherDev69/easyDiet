@@ -123,6 +123,7 @@ final appRouter = GoRouter(
                 userProfileRepository: getIt<UserProfileRepository>(),
                 recipeRepository: getIt<RecipeRepository>(),
                 mealPlanGenerator: getIt<MealPlanGenerator>(),
+                shoppingListGenerator: getIt<ShoppingListGenerator>(),
               ),
               child: const MealPlanPage(),
             ),

@@ -160,6 +160,13 @@ class ShoppingCubit extends Cubit<ShoppingState> {
         if (items.isEmpty && !_isGenerating) {
           _regenerateList(weekPlan, tripsPerWeek);
         } else if (items.isNotEmpty) {
+          // Check if existing items still match the current plan.
+          // This handles the case where the cubit is re-created after
+          // a recipe swap (e.g. navigating back to the shopping tab).
+          if (!planChanged && _shouldRegenerate(items, weekPlan)) {
+            _regenerateList(weekPlan, tripsPerWeek);
+            return;
+          }
           final deduped = _deduplicateItems(items);
           final filtered =
               _filterByTrip(deduped, state.selectedTrip, tripsPerWeek);
@@ -222,6 +229,42 @@ class ShoppingCubit extends Cubit<ShoppingState> {
   ) {
     if (totalTrips <= 1) return items;
     return items.where((i) => i.tripNumber == trip).toList();
+  }
+
+  /// Checks if the shopping items were generated from a different plan version.
+  /// Compares recipe names in sourceDetails against the current plan recipes.
+  bool _shouldRegenerate(
+    List<ShoppingItem> items,
+    WeekPlanWithDays weekPlan,
+  ) {
+    // Only check auto-generated items (not manually added).
+    final autoItems = items.where((i) => !i.isManuallyAdded).toList();
+    if (autoItems.isEmpty) return false;
+
+    // Build set of recipe names from the current plan.
+    final planRecipeNames = weekPlan.days
+        .where((d) => !d.dayPlan.isFreeDay)
+        .expand((d) => d.meals)
+        .map((m) => m.recipe.name)
+        .toSet();
+
+    // Extract recipe names from source details of shopping items.
+    final itemRecipeNames = <String>{};
+    for (final item in autoItems) {
+      try {
+        final sources = jsonDecode(item.sourceDetails) as List;
+        for (final s in sources) {
+          if (s is Map<String, dynamic> && s.containsKey('recipeName')) {
+            itemRecipeNames.add(s['recipeName'] as String);
+          }
+        }
+      } catch (_) {}
+    }
+
+    // If recipe names don't match, the list is stale.
+    if (itemRecipeNames.isEmpty) return false;
+    return !planRecipeNames.containsAll(itemRecipeNames) ||
+        !itemRecipeNames.containsAll(planRecipeNames);
   }
 
   String _computePlanHash(WeekPlanWithDays weekPlan) {

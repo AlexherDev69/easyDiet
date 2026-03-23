@@ -108,7 +108,7 @@ class MealCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: Text(
-                              '${QuantityFormatter.format(servings)} portions',
+                              '${QuantityFormatter.formatServings(servings)} portions',
                               style: theme.textTheme.labelSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.accentAmber,

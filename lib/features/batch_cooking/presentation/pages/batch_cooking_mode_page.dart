@@ -427,7 +427,7 @@ class _RecipeStepCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    '${QuantityFormatter.format(recipeStep.servings)} portions',
+                    '${QuantityFormatter.formatServings(recipeStep.servings)} portions',
                     style: theme.textTheme.labelSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.accentAmber,

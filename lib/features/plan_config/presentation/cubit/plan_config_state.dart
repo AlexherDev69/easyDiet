@@ -19,6 +19,7 @@ class PlanConfigState extends Equatable {
     this.distinctLunches = 3,
     this.distinctDinners = 3,
     this.distinctSnacks = 2,
+    this.economicMode = false,
   });
 
   final bool isLoading;
@@ -30,6 +31,7 @@ class PlanConfigState extends Equatable {
   final int distinctLunches;
   final int distinctDinners;
   final int distinctSnacks;
+  final bool economicMode;
 
   @override
   List<Object?> get props => [
@@ -42,6 +44,7 @@ class PlanConfigState extends Equatable {
         distinctLunches,
         distinctDinners,
         distinctSnacks,
+        economicMode,
       ];
 
   int get dietDaysPerWeek => 7 - freeDays.length;
@@ -56,6 +59,7 @@ class PlanConfigState extends Equatable {
     int? distinctLunches,
     int? distinctDinners,
     int? distinctSnacks,
+    bool? economicMode,
   }) {
     return PlanConfigState(
       isLoading: isLoading ?? this.isLoading,
@@ -67,6 +71,7 @@ class PlanConfigState extends Equatable {
       distinctLunches: distinctLunches ?? this.distinctLunches,
       distinctDinners: distinctDinners ?? this.distinctDinners,
       distinctSnacks: distinctSnacks ?? this.distinctSnacks,
+      economicMode: economicMode ?? this.economicMode,
     );
   }
 }
