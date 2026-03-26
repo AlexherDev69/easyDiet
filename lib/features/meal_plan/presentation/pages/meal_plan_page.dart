@@ -52,11 +52,21 @@ class MealPlanPage extends StatelessWidget {
 
         if (state.weekPlan == null) {
           return Center(
-            child: Text(
-              'Aucun plan pour cette semaine',
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Aucun plan pour cette semaine',
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(height: 16),
+                FilledButton(
+                  onPressed: () => context.push(AppRoutes.planConfig),
+                  child: const Text('Generer un plan'),
+                ),
+              ],
             ),
           );
         }
@@ -175,7 +185,7 @@ class _MealPlanContent extends StatelessWidget {
             // Shift
             IconButton(
               onPressed: () => _showShiftDialog(context, cubit),
-              icon: const Icon(Icons.move_down),
+              icon: const Icon(Icons.swap_vert),
               tooltip: 'Decaler le plan',
             ),
             // Navigate to plan config / regenerate

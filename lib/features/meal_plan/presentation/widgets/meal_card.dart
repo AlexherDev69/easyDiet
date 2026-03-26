@@ -58,165 +58,166 @@ class MealCard extends StatelessWidget {
     final recipe = mealWithRecipe.recipe;
     final servings = mealWithRecipe.meal.servings;
     final totalCalories = (recipe.caloriesPerServing * servings).round();
-    final cardOpacity = isConsumed ? 0.6 : 1.0;
 
-    return Opacity(
-      opacity: cardOpacity,
-      child: SolidCard(
-        contentPadding: EdgeInsets.zero,
-        onTap: onClick,
-        child: IntrinsicHeight(
-          child: Row(
-            children: [
-              // Color bar on the left
-              Container(
-                width: 5,
-                decoration: BoxDecoration(
-                  color: _mealTypeColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
+    // Consumed meals use a muted card background so text stays readable.
+    final consumedBackgroundColor = theme.colorScheme.surfaceContainerHighest;
+
+    return SolidCard(
+      contentPadding: EdgeInsets.zero,
+      onTap: onClick,
+      backgroundColor: isConsumed ? consumedBackgroundColor : null,
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            // Color bar on the left
+            Container(
+              width: 5,
+              decoration: BoxDecoration(
+                color: _mealTypeColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  bottomLeft: Radius.circular(20),
                 ),
               ),
-
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Meal type + servings + consumed icon
-                      Row(
-                        children: [
-                          Text(
-                            _mealTypeName,
-                            style: theme.textTheme.labelMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: _mealTypeColor,
-                            ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Meal type + servings + consumed icon
+                    Row(
+                      children: [
+                        Text(
+                          _mealTypeName,
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: _mealTypeColor,
                           ),
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.accentAmber
-                                  .withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            child: Text(
-                              '${QuantityFormatter.formatServings(servings)} portions',
-                              style: theme.textTheme.labelSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.accentAmber,
-                              ),
-                            ),
-                          ),
-                          if (isConsumed) ...[
-                            const SizedBox(width: 8),
-                            const Icon(
-                              Icons.check_circle,
-                              color: AppColors.emeraldPrimary,
-                              size: 18,
-                            ),
-                          ],
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-
-                      // Recipe name
-                      Text(
-                        recipe.name,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: isConsumed
-                              ? FontWeight.normal
-                              : FontWeight.bold,
-                          decoration: isConsumed
-                              ? TextDecoration.lineThrough
-                              : null,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      const SizedBox(height: 8),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.accentAmber.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            '${QuantityFormatter.formatServings(servings)} portions',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.accentAmber,
+                            ),
+                          ),
+                        ),
+                        AnimatedScale(
+                          scale: isConsumed ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.elasticOut,
+                          child: isConsumed
+                              ? const Padding(
+                                  padding: EdgeInsets.only(left: 8),
+                                  child: Icon(
+                                    Icons.check_circle,
+                                    color: AppColors.emeraldPrimary,
+                                    size: 18,
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
 
-                      // Calories + macros + actions
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Text(
-                                  '$totalCalories kcal',
-                                  style:
-                                      theme.textTheme.bodyMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: _mealTypeColor,
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Flexible(
-                                  child: Text(
-                                    'P:${(recipe.proteinGrams * servings).round()}g '
-                                    'C:${(recipe.carbsGrams * servings).round()}g '
-                                    'L:${(recipe.fatGrams * servings).round()}g',
-                                    style: theme.textTheme.bodySmall
-                                        ?.copyWith(
-                                      color: theme
-                                          .colorScheme.onSurfaceVariant,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: onMove,
-                            icon: Icon(
-                              Icons.move_down,
-                              color:
-                                  theme.colorScheme.onSurfaceVariant,
-                            ),
-                            iconSize: 20,
-                            constraints: const BoxConstraints(
-                              maxWidth: 36,
-                              maxHeight: 36,
-                            ),
-                            padding: EdgeInsets.zero,
-                          ),
-                          IconButton(
-                            onPressed: onSwap,
-                            icon: Icon(
-                              Icons.swap_horiz,
-                              color:
-                                  theme.colorScheme.onSurfaceVariant,
-                            ),
-                            iconSize: 20,
-                            constraints: const BoxConstraints(
-                              maxWidth: 36,
-                              maxHeight: 36,
-                            ),
-                            padding: EdgeInsets.zero,
-                          ),
-                          Checkbox(
-                            value: isConsumed,
-                            onChanged: (_) => onToggleConsumed(),
-                            activeColor: AppColors.emeraldPrimary,
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                          ),
-                        ],
+                    // Recipe name — grey text when consumed to keep readability.
+                    Text(
+                      recipe.name,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight:
+                            isConsumed ? FontWeight.normal : FontWeight.bold,
+                        color: isConsumed
+                            ? theme.colorScheme.onSurfaceVariant
+                            : null,
+                        decoration:
+                            isConsumed ? TextDecoration.lineThrough : null,
                       ),
-                    ],
-                  ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Calories + macros + actions
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Text(
+                                '$totalCalories kcal',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: _mealTypeColor,
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Flexible(
+                                child: Text(
+                                  'P:${(recipe.proteinGrams * servings).round()}g '
+                                  'C:${(recipe.carbsGrams * servings).round()}g '
+                                  'L:${(recipe.fatGrams * servings).round()}g',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: onMove,
+                          icon: Icon(
+                            Icons.swap_vert,
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                          iconSize: 20,
+                          constraints: const BoxConstraints(
+                            maxWidth: 36,
+                            maxHeight: 36,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                        IconButton(
+                          onPressed: onSwap,
+                          icon: Icon(
+                            Icons.swap_horiz,
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                          iconSize: 20,
+                          constraints: const BoxConstraints(
+                            maxWidth: 36,
+                            maxHeight: 36,
+                          ),
+                          padding: EdgeInsets.zero,
+                        ),
+                        Checkbox(
+                          value: isConsumed,
+                          onChanged: (_) => onToggleConsumed(),
+                          activeColor: AppColors.emeraldPrimary,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

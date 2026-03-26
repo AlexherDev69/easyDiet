@@ -25,7 +25,12 @@ class DaySelector extends StatelessWidget {
         final day = weekSchedule[index];
         final isSelected = index == selectedIndex;
 
-        return GestureDetector(
+        return Semantics(
+          label: '${day.dayName}, ${day.date.day}'
+              '${day.isToday ? ", aujourd hui" : ""}',
+          button: true,
+          selected: isSelected,
+          child: GestureDetector(
           onTap: () => onSelectDay(index),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -65,6 +70,7 @@ class DaySelector extends StatelessWidget {
               ],
             ),
           ),
+        ),
         );
       }),
     );

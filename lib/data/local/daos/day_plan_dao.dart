@@ -15,18 +15,53 @@ class DayPlanDao extends DatabaseAccessor<AppDatabase>
   DayPlanDao(super.db);
 
   /// Watch days for a week plan.
+  ///
+  /// Uses a single bulk query for all meals across all days to avoid N+1
+  /// round-trips (one query for days, one for all meals, one for all recipes).
   Stream<List<DayPlanWithMeals>> watchDaysForWeek(int weekPlanId) {
     final query = select(dayPlans)
       ..where((t) => t.weekPlanId.equals(weekPlanId))
       ..orderBy([(t) => OrderingTerm.asc(t.date)]);
 
     return query.watch().asyncMap((dayList) async {
-      final result = <DayPlanWithMeals>[];
-      for (final day in dayList) {
-        final mealsWithRecipes = await _getMealsWithRecipes(day.id);
-        result.add(DayPlanWithMeals(dayPlan: day, meals: mealsWithRecipes));
+      if (dayList.isEmpty) return [];
+
+      final dayIds = dayList.map((d) => d.id).toList();
+
+      // Single query for all meals belonging to any of the days.
+      final allMealRows = await (select(meals)
+            ..where((t) => t.dayPlanId.isIn(dayIds)))
+          .get();
+
+      // Single query for all distinct recipes referenced by those meals.
+      final recipeIds =
+          allMealRows.map((m) => m.recipeId).toSet().toList();
+      final recipeMap = <int, Recipe>{};
+      if (recipeIds.isNotEmpty) {
+        final recipeList = await (select(recipes)
+              ..where((t) => t.id.isIn(recipeIds)))
+            .get();
+        for (final r in recipeList) {
+          recipeMap[r.id] = r;
+        }
       }
-      return result;
+
+      // Group meals by dayPlanId and build the result list.
+      final mealsByDay = <int, List<MealWithRecipe>>{};
+      for (final meal in allMealRows) {
+        final recipe = recipeMap[meal.recipeId];
+        if (recipe == null) continue;
+        mealsByDay.putIfAbsent(meal.dayPlanId, () => []).add(
+              MealWithRecipe(meal: meal, recipe: recipe),
+            );
+      }
+
+      return dayList
+          .map((day) => DayPlanWithMeals(
+                dayPlan: day,
+                meals: mealsByDay[day.id] ?? [],
+              ))
+          .toList();
     });
   }
 

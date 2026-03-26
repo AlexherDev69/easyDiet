@@ -51,24 +51,6 @@ class GoalStep extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // Target weight
-          TextField(
-            decoration: const InputDecoration(
-              labelText: 'Poids cible',
-              suffixText: 'kg',
-              prefixIcon: Icon(Icons.flag_outlined),
-            ),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
-            ],
-            controller: TextEditingController(text: targetWeight)
-              ..selection =
-                  TextSelection.collapsed(offset: targetWeight.length),
-            onChanged: onTargetWeightChange,
-          ),
-          const SizedBox(height: 24),
-
           // Loss pace
           Text('Rythme de perte', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
@@ -121,6 +103,26 @@ class GoalStep extends StatelessWidget {
                 onSelected: (_) => onDietTypeChange(dt),
               );
             }).toList(),
+          ),
+          const SizedBox(height: 24),
+
+          // Target weight
+          Text('Objectif', style: theme.textTheme.titleMedium),
+          const SizedBox(height: 8),
+          TextField(
+            decoration: const InputDecoration(
+              labelText: 'Poids cible',
+              suffixText: 'kg',
+              prefixIcon: Icon(Icons.flag_outlined),
+            ),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
+            ],
+            controller: TextEditingController(text: targetWeight)
+              ..selection =
+                  TextSelection.collapsed(offset: targetWeight.length),
+            onChanged: onTargetWeightChange,
           ),
           const SizedBox(height: 24),
 

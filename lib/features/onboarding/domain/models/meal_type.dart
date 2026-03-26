@@ -20,4 +20,19 @@ enum MealType {
         return 'SNACK';
     }
   }
+
+  /// Fraction of daily calorie target allocated to this meal slot.
+  /// Balanced split: breakfast 25%, lunch 35%, dinner 30%, snack 10%.
+  double get calorieShare {
+    switch (this) {
+      case MealType.breakfast:
+        return 0.25;
+      case MealType.lunch:
+        return 0.35;
+      case MealType.dinner:
+        return 0.30;
+      case MealType.snack:
+        return 0.10;
+    }
+  }
 }

@@ -7,6 +7,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../data/local/database.dart';
 
+const double _chartHeight = 250.0;
+
 /// Custom line chart for weight log — port of WeightLineChart Canvas.
 class WeightLineChart extends StatefulWidget {
   const WeightLineChart({
@@ -32,7 +34,7 @@ class _WeightLineChartState extends State<WeightLineChart> {
     return GestureDetector(
       onTapDown: (details) => _handleTap(details.localPosition),
       child: CustomPaint(
-        size: const Size(double.infinity, 250),
+        size: const Size(double.infinity, _chartHeight),
         painter: _WeightLineChartPainter(
           logs: widget.logs,
           targetWeight: widget.targetWeight,
@@ -56,7 +58,7 @@ class _WeightLineChartState extends State<WeightLineChart> {
     const paddingBottom = 24.0;
     final chartWidth =
         (context.findRenderObject() as RenderBox).size.width - paddingLeft;
-    final chartHeight = 250.0 - paddingBottom;
+    final chartHeight = _chartHeight - paddingBottom;
     final stepX = chartWidth / (widget.logs.length - 1);
 
     final weights = widget.logs.map((l) => l.weightKg).toList();
@@ -254,7 +256,7 @@ class _WeightLineChartPainter extends CustomPainter {
 
     canvas.drawRRect(
       rect,
-      Paint()..color = const Color(0xDD333333),
+      Paint()..color = labelColor.withValues(alpha: 0.85),
     );
 
     textPainter.paint(

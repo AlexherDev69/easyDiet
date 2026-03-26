@@ -45,6 +45,7 @@ class RecipeDetailState extends Equatable {
     this.isLoading = true,
     this.activeTimers = const {},
     this.completedSteps = const {},
+    this.errorMessage,
   });
 
   final RecipeWithDetails? recipe;
@@ -52,6 +53,7 @@ class RecipeDetailState extends Equatable {
   final bool isLoading;
   final Map<int, CookingTimerState> activeTimers;
   final Set<int> completedSteps;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -60,6 +62,7 @@ class RecipeDetailState extends Equatable {
         isLoading,
         activeTimers,
         completedSteps,
+        errorMessage,
       ];
 
   RecipeDetailState copyWith({
@@ -68,6 +71,8 @@ class RecipeDetailState extends Equatable {
     bool? isLoading,
     Map<int, CookingTimerState>? activeTimers,
     Set<int>? completedSteps,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return RecipeDetailState(
       recipe: recipe ?? this.recipe,
@@ -75,6 +80,8 @@ class RecipeDetailState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       activeTimers: activeTimers ?? this.activeTimers,
       completedSteps: completedSteps ?? this.completedSteps,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

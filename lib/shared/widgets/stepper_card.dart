@@ -39,8 +39,8 @@ class StepperCard extends StatelessWidget {
             icon: const Icon(Icons.remove),
             iconSize: 20,
             constraints: const BoxConstraints.tightFor(
-              width: 36,
-              height: 36,
+              width: 48,
+              height: 48,
             ),
           ),
           SizedBox(
@@ -60,8 +60,8 @@ class StepperCard extends StatelessWidget {
             icon: const Icon(Icons.add),
             iconSize: 20,
             constraints: const BoxConstraints.tightFor(
-              width: 36,
-              height: 36,
+              width: 48,
+              height: 48,
             ),
           ),
         ],

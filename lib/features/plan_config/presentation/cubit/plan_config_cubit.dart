@@ -47,6 +47,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
       ));
     } catch (e) {
       debugPrint('Error in _loadProfile: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -89,6 +90,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
 
   /// Saves config and proceeds to plan preview.
   Future<void> saveAndProceed() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final profile = await _userProfileRepository.getProfile();
       if (profile == null) return;
@@ -132,6 +134,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
       );
     } catch (e) {
       debugPrint('Error in saveAndProceed: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 

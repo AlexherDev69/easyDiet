@@ -31,10 +31,13 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   final ShoppingListGenerator _shoppingListGenerator;
 
   Future<void> _generateNewPlan() async {
+    emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
-      emit(state.copyWith(isLoading: true));
       final profile = await _userProfileRepository.getProfile();
-      if (profile == null) return;
+      if (profile == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
 
       await _mealPlanRepository.deleteWeekPlans();
       await _mealPlanGenerator.generateWeekPlan(profile);
@@ -43,13 +46,13 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       emit(state.copyWith(isLoading: false, weekPlan: weekPlan));
     } catch (e) {
       debugPrint('Error in _generateNewPlan: $e');
-      emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
   Future<void> confirmPlan() async {
+    emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
-      emit(state.copyWith(isLoading: true));
       final profile = await _userProfileRepository.getProfile();
       final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
       if (weekPlan != null) {
@@ -61,7 +64,7 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       emit(state.copyWith(isLoading: false));
     } catch (e) {
       debugPrint('Error in confirmPlan: $e');
-      emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -92,6 +95,7 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   }
 
   Future<void> moveMealToDay(int targetDayPlanId) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final meal = state.movingMeal;
       if (meal == null) return;
@@ -106,12 +110,14 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       ));
     } catch (e) {
       debugPrint('Error in moveMealToDay: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   // ── Replace recipe ──────────────────────────────────────────────
 
   Future<void> openReplaceDialog(MealWithRecipe meal) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final profile = await _userProfileRepository.getProfile();
       if (profile == null) return;
@@ -142,6 +148,7 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       ));
     } catch (e) {
       debugPrint('Error in openReplaceDialog: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -154,6 +161,7 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   }
 
   Future<void> replaceRecipe(Recipe newRecipe, bool replaceAll) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final currentMeal = state.replacingMeal;
       final weekPlan = state.weekPlan;
@@ -206,6 +214,7 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       ));
     } catch (e) {
       debugPrint('Error in replaceRecipe: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 }

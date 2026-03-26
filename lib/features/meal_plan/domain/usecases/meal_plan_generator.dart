@@ -269,12 +269,7 @@ class MealPlanGenerator {
     int dailyTarget,
     MealType mealType,
   ) {
-    final mealCalorieShare = switch (mealType) {
-      MealType.breakfast => 0.25,
-      MealType.lunch => 0.35,
-      MealType.dinner => 0.30,
-      MealType.snack => 0.10,
-    };
+    final mealCalorieShare = mealType.calorieShare;
     final maxServings = switch (mealType) {
       MealType.breakfast => 1.5,
       MealType.lunch => 1.5,
@@ -284,8 +279,8 @@ class MealPlanGenerator {
     final targetCalories = dailyTarget * mealCalorieShare;
     if (recipe.caloriesPerServing <= 0) return 1.0;
     final servings = targetCalories / recipe.caloriesPerServing;
-    // Round down to nearest 0.25 to avoid oversized portions.
-    return ((servings * 4).floor() / 4.0).clamp(0.5, maxServings);
+    // Round down to nearest 0.5 to match RecipeDetailCubit increment steps.
+    return ((servings * 2).floor() / 2.0).clamp(0.5, maxServings);
   }
 
   // ── Parsing helpers ──────────────────────────────────────────────────
@@ -838,8 +833,7 @@ class MealPlanGenerator {
             .toSet() ??
         {};
     return groups.every((group) {
-      final maxCount = _maxRecipesPerGroup[group] ?? _defaultMaxPerGroup;
-      return (groupUsageCount[group] ?? 0) < maxCount;
+      return (groupUsageCount[group] ?? 0) < _defaultMaxPerGroup;
     });
   }
 
@@ -864,7 +858,6 @@ class MealPlanGenerator {
   };
 
   static const _defaultMaxPerGroup = 2;
-  static const Map<String, int> _maxRecipesPerGroup = {};
   static const _defaultMaxFatPercent = 35.0;
   static const _relaxedMaxFatPercent = 38.0;
   static const _fatRelaxationThreshold = 35.0;

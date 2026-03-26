@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/quantity_formatter.dart';
@@ -9,7 +10,7 @@ import '../cubit/batch_cooking_mode_cubit.dart';
 import '../cubit/batch_cooking_mode_state.dart';
 
 /// Batch cooking mode screen — port of BatchCookingModeScreen.kt.
-class BatchCookingModePage extends StatelessWidget {
+class BatchCookingModePage extends StatefulWidget {
   const BatchCookingModePage({
     required this.dayPlanId,
     super.key,
@@ -18,10 +19,20 @@ class BatchCookingModePage extends StatelessWidget {
   final int dayPlanId;
 
   @override
-  Widget build(BuildContext context) {
-    final cubit = context.read<BatchCookingModeCubit>();
-    cubit.loadBatchSteps(dayPlanId);
+  State<BatchCookingModePage> createState() => _BatchCookingModePageState();
+}
 
+class _BatchCookingModePageState extends State<BatchCookingModePage> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<BatchCookingModeCubit>()
+        .loadBatchSteps(widget.dayPlanId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<BatchCookingModeCubit, BatchCookingModeState>(
       builder: (context, state) {
         if (state.isLoading) {
@@ -73,7 +84,7 @@ class _BatchCookingModeContent extends StatelessWidget {
         ),
         leading: IconButton(
           icon: const Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.pop(),
         ),
       ),
       body: Column(
@@ -117,7 +128,7 @@ class _BatchCookingModeContent extends StatelessWidget {
             totalPages: state.pages.length,
             onPrevious: cubit.previousPage,
             onNext: cubit.nextPage,
-            onFinish: () => Navigator.of(context).pop(),
+            onFinish: () => context.pop(),
           ),
         ],
       ),

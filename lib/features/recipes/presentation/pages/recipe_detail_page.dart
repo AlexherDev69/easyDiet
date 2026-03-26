@@ -11,7 +11,7 @@ import '../cubit/recipe_detail_cubit.dart';
 import '../cubit/recipe_detail_state.dart';
 
 /// Recipe detail screen — port of RecipeDetailScreen.kt.
-class RecipeDetailPage extends StatelessWidget {
+class RecipeDetailPage extends StatefulWidget {
   const RecipeDetailPage({
     required this.recipeId,
     this.planServings = 0,
@@ -22,12 +22,20 @@ class RecipeDetailPage extends StatelessWidget {
   final double planServings;
 
   @override
+  State<RecipeDetailPage> createState() => _RecipeDetailPageState();
+}
+
+class _RecipeDetailPageState extends State<RecipeDetailPage> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<RecipeDetailCubit>()
+        .loadRecipe(widget.recipeId, planServings: widget.planServings);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final cubit = context.read<RecipeDetailCubit>();
-
-    // Load recipe on first build
-    cubit.loadRecipe(recipeId, planServings: planServings);
-
     return BlocBuilder<RecipeDetailCubit, RecipeDetailState>(
       builder: (context, state) {
         if (state.isLoading || state.recipe == null) {
@@ -42,8 +50,8 @@ class RecipeDetailPage extends StatelessWidget {
         }
 
         return _RecipeDetailContent(
-          recipeId: recipeId,
-          planServings: planServings,
+          recipeId: widget.recipeId,
+          planServings: widget.planServings,
         );
       },
     );

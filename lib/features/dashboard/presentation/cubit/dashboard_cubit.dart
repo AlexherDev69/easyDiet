@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/date_utils.dart';
+import '../../../../data/local/database.dart';
 import '../../../../data/local/models/day_plan_with_meals.dart';
 import '../../../../data/local/models/week_plan_with_days.dart';
 import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
@@ -37,7 +38,7 @@ class DashboardCubit extends Cubit<DashboardState> {
 
   WeekPlanWithDays? _cachedWeekPlan;
   StreamSubscription<WeekPlanWithDays?>? _planSubscription;
-  StreamSubscription<dynamic>? _weightSubscription;
+  StreamSubscription<List<WeightLog>>? _weightSubscription;
 
   // ── Public actions ──────────────────────────────────────────────────
 
@@ -47,18 +48,22 @@ class DashboardCubit extends Cubit<DashboardState> {
   }
 
   Future<void> toggleMealConsumed(int mealId, bool currentlyConsumed) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _mealPlanRepository.toggleMealConsumed(mealId, !currentlyConsumed);
     } catch (e) {
       debugPrint('Error in toggleMealConsumed: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   Future<void> shiftByOneDay() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _mealPlanRepository.shiftProgramByOneDay();
     } catch (e) {
       debugPrint('Error in shiftByOneDay: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -68,7 +73,10 @@ class DashboardCubit extends Cubit<DashboardState> {
     try {
       // Load profile + weight data
       final profile = await _userProfileRepository.getProfile();
-      if (profile == null) return;
+      if (profile == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
 
       final latestWeight = await _weightLogRepository.getLatestLog();
       final firstLog = await _weightLogRepository.getFirstLog();
@@ -115,6 +123,7 @@ class DashboardCubit extends Cubit<DashboardState> {
       });
     } catch (e) {
       debugPrint('Error in _loadDashboard: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 

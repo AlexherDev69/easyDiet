@@ -34,7 +34,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   final CalorieCalculator _calorieCalculator;
 
   /// Original diet fields snapshot to detect changes.
-  Object? _originalDietFields;
+  DietFields? _originalDietFields;
 
   Future<void> _loadProfile() async {
     try {
@@ -101,6 +101,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       _originalDietFields = extractDietFields(state);
     } catch (e) {
       debugPrint('Error in _loadProfile: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -194,6 +195,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   // ── Save ────────────────────────────────────────────────────────────
 
   Future<void> saveProfile() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final weight = double.tryParse(state.weightKg);
       final height = int.tryParse(state.heightCm);
@@ -203,6 +205,9 @@ class SettingsCubit extends Cubit<SettingsState> {
           targetWeight == null) {
         return;
       }
+
+      // Read the original profile to preserve the immutable createdAt timestamp.
+      final existingProfile = await _userProfileRepository.getProfile();
 
       if (targetWeight >= weight) {
         emit(state.copyWith(
@@ -264,7 +269,9 @@ class SettingsCubit extends Cubit<SettingsState> {
           dailyCalorieTarget: Value(calories),
           dailyWaterMl: Value(waterMl),
           onboardingCompleted: const Value(true),
-          createdAt: Value(DateTime.now().millisecondsSinceEpoch),
+          createdAt: Value(
+            existingProfile?.createdAt ?? DateTime.now().millisecondsSinceEpoch,
+          ),
         ),
       );
 
@@ -280,6 +287,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       ));
     } catch (e) {
       debugPrint('Error in saveProfile: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -291,6 +299,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(state.copyWith(showResetDialog: false));
 
   Future<void> resetApp() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _userProfileRepository.deleteAll();
       await _mealPlanRepository.deleteWeekPlans();
@@ -298,6 +307,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       hideResetDialog();
     } catch (e) {
       debugPrint('Error in resetApp: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 

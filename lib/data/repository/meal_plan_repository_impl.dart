@@ -4,6 +4,7 @@ import '../local/database.dart';
 import '../local/daos/day_plan_dao.dart';
 import '../local/daos/meal_dao.dart';
 import '../local/daos/week_plan_dao.dart';
+import '../local/models/day_plan_with_meals.dart';
 import '../local/models/week_plan_with_days.dart';
 import '../../core/utils/date_utils.dart';
 import '../../features/meal_plan/domain/repositories/meal_plan_repository.dart';
@@ -52,30 +53,32 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
 
   @override
   Future<void> swapMealsBetweenDays(int mealId, int targetDayPlanId) async {
-    final sourceMeal = await _mealDao.getMealById(mealId);
-    if (sourceMeal == null) return;
+    await _db.transaction(() async {
+      final sourceMeal = await _mealDao.getMealById(mealId);
+      if (sourceMeal == null) return;
 
-    final targetMeals = await _mealDao.getMealsForDay(targetDayPlanId);
-    final targetMeal = targetMeals
-        .where((m) => m.mealType == sourceMeal.mealType)
-        .firstOrNull;
+      final targetMeals = await _mealDao.getMealsForDay(targetDayPlanId);
+      final targetMeal = targetMeals
+          .where((m) => m.mealType == sourceMeal.mealType)
+          .firstOrNull;
 
-    if (targetMeal != null) {
-      // Swap recipeId + servings between the two meals
-      await _mealDao.updateMeal(sourceMeal.copyWith(
-        recipeId: targetMeal.recipeId,
-        servings: targetMeal.servings,
-      ));
-      await _mealDao.updateMeal(targetMeal.copyWith(
-        recipeId: sourceMeal.recipeId,
-        servings: sourceMeal.servings,
-      ));
-    } else {
-      // Target day has no meal of this type → just move the meal
-      await _mealDao.updateMeal(sourceMeal.copyWith(
-        dayPlanId: targetDayPlanId,
-      ));
-    }
+      if (targetMeal != null) {
+        // Swap recipeId + servings between the two meals
+        await _mealDao.updateMeal(sourceMeal.copyWith(
+          recipeId: targetMeal.recipeId,
+          servings: targetMeal.servings,
+        ));
+        await _mealDao.updateMeal(targetMeal.copyWith(
+          recipeId: sourceMeal.recipeId,
+          servings: sourceMeal.servings,
+        ));
+      } else {
+        // Target day has no meal of this type → just move the meal
+        await _mealDao.updateMeal(sourceMeal.copyWith(
+          dayPlanId: targetDayPlanId,
+        ));
+      }
+    });
   }
 
   @override
@@ -140,4 +143,8 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
     if (maxDate == null) return false;
     return AppDateUtils.todayMillis() > maxDate;
   }
+
+  @override
+  Future<DayPlanWithMeals?> getDayPlanWithMealsById(int dayPlanId) =>
+      _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
 }

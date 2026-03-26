@@ -40,6 +40,7 @@ class SettingsState extends Equatable {
     this.showRegenerateDialog = false,
     this.isSaved = false,
     this.isLoading = true,
+    this.errorMessage,
   });
 
   final String name;
@@ -72,6 +73,7 @@ class SettingsState extends Equatable {
   final bool showRegenerateDialog;
   final bool isSaved;
   final bool isLoading;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -105,6 +107,7 @@ class SettingsState extends Equatable {
         showRegenerateDialog,
         isSaved,
         isLoading,
+        errorMessage,
       ];
 
   int get dietDaysPerWeek => 7 - freeDays.length;
@@ -141,6 +144,8 @@ class SettingsState extends Equatable {
     bool? showRegenerateDialog,
     bool? isSaved,
     bool? isLoading,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return SettingsState(
       name: name ?? this.name,
@@ -177,6 +182,8 @@ class SettingsState extends Equatable {
           showRegenerateDialog ?? this.showRegenerateDialog,
       isSaved: isSaved ?? this.isSaved,
       isLoading: isLoading ?? this.isLoading,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

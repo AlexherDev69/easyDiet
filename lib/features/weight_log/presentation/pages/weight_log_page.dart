@@ -444,6 +444,27 @@ class _HistoryList extends StatelessWidget {
         return Dismissible(
           key: ValueKey(log.id),
           direction: DismissDirection.endToStart,
+          confirmDismiss: (_) async {
+            return showDialog<bool>(
+              context: context,
+              builder: (dialogContext) => AlertDialog(
+                title: const Text(
+                  'Supprimer cette pesee ?',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialogContext, false),
+                    child: const Text('Annuler'),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(dialogContext, true),
+                    child: const Text('Supprimer'),
+                  ),
+                ],
+              ),
+            );
+          },
           onDismissed: (_) => onDelete(log),
           background: Container(
             margin: const EdgeInsets.symmetric(vertical: 4),

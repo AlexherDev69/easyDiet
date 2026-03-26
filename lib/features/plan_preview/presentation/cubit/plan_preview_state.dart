@@ -18,6 +18,7 @@ class PlanPreviewState extends Equatable {
     this.replacingMeal,
     this.replacementCandidates = const [],
     this.otherOccurrencesCount = 0,
+    this.errorMessage,
   });
 
   final bool isLoading;
@@ -30,6 +31,7 @@ class PlanPreviewState extends Equatable {
   final MealWithRecipe? replacingMeal;
   final List<Recipe> replacementCandidates;
   final int otherOccurrencesCount;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -43,6 +45,7 @@ class PlanPreviewState extends Equatable {
         replacingMeal,
         replacementCandidates,
         otherOccurrencesCount,
+        errorMessage,
       ];
 
   PlanPreviewState copyWith({
@@ -56,6 +59,8 @@ class PlanPreviewState extends Equatable {
     MealWithRecipe? replacingMeal,
     List<Recipe>? replacementCandidates,
     int? otherOccurrencesCount,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return PlanPreviewState(
       isLoading: isLoading ?? this.isLoading,
@@ -71,6 +76,8 @@ class PlanPreviewState extends Equatable {
           replacementCandidates ?? this.replacementCandidates,
       otherOccurrencesCount:
           otherOccurrencesCount ?? this.otherOccurrencesCount,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

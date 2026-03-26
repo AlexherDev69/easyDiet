@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/ingredient_normalizer.dart';
-import '../../../../data/local/daos/day_plan_dao.dart';
 import '../../../../data/local/models/recipe_with_details.dart';
+import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
 import '../../../recipes/domain/repositories/recipe_repository.dart';
 import '../../domain/models/batch_cooking_models.dart';
 import 'batch_cooking_state.dart';
@@ -13,18 +13,19 @@ import 'batch_cooking_state.dart';
 /// Manages batch cooking overview — port of BatchCookingViewModel.kt.
 class BatchCookingCubit extends Cubit<BatchCookingState> {
   BatchCookingCubit({
-    required DayPlanDao dayPlanDao,
+    required MealPlanRepository mealPlanRepository,
     required RecipeRepository recipeRepository,
-  })  : _dayPlanDao = dayPlanDao,
+  })  : _mealPlanRepository = mealPlanRepository,
         _recipeRepository = recipeRepository,
         super(const BatchCookingState());
 
-  final DayPlanDao _dayPlanDao;
+  final MealPlanRepository _mealPlanRepository;
   final RecipeRepository _recipeRepository;
 
   Future<void> loadBatchCooking(int dayPlanId) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
-      final dayPlan = await _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
+      final dayPlan = await _mealPlanRepository.getDayPlanWithMealsById(dayPlanId);
       if (dayPlan == null) {
         emit(state.copyWith(isLoading: false));
         return;
@@ -72,6 +73,7 @@ class BatchCookingCubit extends Cubit<BatchCookingState> {
       ));
     } catch (e) {
       debugPrint('Error in loadBatchCooking: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 

@@ -3,7 +3,7 @@ import 'package:drift/drift.dart';
 import 'week_plan_table.dart';
 
 /// Day within a week plan (N:1 to WeekPlan).
-@TableIndex(name: 'idx_day_plans_week_date', columns: {#weekPlanId, #date})
+@TableIndex(name: 'idx_day_plans_week_date', columns: {#weekPlanId, #date}, unique: true)
 class DayPlans extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get weekPlanId =>

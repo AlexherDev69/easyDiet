@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/decimal_input_formatter.dart';
 import '../../../../navigation/app_router.dart';
+import '../../../../shared/widgets/sync_text_field.dart';
 import '../../../onboarding/domain/models/models.dart';
 import '../cubit/settings_cubit.dart';
 import '../cubit/settings_state.dart';
@@ -16,13 +17,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SettingsCubit, SettingsState>(
-      listenWhen: (prev, curr) =>
-          prev.showRegenerateDialog != curr.showRegenerateDialog ||
-          prev.showResetDialog != curr.showResetDialog,
-      listener: (context, state) {
-        // Dialogs are handled inline via state flags.
-      },
+    return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
         if (state.isLoading) {
           return Scaffold(
@@ -131,10 +126,8 @@ class _ProfileSection extends StatelessWidget {
       children: [
         const SettingsSectionTitle('Profil'),
         const SizedBox(height: 8),
-        TextField(
-          controller: TextEditingController(text: state.name)
-            ..selection =
-                TextSelection.collapsed(offset: state.name.length),
+        SyncTextField(
+          value: state.name,
           onChanged: cubit.updateName,
           decoration: _inputDecoration('Prenom'),
         ),
@@ -142,10 +135,8 @@ class _ProfileSection extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: TextField(
-                controller: TextEditingController(text: state.age)
-                  ..selection =
-                      TextSelection.collapsed(offset: state.age.length),
+              child: SyncTextField(
+                value: state.age,
                 onChanged: (v) {
                   if (v.length <= 3 &&
                       v.split('').every(
@@ -162,11 +153,8 @@ class _ProfileSection extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Expanded(
-              child: TextField(
-                controller:
-                    TextEditingController(text: state.heightCm)
-                      ..selection = TextSelection.collapsed(
-                          offset: state.heightCm.length),
+              child: SyncTextField(
+                value: state.heightCm,
                 onChanged: (v) {
                   if (v.length <= 3) cubit.updateHeight(v);
                 },
@@ -316,10 +304,8 @@ class _WeightFields extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: TextField(
-            controller: TextEditingController(text: state.weightKg)
-              ..selection =
-                  TextSelection.collapsed(offset: state.weightKg.length),
+          child: SyncTextField(
+            value: state.weightKg,
             onChanged: cubit.updateWeight,
             decoration: _inputDecoration('Poids (kg)'),
             keyboardType:
@@ -329,11 +315,8 @@ class _WeightFields extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         Expanded(
-          child: TextField(
-            controller:
-                TextEditingController(text: state.targetWeightKg)
-                  ..selection = TextSelection.collapsed(
-                      offset: state.targetWeightKg.length),
+          child: SyncTextField(
+            value: state.targetWeightKg,
             onChanged: cubit.updateTargetWeight,
             decoration: InputDecoration(
               labelText: 'Cible (kg)',

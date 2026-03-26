@@ -50,6 +50,7 @@ class BatchCookingModeState extends Equatable {
     this.completedSteps = const {},
     this.isLoading = true,
     this.sessionNumber = 1,
+    this.errorMessage,
   });
 
   final List<BatchPage> pages;
@@ -58,6 +59,7 @@ class BatchCookingModeState extends Equatable {
   final Set<String> completedSteps;
   final bool isLoading;
   final int sessionNumber;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -67,6 +69,7 @@ class BatchCookingModeState extends Equatable {
         completedSteps,
         isLoading,
         sessionNumber,
+        errorMessage,
       ];
 
   BatchCookingModeState copyWith({
@@ -76,6 +79,8 @@ class BatchCookingModeState extends Equatable {
     Set<String>? completedSteps,
     bool? isLoading,
     int? sessionNumber,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return BatchCookingModeState(
       pages: pages ?? this.pages,
@@ -84,6 +89,8 @@ class BatchCookingModeState extends Equatable {
       completedSteps: completedSteps ?? this.completedSteps,
       isLoading: isLoading ?? this.isLoading,
       sessionNumber: sessionNumber ?? this.sessionNumber,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

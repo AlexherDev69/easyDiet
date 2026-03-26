@@ -12,6 +12,7 @@ class BatchCookingState extends Equatable {
     this.totalPrepTime = 0,
     this.totalCookTime = 0,
     this.isLoading = true,
+    this.errorMessage,
   });
 
   final int sessionNumber;
@@ -21,6 +22,7 @@ class BatchCookingState extends Equatable {
   final int totalPrepTime;
   final int totalCookTime;
   final bool isLoading;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -31,6 +33,7 @@ class BatchCookingState extends Equatable {
         totalPrepTime,
         totalCookTime,
         isLoading,
+        errorMessage,
       ];
 
   BatchCookingState copyWith({
@@ -41,6 +44,8 @@ class BatchCookingState extends Equatable {
     int? totalPrepTime,
     int? totalCookTime,
     bool? isLoading,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return BatchCookingState(
       sessionNumber: sessionNumber ?? this.sessionNumber,
@@ -50,6 +55,8 @@ class BatchCookingState extends Equatable {
       totalPrepTime: totalPrepTime ?? this.totalPrepTime,
       totalCookTime: totalCookTime ?? this.totalCookTime,
       isLoading: isLoading ?? this.isLoading,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

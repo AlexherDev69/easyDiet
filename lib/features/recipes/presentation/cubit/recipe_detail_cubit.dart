@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/repositories/recipe_repository.dart';
@@ -23,23 +24,30 @@ class RecipeDetailCubit extends Cubit<RecipeDetailState> {
   void loadRecipe(int recipeId, {double planServings = 0}) {
     if (_initialLoadDone && state.recipe?.recipe.id == recipeId) return;
 
+    emit(state.copyWith(clearErrorMessage: true));
     _recipeSubscription?.cancel();
     _recipeSubscription =
-        _recipeRepository.watchRecipeWithDetails(recipeId).listen((recipe) {
-      if (!_initialLoadDone) {
-        final defaultServings = planServings > 0
-            ? planServings.clamp(0.5, 12.0)
-            : (recipe?.recipe.servings.toDouble() ?? 1.0);
-        emit(state.copyWith(
-          recipe: recipe,
-          servings: defaultServings,
-          isLoading: false,
-        ));
-        _initialLoadDone = true;
-      } else {
-        emit(state.copyWith(recipe: recipe, isLoading: false));
-      }
-    });
+        _recipeRepository.watchRecipeWithDetails(recipeId).listen(
+      (recipe) {
+        if (!_initialLoadDone) {
+          final defaultServings = planServings > 0
+              ? planServings.clamp(0.5, 12.0)
+              : (recipe?.recipe.servings.toDouble() ?? 1.0);
+          emit(state.copyWith(
+            recipe: recipe,
+            servings: defaultServings,
+            isLoading: false,
+          ));
+          _initialLoadDone = true;
+        } else {
+          emit(state.copyWith(recipe: recipe, isLoading: false));
+        }
+      },
+      onError: (Object e) {
+        debugPrint('Error in watchRecipeWithDetails: $e');
+        emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
+      },
+    );
   }
 
   void increaseServings() {
@@ -107,7 +115,8 @@ class RecipeDetailCubit extends Cubit<RecipeDetailState> {
               timer.copyWith(remainingSeconds: timer.remainingSeconds - 1);
           changed = true;
           hasRunning = true;
-        } else if (timer.isRunning && timer.remainingSeconds > 0) {
+        } else if (timer.isRunning && timer.remainingSeconds <= 0) {
+          // Timer finished but not dismissed — keep ticker alive
           hasRunning = true;
         }
       }

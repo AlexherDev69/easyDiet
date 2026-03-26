@@ -50,38 +50,46 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   Future<void> regenerateWeekPlan() async {
+    emit(state.copyWith(isRegenerating: true, clearErrorMessage: true));
     try {
-      emit(state.copyWith(isRegenerating: true));
       final profile = await _userProfileRepository.getProfile();
-      if (profile == null) return;
+      if (profile == null) {
+        emit(state.copyWith(isRegenerating: false));
+        return;
+      }
       await _mealPlanRepository.deleteWeekPlans();
       await _mealPlanGenerator.generateWeekPlan(profile);
       emit(state.copyWith(isRegenerating: false));
     } catch (e) {
       debugPrint('Error in regenerateWeekPlan: $e');
-      emit(state.copyWith(isRegenerating: false));
+      emit(state.copyWith(isRegenerating: false, errorMessage: e.toString()));
     }
   }
 
   Future<void> toggleMealConsumed(int mealId, bool currentlyConsumed) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _mealPlanRepository.toggleMealConsumed(mealId, !currentlyConsumed);
     } catch (e) {
       debugPrint('Error in toggleMealConsumed: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   Future<void> shiftByOneDay() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _mealPlanRepository.shiftProgramByOneDay();
     } catch (e) {
       debugPrint('Error in shiftByOneDay: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   // ── Swap dialog ───────────────────────────────────────────────────
 
   Future<void> openSwapDialog(Meal meal) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final profile = await _userProfileRepository.getProfile();
       if (profile == null) return;
@@ -112,6 +120,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
       ));
     } catch (e) {
       debugPrint('Error in openSwapDialog: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -120,6 +129,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   Future<void> swapMeal(Recipe newRecipe, {required bool replaceAll}) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final meal = state.swapDialogMeal;
       final weekPlan = state.weekPlan;
@@ -165,6 +175,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
       await _regenerateShoppingList();
     } catch (e) {
       debugPrint('Error in swapMeal: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -192,6 +203,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
   }
 
   Future<void> moveMealToDay(int targetDayPlanId) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final meal = state.movingMeal;
       if (meal == null) return;
@@ -202,6 +214,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
       closeMoveDialog();
     } catch (e) {
       debugPrint('Error in moveMealToDay: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -269,6 +282,7 @@ class MealPlanCubit extends Cubit<MealPlanState> {
       );
     } catch (e) {
       debugPrint('Error regenerating shopping list: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 

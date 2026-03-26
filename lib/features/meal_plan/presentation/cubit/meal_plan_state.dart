@@ -21,6 +21,7 @@ class MealPlanState extends Equatable {
     this.movingMeal,
     this.movingSourceDayPlanId = 0,
     this.moveTargetDays = const [],
+    this.errorMessage,
   });
 
   final WeekPlanWithDays? weekPlan;
@@ -38,6 +39,7 @@ class MealPlanState extends Equatable {
   final MealWithRecipe? movingMeal;
   final int movingSourceDayPlanId;
   final List<DayPlanWithMeals> moveTargetDays;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -52,6 +54,7 @@ class MealPlanState extends Equatable {
         movingMeal,
         movingSourceDayPlanId,
         moveTargetDays,
+        errorMessage,
       ];
 
   /// Sorted days from the plan.
@@ -74,6 +77,8 @@ class MealPlanState extends Equatable {
     List<DayPlanWithMeals>? moveTargetDays,
     bool clearSwapDialog = false,
     bool clearMoveDialog = false,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return MealPlanState(
       weekPlan: weekPlan ?? this.weekPlan,
@@ -98,6 +103,8 @@ class MealPlanState extends Equatable {
       moveTargetDays: clearMoveDialog
           ? const []
           : (moveTargetDays ?? this.moveTargetDays),
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

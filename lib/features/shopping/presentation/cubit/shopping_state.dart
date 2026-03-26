@@ -18,6 +18,7 @@ class ShoppingState extends Equatable {
     this.selectedTrip = 1,
     this.tripDaySummaries = const {},
     this.collapsedSections = const {},
+    this.errorMessage,
   });
 
   final List<ShoppingItem> allItems;
@@ -32,6 +33,7 @@ class ShoppingState extends Equatable {
   final int selectedTrip;
   final Map<int, String> tripDaySummaries;
   final Set<String> collapsedSections;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -47,6 +49,7 @@ class ShoppingState extends Equatable {
         selectedTrip,
         tripDaySummaries,
         collapsedSections,
+        errorMessage,
       ];
 
   ShoppingState copyWith({
@@ -63,6 +66,8 @@ class ShoppingState extends Equatable {
     Map<int, String>? tripDaySummaries,
     Set<String>? collapsedSections,
     bool clearItemDetail = false,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return ShoppingState(
       allItems: allItems ?? this.allItems,
@@ -82,6 +87,8 @@ class ShoppingState extends Equatable {
       selectedTrip: selectedTrip ?? this.selectedTrip,
       tripDaySummaries: tripDaySummaries ?? this.tripDaySummaries,
       collapsedSections: collapsedSections ?? this.collapsedSections,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

@@ -12,7 +12,6 @@ import '../features/meal_plan/presentation/pages/meal_plan_page.dart';
 import '../features/onboarding/domain/usecases/calorie_calculator.dart';
 import '../features/onboarding/presentation/cubit/onboarding_cubit.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
-import '../data/local/daos/day_plan_dao.dart';
 import '../features/batch_cooking/domain/usecases/batch_step_optimizer.dart';
 import '../features/batch_cooking/presentation/cubit/batch_cooking_cubit.dart';
 import '../features/batch_cooking/presentation/cubit/batch_cooking_mode_cubit.dart';
@@ -177,7 +176,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/recipes/:id',
       builder: (context, state) {
-        final id = int.parse(state.pathParameters['id']!);
+        final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
         final servings = double.tryParse(
                 state.uri.queryParameters['servings'] ?? '') ??
             0;
@@ -195,7 +194,7 @@ final appRouter = GoRouter(
         GoRoute(
           path: 'cooking',
           builder: (context, state) {
-            final id = int.parse(state.pathParameters['id']!);
+            final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
             final servings = double.tryParse(
                     state.uri.queryParameters['servings'] ?? '') ??
                 0;
@@ -218,7 +217,7 @@ final appRouter = GoRouter(
         final dayPlanId = int.parse(state.pathParameters['dayPlanId']!);
         return BlocProvider(
           create: (_) => BatchCookingCubit(
-            dayPlanDao: getIt<DayPlanDao>(),
+            mealPlanRepository: getIt<MealPlanRepository>(),
             recipeRepository: getIt<RecipeRepository>(),
           ),
           child: BatchCookingPage(dayPlanId: dayPlanId),
@@ -232,7 +231,7 @@ final appRouter = GoRouter(
                 int.parse(state.pathParameters['dayPlanId']!);
             return BlocProvider(
               create: (_) => BatchCookingModeCubit(
-                dayPlanDao: getIt<DayPlanDao>(),
+                mealPlanRepository: getIt<MealPlanRepository>(),
                 recipeRepository: getIt<RecipeRepository>(),
                 batchStepOptimizer: getIt<BatchStepOptimizer>(),
               ),

@@ -53,8 +53,13 @@ class ExtendedColorsProvider extends InheritedWidget {
   static ExtendedColors of(BuildContext context) {
     final provider =
         context.dependOnInheritedWidgetOfExactType<ExtendedColorsProvider>();
-    assert(provider != null, 'No ExtendedColorsProvider found in context');
-    return provider!.colors;
+    if (provider == null) {
+      throw FlutterError(
+        'No ExtendedColorsProvider found in context. '
+        'Ensure ExtendedColorsProvider wraps MaterialApp.',
+      );
+    }
+    return provider.colors;
   }
 
   @override
@@ -69,15 +74,23 @@ class AppTheme {
   static const _extendedColors = ExtendedColors(
     calorieGradient: LinearGradient(
       colors: [AppColors.gradientCalorieStart, AppColors.gradientCalorieEnd],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
     ),
     waterGradient: LinearGradient(
       colors: [AppColors.gradientWaterStart, AppColors.gradientWaterEnd],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
     ),
     primaryGradient: LinearGradient(
       colors: [AppColors.gradientGreenStart, AppColors.gradientGreenEnd],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
     ),
     purpleGradient: LinearGradient(
       colors: [AppColors.gradientPurpleStart, AppColors.gradientPurpleEnd],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
     ),
     accentAmber: AppColors.accentAmber,
     accentOrange: AppColors.accentOrange,
@@ -262,6 +275,17 @@ class AppTheme {
           textStyle: textTheme.labelLarge,
         ),
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.emeraldPrimary,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          textStyle: textTheme.labelLarge,
+        ),
+      ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: AppColors.emeraldPrimary,
         unselectedItemColor: AppColors.gray400,
@@ -309,6 +333,17 @@ class AppTheme {
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.emeraldPrimaryDark,
           side: const BorderSide(color: AppColors.emeraldPrimaryDark),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          textStyle: textTheme.labelLarge,
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.emeraldPrimaryDark,
+          foregroundColor: AppColors.darkBackground,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),

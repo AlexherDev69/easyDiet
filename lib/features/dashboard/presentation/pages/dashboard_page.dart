@@ -236,7 +236,7 @@ class _DashboardContent extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: QuickActionCard(
-                  icon: Icons.fitness_center,
+                  icon: Icons.monitor_weight_outlined,
                   label: 'Peser',
                   accentColor: AppColors.accentRose,
                   onTap: () => context.go(AppRoutes.weightLog),

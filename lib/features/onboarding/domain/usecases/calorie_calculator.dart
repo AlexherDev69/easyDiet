@@ -71,7 +71,7 @@ class CalorieCalculator {
     final tdee = calculateTDEE(bmr, activityLevel);
     final waterMl = tdee * AppConstants.waterMlPerKcal;
 
-    final rounded = (waterMl / 100.0).ceil() * 100;
+    final rounded = (waterMl / 100.0).round() * 100;
 
     final (minWater, maxWater) = switch (sex) {
       Sex.male => (AppConstants.minWaterMlMale, AppConstants.maxWaterMlMale),

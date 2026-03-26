@@ -299,7 +299,9 @@ class _ReplaceRecipePreviewDialogState
               )
             else
               ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 400),
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.5,
+                ),
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: widget.candidates.length,

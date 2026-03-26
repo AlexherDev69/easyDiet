@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../data/local/daos/day_plan_dao.dart';
 import '../../../../data/local/models/recipe_with_details.dart';
+import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
 import '../../../recipes/domain/repositories/recipe_repository.dart';
 import '../../domain/usecases/batch_step_optimizer.dart';
 import 'batch_cooking_mode_state.dart';
@@ -12,15 +12,15 @@ import 'batch_cooking_mode_state.dart';
 /// Manages batch cooking mode — port of BatchCookingModeViewModel.kt.
 class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
   BatchCookingModeCubit({
-    required DayPlanDao dayPlanDao,
+    required MealPlanRepository mealPlanRepository,
     required RecipeRepository recipeRepository,
     required BatchStepOptimizer batchStepOptimizer,
-  })  : _dayPlanDao = dayPlanDao,
+  })  : _mealPlanRepository = mealPlanRepository,
         _recipeRepository = recipeRepository,
         _batchStepOptimizer = batchStepOptimizer,
         super(const BatchCookingModeState());
 
-  final DayPlanDao _dayPlanDao;
+  final MealPlanRepository _mealPlanRepository;
   final RecipeRepository _recipeRepository;
   final BatchStepOptimizer _batchStepOptimizer;
   Timer? _ticker;
@@ -28,8 +28,9 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
   // ── Public actions ──────────────────────────────────────────────────
 
   Future<void> loadBatchSteps(int dayPlanId) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
-      final dayPlan = await _dayPlanDao.getDayPlanWithMealsById(dayPlanId);
+      final dayPlan = await _mealPlanRepository.getDayPlanWithMealsById(dayPlanId);
       if (dayPlan == null) {
         emit(state.copyWith(isLoading: false));
         return;
@@ -60,6 +61,7 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
       ));
     } catch (e) {
       debugPrint('Error in loadBatchSteps: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -140,7 +142,8 @@ class BatchCookingModeCubit extends Cubit<BatchCookingModeState> {
               timer.copyWith(remainingSeconds: timer.remainingSeconds - 1);
           changed = true;
           hasRunning = true;
-        } else if (timer.isRunning && timer.remainingSeconds > 0) {
+        } else if (timer.isRunning && timer.remainingSeconds <= 0) {
+          // Timer finished but not dismissed — keep ticker alive
           hasRunning = true;
         }
       }

@@ -31,6 +31,7 @@ class DashboardState extends Equatable {
     this.selectedDayIndex = -1,
     this.selectedDayMeals = const [],
     this.selectedDayIsFreeDay = false,
+    this.errorMessage,
   });
 
   final String userName;
@@ -56,6 +57,7 @@ class DashboardState extends Equatable {
   final int selectedDayIndex;
   final List<MealWithRecipe> selectedDayMeals;
   final bool selectedDayIsFreeDay;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -82,6 +84,7 @@ class DashboardState extends Equatable {
         selectedDayIndex,
         selectedDayMeals,
         selectedDayIsFreeDay,
+        errorMessage,
       ];
 
   DashboardState copyWith({
@@ -112,6 +115,8 @@ class DashboardState extends Equatable {
     int? selectedDayIndex,
     List<MealWithRecipe>? selectedDayMeals,
     bool? selectedDayIsFreeDay,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return DashboardState(
       userName: userName ?? this.userName,
@@ -142,6 +147,8 @@ class DashboardState extends Equatable {
       selectedDayIndex: selectedDayIndex ?? this.selectedDayIndex,
       selectedDayMeals: selectedDayMeals ?? this.selectedDayMeals,
       selectedDayIsFreeDay: selectedDayIsFreeDay ?? this.selectedDayIsFreeDay,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }

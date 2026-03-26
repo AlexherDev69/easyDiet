@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../core/utils/decimal_input_formatter.dart';
+import '../../../../shared/widgets/sync_text_field.dart';
 
 /// Step 1: Height and weight.
 class BodyMetricsStep extends StatelessWidget {
@@ -37,7 +38,9 @@ class BodyMetricsStep extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Height
-          TextField(
+          SyncTextField(
+            value: height,
+            onChanged: onHeightChange,
             decoration: const InputDecoration(
               labelText: 'Taille',
               suffixText: 'cm',
@@ -45,24 +48,23 @@ class BodyMetricsStep extends StatelessWidget {
             ),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            controller: TextEditingController(text: height)
-              ..selection = TextSelection.collapsed(offset: height.length),
-            onChanged: onHeightChange,
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
 
           // Weight
-          TextField(
+          SyncTextField(
+            value: weight,
+            onChanged: onWeightChange,
             decoration: const InputDecoration(
               labelText: 'Poids',
               suffixText: 'kg',
               prefixIcon: Icon(Icons.monitor_weight_outlined),
             ),
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            keyboardType:
+                const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [DecimalInputFormatter()],
-            controller: TextEditingController(text: weight)
-              ..selection = TextSelection.collapsed(offset: weight.length),
-            onChanged: onWeightChange,
+            textInputAction: TextInputAction.done,
           ),
         ],
       ),

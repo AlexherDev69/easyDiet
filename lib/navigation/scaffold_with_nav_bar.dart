@@ -45,8 +45,8 @@ const _navItems = [
   ),
   _NavItem(
     label: 'Poids',
-    selectedIcon: Icons.fitness_center,
-    unselectedIcon: Icons.fitness_center_outlined,
+    selectedIcon: Icons.monitor_weight,
+    unselectedIcon: Icons.monitor_weight_outlined,
     path: AppRoutes.weightLog,
   ),
 ];
@@ -61,14 +61,14 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _calculateSelectedIndex(context),
-        onTap: (index) => _onItemTapped(index, context),
-        items: _navItems
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _calculateSelectedIndex(context),
+        onDestinationSelected: (index) => _onItemTapped(index, context),
+        destinations: _navItems
             .map(
-              (item) => BottomNavigationBarItem(
+              (item) => NavigationDestination(
                 icon: Icon(item.unselectedIcon),
-                activeIcon: Icon(item.selectedIcon),
+                selectedIcon: Icon(item.selectedIcon),
                 label: item.label,
               ),
             )

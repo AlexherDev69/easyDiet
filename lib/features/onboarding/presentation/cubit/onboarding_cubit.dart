@@ -188,6 +188,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   Future<void> moveMealToDay(int targetDayPlanId) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final meal = state.movingMeal;
       if (meal == null) return;
@@ -206,12 +207,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       ));
     } catch (e) {
       debugPrint('Error in moveMealToDay: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   // ── Plan preview: replace recipe ────────────────────────────────────
 
   Future<void> openReplaceDialog(MealWithRecipe meal) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final profile = await _userProfileRepository.getProfile();
       final weekPlan = state.generatedWeekPlan;
@@ -239,6 +242,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       ));
     } catch (e) {
       debugPrint('Error in openReplaceDialog: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -252,6 +256,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   Future<void> replaceRecipe(Recipe newRecipe, bool replaceAll) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final currentMeal = state.replacingMeal;
       final weekPlan = state.generatedWeekPlan;
@@ -299,14 +304,15 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       ));
     } catch (e) {
       debugPrint('Error in replaceRecipe: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   // ── Finish onboarding ──────────────────────────────────────────────
 
   Future<void> finishOnboarding() async {
+    emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
-      emit(state.copyWith(isLoading: true));
 
       // Mark profile as completed
       final profile = await _userProfileRepository.getProfile();
@@ -361,7 +367,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       emit(state.copyWith(isLoading: false, isOnboardingCompleted: true));
     } catch (e) {
       debugPrint('Error in finishOnboarding: $e');
-      emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -375,6 +381,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       }
     } catch (e) {
       debugPrint('Error in _checkOnboardingStatus: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -406,13 +413,16 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   Future<void> _generateAndShowPlan() async {
+    emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
-      emit(state.copyWith(isLoading: true));
 
       final weight = double.tryParse(state.weightKg);
       final height = int.tryParse(state.heightCm);
       final age = int.tryParse(state.age);
-      if (weight == null || height == null || age == null) return;
+      if (weight == null || height == null || age == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
 
       final calories = _calorieCalculator.calculateDailyTarget(
         weightKg: weight,
@@ -490,7 +500,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       ));
     } catch (e) {
       debugPrint('Error in _generateAndShowPlan: $e');
-      emit(state.copyWith(isLoading: false));
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 }

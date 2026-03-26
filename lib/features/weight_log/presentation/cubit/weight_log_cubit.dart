@@ -84,11 +84,14 @@ class WeightLogCubit extends Cubit<WeightLogState> {
           avgLossPerWeek: avgLoss,
           projectedGoalDate: projectedDate,
           clearProjectedGoalDate: projectedDate == null,
+          isAggressiveLoss:
+              _weightProjectionCalculator.isAggressiveLossRate(avgLoss),
           isLoading: false,
         ));
       });
     } catch (e) {
       debugPrint('Error in _loadData: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -117,6 +120,7 @@ class WeightLogCubit extends Cubit<WeightLogState> {
   }
 
   Future<void> addWeightLog() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final weight = double.tryParse(state.weightInput);
       if (weight == null) return;
@@ -137,10 +141,12 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       await _insertWeightLog(weight, dateMillis);
     } catch (e) {
       debugPrint('Error in addWeightLog: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   Future<void> confirmReplaceDuplicate() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final weight = double.tryParse(state.weightInput);
       if (weight == null) return;
@@ -160,6 +166,7 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       emit(state.copyWith(showDuplicateDialog: false));
     } catch (e) {
       debugPrint('Error in confirmReplaceDuplicate: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -199,6 +206,7 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       }
     } catch (e) {
       debugPrint('Error in _insertWeightLog: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -243,14 +251,17 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       );
     } catch (e) {
       debugPrint('Error in _syncProfileWeight: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   Future<void> deleteLog(WeightLog log) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _weightLogRepository.deleteLog(log);
     } catch (e) {
       debugPrint('Error in deleteLog: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 

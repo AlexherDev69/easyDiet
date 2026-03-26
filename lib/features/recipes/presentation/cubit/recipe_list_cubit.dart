@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../data/local/database.dart';
+import '../../../../data/local/models/week_plan_with_days.dart';
 import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
 import '../../domain/repositories/recipe_repository.dart';
 import 'recipe_list_state.dart';
@@ -21,8 +23,8 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   final RecipeRepository _recipeRepository;
   final MealPlanRepository _mealPlanRepository;
 
-  StreamSubscription<dynamic>? _recipesSubscription;
-  StreamSubscription<dynamic>? _planSubscription;
+  StreamSubscription<List<Recipe>>? _recipesSubscription;
+  StreamSubscription<WeekPlanWithDays?>? _planSubscription;
 
   // ── Public actions ──────────────────────────────────────────────────
 
@@ -64,6 +66,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
       emit(state.copyWith(allRecipes: recipes, isLoading: false));
     } catch (e) {
       debugPrint('Error in _loadAllRecipesWithDetails: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 

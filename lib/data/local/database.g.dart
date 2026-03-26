@@ -3321,6 +3321,7 @@ class $WeekPlansTable extends WeekPlans
     false,
     type: DriftSqlType.int,
     requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'),
   );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
@@ -5311,7 +5312,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final Index idxDayPlansWeekDate = Index(
     'idx_day_plans_week_date',
-    'CREATE INDEX idx_day_plans_week_date ON day_plans (week_plan_id, date)',
+    'CREATE UNIQUE INDEX idx_day_plans_week_date ON day_plans (week_plan_id, date)',
   );
   late final Index idxMealsDayPlan = Index(
     'idx_meals_day_plan',

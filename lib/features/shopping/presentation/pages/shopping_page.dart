@@ -88,7 +88,13 @@ class _ShoppingContent extends StatelessWidget {
           'Liste de courses',
           style: TextStyle(fontWeight: FontWeight.w800),
         ),
-        actions: const [],
+        actions: [
+          IconButton(
+            onPressed: cubit.resetChecks,
+            icon: const Icon(Icons.replay),
+            tooltip: 'Tout decocher',
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddDialog(context, cubit),

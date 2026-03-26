@@ -80,17 +80,17 @@ lib/
 
 ## Drift Database (9 tables)
 
-| Table | Purpose | Key Fields |
-|-------|---------|-----------|
-| **UserProfiles** | Singleton (id=1) | name, age, sex, heightCm, weightKg, targetWeightKg, lossPace, activityLevel, dietType, dailyCalorieTarget, dailyWaterMl, allergies (JSON), excludedMeats (JSON), freeDays (JSON), enabledMealTypes (JSON), economicMode, onboardingCompleted |
-| **Recipes** | Recipe base | name, category, caloriesPerServing, macros, servings, prepTime, cookTime, isBatchFriendly, allergens (JSON), dietType, meatTypes (JSON) |
-| **RecipeSteps** | Instructions | recipeId (FK), stepNumber, instruction, timerSeconds |
-| **Ingredients** | Recipe ingredients | recipeId (FK), name, quantity, unit, supermarketSection |
-| **WeekPlans** | Week container | weekStartDate, createdAt |
-| **DayPlans** | Day in week | weekPlanId (FK), date, dayOfWeek, isFreeDay, batchCookingSession |
-| **Meals** | Meal assignment | dayPlanId (FK), mealType, recipeId (FK), servings, isConsumed |
-| **ShoppingItems** | Shopping list | weekPlanId (FK), name, quantity, unit, supermarketSection, isChecked, isManuallyAdded, sourceDetails (JSON), tripNumber |
-| **WeightLogs** | Weight tracking | date (unique), weightKg, createdAt |
+| Table             | Purpose            | Key Fields                                                                                                                                                                                                                                   |
+| ----------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **UserProfiles**  | Singleton (id=1)   | name, age, sex, heightCm, weightKg, targetWeightKg, lossPace, activityLevel, dietType, dailyCalorieTarget, dailyWaterMl, allergies (JSON), excludedMeats (JSON), freeDays (JSON), enabledMealTypes (JSON), economicMode, onboardingCompleted |
+| **Recipes**       | Recipe base        | name, category, caloriesPerServing, macros, servings, prepTime, cookTime, isBatchFriendly, allergens (JSON), dietType, meatTypes (JSON)                                                                                                      |
+| **RecipeSteps**   | Instructions       | recipeId (FK), stepNumber, instruction, timerSeconds                                                                                                                                                                                         |
+| **Ingredients**   | Recipe ingredients | recipeId (FK), name, quantity, unit, supermarketSection                                                                                                                                                                                      |
+| **WeekPlans**     | Week container     | weekStartDate, createdAt                                                                                                                                                                                                                     |
+| **DayPlans**      | Day in week        | weekPlanId (FK), date, dayOfWeek, isFreeDay, batchCookingSession                                                                                                                                                                             |
+| **Meals**         | Meal assignment    | dayPlanId (FK), mealType, recipeId (FK), servings, isConsumed                                                                                                                                                                                |
+| **ShoppingItems** | Shopping list      | weekPlanId (FK), name, quantity, unit, supermarketSection, isChecked, isManuallyAdded, sourceDetails (JSON), tripNumber                                                                                                                      |
+| **WeightLogs**    | Weight tracking    | date (unique), weightKg, createdAt                                                                                                                                                                                                           |
 
 Relations: `RecipeWithDetails`, `MealWithRecipe`, `DayPlanWithMeals`, `WeekPlanWithDays`
 
@@ -124,20 +124,20 @@ Relations: `RecipeWithDetails`, `MealWithRecipe`, `DayPlanWithMeals`, `WeekPlanW
 
 ## 12 Cubits
 
-| Cubit | Feature | Key Methods |
-|-------|---------|-------------|
-| OnboardingCubit | 6-step onboarding | updateProfile fields, calculateCalories, generate plan |
-| DashboardCubit | Home screen | selectDay, toggleMealConsumed, shiftByOneDay |
-| MealPlanCubit | Weekly plan | selectDay, regenerateWeekPlan, swap/move meals, shiftByOneDay |
-| ShoppingCubit | Shopping list | selectTrip, toggleItem, addManualItem, toggleSection |
-| RecipeListCubit | Recipe list | selectTab, selectCategory |
-| RecipeDetailCubit | Recipe detail | loadRecipe, increaseServings (+0.5), decreaseServings (-0.5) |
-| WeightLogCubit | Weight tracking | addWeightLog, deleteLog, selectPeriod, date picker |
-| SettingsCubit | Profile settings | updateProfile fields, saveDietProfile, appReset |
-| BatchCookingCubit | Batch overview | loadBatchCooking |
-| BatchCookingModeCubit | Batch cooking mode | loadOptimizedSteps, toggleStepComplete, nav pages |
-| PlanConfigCubit | Plan config | updateDietType, enabledMealTypes, freeDays, save |
-| PlanPreviewCubit | Plan preview | generateNewPlan, confirmPlan |
+| Cubit                 | Feature            | Key Methods                                                   |
+| --------------------- | ------------------ | ------------------------------------------------------------- |
+| OnboardingCubit       | 6-step onboarding  | updateProfile fields, calculateCalories, generate plan        |
+| DashboardCubit        | Home screen        | selectDay, toggleMealConsumed, shiftByOneDay                  |
+| MealPlanCubit         | Weekly plan        | selectDay, regenerateWeekPlan, swap/move meals, shiftByOneDay |
+| ShoppingCubit         | Shopping list      | selectTrip, toggleItem, addManualItem, toggleSection          |
+| RecipeListCubit       | Recipe list        | selectTab, selectCategory                                     |
+| RecipeDetailCubit     | Recipe detail      | loadRecipe, increaseServings (+0.5), decreaseServings (-0.5)  |
+| WeightLogCubit        | Weight tracking    | addWeightLog, deleteLog, selectPeriod, date picker            |
+| SettingsCubit         | Profile settings   | updateProfile fields, saveDietProfile, appReset               |
+| BatchCookingCubit     | Batch overview     | loadBatchCooking                                              |
+| BatchCookingModeCubit | Batch cooking mode | loadOptimizedSteps, toggleStepComplete, nav pages             |
+| PlanConfigCubit       | Plan config        | updateDietType, enabledMealTypes, freeDays, save              |
+| PlanPreviewCubit      | Plan preview       | generateNewPlan, confirmPlan                                  |
 
 ## 14 Routes
 
@@ -195,17 +195,24 @@ dart run flutter_launcher_icons
 
 ## Dependencies
 
-| Category | Package | Version |
-|----------|---------|---------|
-| State | flutter_bloc | ^9.1.0 |
-| DB | drift | ^2.25.0 |
-| DB (SQLite) | sqlite3_flutter_libs | ^0.5.28 |
-| Navigation | go_router | ^14.8.1 |
-| DI | get_it | ^8.0.3 |
-| Models | freezed_annotation | ^2.4.4 |
-| Charts | fl_chart | ^0.70.2 |
-| Fonts | google_fonts | ^6.2.1 |
-| Date | intl | ^0.20.2 |
-| Wakelock | wakelock_plus | ^1.2.10 |
+| Category     | Package                                             | Version |
+| ------------ | --------------------------------------------------- | ------- |
+| State        | flutter_bloc                                        | ^9.1.0  |
+| DB           | drift                                               | ^2.25.0 |
+| DB (SQLite)  | sqlite3_flutter_libs                                | ^0.5.28 |
+| Navigation   | go_router                                           | ^14.8.1 |
+| DI           | get_it                                              | ^8.0.3  |
+| Models       | freezed_annotation                                  | ^2.4.4  |
+| Charts       | fl_chart                                            | ^0.70.2 |
+| Fonts        | google_fonts                                        | ^6.2.1  |
+| Date         | intl                                                | ^0.20.2 |
+| Wakelock     | wakelock_plus                                       | ^1.2.10 |
 | Dev: codegen | build_runner, drift_dev, freezed, json_serializable |
-| Dev: icons | flutter_launcher_icons | ^0.14.3 |
+| Dev: icons   | flutter_launcher_icons                              | ^0.14.3 |
+
+## Subagents
+
+This project has 6 specialized subagents in .claude/agents/.
+Always consider delegating to the appropriate subagent instead of handling everything in the main context.
+Use the nutrition-engine for any calorie/macro/meal plan logic.
+Use the test-writer after implementing any new feature.

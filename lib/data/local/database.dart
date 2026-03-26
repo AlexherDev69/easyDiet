@@ -61,6 +61,11 @@ class AppDatabase extends _$AppDatabase {
       onCreate: (Migrator m) async {
         await m.createAll();
       },
+      onUpgrade: (Migrator m, int from, int to) async {
+        // For future schema changes, add migration steps here:
+        // if (from < 2) { await m.addColumn(...); }
+        await m.createAll();
+      },
     );
   }
 }
@@ -69,6 +74,8 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
     final file = File(p.join(dbFolder.path, 'easydiet.sqlite'));
-    return NativeDatabase.createInBackground(file);
+    return NativeDatabase.createInBackground(file, setup: (db) {
+      db.execute('PRAGMA foreign_keys = ON;');
+    });
   });
 }

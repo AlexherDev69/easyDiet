@@ -62,7 +62,7 @@ class ShoppingListGenerator {
           final source = _IngredientSource(
             recipeName: mealWithRecipe.recipe.name,
             dayOfWeek: day.dayPlan.dayOfWeek,
-            quantity: QuantityFormatter.roundForCooking(normalizedQty),
+            quantity: normalizedQty,
             unit: normalizedUnit,
           );
 
@@ -113,14 +113,15 @@ class ShoppingListGenerator {
   }
 
   Map<int, int> _buildTripDayMap(List<int> dietDayNumbers, int tripsPerWeek) {
-    if (tripsPerWeek <= 1) {
+    if (tripsPerWeek <= 1 || dietDayNumbers.isEmpty) {
       return {for (final d in dietDayNumbers) d: 1};
     }
+    final effectiveTrips = tripsPerWeek.clamp(1, dietDayNumbers.length);
     final sorted = List.of(dietDayNumbers)..sort();
-    final splitIndex = (sorted.length / 2.0).ceil();
     final map = <int, int>{};
     for (var i = 0; i < sorted.length; i++) {
-      map[sorted[i]] = i < splitIndex ? 1 : 2;
+      // Distribute days equitably: day i goes to trip (i * effectiveTrips ~/ sorted.length) + 1
+      map[sorted[i]] = (i * effectiveTrips ~/ sorted.length) + 1;
     }
     return map;
   }
@@ -223,7 +224,7 @@ class ShoppingListGenerator {
   };
 
   static const _dryTspGrams = 3.0;
-  static const _dryTbspGrams = 8.0;
+  static const _dryTbspGrams = 10.0;
 
   static const _dryIngredientPatterns = [
     'cumin', 'curcuma', 'paprika', 'cannelle', 'curry',

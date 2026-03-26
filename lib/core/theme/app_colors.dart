@@ -73,4 +73,9 @@ class AppColors {
   static const lunchColor = Color(0xFF10B981);
   static const dinnerColor = Color(0xFF8B5CF6);
   static const snackColor = Color(0xFFF43F5E);
+
+  // Macro nutrient colors
+  static const macroProtein = accentRose;
+  static const macroCarbs = Color(0xFFFBBF24); // amber-400
+  static const macroFat = accentAmber;
 }

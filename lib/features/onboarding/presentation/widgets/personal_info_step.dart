@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../shared/widgets/sync_text_field.dart';
 import '../../domain/models/sex.dart';
 
 /// Step 0: Name, age, sex.
@@ -42,20 +43,22 @@ class PersonalInfoStep extends StatelessWidget {
           const SizedBox(height: 24),
 
           // Name
-          TextField(
+          SyncTextField(
+            value: name,
+            onChanged: onNameChange,
             decoration: const InputDecoration(
               labelText: 'Prenom',
               prefixIcon: Icon(Icons.person_outline),
             ),
             textCapitalization: TextCapitalization.words,
-            controller: TextEditingController(text: name)
-              ..selection = TextSelection.collapsed(offset: name.length),
-            onChanged: onNameChange,
+            textInputAction: TextInputAction.next,
           ),
           const SizedBox(height: 16),
 
           // Age
-          TextField(
+          SyncTextField(
+            value: age,
+            onChanged: onAgeChange,
             decoration: const InputDecoration(
               labelText: 'Age',
               suffixText: 'ans',
@@ -63,9 +66,7 @@ class PersonalInfoStep extends StatelessWidget {
             ),
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            controller: TextEditingController(text: age)
-              ..selection = TextSelection.collapsed(offset: age.length),
-            onChanged: onAgeChange,
+            textInputAction: TextInputAction.done,
           ),
           const SizedBox(height: 24),
 

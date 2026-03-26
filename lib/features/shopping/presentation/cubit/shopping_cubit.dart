@@ -35,10 +35,11 @@ class ShoppingCubit extends Cubit<ShoppingState> {
   final ShoppingListGenerator _shoppingListGenerator;
   final UserProfileRepository _userProfileRepository;
 
-  StreamSubscription<dynamic>? _planSubscription;
+  StreamSubscription<WeekPlanWithDays?>? _planSubscription;
   StreamSubscription<List<ShoppingItem>>? _itemsSubscription;
   String? _lastPlanHash;
   bool _isGenerating = false;
+  int? _currentWeekPlanId;
 
   // ── Public actions ──────────────────────────────────────────────────
 
@@ -63,28 +64,34 @@ class ShoppingCubit extends Cubit<ShoppingState> {
   }
 
   Future<void> toggleItemChecked(int itemId, bool currentlyChecked) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _shoppingRepository.updateChecked(itemId, !currentlyChecked);
     } catch (e) {
       debugPrint('Error in toggleItemChecked: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   Future<void> deleteItem(int itemId) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       await _shoppingRepository.deleteItem(itemId);
     } catch (e) {
       debugPrint('Error in deleteItem: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
   Future<void> resetChecks() async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final weekPlanId = state.weekPlanId;
       if (weekPlanId == null) return;
       await _shoppingRepository.uncheckAll(weekPlanId);
     } catch (e) {
       debugPrint('Error in resetChecks: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -108,6 +115,7 @@ class ShoppingCubit extends Cubit<ShoppingState> {
     String unit,
     String section,
   ) async {
+    emit(state.copyWith(clearErrorMessage: true));
     try {
       final weekPlanId = state.weekPlanId;
       if (weekPlanId == null) return;
@@ -125,6 +133,7 @@ class ShoppingCubit extends Cubit<ShoppingState> {
       );
     } catch (e) {
       debugPrint('Error in addItem: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
@@ -152,11 +161,13 @@ class ShoppingCubit extends Cubit<ShoppingState> {
         _regenerateList(weekPlan, tripsPerWeek);
       }
 
-      // Watch items for this week plan
-      _itemsSubscription?.cancel();
-      _itemsSubscription = _shoppingRepository
-          .watchItemsForWeek(weekPlan.weekPlan.id)
-          .listen((items) {
+      // Only re-subscribe to item stream when weekPlanId actually changes.
+      if (_currentWeekPlanId != weekPlan.weekPlan.id) {
+        _currentWeekPlanId = weekPlan.weekPlan.id;
+        _itemsSubscription?.cancel();
+        _itemsSubscription = _shoppingRepository
+            .watchItemsForWeek(weekPlan.weekPlan.id)
+            .listen((items) {
         if (items.isEmpty && !_isGenerating) {
           _regenerateList(weekPlan, tripsPerWeek);
         } else if (items.isNotEmpty) {
@@ -180,9 +191,11 @@ class ShoppingCubit extends Cubit<ShoppingState> {
           ));
         }
       });
+      } // end if (_currentWeekPlanId != weekPlan.weekPlan.id)
     });
     } catch (e) {
       debugPrint('Error in _loadShoppingList: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -200,6 +213,7 @@ class ShoppingCubit extends Cubit<ShoppingState> {
     } catch (e) {
       _isGenerating = false;
       debugPrint('Error in _regenerateList: $e');
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 

@@ -16,7 +16,9 @@ class WeightLogState extends Equatable {
     this.targetWeight = 0.0,
     this.showDuplicateDialog = false,
     this.outlierWarning,
+    this.isAggressiveLoss = false,
     this.isLoading = true,
+    this.errorMessage,
     DateTime? selectedDate,
   }) : selectedDate = selectedDate ?? DateTime.now();
 
@@ -34,7 +36,9 @@ class WeightLogState extends Equatable {
   final double targetWeight;
   final bool showDuplicateDialog;
   final String? outlierWarning;
+  final bool isAggressiveLoss;
   final bool isLoading;
+  final String? errorMessage;
 
   /// Selected date for the weight entry.
   final DateTime selectedDate;
@@ -52,7 +56,9 @@ class WeightLogState extends Equatable {
         targetWeight,
         showDuplicateDialog,
         outlierWarning,
+        isAggressiveLoss,
         isLoading,
+        errorMessage,
         selectedDate,
       ];
 
@@ -71,7 +77,10 @@ class WeightLogState extends Equatable {
     bool? showDuplicateDialog,
     String? outlierWarning,
     bool clearOutlierWarning = false,
+    bool? isAggressiveLoss,
     bool? isLoading,
+    String? errorMessage,
+    bool clearErrorMessage = false,
     DateTime? selectedDate,
   }) {
     return WeightLogState(
@@ -91,7 +100,10 @@ class WeightLogState extends Equatable {
       showDuplicateDialog: showDuplicateDialog ?? this.showDuplicateDialog,
       outlierWarning:
           clearOutlierWarning ? null : (outlierWarning ?? this.outlierWarning),
+      isAggressiveLoss: isAggressiveLoss ?? this.isAggressiveLoss,
       isLoading: isLoading ?? this.isLoading,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
       selectedDate: selectedDate ?? this.selectedDate,
     );
   }

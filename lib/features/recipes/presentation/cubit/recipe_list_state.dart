@@ -10,6 +10,7 @@ class RecipeListState extends Equatable {
     this.selectedTab = 0,
     this.selectedCategory,
     this.isLoading = true,
+    this.errorMessage,
   });
 
   final List<RecipeWithDetails> allRecipes;
@@ -17,6 +18,7 @@ class RecipeListState extends Equatable {
   final int selectedTab;
   final String? selectedCategory;
   final bool isLoading;
+  final String? errorMessage;
 
   @override
   List<Object?> get props => [
@@ -25,6 +27,7 @@ class RecipeListState extends Equatable {
         selectedTab,
         selectedCategory,
         isLoading,
+        errorMessage,
       ];
 
   RecipeListState copyWith({
@@ -34,6 +37,8 @@ class RecipeListState extends Equatable {
     String? selectedCategory,
     bool? isLoading,
     bool clearCategory = false,
+    String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return RecipeListState(
       allRecipes: allRecipes ?? this.allRecipes,
@@ -42,6 +47,8 @@ class RecipeListState extends Equatable {
       selectedCategory:
           clearCategory ? null : (selectedCategory ?? this.selectedCategory),
       isLoading: isLoading ?? this.isLoading,
+      errorMessage:
+          clearErrorMessage ? null : (errorMessage ?? this.errorMessage),
     );
   }
 }
