@@ -92,17 +92,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedIndex = _calculateSelectedIndex(context);
     return Scaffold(
-      // FadeThroughTransition equivalent: AnimatedSwitcher with a cross-fade
-      // between tabs. ValueKey on the route path ensures the animation fires
-      // on every top-level tab change while sub-route pushes (e.g. recipe
-      // detail) are handled by the nested navigator and don't re-trigger it.
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        child: KeyedSubtree(
-          key: ValueKey(GoRouterState.of(context).uri.path),
-          child: child,
-        ),
-      ),
+      body: child,
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
         onDestinationSelected: (index) => context.go(_navItems[index].path),

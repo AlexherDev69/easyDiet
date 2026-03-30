@@ -7,6 +7,8 @@ class PlanConfigState extends Equatable {
   const PlanConfigState({
     this.isLoading = true,
     this.dietType = DietType.omnivore,
+    this.selectedAllergies = const {},
+    this.excludedMeats = const {},
     this.freeDays = const {},
     this.dietStartDate,
     this.enabledMealTypes = const {
@@ -25,6 +27,8 @@ class PlanConfigState extends Equatable {
 
   final bool isLoading;
   final DietType dietType;
+  final Set<Allergy> selectedAllergies;
+  final Set<ExcludedMeat> excludedMeats;
   final Set<int> freeDays;
   final DateTime? dietStartDate;
   final Set<MealType> enabledMealTypes;
@@ -39,6 +43,8 @@ class PlanConfigState extends Equatable {
   List<Object?> get props => [
         isLoading,
         dietType,
+        selectedAllergies,
+        excludedMeats,
         freeDays,
         dietStartDate,
         enabledMealTypes,
@@ -55,6 +61,8 @@ class PlanConfigState extends Equatable {
   PlanConfigState copyWith({
     bool? isLoading,
     DietType? dietType,
+    Set<Allergy>? selectedAllergies,
+    Set<ExcludedMeat>? excludedMeats,
     Set<int>? freeDays,
     DateTime? dietStartDate,
     Set<MealType>? enabledMealTypes,
@@ -69,6 +77,8 @@ class PlanConfigState extends Equatable {
     return PlanConfigState(
       isLoading: isLoading ?? this.isLoading,
       dietType: dietType ?? this.dietType,
+      selectedAllergies: selectedAllergies ?? this.selectedAllergies,
+      excludedMeats: excludedMeats ?? this.excludedMeats,
       freeDays: freeDays ?? this.freeDays,
       dietStartDate: dietStartDate ?? this.dietStartDate,
       enabledMealTypes: enabledMealTypes ?? this.enabledMealTypes,

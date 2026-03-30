@@ -50,7 +50,7 @@ class ShoppingPage extends StatelessWidget {
     final cubit = context.read<ShoppingCubit>();
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => ItemDetailDialog(
         itemName: state.selectedItemName ?? '',
         totalQuantity: state.selectedItemQuantity ?? '',
@@ -251,7 +251,7 @@ class _ShoppingScaffold extends StatelessWidget {
   void _showAddDialog(BuildContext context, ShoppingCubit cubit) {
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => AddItemDialog(
         onAdd: (name, qty, unit, section) {
           Navigator.pop(dialogContext);
@@ -281,7 +281,7 @@ class _TripTabs extends StatefulWidget {
 }
 
 class _TripTabsState extends State<_TripTabs>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override

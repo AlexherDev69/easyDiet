@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -123,7 +122,7 @@ class MealPlanPage extends StatelessWidget {
 
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => SwapMealDialog(
         alternatives: state.swapAlternatives,
         otherOccurrencesCount: state.swapOtherOccurrencesCount,
@@ -152,7 +151,7 @@ class MealPlanPage extends StatelessWidget {
   ) {
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => MoveMealDialog(
         movingMeal: state.movingMeal!,
         targetDays: state.moveTargetDays,
@@ -194,25 +193,6 @@ class _MealPlanContent extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w800),
           ),
           actions: [
-            // Copy JSON
-            IconButton(
-              onPressed: () async {
-                final json = await cubit.exportWeekPlanJson();
-                if (json.isNotEmpty && context.mounted) {
-                  await Clipboard.setData(ClipboardData(text: json));
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Plan semaine copie !'),
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
-                  }
-                }
-              },
-              icon: const Icon(Icons.content_copy),
-              tooltip: 'Copier le plan',
-            ),
             // Shift
             IconButton(
               onPressed: () => _showShiftDialog(context, cubit),
@@ -261,7 +241,7 @@ class _MealPlanContent extends StatelessWidget {
   void _showShiftDialog(BuildContext context, MealPlanCubit cubit) {
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
           'Decaler le programme ?',
@@ -291,7 +271,7 @@ class _MealPlanContent extends StatelessWidget {
   void _showRegenerateDialog(BuildContext context) {
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
           'Regenerer le plan ?',
@@ -345,7 +325,7 @@ class ScrollableTabBar extends StatefulWidget {
 }
 
 class _ScrollableTabBarState extends State<ScrollableTabBar>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late TabController _tabController;
 
   @override

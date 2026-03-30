@@ -155,11 +155,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     final nextStep = state.currentStep + 1;
     emit(state.copyWith(currentStep: nextStep));
 
-    // Save progress after each step so data survives app restart
-    _savePartialProfile();
-
     if (nextStep == 2) _calculateCalories();
-    if (nextStep == 5) _generateAndShowPlan();
+    if (nextStep == 5) {
+      // _generateAndShowPlan saves the profile itself - no need for double save
+      _generateAndShowPlan();
+    } else {
+      // Save progress after each step so data survives app restart
+      _savePartialProfile();
+    }
   }
 
   void previousStep() {
@@ -490,7 +493,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   Future<void> _generateAndShowPlan() async {
     emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
-
       final weight = double.tryParse(state.weightKg);
       final height = int.tryParse(state.heightCm);
       final age = int.tryParse(state.age);
@@ -553,6 +555,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       );
 
       await _userProfileRepository.saveProfile(profile);
+
+      // Delete any existing plan (e.g. user went back and changed settings)
+      await _mealPlanRepository.deleteWeekPlans();
 
       // Log initial weight
       await _weightLogRepository.insertLog(WeightLogsCompanion.insert(

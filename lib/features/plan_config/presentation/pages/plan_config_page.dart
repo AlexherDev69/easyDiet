@@ -89,6 +89,46 @@ class PlanConfigPage extends StatelessWidget {
 
                       const SizedBox(height: 20),
 
+                      // Allergies.
+                      const Text(
+                        'Allergies',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        children: Allergy.values.map((allergy) {
+                          return FilterChip(
+                            selected:
+                                state.selectedAllergies.contains(allergy),
+                            label: Text(allergy.displayName),
+                            onSelected: (_) => cubit.toggleAllergy(allergy),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Excluded meats.
+                      const Text(
+                        'Viandes exclues',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 4,
+                        children: ExcludedMeat.values.map((meat) {
+                          return FilterChip(
+                            selected: state.excludedMeats.contains(meat),
+                            label: Text(meat.displayName),
+                            onSelected: (_) =>
+                                cubit.toggleExcludedMeat(meat),
+                          );
+                        }).toList(),
+                      ),
+                      const SizedBox(height: 20),
+
                       // Free days.
                       const Text(
                         'Jours libres (sans regime)',

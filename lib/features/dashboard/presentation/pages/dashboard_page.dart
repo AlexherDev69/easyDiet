@@ -55,7 +55,7 @@ class _DashboardContent extends StatelessWidget {
   void _showShiftConfirmation(BuildContext context) {
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => AlertDialog(
         title: const Text('Decaler le programme ?'),
         content: const Text(

@@ -22,9 +22,16 @@ class UserProfileDao extends DatabaseAccessor<AppDatabase>
         .getSingleOrNull();
   }
 
-  /// Insert or update the profile.
-  Future<void> insertOrUpdate(UserProfilesCompanion profile) {
-    return into(userProfiles).insertOnConflictUpdate(profile);
+  /// Insert or update the profile (singleton id=1).
+  Future<void> insertOrUpdate(UserProfilesCompanion profile) async {
+    final existing = await getProfile();
+    final withId = profile.copyWith(id: const Value(1));
+    if (existing == null) {
+      await into(userProfiles).insert(withId);
+    } else {
+      await (update(userProfiles)..where((t) => t.id.equals(1)))
+          .write(withId);
+    }
   }
 
   /// Update weight and recalculated calories.

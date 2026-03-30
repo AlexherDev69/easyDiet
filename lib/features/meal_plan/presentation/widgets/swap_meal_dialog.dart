@@ -62,7 +62,7 @@ class SwapMealDialog extends StatelessWidget {
 
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
           'Remplacer partout ?',

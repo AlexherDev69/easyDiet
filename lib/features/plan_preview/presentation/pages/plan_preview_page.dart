@@ -110,7 +110,7 @@ class PlanPreviewPage extends StatelessWidget {
 
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => AlertDialog(
         title: const Text(
           'Deplacer le repas',
@@ -195,7 +195,7 @@ class PlanPreviewPage extends StatelessWidget {
 
     showDialog<void>(
       context: context,
-      useRootNavigator: false,
+      useRootNavigator: true,
       builder: (dialogContext) => _ReplaceRecipePreviewDialog(
         currentRecipeName: meal.recipe.name,
         candidates: sortedCandidates,
