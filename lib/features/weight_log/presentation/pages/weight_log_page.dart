@@ -17,14 +17,57 @@ class WeightLogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<WeightLogCubit, WeightLogState>(
       listenWhen: (prev, curr) =>
-          prev.outlierWarning != curr.outlierWarning &&
-          curr.outlierWarning != null,
+          (prev.outlierWarning != curr.outlierWarning &&
+              curr.outlierWarning != null) ||
+          (!prev.isAggressiveLoss && curr.isAggressiveLoss) ||
+          (!prev.showAddDialog && curr.showAddDialog) ||
+          (!prev.showDuplicateDialog && curr.showDuplicateDialog),
       listener: (context, state) {
         if (state.outlierWarning != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.outlierWarning!)),
           );
           context.read<WeightLogCubit>().dismissOutlierWarning();
+        }
+        if (state.isAggressiveLoss) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text(
+                'Perte de poids rapide detectee (> 1 kg/semaine). '
+                'Consultez un professionnel de sante.',
+              ),
+              duration: const Duration(seconds: 5),
+              backgroundColor: AppColors.accentRose,
+            ),
+          );
+        }
+        if (state.showAddDialog) {
+          showDialog<void>(
+            context: context,
+            builder: (dialogContext) => BlocProvider.value(
+              value: context.read<WeightLogCubit>(),
+              child: const _AddWeightDialogShell(),
+            ),
+          ).then((_) {
+            // Dialog was dismissed (barrier tap, back button, or programmatic pop).
+            // Sync cubit state only if it still thinks the dialog is open.
+            if (context.mounted) {
+              final cubit = context.read<WeightLogCubit>();
+              if (cubit.state.showAddDialog) {
+                cubit.hideAddDialog();
+              }
+            }
+          });
+        }
+        if (state.showDuplicateDialog) {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (dialogContext) => BlocProvider.value(
+              value: context.read<WeightLogCubit>(),
+              child: const _DuplicateDialogShell(),
+            ),
+          );
         }
       },
       builder: (context, state) {
@@ -60,143 +103,124 @@ class WeightLogPage extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: cubit.showAddDialog,
             backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onPrimary,
             shape: const CircleBorder(),
             child: const Icon(Icons.add, size: 28),
           ),
-          body: Stack(
-            children: [
-              SingleChildScrollView(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Stats row 1: Current weight + Total lost.
+                Row(
                   children: [
-                    // Stats row 1: Current weight + Total lost.
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _GradientStatCard(
-                            label: 'Poids actuel',
-                            value: currentWeight,
-                            suffix: ' kg',
-                            decimals: 1,
-                            gradientColors: const [
-                              AppColors.gradientPurpleStart,
-                              AppColors.gradientPurpleEnd,
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: _GradientStatCard(
-                            label: 'Total perdu',
-                            value: state.totalLost,
-                            suffix: ' kg',
-                            decimals: 1,
-                            gradientColors: const [
-                              AppColors.gradientGreenStart,
-                              AppColors.gradientGreenEnd,
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-
-                    // Stats row 2: Remaining + Avg per week.
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _GradientStatCard(
-                            label: 'Restant',
-                            value: remaining,
-                            suffix: ' kg',
-                            decimals: 1,
-                            gradientColors: const [
-                              AppColors.accentRose,
-                              AppColors.accentRoseLight,
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: _GradientStatCard(
-                            label: 'Moyenne / sem',
-                            value: state.avgLossPerWeek,
-                            suffix: ' kg',
-                            decimals: 2,
-                            gradientColors: [
-                              AppColors.accentAmber,
-                              AppColors.accentAmber.withValues(alpha: 0.7),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-
-                    // Projected goal date.
-                    if (state.projectedGoalDate != null)
-                      _ProjectedGoalCard(
-                        projectedDate: state.projectedGoalDate!,
-                        initialDate: state.initialProjectedDate,
-                      ),
-
-                    const SizedBox(height: 16),
-
-                    // Period filter.
-                    _PeriodFilterChips(
-                      selectedPeriod: state.selectedPeriod,
-                      onPeriodSelected: cubit.selectPeriod,
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // Chart.
-                    _ChartSection(
-                      allLogs: state.allLogs,
-                      selectedPeriod: state.selectedPeriod,
-                      targetWeight: state.targetWeight,
-                    ),
-
-                    const SizedBox(height: 16),
-
-                    // History.
-                    const Text(
-                      'Historique',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
+                    Expanded(
+                      child: _GradientStatCard(
+                        label: 'Poids actuel',
+                        value: currentWeight,
+                        suffix: ' kg',
+                        decimals: 1,
+                        gradientColors: const [
+                          AppColors.gradientPurpleStart,
+                          AppColors.gradientPurpleEnd,
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8),
-
-                    _HistoryList(
-                      logs: state.allLogs.reversed.take(10).toList(),
-                      onDelete: cubit.deleteLog,
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _GradientStatCard(
+                        label: 'Total perdu',
+                        value: state.totalLost,
+                        suffix: ' kg',
+                        decimals: 1,
+                        gradientColors: const [
+                          AppColors.gradientGreenStart,
+                          AppColors.gradientGreenEnd,
+                        ],
+                      ),
                     ),
-
-                    // Bottom padding for FAB.
-                    const SizedBox(height: 80),
                   ],
                 ),
-              ),
+                const SizedBox(height: 12),
 
-              // Dialogs.
-              if (state.showAddDialog)
-                _AddWeightDialog(
-                  weightInput: state.weightInput,
-                  selectedDate: state.selectedDate,
-                  onInputChanged: cubit.updateWeightInput,
-                  onDateChanged: cubit.updateSelectedDate,
-                  onConfirm: cubit.addWeightLog,
-                  onDismiss: cubit.hideAddDialog,
+                // Stats row 2: Remaining + Avg per week.
+                Row(
+                  children: [
+                    Expanded(
+                      child: _GradientStatCard(
+                        label: 'Restant',
+                        value: remaining,
+                        suffix: ' kg',
+                        decimals: 1,
+                        gradientColors: const [
+                          AppColors.accentRose,
+                          AppColors.accentRoseLight,
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _GradientStatCard(
+                        label: 'Moyenne / sem',
+                        value: state.avgLossPerWeek,
+                        suffix: ' kg',
+                        decimals: 2,
+                        gradientColors: [
+                          AppColors.accentAmber,
+                          AppColors.accentAmber.withValues(alpha: 0.7),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              if (state.showDuplicateDialog)
-                _DuplicateDialog(
-                  onConfirm: cubit.confirmReplaceDuplicate,
-                  onDismiss: cubit.dismissDuplicateDialog,
+                const SizedBox(height: 12),
+
+                // Projected goal date.
+                if (state.projectedGoalDate != null)
+                  _ProjectedGoalCard(
+                    projectedDate: state.projectedGoalDate!,
+                    initialDate: state.initialProjectedDate,
+                  ),
+
+                const SizedBox(height: 16),
+
+                // Period filter.
+                _PeriodFilterChips(
+                  selectedPeriod: state.selectedPeriod,
+                  onPeriodSelected: cubit.selectPeriod,
                 ),
-            ],
+
+                const SizedBox(height: 16),
+
+                // Chart.
+                _ChartSection(
+                  allLogs: state.allLogs,
+                  selectedPeriod: state.selectedPeriod,
+                  targetWeight: state.targetWeight,
+                ),
+
+                const SizedBox(height: 16),
+
+                // History.
+                const Text(
+                  'Historique',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 8),
+
+                _ExpandableHistoryList(
+                  allLogs: state.allLogs,
+                  onDelete: cubit.deleteLog,
+                ),
+
+                // Bottom padding for FAB.
+                const SizedBox(height: 80),
+              ],
+            ),
           ),
         );
       },
@@ -240,27 +264,33 @@ class _GradientStatCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Colors.white70,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            '${value.toStringAsFixed(decimals)}$suffix',
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w800,
-              color: Colors.white,
-            ),
-          ),
-        ],
+      child: Builder(
+        builder: (context) {
+          final theme = Theme.of(context);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                label,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  // Keep explicit white: these sit on gradient backgrounds.
+                  color: Colors.white70,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${value.toStringAsFixed(decimals)}$suffix',
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                  // Tabular figures prevent layout shifts on animated/live values.
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -298,40 +328,39 @@ class _ProjectedGoalCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Objectif atteint le',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context)
-                  .colorScheme
-                  .onSurface
-                  .withValues(alpha: 0.7),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            AppDateUtils.formatFrenchDate(projectedDate),
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-              color: AppColors.emeraldPrimary,
-            ),
-          ),
-          if (initialDate != null) ...[
-            const SizedBox(height: 2),
-            Text(
-              '(rythme initial : ${AppDateUtils.formatFrenchDate(initialDate!)})',
-              style: TextStyle(
-                fontSize: 12,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+      child: Builder(
+        builder: (context) {
+          final theme = Theme.of(context);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Objectif atteint le',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                ),
               ),
-            ),
-          ],
-        ],
+              const SizedBox(height: 4),
+              Text(
+                AppDateUtils.formatFrenchDate(projectedDate),
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  color: AppColors.emeraldPrimary,
+                ),
+              ),
+              if (initialDate != null) ...[
+                const SizedBox(height: 2),
+                Text(
+                  '(rythme initial : ${AppDateUtils.formatFrenchDate(initialDate!)})',
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ],
+          );
+        },
       ),
     );
   }
@@ -414,6 +443,56 @@ class _ChartSection extends StatelessWidget {
 }
 
 // ── History list ────────────────────────────────────────────────────
+
+class _ExpandableHistoryList extends StatefulWidget {
+  const _ExpandableHistoryList({
+    required this.allLogs,
+    required this.onDelete,
+  });
+
+  final List<WeightLog> allLogs;
+  final ValueChanged<WeightLog> onDelete;
+
+  @override
+  State<_ExpandableHistoryList> createState() => _ExpandableHistoryListState();
+}
+
+class _ExpandableHistoryListState extends State<_ExpandableHistoryList> {
+  static const _previewCount = 10;
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final reversed = widget.allLogs.reversed.toList();
+    final displayLogs =
+        _expanded ? reversed : reversed.take(_previewCount).toList();
+    final hasMore = reversed.length > _previewCount;
+
+    return Column(
+      children: [
+        _HistoryList(logs: displayLogs, onDelete: widget.onDelete),
+        if (hasMore && !_expanded)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: TextButton(
+              onPressed: () => setState(() => _expanded = true),
+              child: Text(
+                'Voir tout (${reversed.length} entrees)',
+              ),
+            ),
+          ),
+        if (_expanded && hasMore)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: TextButton(
+              onPressed: () => setState(() => _expanded = false),
+              child: const Text('Reduire'),
+            ),
+          ),
+      ],
+    );
+  }
+}
 
 class _HistoryList extends StatelessWidget {
   const _HistoryList({
@@ -506,113 +585,125 @@ class _HistoryList extends StatelessWidget {
   }
 }
 
-// ── Add weight dialog ───────────────────────────────────────────────
+// ── Add weight dialog shell ─────────────────────────────────────────
 
-class _AddWeightDialog extends StatelessWidget {
-  const _AddWeightDialog({
-    required this.weightInput,
-    required this.selectedDate,
-    required this.onInputChanged,
-    required this.onDateChanged,
-    required this.onConfirm,
-    required this.onDismiss,
-  });
-
-  final String weightInput;
-  final DateTime selectedDate;
-  final ValueChanged<String> onInputChanged;
-  final ValueChanged<DateTime> onDateChanged;
-  final VoidCallback onConfirm;
-  final VoidCallback onDismiss;
+class _AddWeightDialogShell extends StatelessWidget {
+  const _AddWeightDialogShell();
 
   @override
   Widget build(BuildContext context) {
-    final isValid = double.tryParse(weightInput) != null;
-    return AlertDialog(
-      title: const Text(
-        'Ajouter une pesee',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Date picker row.
-          InkWell(
-            onTap: () async {
-              final picked = await showDatePicker(
-                context: context,
-                initialDate: selectedDate,
-                firstDate: DateTime(2020),
-                lastDate: DateTime.now(),
-              );
-              if (picked != null) onDateChanged(picked);
-            },
-            borderRadius: BorderRadius.circular(12),
-            child: InputDecorator(
-              decoration: const InputDecoration(
-                labelText: 'Date',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.calendar_today, size: 20),
-              ),
-              child: Text(
-                AppDateUtils.formatFrenchDate(selectedDate),
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
+    return BlocConsumer<WeightLogCubit, WeightLogState>(
+      listenWhen: (prev, curr) => prev.showAddDialog && !curr.showAddDialog,
+      listener: (context, state) {
+        // Only pop if this dialog route is still on top
+        final route = ModalRoute.of(context);
+        if (route != null && route.isCurrent) {
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<WeightLogCubit>();
+        final isValid = double.tryParse(state.weightInput) != null;
+        return AlertDialog(
+          title: const Text(
+            'Ajouter une pesee',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 12),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Date picker row.
+              InkWell(
+                onTap: () async {
+                  final picked = await showDatePicker(
+                    context: context,
+                    initialDate: state.selectedDate,
+                    firstDate: DateTime(2020),
+                    lastDate: DateTime.now(),
+                  );
+                  if (picked != null) cubit.updateSelectedDate(picked);
+                },
+                borderRadius: BorderRadius.circular(12),
+                child: InputDecorator(
+                  decoration: const InputDecoration(
+                    labelText: 'Date',
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.calendar_today, size: 20),
+                  ),
+                  child: Text(
+                    AppDateUtils.formatFrenchDate(state.selectedDate),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
 
-          // Weight input.
-          TextField(
-            autofocus: true,
-            keyboardType:
-                const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [DecimalInputFormatter()],
-            decoration: const InputDecoration(
-              labelText: 'Poids (kg)',
-              border: OutlineInputBorder(),
-            ),
-            onChanged: onInputChanged,
+              // Weight input.
+              TextField(
+                autofocus: true,
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [DecimalInputFormatter()],
+                decoration: const InputDecoration(
+                  labelText: 'Poids (kg)',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: cubit.updateWeightInput,
+              ),
+            ],
           ),
-        ],
-      ),
-      actions: [
-        TextButton(onPressed: onDismiss, child: const Text('Annuler')),
-        TextButton(
-          onPressed: isValid ? onConfirm : null,
-          child: const Text('Ajouter'),
-        ),
-      ],
+          actions: [
+            TextButton(onPressed: cubit.hideAddDialog, child: const Text('Annuler')),
+            TextButton(
+              onPressed: isValid ? cubit.addWeightLog : null,
+              child: const Text('Ajouter'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
 
-// ── Duplicate dialog ────────────────────────────────────────────────
+// ── Duplicate dialog shell ──────────────────────────────────────────
 
-class _DuplicateDialog extends StatelessWidget {
-  const _DuplicateDialog({
-    required this.onConfirm,
-    required this.onDismiss,
-  });
-
-  final VoidCallback onConfirm;
-  final VoidCallback onDismiss;
+class _DuplicateDialogShell extends StatelessWidget {
+  const _DuplicateDialogShell();
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text(
-        'Doublon detecte',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      content: const Text(
-        "Une entree existe deja pour aujourd'hui. "
-        'Voulez-vous la remplacer ?',
-      ),
-      actions: [
-        TextButton(onPressed: onDismiss, child: const Text('Annuler')),
-        TextButton(onPressed: onConfirm, child: const Text('Remplacer')),
-      ],
+    return BlocConsumer<WeightLogCubit, WeightLogState>(
+      listenWhen: (prev, curr) =>
+          prev.showDuplicateDialog && !curr.showDuplicateDialog,
+      listener: (context, state) {
+        final route = ModalRoute.of(context);
+        if (route != null && route.isCurrent) {
+          Navigator.pop(context);
+        }
+      },
+      builder: (context, state) {
+        final cubit = context.read<WeightLogCubit>();
+        return AlertDialog(
+          title: const Text(
+            'Doublon detecte',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: const Text(
+            "Une entree existe deja pour aujourd'hui. "
+            'Voulez-vous la remplacer ?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: cubit.dismissDuplicateDialog,
+              child: const Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: cubit.confirmReplaceDuplicate,
+              child: const Text('Remplacer'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

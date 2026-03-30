@@ -11,4 +11,14 @@ class AppConstants {
   static const int maxWaterMlMale = 3300;
   static const int minWaterMlFemale = 2000;
   static const int maxWaterMlFemale = 2800;
+
+  // Calorie share per meal slot (must sum to 1.0)
+  static const double calorieShareBreakfast = 0.25;
+  static const double calorieShareLunch = 0.35;
+  static const double calorieShareDinner = 0.30;
+  static const double calorieShareSnack = 0.10;
+
+  // Servings limits
+  static const double maxServingsMeal = 3.0;
+  static const double maxServingsSnack = 2.0;
 }

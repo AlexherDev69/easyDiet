@@ -85,6 +85,7 @@ class _BatchCookingModeContent extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => context.pop(),
+          tooltip: 'Fermer',
         ),
       ),
       body: Column(
@@ -224,7 +225,7 @@ class _TimerChip extends StatelessWidget {
                 Text(
                   timer.recipeName,
                   style: TextStyle(
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: bgColor,
                   ),
@@ -246,9 +247,13 @@ class _TimerChip extends StatelessWidget {
             ),
             if (isFinished) ...[
               const SizedBox(width: 6),
-              GestureDetector(
-                onTap: onDismiss,
-                child: Icon(Icons.close, size: 14, color: bgColor),
+              IconButton(
+                onPressed: onDismiss,
+                icon: Icon(Icons.close, size: 14, color: bgColor),
+                iconSize: 14,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                tooltip: 'Ignorer le minuteur',
               ),
             ],
           ],

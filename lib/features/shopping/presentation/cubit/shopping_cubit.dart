@@ -190,8 +190,14 @@ class ShoppingCubit extends Cubit<ShoppingState> {
             tripDaySummaries: tripSummaries,
           ));
         }
+      }, onError: (Object e) {
+        debugPrint('Error in watchItemsForWeek: $e');
+        emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
       });
       } // end if (_currentWeekPlanId != weekPlan.weekPlan.id)
+    }, onError: (Object e) {
+      debugPrint('Error in watchCurrentWeekPlan: $e');
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     });
     } catch (e) {
       debugPrint('Error in _loadShoppingList: $e');

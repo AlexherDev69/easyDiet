@@ -10,6 +10,7 @@ import '../../../../data/local/database.dart';
 const double _chartHeight = 250.0;
 
 /// Custom line chart for weight log — port of WeightLineChart Canvas.
+/// Animates with a left-to-right draw-in on first render and on period change.
 class WeightLineChart extends StatefulWidget {
   const WeightLineChart({
     super.key,
@@ -29,25 +30,46 @@ class _WeightLineChartState extends State<WeightLineChart> {
 
   @override
   Widget build(BuildContext context) {
-    final labelColor = Theme.of(context).colorScheme.onSurfaceVariant;
+    final colorScheme = Theme.of(context).colorScheme;
+    final labelColor = colorScheme.onSurfaceVariant;
+    // Use Material inverseSurface for the tooltip bubble so it adapts to
+    // both light and dark mode without a hardcoded hex color.
+    final tooltipBgColor = colorScheme.inverseSurface;
+    final tooltipTextColor = colorScheme.onInverseSurface;
 
-    return GestureDetector(
-      onTapDown: (details) => _handleTap(details.localPosition),
-      child: CustomPaint(
-        size: const Size(double.infinity, _chartHeight),
-        painter: _WeightLineChartPainter(
-          logs: widget.logs,
-          targetWeight: widget.targetWeight,
-          selectedIndex: _selectedIndex,
-          lineColor: AppColors.accentPurple,
-          fillColorStart:
-              AppColors.accentPurpleLight.withValues(alpha: 0.4),
-          fillColorEnd:
-              AppColors.accentPurpleLight.withValues(alpha: 0.0),
-          targetColor: AppColors.accentRose,
-          labelColor: labelColor,
-        ),
-      ),
+    // ValueKey(logs.length) re-triggers the 800ms draw-in whenever the log
+    // list changes length (new entry added or period filter changed).
+    return TweenAnimationBuilder<double>(
+      key: ValueKey(widget.logs.length),
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeOutCubic,
+      builder: (context, drawProgress, _) {
+        return Semantics(
+          label: 'Graphique de poids',
+          child: GestureDetector(
+            onTapDown: (details) => _handleTap(details.localPosition),
+            child: CustomPaint(
+              size: const Size(double.infinity, _chartHeight),
+              painter: _WeightLineChartPainter(
+                logs: widget.logs,
+                targetWeight: widget.targetWeight,
+                selectedIndex: _selectedIndex,
+                lineColor: AppColors.accentPurple,
+                fillColorStart:
+                    AppColors.accentPurpleLight.withValues(alpha: 0.4),
+                fillColorEnd:
+                    AppColors.accentPurpleLight.withValues(alpha: 0.0),
+                targetColor: AppColors.accentRose,
+                labelColor: labelColor,
+                tooltipBgColor: tooltipBgColor,
+                tooltipTextColor: tooltipTextColor,
+                drawProgress: drawProgress,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -97,6 +119,9 @@ class _WeightLineChartPainter extends CustomPainter {
     required this.fillColorEnd,
     required this.targetColor,
     required this.labelColor,
+    required this.tooltipBgColor,
+    required this.tooltipTextColor,
+    required this.drawProgress,
   });
 
   final List<WeightLog> logs;
@@ -107,6 +132,18 @@ class _WeightLineChartPainter extends CustomPainter {
   final Color fillColorEnd;
   final Color targetColor;
   final Color labelColor;
+
+  /// Background color for the tap tooltip bubble. Passed from the widget
+  /// so the painter stays theme-agnostic (CustomPainters have no BuildContext).
+  final Color tooltipBgColor;
+
+  /// Text color inside the tooltip bubble.
+  final Color tooltipTextColor;
+
+  /// 0.0 to 1.0 left-to-right draw-in progress driven by TweenAnimationBuilder.
+  /// Points beyond the current frontier are withheld, creating a smooth
+  /// "chart drawing itself" reveal animation on screen entry.
+  final double drawProgress;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -139,8 +176,13 @@ class _WeightLineChartPainter extends CustomPainter {
       final linePath = Path();
       final fillPath = Path();
 
+      // The x-coordinate frontier up to which the chart is currently drawn.
+      final maxDrawX = paddingLeft + chartWidth * drawProgress;
+
       for (var i = 0; i < logs.length; i++) {
-        final x = paddingLeft + i * stepX;
+        final rawX = paddingLeft + i * stepX;
+        // Clamp drawn x to the current frontier.
+        final x = rawX.clamp(0.0, maxDrawX);
         final y =
             chartHeight - ((logs[i].weightKg - minWeight) / range) * chartHeight;
 
@@ -152,18 +194,19 @@ class _WeightLineChartPainter extends CustomPainter {
           fillPath.lineTo(x, y);
         }
 
-        // Data point dots.
-        final isSelected = i == selectedIndex;
-        canvas.drawCircle(
-          Offset(x, y),
-          isSelected ? 6.0 : 4.0,
-          Paint()..color = lineColor,
-        );
+        // Only draw dots for points whose natural x has been revealed.
+        if (rawX <= maxDrawX) {
+          final isSelected = i == selectedIndex;
+          canvas.drawCircle(
+            Offset(rawX, y),
+            isSelected ? 6.0 : 4.0,
+            Paint()..color = lineColor,
+          );
+        }
       }
 
-      // Close fill path.
-      final lastX = paddingLeft + (logs.length - 1) * stepX;
-      fillPath.lineTo(lastX, chartHeight);
+      // Close fill path at the current draw frontier.
+      fillPath.lineTo(maxDrawX, chartHeight);
       fillPath.lineTo(paddingLeft, chartHeight);
       fillPath.close();
 
@@ -172,7 +215,7 @@ class _WeightLineChartPainter extends CustomPainter {
         fillPath,
         Paint()
           ..shader = ui.Gradient.linear(
-            Offset(0, 0),
+            Offset.zero,
             Offset(0, chartHeight),
             [fillColorStart, fillColorEnd],
           ),
@@ -189,8 +232,10 @@ class _WeightLineChartPainter extends CustomPainter {
           ..strokeJoin = StrokeJoin.round,
       );
 
-      // Selected point tooltip.
-      if (selectedIndex != null &&
+      // Selected point tooltip — only shown once the draw-in is complete so
+      // it never appears before its data point has been rendered.
+      if (drawProgress >= 1.0 &&
+          selectedIndex != null &&
           selectedIndex! >= 0 &&
           selectedIndex! < logs.length) {
         final i = selectedIndex!;
@@ -229,10 +274,10 @@ class _WeightLineChartPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         text: label,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: tooltipTextColor,
         ),
       ),
       textAlign: TextAlign.center,
@@ -246,8 +291,12 @@ class _WeightLineChartPainter extends CustomPainter {
 
     // Position above the point, clamped to chart bounds.
     var left = point.dx - boxWidth / 2;
-    left = left.clamp(0.0, maxWidth - boxWidth);
-    final top = point.dy - boxHeight - arrowHeight - 4;
+    left = left.clamp(4.0, maxWidth - boxWidth - 4);
+    // If tooltip would go above canvas, show it below the point instead.
+    var top = point.dy - boxHeight - arrowHeight - 4;
+    if (top < 0) {
+      top = point.dy + arrowHeight + 4;
+    }
 
     final rect = RRect.fromRectAndRadius(
       Rect.fromLTWH(left, top, boxWidth, boxHeight),
@@ -256,7 +305,7 @@ class _WeightLineChartPainter extends CustomPainter {
 
     canvas.drawRRect(
       rect,
-      Paint()..color = labelColor.withValues(alpha: 0.85),
+      Paint()..color = tooltipBgColor,
     );
 
     textPainter.paint(
@@ -293,6 +342,9 @@ class _WeightLineChartPainter extends CustomPainter {
   bool shouldRepaint(covariant _WeightLineChartPainter oldDelegate) {
     return oldDelegate.logs != logs ||
         oldDelegate.targetWeight != targetWeight ||
-        oldDelegate.selectedIndex != selectedIndex;
+        oldDelegate.selectedIndex != selectedIndex ||
+        oldDelegate.drawProgress != drawProgress ||
+        oldDelegate.tooltipBgColor != tooltipBgColor ||
+        oldDelegate.tooltipTextColor != tooltipTextColor;
   }
 }

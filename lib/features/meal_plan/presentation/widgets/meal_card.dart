@@ -163,53 +163,46 @@ class MealCard extends StatelessWidget {
                                   color: _mealTypeColor,
                                 ),
                               ),
-                              const SizedBox(width: 12),
-                              Flexible(
-                                child: Text(
-                                  'P:${(recipe.proteinGrams * servings).round()}g '
-                                  'C:${(recipe.carbsGrams * servings).round()}g '
-                                  'L:${(recipe.fatGrams * servings).round()}g',
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: theme.colorScheme.onSurfaceVariant,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                              const SizedBox(width: 8),
+                              _MacroDot(
+                                color: AppColors.macroProtein,
+                                value: (recipe.proteinGrams * servings).round(),
+                              ),
+                              const SizedBox(width: 6),
+                              _MacroDot(
+                                color: AppColors.macroCarbs,
+                                value: (recipe.carbsGrams * servings).round(),
+                              ),
+                              const SizedBox(width: 6),
+                              _MacroDot(
+                                color: AppColors.macroFat,
+                                value: (recipe.fatGrams * servings).round(),
                               ),
                             ],
                           ),
                         ),
                         IconButton(
                           onPressed: onMove,
+                          tooltip: 'Deplacer',
                           icon: Icon(
                             Icons.swap_vert,
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
                           iconSize: 20,
-                          constraints: const BoxConstraints(
-                            maxWidth: 36,
-                            maxHeight: 36,
-                          ),
-                          padding: EdgeInsets.zero,
                         ),
                         IconButton(
                           onPressed: onSwap,
+                          tooltip: 'Remplacer',
                           icon: Icon(
                             Icons.swap_horiz,
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
                           iconSize: 20,
-                          constraints: const BoxConstraints(
-                            maxWidth: 36,
-                            maxHeight: 36,
-                          ),
-                          padding: EdgeInsets.zero,
                         ),
                         Checkbox(
                           value: isConsumed,
                           onChanged: (_) => onToggleConsumed(),
                           activeColor: AppColors.emeraldPrimary,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
                         ),
                       ],
                     ),
@@ -220,6 +213,34 @@ class MealCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MacroDot extends StatelessWidget {
+  const _MacroDot({required this.color, required this.value});
+
+  final Color color;
+  final int value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 6,
+          height: 6,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
+        const SizedBox(width: 3),
+        Text(
+          '${value}g',
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+        ),
+      ],
     );
   }
 }

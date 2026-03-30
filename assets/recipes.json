@@ -619,7 +619,8 @@
       "isBatchFriendly": true,
       "difficulty": "EASY",
       "allergens": [
-        "BIRCH_POLLEN"
+        "BIRCH_POLLEN",
+        "SESAME"
       ],
       "steps": [
         {
@@ -722,7 +723,8 @@
       "allergens": [
         "GLUTEN",
         "LACTOSE",
-        "BIRCH_POLLEN"
+        "BIRCH_POLLEN",
+        "MUSTARD"
       ],
       "steps": [
         {
@@ -1389,7 +1391,9 @@
       "cookTimeMinutes": 12,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "FISH"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -1474,7 +1478,8 @@
       "isBatchFriendly": true,
       "difficulty": "EASY",
       "allergens": [
-        "SOY"
+        "SOY",
+        "SESAME"
       ],
       "steps": [
         {
@@ -1745,6 +1750,12 @@
           "quantity": 1,
           "unit": "c. a soupe",
           "section": "PANTRY"
+        },
+        {
+          "name": "piment en poudre",
+          "quantity": 0.5,
+          "unit": "cac",
+          "section": "SPICES"
         }
       ],
       "dietType": "OMNIVORE",
@@ -1843,7 +1854,7 @@
           "section": "PANTRY"
         }
       ],
-      "dietType": "VEGETARIAN",
+      "dietType": "VEGAN",
       "meatTypes": []
     },
     {
@@ -2055,7 +2066,8 @@
       "difficulty": "EASY",
       "allergens": [
         "GLUTEN",
-        "TREE_NUTS"
+        "TREE_NUTS",
+        "PEANUTS"
       ],
       "steps": [
         {
@@ -2133,7 +2145,8 @@
       "isBatchFriendly": true,
       "difficulty": "EASY",
       "allergens": [
-        "BIRCH_POLLEN"
+        "BIRCH_POLLEN",
+        "SESAME"
       ],
       "steps": [
         {
@@ -2431,7 +2444,8 @@
       "isBatchFriendly": false,
       "difficulty": "EASY",
       "allergens": [
-        "EGGS"
+        "EGGS",
+        "FISH"
       ],
       "steps": [
         {
@@ -2630,7 +2644,8 @@
       "difficulty": "EASY",
       "allergens": [
         "GLUTEN",
-        "LACTOSE"
+        "LACTOSE",
+        "MUSTARD"
       ],
       "steps": [
         {
@@ -3003,12 +3018,14 @@
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
       "allergens": [
-        "SOY"
+        "SOY",
+        "FISH",
+        "SESAME"
       ],
       "steps": [
         {
           "stepNumber": 1,
-          "instruction": "Couper le saumon frais en petits des reguliers.",
+          "instruction": "Utiliser du saumon prealablement congele a -20 degres pendant 24h minimum. Couper le saumon frais en petits des reguliers.",
           "timerSeconds": null
         },
         {
@@ -3092,15 +3109,17 @@
       "servings": 2,
       "prepTimeMinutes": 20,
       "cookTimeMinutes": 15,
-      "isBatchFriendly": true,
+      "isBatchFriendly": false,
       "difficulty": "MEDIUM",
       "allergens": [
-        "SOY"
+        "SOY",
+        "FISH",
+        "SESAME"
       ],
       "steps": [
         {
           "stepNumber": 1,
-          "instruction": "Cuire le riz a sushi et l'assaisonner avec le vinaigre de riz une fois cuit.",
+          "instruction": "Utiliser du thon prealablement congele a -20 degres pendant 24h minimum. Cuire le riz a sushi et l'assaisonner avec le vinaigre de riz une fois cuit.",
           "timerSeconds": 900
         },
         {
@@ -3420,7 +3439,9 @@
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
       "allergens": [
-        "GLUTEN"
+        "GLUTEN",
+        "FISH",
+        "MUSTARD"
       ],
       "steps": [
         {
@@ -3610,7 +3631,7 @@
       "fatGrams": 15,
       "servings": 4,
       "prepTimeMinutes": 15,
-      "cookTimeMinutes": 50,
+      "cookTimeMinutes": 65,
       "isBatchFriendly": true,
       "difficulty": "EASY",
       "allergens": [
@@ -3805,7 +3826,7 @@
         },
         {
           "stepNumber": 4,
-          "instruction": "Deglacerr avec le vin blanc, puis ajouter la creme legere. Laisser reduire.",
+          "instruction": "Deglacer avec le vin blanc, puis ajouter la creme legere. Laisser reduire.",
           "timerSeconds": 180
         },
         {
@@ -3980,7 +4001,8 @@
       "difficulty": "EASY",
       "allergens": [
         "GLUTEN",
-        "TREE_NUTS"
+        "TREE_NUTS",
+        "PEANUTS"
       ],
       "steps": [
         {
@@ -4353,7 +4375,7 @@
           "section": "PANTRY"
         }
       ],
-      "dietType": "OMNIVORE",
+      "dietType": "VEGETARIAN",
       "meatTypes": []
     },
     {
@@ -4638,7 +4660,8 @@
       "isBatchFriendly": false,
       "difficulty": "EASY",
       "allergens": [
-        "SOY"
+        "SOY",
+        "SESAME"
       ],
       "steps": [
         {
@@ -4922,12 +4945,14 @@
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
       "allergens": [
-        "SOY"
+        "SOY",
+        "FISH",
+        "SESAME"
       ],
       "steps": [
         {
           "stepNumber": 1,
-          "instruction": "Cuire le riz selon les instructions du paquet et laisser refroidir legerement.",
+          "instruction": "Utiliser du thon prealablement congele a -20 degres pendant 24h minimum. Cuire le riz selon les instructions du paquet et laisser refroidir legerement.",
           "timerSeconds": 900
         },
         {
@@ -5417,7 +5442,9 @@
       "cookTimeMinutes": 20,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "FISH"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -5607,7 +5634,9 @@
       "cookTimeMinutes": 25,
       "isBatchFriendly": true,
       "difficulty": "MEDIUM",
-      "allergens": [],
+      "allergens": [
+        "EGGS"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -5677,6 +5706,12 @@
           "quantity": 1,
           "unit": "c. a cafe",
           "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
         }
       ],
       "dietType": "OMNIVORE",
@@ -5787,7 +5822,8 @@
       "difficulty": "EASY",
       "allergens": [
         "SHELLFISH",
-        "SOY"
+        "SOY",
+        "SESAME"
       ],
       "steps": [
         {
@@ -6360,7 +6396,8 @@
       "isBatchFriendly": false,
       "difficulty": "EASY",
       "allergens": [
-        "TREE_NUTS"
+        "TREE_NUTS",
+        "PEANUTS"
       ],
       "steps": [
         {
@@ -6489,7 +6526,8 @@
       "difficulty": "EASY",
       "allergens": [
         "TREE_NUTS",
-        "GLUTEN"
+        "GLUTEN",
+        "PEANUTS"
       ],
       "steps": [
         {
@@ -6716,7 +6754,8 @@
       "difficulty": "EASY",
       "dietType": "OMNIVORE",
       "allergens": [
-        "LACTOSE"
+        "LACTOSE",
+        "MUSTARD"
       ],
       "meatTypes": [
         "PORK"
@@ -7118,7 +7157,8 @@
       "isBatchFriendly": true,
       "difficulty": "EASY",
       "allergens": [
-        "SOY"
+        "SOY",
+        "SESAME"
       ],
       "steps": [
         {
@@ -7736,7 +7776,9 @@
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
       "allergens": [
-        "SOY"
+        "SOY",
+        "FISH",
+        "SESAME"
       ],
       "steps": [
         {
@@ -7994,7 +8036,9 @@
       "cookTimeMinutes": 12,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "FISH"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -8084,7 +8128,10 @@
       "cookTimeMinutes": 15,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": [],
+      "allergens": [
+        "FISH",
+        "MUSTARD"
+      ],
       "steps": [
         {
           "stepNumber": 1,
@@ -8181,7 +8228,8 @@
       "difficulty": "MEDIUM",
       "allergens": [
         "LACTOSE",
-        "GLUTEN"
+        "GLUTEN",
+        "FISH"
       ],
       "steps": [
         {
@@ -8364,30 +8412,115 @@
       "cookTimeMinutes": 15,
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
-      "allergens": ["GLUTEN", "SOY"],
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "SESAME"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Cuire les nouilles de ble selon les instructions du paquet, egoutter et reserver.", "timerSeconds": 300},
-        {"stepNumber": 2, "instruction": "Preparer la sauce : melanger la pate de gochujang, la sauce soja, le vinaigre de riz, le miel et l'ail emince.", "timerSeconds": null},
-        {"stepNumber": 3, "instruction": "Faire griller le blanc de poulet coupe en lamelles dans une poele antiadhesive a feu vif.", "timerSeconds": 360},
-        {"stepNumber": 4, "instruction": "Ajouter le brocoli et le poivron, faire sauter 3 minutes.", "timerSeconds": 180},
-        {"stepNumber": 5, "instruction": "Incorporer les nouilles et la sauce, melanger vivement pendant 2 minutes.", "timerSeconds": 120},
-        {"stepNumber": 6, "instruction": "Servir garni de graines de sesame et d'oignon vert emince.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire les nouilles de ble selon les instructions du paquet, egoutter et reserver.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce : melanger la pate de gochujang, la sauce soja, le vinaigre de riz, le miel et l'ail emince.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire griller le blanc de poulet coupe en lamelles dans une poele antiadhesive a feu vif.",
+          "timerSeconds": 360
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter le brocoli et le poivron, faire sauter 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Incorporer les nouilles et la sauce, melanger vivement pendant 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir garni de graines de sesame et d'oignon vert emince.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "nouilles de ble (type ramen)", "quantity": 80, "unit": "g", "section": "PANTRY"},
-        {"name": "blanc de poulet", "quantity": 150, "unit": "g", "section": "MEAT"},
-        {"name": "brocoli (fleurettes)", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "poivron rouge", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "pate de gochujang", "quantity": 15, "unit": "g", "section": "SPICES"},
-        {"name": "sauce soja allege", "quantity": 15, "unit": "ml", "section": "SPICES"},
-        {"name": "vinaigre de riz", "quantity": 5, "unit": "ml", "section": "SPICES"},
-        {"name": "miel", "quantity": 5, "unit": "g", "section": "PANTRY"},
-        {"name": "ail", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "graines de sesame", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "oignon vert", "quantity": 10, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "nouilles de ble (type ramen)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "blanc de poulet",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "brocoli (fleurettes)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de gochujang",
+          "quantity": 15,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "vinaigre de riz",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "miel",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "ail",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["POULTRY"]
+      "meatTypes": [
+        "POULTRY"
+      ]
     },
     {
       "name": "Ramen proteines au poulet et miso",
@@ -8402,29 +8535,109 @@
       "cookTimeMinutes": 20,
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
-      "allergens": ["GLUTEN", "SOY", "EGGS"],
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "EGGS"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Faire chauffer le bouillon de poulet dans une casserole, ajouter la pate miso et bien melanger.", "timerSeconds": null},
-        {"stepNumber": 2, "instruction": "Cuire les nouilles ramen dans une eau bouillante separee, egoutter.", "timerSeconds": 240},
-        {"stepNumber": 3, "instruction": "Faire griller le blanc de poulet emince dans une poele avec un filet d'huile de sesame.", "timerSeconds": 420},
-        {"stepNumber": 4, "instruction": "Cuire l'oeuf mollet : plonger dans l'eau bouillante puis refroidir immediatement.", "timerSeconds": 390},
-        {"stepNumber": 5, "instruction": "Blanchir le pak choi dans le bouillon pendant 2 minutes.", "timerSeconds": 120},
-        {"stepNumber": 6, "instruction": "Assembler le bol : deposer les nouilles, verser le bouillon, disposer le poulet, l'oeuf coupe en deux, le pak choi, le mais et l'oignon vert.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Faire chauffer le bouillon de poulet dans une casserole, ajouter la pate miso et bien melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire les nouilles ramen dans une eau bouillante separee, egoutter.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire griller le blanc de poulet emince dans une poele avec un filet d'huile de sesame.",
+          "timerSeconds": 420
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Cuire l'oeuf mollet : plonger dans l'eau bouillante puis refroidir immediatement.",
+          "timerSeconds": 390
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Blanchir le pak choi dans le bouillon pendant 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Assembler le bol : deposer les nouilles, verser le bouillon, disposer le poulet, l'oeuf coupe en deux, le pak choi, le mais et l'oignon vert.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "nouilles ramen", "quantity": 80, "unit": "g", "section": "PANTRY"},
-        {"name": "blanc de poulet", "quantity": 130, "unit": "g", "section": "MEAT"},
-        {"name": "bouillon de poulet", "quantity": 400, "unit": "ml", "section": "PANTRY"},
-        {"name": "pate de miso blanc", "quantity": 15, "unit": "g", "section": "SPICES"},
-        {"name": "oeuf", "quantity": 1, "unit": "piece", "section": "DAIRY"},
-        {"name": "pak choi", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "mais en conserve", "quantity": 30, "unit": "g", "section": "PANTRY"},
-        {"name": "oignon vert", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "huile de sesame", "quantity": 5, "unit": "ml", "section": "SPICES"},
-        {"name": "sauce soja", "quantity": 10, "unit": "ml", "section": "SPICES"}
+        {
+          "name": "nouilles ramen",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "blanc de poulet",
+          "quantity": 130,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "bouillon de poulet",
+          "quantity": 400,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "pate de miso blanc",
+          "quantity": 15,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "piece",
+          "section": "DAIRY"
+        },
+        {
+          "name": "pak choi",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "mais en conserve",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["POULTRY"]
+      "meatTypes": [
+        "POULTRY"
+      ]
     },
     {
       "name": "Soba sautees aux crevettes et legumes",
@@ -8439,28 +8652,105 @@
       "cookTimeMinutes": 12,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["GLUTEN", "SHELLFISH", "SOY"],
+      "allergens": [
+        "GLUTEN",
+        "SHELLFISH",
+        "SOY",
+        "SESAME"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Cuire les nouilles soba selon les instructions du paquet, rincer a l'eau froide et egoutter.", "timerSeconds": 300},
-        {"stepNumber": 2, "instruction": "Preparer la sauce : melanger la sauce soja, l'huile de sesame, le jus de citron vert et le gingembre rape.", "timerSeconds": null},
-        {"stepNumber": 3, "instruction": "Faire sauter les crevettes dans une poele chaude pendant 2 minutes de chaque cote.", "timerSeconds": 240},
-        {"stepNumber": 4, "instruction": "Ajouter les courgettes, les carottes et les edamames, cuire 3 minutes.", "timerSeconds": 180},
-        {"stepNumber": 5, "instruction": "Incorporer les nouilles soba et la sauce, melanger et servir avec les graines de sesame.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire les nouilles soba selon les instructions du paquet, rincer a l'eau froide et egoutter.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce : melanger la sauce soja, l'huile de sesame, le jus de citron vert et le gingembre rape.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire sauter les crevettes dans une poele chaude pendant 2 minutes de chaque cote.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les courgettes, les carottes et les edamames, cuire 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Incorporer les nouilles soba et la sauce, melanger et servir avec les graines de sesame.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "nouilles soba", "quantity": 80, "unit": "g", "section": "PANTRY"},
-        {"name": "crevettes decortiquees", "quantity": 120, "unit": "g", "section": "MEAT"},
-        {"name": "edamames", "quantity": 50, "unit": "g", "section": "FROZEN"},
-        {"name": "courgette", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "carotte", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "sauce soja allege", "quantity": 15, "unit": "ml", "section": "SPICES"},
-        {"name": "huile de sesame", "quantity": 5, "unit": "ml", "section": "SPICES"},
-        {"name": "citron vert", "quantity": 15, "unit": "ml", "section": "PRODUCE"},
-        {"name": "gingembre frais", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "graines de sesame", "quantity": 3, "unit": "g", "section": "SPICES"}
+        {
+          "name": "nouilles soba",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "crevettes decortiquees",
+          "quantity": 120,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "edamames",
+          "quantity": 50,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "courgette",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carotte",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "citron vert",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["SHELLFISH"]
+      "meatTypes": [
+        "SHELLFISH"
+      ]
     },
     {
       "name": "Nouilles udon au boeuf teriyaki et brocoli",
@@ -8475,28 +8765,102 @@
       "cookTimeMinutes": 15,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["GLUTEN", "SOY"],
+      "allergens": [
+        "GLUTEN",
+        "SOY"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Cuire les nouilles udon dans l'eau bouillante, egoutter et reserver.", "timerSeconds": 300},
-        {"stepNumber": 2, "instruction": "Preparer la sauce teriyaki legere : melanger la sauce soja, le mirin, le miel et la fecule de mais diluee.", "timerSeconds": null},
-        {"stepNumber": 3, "instruction": "Saisir les lamelles de boeuf a feu tres vif dans une poele legerement huilee.", "timerSeconds": 180},
-        {"stepNumber": 4, "instruction": "Cuire le brocoli a la vapeur ou le blanchir rapidement.", "timerSeconds": 180},
-        {"stepNumber": 5, "instruction": "Reunir les udon, le boeuf et le brocoli, napper de sauce teriyaki et melanger.", "timerSeconds": null},
-        {"stepNumber": 6, "instruction": "Servir parseme de graines de sesame et d'oignon vert.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire les nouilles udon dans l'eau bouillante, egoutter et reserver.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce teriyaki legere : melanger la sauce soja, le mirin, le miel et la fecule de mais diluee.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saisir les lamelles de boeuf a feu tres vif dans une poele legerement huilee.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Cuire le brocoli a la vapeur ou le blanchir rapidement.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Reunir les udon, le boeuf et le brocoli, napper de sauce teriyaki et melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir parseme de graines de sesame et d'oignon vert.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "nouilles udon", "quantity": 100, "unit": "g", "section": "PANTRY"},
-        {"name": "rumsteck de boeuf", "quantity": 130, "unit": "g", "section": "MEAT"},
-        {"name": "brocoli (fleurettes)", "quantity": 100, "unit": "g", "section": "PRODUCE"},
-        {"name": "sauce soja allege", "quantity": 20, "unit": "ml", "section": "SPICES"},
-        {"name": "mirin", "quantity": 10, "unit": "ml", "section": "SPICES"},
-        {"name": "miel", "quantity": 5, "unit": "g", "section": "PANTRY"},
-        {"name": "fecule de mais", "quantity": 3, "unit": "g", "section": "PANTRY"},
-        {"name": "graines de sesame", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "oignon vert", "quantity": 10, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "nouilles udon",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "rumsteck de boeuf",
+          "quantity": 130,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "brocoli (fleurettes)",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 20,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "mirin",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "miel",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "fecule de mais",
+          "quantity": 3,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["BEEF"]
+      "meatTypes": [
+        "BEEF"
+      ]
     },
     {
       "name": "Pad thai leger aux crevettes",
@@ -8511,30 +8875,117 @@
       "cookTimeMinutes": 10,
       "isBatchFriendly": false,
       "difficulty": "MEDIUM",
-      "allergens": ["SHELLFISH", "SOY", "TREE_NUTS"],
+      "allergens": [
+        "SHELLFISH",
+        "SOY",
+        "TREE_NUTS",
+        "PEANUTS",
+        "FISH"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Faire tremper les nouilles de riz dans l'eau chaude jusqu'a ce qu'elles soient souples, egoutter.", "timerSeconds": 480},
-        {"stepNumber": 2, "instruction": "Preparer la sauce : melanger la sauce poisson, le jus de citron vert, le sucre et la sauce soja.", "timerSeconds": null},
-        {"stepNumber": 3, "instruction": "Faire sauter les crevettes dans un wok legerement huile a feu vif.", "timerSeconds": 180},
-        {"stepNumber": 4, "instruction": "Ajouter l'oeuf et brouiller rapidement.", "timerSeconds": 60},
-        {"stepNumber": 5, "instruction": "Incorporer les nouilles, les germes de soja et la sauce, faire sauter 2 minutes.", "timerSeconds": 120},
-        {"stepNumber": 6, "instruction": "Servir avec les cacahuetes concassees, la coriandre et un quartier de citron vert.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Faire tremper les nouilles de riz dans l'eau chaude jusqu'a ce qu'elles soient souples, egoutter.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce : melanger la sauce poisson, le jus de citron vert, le sucre et la sauce soja.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire sauter les crevettes dans un wok legerement huile a feu vif.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter l'oeuf et brouiller rapidement.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Incorporer les nouilles, les germes de soja et la sauce, faire sauter 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir avec les cacahuetes concassees, la coriandre et un quartier de citron vert.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "nouilles de riz", "quantity": 70, "unit": "g", "section": "PANTRY"},
-        {"name": "crevettes decortiquees", "quantity": 120, "unit": "g", "section": "MEAT"},
-        {"name": "germes de soja", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "oeuf", "quantity": 1, "unit": "piece", "section": "DAIRY"},
-        {"name": "cacahuetes concassees", "quantity": 10, "unit": "g", "section": "PANTRY"},
-        {"name": "sauce soja", "quantity": 10, "unit": "ml", "section": "SPICES"},
-        {"name": "sauce poisson (nuoc mam)", "quantity": 10, "unit": "ml", "section": "SPICES"},
-        {"name": "citron vert", "quantity": 15, "unit": "ml", "section": "PRODUCE"},
-        {"name": "sucre de coco", "quantity": 5, "unit": "g", "section": "PANTRY"},
-        {"name": "coriandre fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "huile vegetale", "quantity": 5, "unit": "ml", "section": "PANTRY"}
+        {
+          "name": "nouilles de riz",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "crevettes decortiquees",
+          "quantity": 120,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "germes de soja",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "piece",
+          "section": "DAIRY"
+        },
+        {
+          "name": "cacahuetes concassees",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "sauce poisson (nuoc mam)",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "citron vert",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sucre de coco",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile vegetale",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "PANTRY"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["SHELLFISH"]
+      "meatTypes": [
+        "SHELLFISH"
+      ]
     },
     {
       "name": "Wok de nouilles sautees au tofu et legumes",
@@ -8549,27 +9000,110 @@
       "cookTimeMinutes": 12,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["GLUTEN", "SOY"],
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "SESAME"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Cuire les nouilles aux oeufs selon les instructions, egoutter et reserver.", "timerSeconds": 240},
-        {"stepNumber": 2, "instruction": "Couper le tofu ferme en cubes et le faire dorer dans une poele antiadhesive a feu vif.", "timerSeconds": 300},
-        {"stepNumber": 3, "instruction": "Faire sauter les poivrons, les champignons et le chou chinois 3 minutes au wok.", "timerSeconds": 180},
-        {"stepNumber": 4, "instruction": "Preparer la sauce : melanger la sauce hoisin, la sauce soja et le gingembre rape.", "timerSeconds": null},
-        {"stepNumber": 5, "instruction": "Reunir les nouilles, le tofu et les legumes, verser la sauce et faire sauter 2 minutes.", "timerSeconds": 120},
-        {"stepNumber": 6, "instruction": "Servir parseme d'oignon vert et de graines de sesame.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire les nouilles aux oeufs selon les instructions, egoutter et reserver.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper le tofu ferme en cubes et le faire dorer dans une poele antiadhesive a feu vif.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire sauter les poivrons, les champignons et le chou chinois 3 minutes au wok.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Preparer la sauce : melanger la sauce hoisin, la sauce soja et le gingembre rape.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Reunir les nouilles, le tofu et les legumes, verser la sauce et faire sauter 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir parseme d'oignon vert et de graines de sesame.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "nouilles aux oeufs", "quantity": 80, "unit": "g", "section": "PANTRY"},
-        {"name": "tofu ferme", "quantity": 120, "unit": "g", "section": "PRODUCE"},
-        {"name": "poivron rouge", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "champignons shiitake", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "chou chinois", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "sauce hoisin", "quantity": 15, "unit": "g", "section": "SPICES"},
-        {"name": "sauce soja allege", "quantity": 10, "unit": "ml", "section": "SPICES"},
-        {"name": "gingembre frais", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "huile de sesame", "quantity": 5, "unit": "ml", "section": "SPICES"},
-        {"name": "oignon vert", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "graines de sesame", "quantity": 3, "unit": "g", "section": "SPICES"}
+        {
+          "name": "nouilles aux oeufs",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tofu ferme",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "champignons shiitake",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "chou chinois",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce hoisin",
+          "quantity": 15,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        }
       ],
       "dietType": "VEGAN",
       "meatTypes": []
@@ -8587,32 +9121,125 @@
       "cookTimeMinutes": 25,
       "isBatchFriendly": true,
       "difficulty": "MEDIUM",
-      "allergens": ["LACTOSE"],
+      "allergens": [
+        "LACTOSE"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Couper le poulet en cubes et le faire mariner dans le yaourt, le curcuma, le cumin, le paprika et le garam masala pendant 15 minutes minimum.", "timerSeconds": 900},
-        {"stepNumber": 2, "instruction": "Faire griller les morceaux de poulet marines dans une poele bien chaude sans matiere grasse.", "timerSeconds": 420},
-        {"stepNumber": 3, "instruction": "Dans une autre poele, faire revenir l'oignon et l'ail emince dans l'huile d'olive.", "timerSeconds": 180},
-        {"stepNumber": 4, "instruction": "Ajouter la pate de tomate, les tomates concassees et le lait de coco, laisser mijoter.", "timerSeconds": 600},
-        {"stepNumber": 5, "instruction": "Incorporer les morceaux de poulet grilles dans la sauce et laisser mijoter encore 5 minutes.", "timerSeconds": 300},
-        {"stepNumber": 6, "instruction": "Servir parseme de coriandre fraiche.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le poulet en cubes et le faire mariner dans le yaourt, le curcuma, le cumin, le paprika et le garam masala pendant 15 minutes minimum.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire griller les morceaux de poulet marines dans une poele bien chaude sans matiere grasse.",
+          "timerSeconds": 420
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Dans une autre poele, faire revenir l'oignon et l'ail emince dans l'huile d'olive.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter la pate de tomate, les tomates concassees et le lait de coco, laisser mijoter.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Incorporer les morceaux de poulet grilles dans la sauce et laisser mijoter encore 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir parseme de coriandre fraiche.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "blanc de poulet", "quantity": 300, "unit": "g", "section": "MEAT"},
-        {"name": "yaourt nature 0%", "quantity": 80, "unit": "g", "section": "DAIRY"},
-        {"name": "tomates concassees", "quantity": 200, "unit": "g", "section": "PANTRY"},
-        {"name": "lait de coco leger", "quantity": 80, "unit": "ml", "section": "PANTRY"},
-        {"name": "oignon", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "ail", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "pate de tomate", "quantity": 15, "unit": "g", "section": "PANTRY"},
-        {"name": "curcuma", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "cumin moulu", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "garam masala", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "paprika", "quantity": 2, "unit": "g", "section": "SPICES"},
-        {"name": "huile d'olive", "quantity": 10, "unit": "ml", "section": "PANTRY"},
-        {"name": "coriandre fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "blanc de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "yaourt nature 0%",
+          "quantity": 80,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait de coco leger",
+          "quantity": 80,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de tomate",
+          "quantity": 15,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "garam masala",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["POULTRY"]
+      "meatTypes": [
+        "POULTRY"
+      ]
     },
     {
       "name": "Dal de lentilles corail aux epices",
@@ -8629,27 +9256,116 @@
       "difficulty": "EASY",
       "allergens": [],
       "steps": [
-        {"stepNumber": 1, "instruction": "Rincer les lentilles corail a l'eau froide jusqu'a ce que l'eau soit claire.", "timerSeconds": null},
-        {"stepNumber": 2, "instruction": "Faire revenir l'oignon, l'ail et le gingembre dans l'huile de coco a feu moyen.", "timerSeconds": 180},
-        {"stepNumber": 3, "instruction": "Ajouter le curcuma, le cumin, la coriandre moulue et les graines de moutarde, faire torrefier 1 minute.", "timerSeconds": 60},
-        {"stepNumber": 4, "instruction": "Ajouter les lentilles, les tomates concassees et le bouillon de legumes, porter a ebullition.", "timerSeconds": null},
-        {"stepNumber": 5, "instruction": "Reduire le feu et laisser mijoter jusqu'a ce que les lentilles soient fondantes.", "timerSeconds": 1200},
-        {"stepNumber": 6, "instruction": "Assaisonner avec le jus de citron et servir parseme de coriandre fraiche.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Rincer les lentilles corail a l'eau froide jusqu'a ce que l'eau soit claire.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir l'oignon, l'ail et le gingembre dans l'huile de coco a feu moyen.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter le curcuma, le cumin, la coriandre moulue et les graines de moutarde, faire torrefier 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les lentilles, les tomates concassees et le bouillon de legumes, porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Reduire le feu et laisser mijoter jusqu'a ce que les lentilles soient fondantes.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Assaisonner avec le jus de citron et servir parseme de coriandre fraiche.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "lentilles corail", "quantity": 150, "unit": "g", "section": "PANTRY"},
-        {"name": "tomates concassees", "quantity": 200, "unit": "g", "section": "PANTRY"},
-        {"name": "bouillon de legumes", "quantity": 400, "unit": "ml", "section": "PANTRY"},
-        {"name": "oignon", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "ail", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "gingembre frais", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "curcuma", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "cumin moulu", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "coriandre moulue", "quantity": 2, "unit": "g", "section": "SPICES"},
-        {"name": "graines de moutarde", "quantity": 2, "unit": "g", "section": "SPICES"},
-        {"name": "huile de coco", "quantity": 10, "unit": "ml", "section": "PANTRY"},
-        {"name": "citron", "quantity": 15, "unit": "ml", "section": "PRODUCE"},
-        {"name": "coriandre fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "lentilles corail",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "bouillon de legumes",
+          "quantity": 400,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "coriandre moulue",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "graines de moutarde",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile de coco",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "VEGAN",
       "meatTypes": []
@@ -8667,28 +9383,101 @@
       "cookTimeMinutes": 25,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["LACTOSE"],
+      "allergens": [
+        "LACTOSE"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Melanger le yaourt avec les epices tandoori, le curcuma, le paprika fume, le jus de citron et l'ail. Entailler le poulet et le faire mariner.", "timerSeconds": null},
-        {"stepNumber": 2, "instruction": "Laisser mariner au refrigerateur au minimum 30 minutes.", "timerSeconds": 1800},
-        {"stepNumber": 3, "instruction": "Prechauffer le four a 220 degres. Disposer le poulet sur une grille avec un plat en dessous.", "timerSeconds": null},
-        {"stepNumber": 4, "instruction": "Enfourner et cuire jusqu'a ce que le poulet soit bien dore et cuit a coeur.", "timerSeconds": 1500},
-        {"stepNumber": 5, "instruction": "Preparer le raita : melanger le yaourt, le concombre rape et la menthe.", "timerSeconds": null},
-        {"stepNumber": 6, "instruction": "Servir le poulet avec le raita et des quartiers de citron.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Melanger le yaourt avec les epices tandoori, le curcuma, le paprika fume, le jus de citron et l'ail. Entailler le poulet et le faire mariner.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Laisser mariner au refrigerateur au minimum 30 minutes.",
+          "timerSeconds": 1800
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Prechauffer le four a 220 degres. Disposer le poulet sur une grille avec un plat en dessous.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Enfourner et cuire jusqu'a ce que le poulet soit bien dore et cuit a coeur.",
+          "timerSeconds": 1500
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Preparer le raita : melanger le yaourt, le concombre rape et la menthe.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir le poulet avec le raita et des quartiers de citron.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "cuisses de poulet desossees", "quantity": 300, "unit": "g", "section": "MEAT"},
-        {"name": "yaourt nature 0%", "quantity": 100, "unit": "g", "section": "DAIRY"},
-        {"name": "epices tandoori", "quantity": 10, "unit": "g", "section": "SPICES"},
-        {"name": "curcuma", "quantity": 2, "unit": "g", "section": "SPICES"},
-        {"name": "paprika fume", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "ail", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "citron", "quantity": 30, "unit": "ml", "section": "PRODUCE"},
-        {"name": "concombre", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "menthe fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "cuisses de poulet desossees",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "yaourt nature 0%",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "epices tandoori",
+          "quantity": 10,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika fume",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 30,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "concombre",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "menthe fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["POULTRY"]
+      "meatTypes": [
+        "POULTRY"
+      ]
     },
     {
       "name": "Butter chicken leger",
@@ -8703,32 +9492,125 @@
       "cookTimeMinutes": 30,
       "isBatchFriendly": true,
       "difficulty": "MEDIUM",
-      "allergens": ["LACTOSE"],
+      "allergens": [
+        "LACTOSE"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Couper le poulet en cubes et le faire mariner dans le yaourt grec, le garam masala et le curcuma.", "timerSeconds": 900},
-        {"stepNumber": 2, "instruction": "Faire revenir l'oignon emince dans l'huile d'olive a feu moyen jusqu'a coloration.", "timerSeconds": 300},
-        {"stepNumber": 3, "instruction": "Ajouter l'ail, le gingembre, le cumin et la coriandre moulue, cuire 1 minute.", "timerSeconds": 60},
-        {"stepNumber": 4, "instruction": "Incorporer la pate de tomate et les tomates concassees, laisser mijoter 10 minutes.", "timerSeconds": 600},
-        {"stepNumber": 5, "instruction": "Ajouter les morceaux de poulet marines et laisser cuire dans la sauce.", "timerSeconds": 720},
-        {"stepNumber": 6, "instruction": "Hors du feu, incorporer le yaourt grec et melanger delicatement. Servir parseme de coriandre.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le poulet en cubes et le faire mariner dans le yaourt grec, le garam masala et le curcuma.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir l'oignon emince dans l'huile d'olive a feu moyen jusqu'a coloration.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter l'ail, le gingembre, le cumin et la coriandre moulue, cuire 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Incorporer la pate de tomate et les tomates concassees, laisser mijoter 10 minutes.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter les morceaux de poulet marines et laisser cuire dans la sauce.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Hors du feu, incorporer le yaourt grec et melanger delicatement. Servir parseme de coriandre.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "blanc de poulet", "quantity": 300, "unit": "g", "section": "MEAT"},
-        {"name": "yaourt grec 0%", "quantity": 80, "unit": "g", "section": "DAIRY"},
-        {"name": "tomates concassees", "quantity": 250, "unit": "g", "section": "PANTRY"},
-        {"name": "pate de tomate", "quantity": 20, "unit": "g", "section": "PANTRY"},
-        {"name": "oignon", "quantity": 100, "unit": "g", "section": "PRODUCE"},
-        {"name": "ail", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "gingembre frais", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "garam masala", "quantity": 5, "unit": "g", "section": "SPICES"},
-        {"name": "curcuma", "quantity": 2, "unit": "g", "section": "SPICES"},
-        {"name": "cumin moulu", "quantity": 3, "unit": "g", "section": "SPICES"},
-        {"name": "coriandre moulue", "quantity": 2, "unit": "g", "section": "SPICES"},
-        {"name": "huile d'olive", "quantity": 10, "unit": "ml", "section": "PANTRY"},
-        {"name": "coriandre fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "blanc de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "yaourt grec 0%",
+          "quantity": 80,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 250,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "pate de tomate",
+          "quantity": 20,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "garam masala",
+          "quantity": 5,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "coriandre moulue",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["POULTRY"]
+      "meatTypes": [
+        "POULTRY"
+      ]
     },
     {
       "name": "Bol teriyaki au saumon et riz",
@@ -8743,29 +9625,110 @@
       "cookTimeMinutes": 20,
       "isBatchFriendly": false,
       "difficulty": "EASY",
-      "allergens": ["GLUTEN", "SOY"],
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "FISH",
+        "SESAME"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Cuire le riz complet selon les instructions du paquet.", "timerSeconds": 900},
-        {"stepNumber": 2, "instruction": "Preparer la sauce teriyaki : melanger la sauce soja, le mirin, le miel et la fecule de mais diluee, faire epaissir a feu doux.", "timerSeconds": 180},
-        {"stepNumber": 3, "instruction": "Assaisonner le pave de saumon, le cuire dans une poele antiadhesive cote peau d'abord.", "timerSeconds": 480},
-        {"stepNumber": 4, "instruction": "Glacer le saumon avec la moitie de la sauce teriyaki en fin de cuisson.", "timerSeconds": 60},
-        {"stepNumber": 5, "instruction": "Assembler le bol : riz, saumon, edamames, concombre emince et carotte rapee.", "timerSeconds": null},
-        {"stepNumber": 6, "instruction": "Arroser du reste de sauce teriyaki et parsemer de graines de sesame.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire le riz complet selon les instructions du paquet.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce teriyaki : melanger la sauce soja, le mirin, le miel et la fecule de mais diluee, faire epaissir a feu doux.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Assaisonner le pave de saumon, le cuire dans une poele antiadhesive cote peau d'abord.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Glacer le saumon avec la moitie de la sauce teriyaki en fin de cuisson.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Assembler le bol : riz, saumon, edamames, concombre emince et carotte rapee.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Arroser du reste de sauce teriyaki et parsemer de graines de sesame.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "pave de saumon", "quantity": 120, "unit": "g", "section": "MEAT"},
-        {"name": "riz complet", "quantity": 70, "unit": "g", "section": "PANTRY"},
-        {"name": "edamames", "quantity": 40, "unit": "g", "section": "FROZEN"},
-        {"name": "concombre", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "carotte", "quantity": 40, "unit": "g", "section": "PRODUCE"},
-        {"name": "sauce soja allege", "quantity": 15, "unit": "ml", "section": "SPICES"},
-        {"name": "mirin", "quantity": 10, "unit": "ml", "section": "SPICES"},
-        {"name": "miel", "quantity": 5, "unit": "g", "section": "PANTRY"},
-        {"name": "fecule de mais", "quantity": 3, "unit": "g", "section": "PANTRY"},
-        {"name": "graines de sesame", "quantity": 3, "unit": "g", "section": "SPICES"}
+        {
+          "name": "pave de saumon",
+          "quantity": 120,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "riz complet",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "edamames",
+          "quantity": 40,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "concombre",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carotte",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "mirin",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "miel",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "fecule de mais",
+          "quantity": 3,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["FISH"]
+      "meatTypes": [
+        "FISH"
+      ]
     },
     {
       "name": "Soupe miso proteines au tofu et champignons",
@@ -8780,25 +9743,97 @@
       "cookTimeMinutes": 15,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["SOY", "EGGS"],
+      "allergens": [
+        "SOY",
+        "EGGS"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Faire chauffer le dashi ou bouillon de legumes dans une casserole.", "timerSeconds": null},
-        {"stepNumber": 2, "instruction": "Ajouter les champignons shiitake eminces et cuire 5 minutes.", "timerSeconds": 300},
-        {"stepNumber": 3, "instruction": "Ajouter les nouilles soba et cuire 3 minutes.", "timerSeconds": 180},
-        {"stepNumber": 4, "instruction": "Hors du feu, diluer la pate de miso dans un peu de bouillon chaud, puis incorporer au reste de la soupe.", "timerSeconds": null},
-        {"stepNumber": 5, "instruction": "Ajouter le tofu coupe en des et les algues wakame rehydratees.", "timerSeconds": null},
-        {"stepNumber": 6, "instruction": "Pocher l'oeuf delicatement dans la soupe et servir avec l'oignon vert emince.", "timerSeconds": 180}
+        {
+          "stepNumber": 1,
+          "instruction": "Faire chauffer le dashi ou bouillon de legumes dans une casserole.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les champignons shiitake eminces et cuire 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les nouilles soba et cuire 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Hors du feu, diluer la pate de miso dans un peu de bouillon chaud, puis incorporer au reste de la soupe.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter le tofu coupe en des et les algues wakame rehydratees.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Pocher l'oeuf delicatement dans la soupe et servir avec l'oignon vert emince.",
+          "timerSeconds": 180
+        }
       ],
       "ingredients": [
-        {"name": "tofu soyeux", "quantity": 120, "unit": "g", "section": "PRODUCE"},
-        {"name": "champignons shiitake", "quantity": 60, "unit": "g", "section": "PRODUCE"},
-        {"name": "pate de miso blanc", "quantity": 20, "unit": "g", "section": "SPICES"},
-        {"name": "bouillon de legumes", "quantity": 500, "unit": "ml", "section": "PANTRY"},
-        {"name": "nouilles soba", "quantity": 40, "unit": "g", "section": "PANTRY"},
-        {"name": "algues wakame sechees", "quantity": 3, "unit": "g", "section": "PANTRY"},
-        {"name": "oeuf", "quantity": 1, "unit": "piece", "section": "DAIRY"},
-        {"name": "oignon vert", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "sauce soja", "quantity": 5, "unit": "ml", "section": "SPICES"}
+        {
+          "name": "tofu soyeux",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "champignons shiitake",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de miso blanc",
+          "quantity": 20,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "bouillon de legumes",
+          "quantity": 500,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "nouilles soba",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "algues wakame sechees",
+          "quantity": 3,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "piece",
+          "section": "DAIRY"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        }
       ],
       "dietType": "VEGETARIAN",
       "meatTypes": []
@@ -8816,27 +9851,97 @@
       "cookTimeMinutes": 20,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["GLUTEN", "SOY"],
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "SESAME"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Cuire le riz complet selon les instructions du paquet.", "timerSeconds": 900},
-        {"stepNumber": 2, "instruction": "Couper le blanc de poulet en tranches fines et le faire dorer dans une poele antiadhesive.", "timerSeconds": 360},
-        {"stepNumber": 3, "instruction": "Preparer la sauce teriyaki legere : sauce soja, mirin, miel et eau, faire reduire.", "timerSeconds": 180},
-        {"stepNumber": 4, "instruction": "Glacer le poulet avec la sauce teriyaki.", "timerSeconds": 60},
-        {"stepNumber": 5, "instruction": "Faire sauter les epinards et les champignons avec un filet de sauce soja.", "timerSeconds": 180},
-        {"stepNumber": 6, "instruction": "Assembler le bol : riz, poulet teriyaki, epinards, champignons et parsemer de graines de sesame.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire le riz complet selon les instructions du paquet.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper le blanc de poulet en tranches fines et le faire dorer dans une poele antiadhesive.",
+          "timerSeconds": 360
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Preparer la sauce teriyaki legere : sauce soja, mirin, miel et eau, faire reduire.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Glacer le poulet avec la sauce teriyaki.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Faire sauter les epinards et les champignons avec un filet de sauce soja.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Assembler le bol : riz, poulet teriyaki, epinards, champignons et parsemer de graines de sesame.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "blanc de poulet", "quantity": 150, "unit": "g", "section": "MEAT"},
-        {"name": "riz complet", "quantity": 70, "unit": "g", "section": "PANTRY"},
-        {"name": "epinards frais", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "champignons de Paris", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "sauce soja allege", "quantity": 20, "unit": "ml", "section": "SPICES"},
-        {"name": "mirin", "quantity": 10, "unit": "ml", "section": "SPICES"},
-        {"name": "miel", "quantity": 5, "unit": "g", "section": "PANTRY"},
-        {"name": "graines de sesame", "quantity": 3, "unit": "g", "section": "SPICES"}
+        {
+          "name": "blanc de poulet",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "riz complet",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "champignons de Paris",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 20,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "mirin",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "miel",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["POULTRY"]
+      "meatTypes": [
+        "POULTRY"
+      ]
     },
     {
       "name": "Paella legere aux fruits de mer",
@@ -8851,32 +9956,125 @@
       "cookTimeMinutes": 30,
       "isBatchFriendly": true,
       "difficulty": "MEDIUM",
-      "allergens": ["SHELLFISH"],
+      "allergens": [
+        "SHELLFISH"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Faire revenir l'oignon et le poivron coupes en des dans l'huile d'olive a feu moyen.", "timerSeconds": 240},
-        {"stepNumber": 2, "instruction": "Ajouter l'ail, le riz et faire nacrer pendant 2 minutes en remuant.", "timerSeconds": 120},
-        {"stepNumber": 3, "instruction": "Ajouter les tomates concassees, le bouillon chaud et le safran, porter a ebullition puis reduire.", "timerSeconds": null},
-        {"stepNumber": 4, "instruction": "Laisser cuire le riz a couvert sans remuer pendant 15 minutes.", "timerSeconds": 900},
-        {"stepNumber": 5, "instruction": "Disposer les crevettes, les moules et les calamars sur le riz, couvrir et cuire 8 minutes.", "timerSeconds": 480},
-        {"stepNumber": 6, "instruction": "Retirer du feu, laisser reposer 5 minutes couvert. Servir avec des quartiers de citron et du persil.", "timerSeconds": 300}
+        {
+          "stepNumber": 1,
+          "instruction": "Faire revenir l'oignon et le poivron coupes en des dans l'huile d'olive a feu moyen.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter l'ail, le riz et faire nacrer pendant 2 minutes en remuant.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les tomates concassees, le bouillon chaud et le safran, porter a ebullition puis reduire.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Laisser cuire le riz a couvert sans remuer pendant 15 minutes.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Disposer les crevettes, les moules et les calamars sur le riz, couvrir et cuire 8 minutes.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Retirer du feu, laisser reposer 5 minutes couvert. Servir avec des quartiers de citron et du persil.",
+          "timerSeconds": 300
+        }
       ],
       "ingredients": [
-        {"name": "riz rond", "quantity": 120, "unit": "g", "section": "PANTRY"},
-        {"name": "crevettes decortiquees", "quantity": 120, "unit": "g", "section": "MEAT"},
-        {"name": "moules nettoyees", "quantity": 100, "unit": "g", "section": "MEAT"},
-        {"name": "calamars (anneaux)", "quantity": 80, "unit": "g", "section": "FROZEN"},
-        {"name": "oignon", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "poivron rouge", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "ail", "quantity": 10, "unit": "g", "section": "PRODUCE"},
-        {"name": "tomates concassees", "quantity": 100, "unit": "g", "section": "PANTRY"},
-        {"name": "bouillon de legumes", "quantity": 400, "unit": "ml", "section": "PANTRY"},
-        {"name": "safran", "quantity": 0.5, "unit": "g", "section": "SPICES"},
-        {"name": "huile d'olive", "quantity": 10, "unit": "ml", "section": "PANTRY"},
-        {"name": "citron", "quantity": 15, "unit": "ml", "section": "PRODUCE"},
-        {"name": "persil frais", "quantity": 5, "unit": "g", "section": "PRODUCE"}
+        {
+          "name": "riz rond",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "crevettes decortiquees",
+          "quantity": 120,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "moules nettoyees",
+          "quantity": 100,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "calamars (anneaux)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "oignon",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "bouillon de legumes",
+          "quantity": 400,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "safran",
+          "quantity": 0.5,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
       ],
       "dietType": "OMNIVORE",
-      "meatTypes": ["SHELLFISH"]
+      "meatTypes": [
+        "SHELLFISH"
+      ]
     },
     {
       "name": "Gazpacho andalou aux legumes",
@@ -8891,24 +10089,90 @@
       "cookTimeMinutes": 0,
       "isBatchFriendly": true,
       "difficulty": "EASY",
-      "allergens": ["GLUTEN"],
+      "allergens": [
+        "GLUTEN"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Couper les tomates, le concombre, le poivron et l'oignon en morceaux grossiers.", "timerSeconds": null},
-        {"stepNumber": 2, "instruction": "Mettre tous les legumes dans un blender avec l'ail, le vinaigre de xeres et l'huile d'olive.", "timerSeconds": null},
-        {"stepNumber": 3, "instruction": "Ajouter le pain de mie trempe et mixer jusqu'a obtenir une texture lisse.", "timerSeconds": 60},
-        {"stepNumber": 4, "instruction": "Assaisonner, ajouter un peu d'eau si trop epais.", "timerSeconds": null},
-        {"stepNumber": 5, "instruction": "Refrigerer au minimum 2 heures avant de servir.", "timerSeconds": null},
-        {"stepNumber": 6, "instruction": "Servir bien frais avec des petits des de concombre, poivron et un filet d'huile d'olive.", "timerSeconds": null}
+        {
+          "stepNumber": 1,
+          "instruction": "Couper les tomates, le concombre, le poivron et l'oignon en morceaux grossiers.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mettre tous les legumes dans un blender avec l'ail, le vinaigre de xeres et l'huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter le pain de mie trempe et mixer jusqu'a obtenir une texture lisse.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Assaisonner, ajouter un peu d'eau si trop epais.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Refrigerer au minimum 2 heures avant de servir.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir bien frais avec des petits des de concombre, poivron et un filet d'huile d'olive.",
+          "timerSeconds": null
+        }
       ],
       "ingredients": [
-        {"name": "tomates bien mures", "quantity": 400, "unit": "g", "section": "PRODUCE"},
-        {"name": "concombre", "quantity": 120, "unit": "g", "section": "PRODUCE"},
-        {"name": "poivron vert", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "oignon", "quantity": 40, "unit": "g", "section": "PRODUCE"},
-        {"name": "ail", "quantity": 5, "unit": "g", "section": "PRODUCE"},
-        {"name": "vinaigre de xeres", "quantity": 15, "unit": "ml", "section": "SPICES"},
-        {"name": "huile d'olive extra vierge", "quantity": 15, "unit": "ml", "section": "PANTRY"},
-        {"name": "pain de mie complet", "quantity": 20, "unit": "g", "section": "PANTRY"}
+        {
+          "name": "tomates bien mures",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "concombre",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron vert",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "vinaigre de xeres",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive extra vierge",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "pain de mie complet",
+          "quantity": 20,
+          "unit": "g",
+          "section": "PANTRY"
+        }
       ],
       "dietType": "VEGAN",
       "meatTypes": []
@@ -8926,22 +10190,570 @@
       "cookTimeMinutes": 25,
       "isBatchFriendly": true,
       "difficulty": "MEDIUM",
-      "allergens": ["EGGS"],
+      "allergens": [
+        "EGGS"
+      ],
       "steps": [
-        {"stepNumber": 1, "instruction": "Prechauffer le four a 180 degres. Couper les pommes de terre en fines rondelles et les cuire a la vapeur.", "timerSeconds": 480},
-        {"stepNumber": 2, "instruction": "Faire revenir l'oignon et la courgette eminces dans l'huile d'olive a feu moyen.", "timerSeconds": 240},
-        {"stepNumber": 3, "instruction": "Battre les oeufs avec le sel, le poivre et le paprika fume.", "timerSeconds": null},
-        {"stepNumber": 4, "instruction": "Melanger les pommes de terre, l'oignon et la courgette avec les oeufs battus.", "timerSeconds": null},
-        {"stepNumber": 5, "instruction": "Verser dans un plat allant au four legerement huile et enfourner.", "timerSeconds": 1200},
-        {"stepNumber": 6, "instruction": "Laisser tiedir 5 minutes avant de demouler et couper en parts.", "timerSeconds": 300}
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180 degres. Couper les pommes de terre en fines rondelles et les cuire a la vapeur.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir l'oignon et la courgette eminces dans l'huile d'olive a feu moyen.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Battre les oeufs avec le sel, le poivre et le paprika fume.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Melanger les pommes de terre, l'oignon et la courgette avec les oeufs battus.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Verser dans un plat allant au four legerement huile et enfourner.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Laisser tiedir 5 minutes avant de demouler et couper en parts.",
+          "timerSeconds": 300
+        }
       ],
       "ingredients": [
-        {"name": "pommes de terre", "quantity": 200, "unit": "g", "section": "PRODUCE"},
-        {"name": "oeufs", "quantity": 4, "unit": "piece", "section": "DAIRY"},
-        {"name": "oignon", "quantity": 80, "unit": "g", "section": "PRODUCE"},
-        {"name": "courgette", "quantity": 100, "unit": "g", "section": "PRODUCE"},
-        {"name": "huile d'olive", "quantity": 10, "unit": "ml", "section": "PANTRY"},
-        {"name": "paprika fume", "quantity": 2, "unit": "g", "section": "SPICES"}
+        {
+          "name": "pommes de terre",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oeufs",
+          "quantity": 4,
+          "unit": "piece",
+          "section": "DAIRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "courgette",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "paprika fume",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Shakshuka legere aux poivrons",
+      "description": "Des oeufs poches dans une sauce tomate epicee aux poivrons et cumin, un classique du Moyen-Orient ideal pour un brunch sain",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 320,
+      "proteinGrams": 18.0,
+      "carbsGrams": 22.0,
+      "fatGrams": 18.0,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "allergens": ["EGGS"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Faire revenir l'oignon emince et les poivrons coupes en lamelles dans l'huile d'olive pendant 5 minutes.", "timerSeconds": 300},
+        {"stepNumber": 2, "instruction": "Ajouter l'ail emince, le cumin, le paprika et le piment doux. Remuer 1 minute.", "timerSeconds": 60},
+        {"stepNumber": 3, "instruction": "Verser les tomates concassees, assaisonner et laisser mijoter a feu doux pour reduire la sauce.", "timerSeconds": 600},
+        {"stepNumber": 4, "instruction": "Faire des petits puits dans la sauce et y casser les oeufs delicatement.", "timerSeconds": null},
+        {"stepNumber": 5, "instruction": "Couvrir et cuire a feu doux jusqu'a ce que les blancs soient pris mais les jaunes encore coulants.", "timerSeconds": 300},
+        {"stepNumber": 6, "instruction": "Parsemer de feta emiettee et de coriandre fraiche. Servir directement dans la poele avec du pain complet.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "oeufs", "quantity": 4, "unit": "unite", "section": "DAIRY"},
+        {"name": "tomates concassees", "quantity": 400, "unit": "g", "section": "PANTRY"},
+        {"name": "poivron rouge", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "poivron jaune", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "oignon", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 2, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "cumin moulu", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "paprika doux", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "piment doux moulu", "quantity": 0.5, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "feta", "quantity": 40, "unit": "g", "section": "DAIRY"},
+        {"name": "coriandre fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"},
+        {"name": "huile d'olive", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"}
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Chia pudding cacao noisettes",
+      "description": "Un pudding de chia prepare la veille au lait vegetal et cacao sans sucre, garni de noisettes et de banane, riche en omega-3 et fibres",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 330,
+      "proteinGrams": 12.0,
+      "carbsGrams": 36.0,
+      "fatGrams": 14.0,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "allergens": ["TREE_NUTS"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Dans un bocal, melanger les graines de chia, le lait d'amande, le cacao en poudre et le sirop d'erable. Bien fouetter pour eviter les grumeaux.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Couvrir et placer au refrigerateur toute la nuit (minimum 4 heures).", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Le matin, verifier la texture et ajouter un peu de lait vegetal si trop epais.", "timerSeconds": null},
+        {"stepNumber": 4, "instruction": "Garnir de rondelles de banane, de noisettes concassees et d'une pincee de cannelle. Servir frais.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "graines de chia", "quantity": 40, "unit": "g", "section": "PANTRY"},
+        {"name": "lait d'amande non sucre", "quantity": 200, "unit": "ml", "section": "DAIRY"},
+        {"name": "cacao en poudre non sucre", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "sirop d'erable", "quantity": 1, "unit": "c. a cafe", "section": "PANTRY"},
+        {"name": "banane", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "noisettes", "quantity": 15, "unit": "g", "section": "PANTRY"},
+        {"name": "cannelle moulue", "quantity": 0.5, "unit": "c. a cafe", "section": "SPICES"}
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Frittata legumes du soleil",
+      "description": "Une frittata italienne aux courgettes, poivrons et tomates sechees, cuite au four, riche en proteines et tres peu de glucides",
+      "category": "LUNCH",
+      "caloriesPerServing": 290,
+      "proteinGrams": 22.0,
+      "carbsGrams": 8.0,
+      "fatGrams": 18.0,
+      "servings": 3,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": true,
+      "allergens": ["EGGS", "LACTOSE"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Prechauffer le four a 180 degres. Couper la courgette et le poivron en petits des.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Faire sauter les legumes dans une poele allant au four avec l'huile d'olive et l'ail pendant 5 minutes.", "timerSeconds": 300},
+        {"stepNumber": 3, "instruction": "Battre les oeufs avec la feta emiettee, le sel, le poivre, l'origan et les tomates sechees coupees en morceaux.", "timerSeconds": null},
+        {"stepNumber": 4, "instruction": "Verser le melange d'oeufs sur les legumes sautes dans la poele. Enfourner.", "timerSeconds": 1200},
+        {"stepNumber": 5, "instruction": "Laisser tiedir 5 minutes avant de couper en parts. Se conserve 3 jours au refrigerateur.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "oeufs", "quantity": 6, "unit": "unite", "section": "DAIRY"},
+        {"name": "courgette", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "poivron rouge", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "feta", "quantity": 60, "unit": "g", "section": "DAIRY"},
+        {"name": "tomates sechees", "quantity": 30, "unit": "g", "section": "PANTRY"},
+        {"name": "ail", "quantity": 2, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "origan seche", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "huile d'olive", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"}
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Salade grecque au poulet grille",
+      "description": "Une salade grecque authentique avec poulet grille, tomates, concombre, feta, olives kalamata et origan",
+      "category": "LUNCH",
+      "caloriesPerServing": 400,
+      "proteinGrams": 34.0,
+      "carbsGrams": 14.0,
+      "fatGrams": 24.0,
+      "servings": 1,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": false,
+      "allergens": ["LACTOSE"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Assaisonner le filet de poulet avec l'origan, le sel, le poivre et un filet d'huile d'olive. Le griller a la poele 5 minutes de chaque cote.", "timerSeconds": 600},
+        {"stepNumber": 2, "instruction": "Couper les tomates en quartiers, le concombre en demi-rondelles et l'oignon rouge en fines lamelles.", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Disposer les legumes dans un bol, ajouter les olives kalamata et la feta emiettee.", "timerSeconds": null},
+        {"stepNumber": 4, "instruction": "Preparer la vinaigrette en melangeant l'huile d'olive, le jus de citron, l'origan seche, le sel et le poivre.", "timerSeconds": null},
+        {"stepNumber": 5, "instruction": "Trancher le poulet et le disposer sur la salade. Arroser de vinaigrette et servir immediatement.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "filet de poulet", "quantity": 150, "unit": "g", "section": "MEAT"},
+        {"name": "tomates", "quantity": 2, "unit": "unite", "section": "PRODUCE"},
+        {"name": "concombre", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "oignon rouge", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "feta", "quantity": 60, "unit": "g", "section": "DAIRY"},
+        {"name": "olives kalamata denoyautees", "quantity": 30, "unit": "g", "section": "PANTRY"},
+        {"name": "huile d'olive", "quantity": 1.5, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "citron", "quantity": 1, "unit": "c. a soupe", "section": "PRODUCE"},
+        {"name": "origan seche", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"}
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": ["POULTRY"]
+    },
+    {
+      "name": "Falafel au four avec tzatziki allege",
+      "description": "Des falafels croustillants cuits au four sans friture, accompagnes d'un tzatziki maison allege au fromage blanc",
+      "category": "LUNCH",
+      "caloriesPerServing": 380,
+      "proteinGrams": 18.0,
+      "carbsGrams": 42.0,
+      "fatGrams": 14.0,
+      "servings": 2,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "allergens": ["LACTOSE", "GLUTEN"],
+      "difficulty": "MEDIUM",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Prechauffer le four a 200 degres. Egoutter les pois chiches et les secher soigneusement.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Mixer grossierement les pois chiches avec l'oignon, l'ail, le persil, la coriandre fraiche, le cumin, la coriandre moulue, le sel et la farine. La texture doit rester un peu granuleuse.", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Former des boules de la taille d'une noix, les aplatir legerement. Les badigeonner d'huile d'olive et les disposer sur une plaque.", "timerSeconds": null},
+        {"stepNumber": 4, "instruction": "Enfourner et cuire en retournant a mi-cuisson jusqu'a ce qu'ils soient dores et croustillants.", "timerSeconds": 1500},
+        {"stepNumber": 5, "instruction": "Preparer le tzatziki : raper et exprimer le concombre, melanger avec le fromage blanc, l'ail rape, la menthe cisellee, le jus de citron et l'huile d'olive.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "pois chiches en conserve", "quantity": 240, "unit": "g", "section": "PANTRY"},
+        {"name": "oignon", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 2, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "persil plat", "quantity": 15, "unit": "g", "section": "PRODUCE"},
+        {"name": "coriandre fraiche", "quantity": 10, "unit": "g", "section": "PRODUCE"},
+        {"name": "cumin moulu", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "coriandre moulue", "quantity": 0.5, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "farine de ble", "quantity": 2, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "huile d'olive", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "fromage blanc 0%", "quantity": 150, "unit": "g", "section": "DAIRY"},
+        {"name": "concombre", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "menthe fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"},
+        {"name": "citron", "quantity": 1, "unit": "c. a soupe", "section": "PRODUCE"}
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Salade de foie de volaille epinards lentilles",
+      "description": "Une salade tiede aux foies de volaille sautes, epinards frais et lentilles vertes, source exceptionnelle de fer, B12 et zinc",
+      "category": "LUNCH",
+      "caloriesPerServing": 390,
+      "proteinGrams": 30.0,
+      "carbsGrams": 28.0,
+      "fatGrams": 16.0,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "allergens": ["MUSTARD"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Cuire les lentilles vertes dans de l'eau bouillante salee pendant 15 minutes. Egoutter et laisser tiedir.", "timerSeconds": 900},
+        {"stepNumber": 2, "instruction": "Nettoyer les foies de volaille en retirant les parties grasses et les membranes. Les couper en deux si necessaire.", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Faire chauffer l'huile d'olive dans une poele a feu vif. Faire sauter les foies 2 a 3 minutes de chaque cote jusqu'a coloration. Saler et poivrer.", "timerSeconds": 300},
+        {"stepNumber": 4, "instruction": "Preparer la vinaigrette en melangeant le vinaigre balsamique, l'huile d'olive, le miel et la moutarde.", "timerSeconds": null},
+        {"stepNumber": 5, "instruction": "Dresser les epinards frais, les lentilles tiedes et les foies. Arroser de vinaigrette et parsemer de noisettes concassees.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "foies de volaille", "quantity": 200, "unit": "g", "section": "MEAT"},
+        {"name": "lentilles vertes", "quantity": 120, "unit": "g", "section": "PANTRY"},
+        {"name": "epinards frais", "quantity": 80, "unit": "g", "section": "PRODUCE"},
+        {"name": "noisettes concassees", "quantity": 20, "unit": "g", "section": "PANTRY"},
+        {"name": "vinaigre balsamique", "quantity": 1, "unit": "c. a soupe", "section": "CONDIMENTS"},
+        {"name": "huile d'olive", "quantity": 2, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "moutarde de Dijon", "quantity": 1, "unit": "c. a cafe", "section": "CONDIMENTS"},
+        {"name": "miel", "quantity": 1, "unit": "c. a cafe", "section": "PANTRY"}
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": ["POULTRY"]
+    },
+    {
+      "name": "Jollof rice au poulet",
+      "description": "Un plat emblematique d'Afrique de l'Ouest avec du riz cuit dans une sauce tomate epicee et du poulet grille",
+      "category": "DINNER",
+      "caloriesPerServing": 460,
+      "proteinGrams": 36.0,
+      "carbsGrams": 50.0,
+      "fatGrams": 12.0,
+      "servings": 2,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 40,
+      "isBatchFriendly": true,
+      "allergens": [],
+      "difficulty": "MEDIUM",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Mixer les tomates, les poivrons et l'oignon pour obtenir une sauce lisse. Faire revenir dans l'huile a feu vif pendant 10 minutes jusqu'a reduction.", "timerSeconds": 600},
+        {"stepNumber": 2, "instruction": "Ajouter le bouillon de poulet, le curry, le cumin, le paprika fume et le sel. Porter a ebullition.", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Incorporer le riz rince, couvrir hermetiquement et cuire a feu tres doux.", "timerSeconds": 1200},
+        {"stepNumber": 4, "instruction": "Pendant ce temps, griller les hauts de cuisse de poulet assaisonnes au four a 200 degres.", "timerSeconds": 1500},
+        {"stepNumber": 5, "instruction": "Verifier que le riz a absorbe tout le liquide. Servir avec le poulet grille et de la coriandre fraiche.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "riz long grain", "quantity": 160, "unit": "g", "section": "PANTRY"},
+        {"name": "hauts de cuisse de poulet", "quantity": 300, "unit": "g", "section": "MEAT"},
+        {"name": "tomates", "quantity": 3, "unit": "unite", "section": "PRODUCE"},
+        {"name": "poivron rouge", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "oignon", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "bouillon de poulet", "quantity": 300, "unit": "ml", "section": "PANTRY"},
+        {"name": "poudre de curry", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "paprika fume", "quantity": 1, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "cumin moulu", "quantity": 0.5, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "huile d'olive", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "coriandre fraiche", "quantity": 5, "unit": "g", "section": "PRODUCE"}
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": ["POULTRY"]
+    },
+    {
+      "name": "Moqueca de poisson a la bresilienne",
+      "description": "Un ragout de poisson bresilien leger au lait de coco, coriandre et poivrons, un plat parfume et riche en proteines",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 32.0,
+      "carbsGrams": 18.0,
+      "fatGrams": 20.0,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": false,
+      "allergens": ["FISH"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Couper les filets de poisson en morceaux de 4 cm. Les mariner avec le jus de citron vert, l'ail emince, le curcuma et le sel pendant 10 minutes.", "timerSeconds": 600},
+        {"stepNumber": 2, "instruction": "Dans une cocotte, faire revenir l'oignon et les poivrons en rondelles dans l'huile d'olive pendant 3 minutes.", "timerSeconds": 180},
+        {"stepNumber": 3, "instruction": "Ajouter les tomates en des et la coriandre fraiche, cuire 2 minutes.", "timerSeconds": 120},
+        {"stepNumber": 4, "instruction": "Disposer les morceaux de poisson marine sur les legumes, verser le lait de coco. Couvrir et laisser mijoter a feu doux.", "timerSeconds": 900},
+        {"stepNumber": 5, "instruction": "Verifier la cuisson du poisson, ajouter un filet de citron vert et parsemer de coriandre fraiche. Servir avec du riz.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "filets de poisson blanc (cabillaud ou tilapia)", "quantity": 300, "unit": "g", "section": "MEAT_FISH"},
+        {"name": "lait de coco light", "quantity": 150, "unit": "ml", "section": "PANTRY"},
+        {"name": "tomates", "quantity": 2, "unit": "unite", "section": "PRODUCE"},
+        {"name": "poivron rouge", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "poivron vert", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "oignon", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 2, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "citron vert", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "coriandre fraiche", "quantity": 10, "unit": "g", "section": "PRODUCE"},
+        {"name": "curcuma", "quantity": 0.5, "unit": "c. a cafe", "section": "SPICES"},
+        {"name": "huile d'olive", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"}
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": ["FISH"]
+    },
+    {
+      "name": "Tofu ferme sesame riz complet edamames",
+      "description": "Un bowl vegan complet avec du tofu ferme marine au sesame, riz complet et edamames, riche en calcium et zinc",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 26.0,
+      "carbsGrams": 46.0,
+      "fatGrams": 14.0,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "allergens": ["SOY", "SESAME", "GLUTEN"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Presser le tofu ferme dans un linge propre pour en extraire le maximum d'eau. Couper en cubes de 2 cm.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Mariner le tofu avec la sauce soja, le vinaigre de riz, l'ail rape et le gingembre pendant 10 minutes.", "timerSeconds": 600},
+        {"stepNumber": 3, "instruction": "Cuire le riz complet dans de l'eau bouillante salee selon les instructions du paquet.", "timerSeconds": 1200},
+        {"stepNumber": 4, "instruction": "Faire dorer le tofu marine dans une poele antiadhesive avec l'huile de sesame a feu moyen-vif, 3 a 4 minutes par face.", "timerSeconds": 480},
+        {"stepNumber": 5, "instruction": "Cuire les edamames surgeles dans l'eau bouillante salee pendant 5 minutes. Egoutter.", "timerSeconds": 300},
+        {"stepNumber": 6, "instruction": "Dresser le riz, le tofu, les edamames et le chou kale. Parsemer de graines de sesame.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "tofu ferme", "quantity": 300, "unit": "g", "section": "PRODUCE"},
+        {"name": "riz complet", "quantity": 120, "unit": "g", "section": "PANTRY"},
+        {"name": "edamames surgeles", "quantity": 100, "unit": "g", "section": "FROZEN"},
+        {"name": "sauce soja", "quantity": 2, "unit": "c. a soupe", "section": "CONDIMENTS"},
+        {"name": "vinaigre de riz", "quantity": 1, "unit": "c. a soupe", "section": "CONDIMENTS"},
+        {"name": "huile de sesame", "quantity": 1, "unit": "c. a soupe", "section": "CONDIMENTS"},
+        {"name": "ail", "quantity": 1, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "gingembre frais", "quantity": 5, "unit": "g", "section": "PRODUCE"},
+        {"name": "chou kale", "quantity": 60, "unit": "g", "section": "PRODUCE"},
+        {"name": "graines de sesame", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"}
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Moules mariniere legere a la tomate",
+      "description": "Des moules cuisinees dans un bouillon tomate-ail-persil sans creme, source majeure d'iode, zinc et B12",
+      "category": "DINNER",
+      "caloriesPerServing": 320,
+      "proteinGrams": 28.0,
+      "carbsGrams": 22.0,
+      "fatGrams": 8.0,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 12,
+      "isBatchFriendly": false,
+      "allergens": ["SHELLFISH"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Gratter et rincer abondamment les moules sous l'eau froide. Retirer les barbillons. Eliminer toutes les moules ouvertes qui ne se ferment pas au toucher.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Faire chauffer l'huile d'olive dans une grande cocotte. Faire revenir l'echalote et l'ail eminces pendant 2 minutes.", "timerSeconds": 120},
+        {"stepNumber": 3, "instruction": "Ajouter les tomates concassees et le thym. Porter a ebullition.", "timerSeconds": null},
+        {"stepNumber": 4, "instruction": "Ajouter les moules, couvrir et cuire a feu vif en secouant la cocotte toutes les minutes pendant 5 a 6 minutes, jusqu'a ce que toutes les moules soient ouvertes.", "timerSeconds": 360},
+        {"stepNumber": 5, "instruction": "Eliminer les moules qui ne se sont pas ouvertes. Parsemer de persil frais et servir immediatement.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "moules fraiches", "quantity": 800, "unit": "g", "section": "SEAFOOD"},
+        {"name": "tomates concassees", "quantity": 200, "unit": "g", "section": "PANTRY"},
+        {"name": "echalote", "quantity": 2, "unit": "unite", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 3, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "persil plat frais", "quantity": 15, "unit": "g", "section": "PRODUCE"},
+        {"name": "thym frais", "quantity": 2, "unit": "g", "section": "PRODUCE"},
+        {"name": "huile d'olive", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"}
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": ["SHELLFISH"]
+    },
+    {
+      "name": "Bibimbap vegetal au riz complet",
+      "description": "Le celebre bol coreen avec riz complet, legumes sautes individuellement, oeuf et sauce gochujang allegee",
+      "category": "DINNER",
+      "caloriesPerServing": 440,
+      "proteinGrams": 18.0,
+      "carbsGrams": 58.0,
+      "fatGrams": 14.0,
+      "servings": 1,
+      "prepTimeMinutes": 25,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "allergens": ["EGGS", "SOY", "SESAME"],
+      "difficulty": "MEDIUM",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Cuire le riz complet selon les instructions du paquet.", "timerSeconds": 1200},
+        {"stepNumber": 2, "instruction": "Faire sauter les epinards avec un peu d'ail et de sauce soja. Reserver. Faire de meme separement avec les carottes rapees et les courgettes.", "timerSeconds": 600},
+        {"stepNumber": 3, "instruction": "Faire sauter les champignons avec une touche de sauce soja et d'huile de sesame. Reserver.", "timerSeconds": 180},
+        {"stepNumber": 4, "instruction": "Cuire l'oeuf au plat dans une poele a feu doux.", "timerSeconds": 180},
+        {"stepNumber": 5, "instruction": "Preparer la sauce : melanger la pate de gochujang, le vinaigre de riz, le miel et l'huile de sesame.", "timerSeconds": null},
+        {"stepNumber": 6, "instruction": "Disposer le riz dans un bol chaud, arranger les legumes autour, placer l'oeuf au centre. Arroser de sauce et parsemer de graines de sesame.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "riz complet", "quantity": 80, "unit": "g", "section": "PANTRY"},
+        {"name": "oeuf", "quantity": 1, "unit": "unite", "section": "DAIRY"},
+        {"name": "epinards frais", "quantity": 80, "unit": "g", "section": "PRODUCE"},
+        {"name": "carotte", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "courgette", "quantity": 80, "unit": "g", "section": "PRODUCE"},
+        {"name": "champignons de Paris", "quantity": 60, "unit": "g", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 1, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "pate de gochujang", "quantity": 1, "unit": "c. a cafe", "section": "CONDIMENTS"},
+        {"name": "sauce soja", "quantity": 1, "unit": "c. a soupe", "section": "CONDIMENTS"},
+        {"name": "huile de sesame", "quantity": 1, "unit": "c. a cafe", "section": "CONDIMENTS"},
+        {"name": "vinaigre de riz", "quantity": 1, "unit": "c. a cafe", "section": "CONDIMENTS"},
+        {"name": "miel", "quantity": 0.5, "unit": "c. a cafe", "section": "PANTRY"},
+        {"name": "graines de sesame", "quantity": 1, "unit": "c. a cafe", "section": "PANTRY"}
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Nasi goreng allege poulet oeuf",
+      "description": "Le riz frit indonesien revisite en version saine avec riz complet, poulet, oeuf et sauce kecap manis allegee",
+      "category": "DINNER",
+      "caloriesPerServing": 430,
+      "proteinGrams": 34.0,
+      "carbsGrams": 48.0,
+      "fatGrams": 12.0,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": false,
+      "allergens": ["EGGS", "SOY"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Utiliser du riz complet cuit de la veille (froid). C'est essentiel pour un bon nasi goreng.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Faire chauffer l'huile dans un wok a feu vif. Faire revenir l'ail et les echalotes eminces 1 minute.", "timerSeconds": 60},
+        {"stepNumber": 3, "instruction": "Ajouter le poulet coupe en des et sauter jusqu'a coloration.", "timerSeconds": 240},
+        {"stepNumber": 4, "instruction": "Pousser le tout sur le bord du wok, casser l'oeuf au centre et brouiller rapidement.", "timerSeconds": 60},
+        {"stepNumber": 5, "instruction": "Ajouter le riz froid, la sauce soja et le sambal oelek. Faire sauter a feu vif en melangeant constamment.", "timerSeconds": 180},
+        {"stepNumber": 6, "instruction": "Servir garni de concombre emince et de tomate en quartiers.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "riz complet cuit", "quantity": 150, "unit": "g", "section": "PANTRY"},
+        {"name": "blanc de poulet", "quantity": 120, "unit": "g", "section": "MEAT"},
+        {"name": "oeuf", "quantity": 1, "unit": "unite", "section": "DAIRY"},
+        {"name": "echalotes", "quantity": 2, "unit": "unite", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 2, "unit": "gousses", "section": "PRODUCE"},
+        {"name": "sauce soja", "quantity": 1, "unit": "c. a soupe", "section": "CONDIMENTS"},
+        {"name": "sambal oelek", "quantity": 0.5, "unit": "c. a cafe", "section": "CONDIMENTS"},
+        {"name": "huile vegetale", "quantity": 1, "unit": "c. a soupe", "section": "PANTRY"},
+        {"name": "concombre", "quantity": 0.5, "unit": "unite", "section": "PRODUCE"},
+        {"name": "tomate", "quantity": 1, "unit": "unite", "section": "PRODUCE"}
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": ["POULTRY"]
+    },
+    {
+      "name": "Gaspacho de concombre au yaourt grec",
+      "description": "Un gaspacho froid de concombre et menthe au yaourt grec, ultra-leger et riche en probiotiques",
+      "category": "SNACK",
+      "caloriesPerServing": 110,
+      "proteinGrams": 10.0,
+      "carbsGrams": 10.0,
+      "fatGrams": 2.0,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "allergens": ["LACTOSE"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Couper le concombre en troncons (garder un quart pour la garniture). Emincer l'ail.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Mixer le concombre avec le yaourt grec, la menthe, le jus de citron, l'ail et le sel.", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Ajouter un filet d'eau froide si necessaire pour ajuster la consistance. Assaisonner.", "timerSeconds": null},
+        {"stepNumber": 4, "instruction": "Refrigerer minimum 30 minutes. Servir bien frais avec les des de concombre reserves et quelques feuilles de menthe.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "concombre", "quantity": 1, "unit": "unite", "section": "PRODUCE"},
+        {"name": "yaourt grec 0%", "quantity": 150, "unit": "g", "section": "DAIRY"},
+        {"name": "menthe fraiche", "quantity": 10, "unit": "g", "section": "PRODUCE"},
+        {"name": "citron", "quantity": 1, "unit": "c. a soupe", "section": "PRODUCE"},
+        {"name": "ail", "quantity": 0.5, "unit": "gousses", "section": "PRODUCE"}
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Collation cottage cheese amandes",
+      "description": "Une collation haute en proteines avec du cottage cheese, des amandes et un filet de miel, ideale avant ou apres l'entrainement",
+      "category": "SNACK",
+      "caloriesPerServing": 220,
+      "proteinGrams": 22.0,
+      "carbsGrams": 12.0,
+      "fatGrams": 9.0,
+      "servings": 1,
+      "prepTimeMinutes": 3,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "allergens": ["LACTOSE", "TREE_NUTS"],
+      "difficulty": "EASY",
+      "steps": [
+        {"stepNumber": 1, "instruction": "Verser le cottage cheese dans un bol.", "timerSeconds": null},
+        {"stepNumber": 2, "instruction": "Ajouter les amandes entieres et arroser de miel.", "timerSeconds": null},
+        {"stepNumber": 3, "instruction": "Saupoudrer de cannelle et servir.", "timerSeconds": null}
+      ],
+      "ingredients": [
+        {"name": "cottage cheese", "quantity": 150, "unit": "g", "section": "DAIRY"},
+        {"name": "amandes entieres", "quantity": 20, "unit": "g", "section": "PANTRY"},
+        {"name": "miel", "quantity": 1, "unit": "c. a cafe", "section": "PANTRY"},
+        {"name": "cannelle moulue", "quantity": 0.5, "unit": "c. a cafe", "section": "SPICES"}
       ],
       "dietType": "VEGETARIAN",
       "meatTypes": []

@@ -2,16 +2,18 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:drift/drift.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
 
 import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/ingredient_normalizer.dart';
 import '../../../../data/local/database.dart';
 import '../../../../data/local/models/recipe_with_details.dart';
 import '../../../onboarding/domain/models/diet_type.dart';
-import '../../../onboarding/domain/models/excluded_meat.dart';
 import '../../../onboarding/domain/models/meal_type.dart';
 import '../../../recipes/domain/repositories/recipe_repository.dart';
 import '../repositories/meal_plan_repository.dart';
+import 'recipe_filter.dart';
+import 'servings_calculator.dart';
 
 /// Generates a weekly meal plan from recipes based on user profile.
 /// Port of MealPlanGenerator.kt (~914 lines).
@@ -26,18 +28,17 @@ class MealPlanGenerator {
     if (allRecipes.isEmpty) return;
 
     final userAllergies =
-        _parseAllergies(profile.allergies, profile.customAllergies);
+        RecipeFilter.parseAllergies(profile.allergies, profile.customAllergies);
     final userDietType = DietType.values.firstWhere(
       (d) => d.name == profile.dietType,
       orElse: () => DietType.omnivore,
     );
-    final userExcludedMeats = _parseExcludedMeats(profile.excludedMeats);
-    final filteredRecipes = _filterByExcludedMeats(
-      _filterByDietType(
-        _filterByAllergies(allRecipes, userAllergies),
-        userDietType,
-      ),
-      userExcludedMeats,
+    final userExcludedMeats = RecipeFilter.parseExcludedMeats(profile.excludedMeats);
+    final filteredRecipes = RecipeFilter.applyAll(
+      allRecipes,
+      allergies: userAllergies,
+      dietType: userDietType,
+      excludedMeats: userExcludedMeats,
     );
     final enabledMeals = _parseEnabledMealTypes(profile.enabledMealTypes);
 
@@ -220,18 +221,17 @@ class MealPlanGenerator {
     final category = mealType.name.toUpperCase();
     final recipes = await _recipeRepository.getRecipesByCategory(category);
     final userAllergies =
-        _parseAllergies(profile.allergies, profile.customAllergies);
+        RecipeFilter.parseAllergies(profile.allergies, profile.customAllergies);
     final userDietType = DietType.values.firstWhere(
       (d) => d.name == profile.dietType,
       orElse: () => DietType.omnivore,
     );
-    final userExcludedMeats = _parseExcludedMeats(profile.excludedMeats);
-    return _filterByExcludedMeats(
-      _filterByDietType(
-        _filterByAllergies(recipes, userAllergies),
-        userDietType,
-      ),
-      userExcludedMeats,
+    final userExcludedMeats = RecipeFilter.parseExcludedMeats(profile.excludedMeats);
+    return RecipeFilter.applyAll(
+      recipes,
+      allergies: userAllergies,
+      dietType: userDietType,
+      excludedMeats: userExcludedMeats,
     ).where((r) => r.id != currentRecipeId).toList();
   }
 
@@ -243,19 +243,18 @@ class MealPlanGenerator {
   ) async {
     final allRecipes = await _recipeRepository.getAllRecipes();
     final userAllergies =
-        _parseAllergies(profile.allergies, profile.customAllergies);
+        RecipeFilter.parseAllergies(profile.allergies, profile.customAllergies);
     final userDietType = DietType.values.firstWhere(
       (d) => d.name == profile.dietType,
       orElse: () => DietType.omnivore,
     );
-    final userExcludedMeats = _parseExcludedMeats(profile.excludedMeats);
+    final userExcludedMeats = RecipeFilter.parseExcludedMeats(profile.excludedMeats);
 
-    return _filterByExcludedMeats(
-      _filterByDietType(
-        _filterByAllergies(allRecipes, userAllergies),
-        userDietType,
-      ),
-      userExcludedMeats,
+    return RecipeFilter.applyAll(
+      allRecipes,
+      allergies: userAllergies,
+      dietType: userDietType,
+      excludedMeats: userExcludedMeats,
     )
         .where((r) => r.category == category && !excludeRecipeIds.contains(r.id))
         .toList()
@@ -264,36 +263,26 @@ class MealPlanGenerator {
 
   // ── Serving calculation ──────────────────────────────────────────────
 
+  /// Delegates to [ServingsCalculator.calculate].
   double calculateServings(
     Recipe recipe,
     int dailyTarget,
     MealType mealType,
-  ) {
-    final mealCalorieShare = mealType.calorieShare;
-    final maxServings = switch (mealType) {
-      MealType.breakfast => 1.5,
-      MealType.lunch => 1.5,
-      MealType.dinner => 1.5,
-      MealType.snack => 1.0,
-    };
-    final targetCalories = dailyTarget * mealCalorieShare;
-    if (recipe.caloriesPerServing <= 0) return 1.0;
-    final servings = targetCalories / recipe.caloriesPerServing;
-    // Round down to nearest 0.5 to match RecipeDetailCubit increment steps.
-    return ((servings * 2).floor() / 2.0).clamp(0.5, maxServings);
-  }
+  ) =>
+      ServingsCalculator.calculate(recipe, dailyTarget, mealType);
 
   // ── Parsing helpers ──────────────────────────────────────────────────
 
   Set<MealType> _parseEnabledMealTypes(String jsonStr) {
     try {
       final names = (json.decode(jsonStr) as List).cast<String>();
-      return names
-          .map((n) => MealType.values.firstWhere(
-                (m) => m.name == n || m.name.toUpperCase() == n,
-                orElse: () => MealType.breakfast,
-              ))
+      final result = names
+          .map((n) => MealType.values
+              .where((m) => m.name == n || m.name.toUpperCase() == n)
+              .firstOrNull)
+          .whereType<MealType>()
           .toSet();
+      return result.isNotEmpty ? result : MealType.values.toSet();
     } catch (_) {
       return MealType.values.toSet();
     }
@@ -321,84 +310,6 @@ class MealPlanGenerator {
         .toSet();
   }
 
-  Set<String> _parseAllergies(String allergiesJson, String customAllergies) {
-    final standard =
-        (json.decode(allergiesJson) as List?)?.cast<String>() ?? <String>[];
-    final custom = customAllergies.trim().isNotEmpty
-        ? customAllergies.split(',').map((s) => s.trim().toUpperCase()).toList()
-        : <String>[];
-    return {...standard, ...custom};
-  }
-
-  Set<String> _parseExcludedMeats(String excludedMeatsJson) {
-    try {
-      final names =
-          (json.decode(excludedMeatsJson) as List).cast<String>();
-      final expanded = <String>{};
-      for (final name in names) {
-        if (name == ExcludedMeat.allMeat.name.toUpperCase() ||
-            name == 'ALL_MEAT') {
-          expanded.addAll(['PORK', 'BEEF', 'POULTRY', 'VEAL', 'LAMB']);
-        } else if (name == ExcludedMeat.allFish.name.toUpperCase() ||
-            name == 'ALL_FISH') {
-          expanded.addAll(['FISH', 'SHELLFISH']);
-        } else {
-          expanded.add(name);
-        }
-      }
-      return expanded;
-    } catch (_) {
-      return {};
-    }
-  }
-
-  // ── Filtering pipeline ───────────────────────────────────────────────
-
-  List<Recipe> _filterByDietType(List<Recipe> recipes, DietType userDietType) {
-    return switch (userDietType) {
-      DietType.omnivore => recipes,
-      DietType.vegetarian => recipes
-          .where((r) =>
-              r.dietType == 'VEGETARIAN' || r.dietType == 'VEGAN')
-          .toList(),
-      DietType.vegan => recipes.where((r) => r.dietType == 'VEGAN').toList(),
-    };
-  }
-
-  List<Recipe> _filterByAllergies(
-    List<Recipe> recipes,
-    Set<String> userAllergies,
-  ) {
-    if (userAllergies.isEmpty) return recipes;
-    return recipes.where((recipe) {
-      try {
-        final allergens =
-            (json.decode(recipe.allergens) as List?)?.cast<String>() ??
-                <String>[];
-        return allergens.none((a) => userAllergies.contains(a));
-      } catch (_) {
-        return true;
-      }
-    }).toList();
-  }
-
-  List<Recipe> _filterByExcludedMeats(
-    List<Recipe> recipes,
-    Set<String> excludedMeats,
-  ) {
-    if (excludedMeats.isEmpty) return recipes;
-    return recipes.where((recipe) {
-      try {
-        final meats =
-            (json.decode(recipe.meatTypes) as List?)?.cast<String>() ??
-                <String>[];
-        return meats.none((m) => excludedMeats.contains(m));
-      } catch (_) {
-        return true;
-      }
-    }).toList();
-  }
-
   // ── Batch cooking helpers ────────────────────────────────────────────
 
   List<int> _computeBatchDayIndices(
@@ -408,14 +319,15 @@ class MealPlanGenerator {
     bool batchBeforeDiet,
   ) {
     if (sessions == 0) return [];
+    final clamped = sessions.clamp(1, dietDays.clamp(1, 7));
     final firstBatch =
         batchBeforeDiet ? (dietStartIndex - 1 + 7) % 7 : dietStartIndex;
-    if (sessions == 1) return [firstBatch];
-    if (sessions == 2) {
-      final secondBatch = (dietStartIndex + dietDays ~/ 2) % 7;
-      return [firstBatch, secondBatch];
-    }
-    return [firstBatch];
+    if (clamped == 1) return [firstBatch];
+    // Distribute sessions evenly across diet days.
+    return List.generate(clamped, (i) {
+      final offset = (dietDays * i / clamped).round();
+      return (dietStartIndex + offset) % 7;
+    });
   }
 
   List<Recipe> _groupRecipesByBatch(
@@ -441,7 +353,26 @@ class MealPlanGenerator {
 
   List<Recipe> _fillDaysWithRecipes(List<Recipe> recipes, int days) {
     if (recipes.isEmpty || days == 0) return [];
-    return List.generate(days, (i) => recipes[i % recipes.length]);
+    if (recipes.length == 1) return List.filled(days, recipes.first);
+
+    // Spread recipes to avoid consecutive repetition.
+    // Shuffle then tile, swapping any adjacent duplicates.
+    final pool = List.of(recipes)..shuffle();
+    final result = List.generate(days, (i) => pool[i % pool.length]);
+    for (var i = 1; i < result.length; i++) {
+      if (result[i].id == result[i - 1].id) {
+        // Find the nearest different recipe and swap.
+        for (var j = i + 1; j < result.length; j++) {
+          if (result[j].id != result[i - 1].id) {
+            final temp = result[i];
+            result[i] = result[j];
+            result[j] = temp;
+            break;
+          }
+        }
+      }
+    }
+    return result;
   }
 
   // ── Random mode ──────────────────────────────────────────────────────
@@ -471,7 +402,7 @@ class MealPlanGenerator {
       'SNACK': profile.distinctSnacks,
     };
 
-    final effectiveFatLimit = _computeEffectiveFatLimit(filteredRecipes);
+    final effectiveFatLimit = computeEffectiveFatLimit(filteredRecipes);
     final blacklistedIds = <int>{};
 
     for (var attempt = 0; attempt <= _maxValidationRetries; attempt++) {
@@ -490,7 +421,7 @@ class MealPlanGenerator {
         result[mealType] = pool.take(needed).toList();
       }
 
-      final validation = _validateMacros(
+      final validation = validateMacros(
         result,
         profile.dailyCalorieTarget,
         ingredientSets,
@@ -570,7 +501,7 @@ class MealPlanGenerator {
     final sortedTypes = candidatesByType.entries.toList()
       ..sort((a, b) => a.value.length.compareTo(b.value.length));
 
-    final effectiveFatLimit = _computeEffectiveFatLimit(filteredRecipes);
+    final effectiveFatLimit = computeEffectiveFatLimit(filteredRecipes);
     final blacklistedIds = <int>{};
 
     for (var attempt = 0; attempt <= _maxValidationRetries; attempt++) {
@@ -589,7 +520,7 @@ class MealPlanGenerator {
         overlapWeight,
       );
 
-      final validation = _validateMacros(
+      final validation = validateMacros(
         result,
         profile.dailyCalorieTarget,
         ingredientSets,
@@ -641,7 +572,7 @@ class MealPlanGenerator {
                 !selectedIds.contains(rwd.recipe.id) &&
                 !blacklistedIds.contains(rwd.recipe.id))
             .where((rwd) =>
-                _isWithinGroupCaps(ingredientSets[rwd.recipe.id], groupUsageCount))
+                isWithinGroupCaps(ingredientSets[rwd.recipe.id], groupUsageCount))
             .toList();
 
         if (available.isEmpty) {
@@ -683,7 +614,7 @@ class MealPlanGenerator {
               .where((g) => g != null && _proteinGroups.contains(g))
               .where((g) => !groupUsageCount.containsKey(g))
               .length;
-          final fatPenalty = _computeFatPenalty(
+          final fatPenalty = computeFatPenalty(
             rwd.recipe.fatGrams,
             rwd.recipe.caloriesPerServing,
           );
@@ -713,7 +644,8 @@ class MealPlanGenerator {
 
   // ── Macro validation ─────────────────────────────────────────────────
 
-  double _computeEffectiveFatLimit(List<Recipe> filteredRecipes) {
+  @visibleForTesting
+  double computeEffectiveFatLimit(List<Recipe> filteredRecipes) {
     final lunchDinner = filteredRecipes
         .where((r) => r.category == 'LUNCH' || r.category == 'DINNER')
         .toList();
@@ -733,7 +665,8 @@ class MealPlanGenerator {
         : _defaultMaxFatPercent;
   }
 
-  _MacroValidation _validateMacros(
+  @visibleForTesting
+  MacroValidation validateMacros(
     Map<String, List<Recipe>> plan,
     int dailyCalorieTarget,
     Map<int, Set<String>> ingredientSets,
@@ -753,7 +686,7 @@ class MealPlanGenerator {
           (m) => m.name.toUpperCase() == entry.key,
           orElse: () => MealType.breakfast,
         );
-        final servings = calculateServings(recipe, dailyCalorieTarget, type);
+        final servings = ServingsCalculator.calculate(recipe, dailyCalorieTarget, type);
         final cal = recipe.caloriesPerServing * servings;
         final fatCal = recipe.fatGrams * servings * 9.0;
         final protCal = recipe.proteinGrams * servings * 4.0;
@@ -794,27 +727,28 @@ class MealPlanGenerator {
     }
 
     if (avgFatPercent > maxFatPercent) {
-      return _MacroValidation(
+      return MacroValidation(
         isValid: false,
         recipeToBlacklist: fattiestRecipeId,
       );
     }
     if (avgProtPercent < _minProteinPercent) {
-      return _MacroValidation(
+      return MacroValidation(
         isValid: false,
         recipeToBlacklist: lowestProteinRecipeId,
       );
     }
     if (proteinGroupsUsed.length < _minProteinGroups) {
-      return _MacroValidation(
+      return MacroValidation(
         isValid: false,
         recipeToBlacklist: lowestProteinRecipeId,
       );
     }
-    return const _MacroValidation(isValid: true);
+    return const MacroValidation(isValid: true);
   }
 
-  int _computeFatPenalty(double fatGrams, int caloriesPerServing) {
+  @visibleForTesting
+  int computeFatPenalty(double fatGrams, int caloriesPerServing) {
     if (caloriesPerServing <= 0) return 0;
     final fatPercent = fatGrams * 9.0 / caloriesPerServing * 100.0;
     if (fatPercent > 50) return 4;
@@ -823,7 +757,8 @@ class MealPlanGenerator {
     return 0;
   }
 
-  bool _isWithinGroupCaps(
+  @visibleForTesting
+  bool isWithinGroupCaps(
     Set<String>? ingredients,
     Map<String, int> groupUsageCount,
   ) {
@@ -909,14 +844,11 @@ class MealPlanGenerator {
   }
 }
 
-class _MacroValidation {
-  const _MacroValidation({required this.isValid, this.recipeToBlacklist});
+@visibleForTesting
+class MacroValidation {
+  const MacroValidation({required this.isValid, this.recipeToBlacklist});
 
   final bool isValid;
   final int? recipeToBlacklist;
 }
 
-/// Extension to mirror Kotlin's `none` on Iterable.
-extension _IterableNone<T> on Iterable<T> {
-  bool none(bool Function(T) test) => !any(test);
-}

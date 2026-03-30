@@ -7,6 +7,7 @@ import '../features/dashboard/presentation/cubit/dashboard_cubit.dart';
 import '../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../features/meal_plan/domain/repositories/meal_plan_repository.dart';
 import '../features/meal_plan/domain/usecases/meal_plan_generator.dart';
+import '../features/meal_plan/domain/usecases/plan_edit_use_case.dart';
 import '../features/meal_plan/presentation/cubit/meal_plan_cubit.dart';
 import '../features/meal_plan/presentation/pages/meal_plan_page.dart';
 import '../features/onboarding/domain/usecases/calorie_calculator.dart';
@@ -71,10 +72,10 @@ class AppRoutes {
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
-/// App router configuration.
-final appRouter = GoRouter(
+/// Creates the app router with the given initial location.
+GoRouter createAppRouter(String initialLocation) => GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: AppRoutes.onboarding,
+  initialLocation: initialLocation,
   routes: [
     // ── Onboarding (full screen, no bottom bar) ─────────────────────
     GoRoute(
@@ -87,6 +88,7 @@ final appRouter = GoRouter(
           mealPlanGenerator: getIt<MealPlanGenerator>(),
           mealPlanRepository: getIt<MealPlanRepository>(),
           shoppingListGenerator: getIt<ShoppingListGenerator>(),
+          planEditUseCase: getIt<PlanEditUseCase>(),
         ),
         child: const OnboardingPage(),
       ),
@@ -214,7 +216,13 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/batch-cooking/:dayPlanId',
       builder: (context, state) {
-        final dayPlanId = int.parse(state.pathParameters['dayPlanId']!);
+        final dayPlanId = int.tryParse(state.pathParameters['dayPlanId'] ?? '');
+        if (dayPlanId == null) {
+          return Scaffold(
+            appBar: AppBar(title: const Text('Erreur')),
+            body: const Center(child: Text('Route invalide')),
+          );
+        }
         return BlocProvider(
           create: (_) => BatchCookingCubit(
             mealPlanRepository: getIt<MealPlanRepository>(),
@@ -228,7 +236,13 @@ final appRouter = GoRouter(
           path: 'mode',
           builder: (context, state) {
             final dayPlanId =
-                int.parse(state.pathParameters['dayPlanId']!);
+                int.tryParse(state.pathParameters['dayPlanId'] ?? '');
+            if (dayPlanId == null) {
+          return Scaffold(
+            appBar: AppBar(title: const Text('Erreur')),
+            body: const Center(child: Text('Route invalide')),
+          );
+        }
             return BlocProvider(
               create: (_) => BatchCookingModeCubit(
                 mealPlanRepository: getIt<MealPlanRepository>(),
@@ -274,6 +288,7 @@ final appRouter = GoRouter(
           mealPlanGenerator: getIt<MealPlanGenerator>(),
           userProfileRepository: getIt<UserProfileRepository>(),
           shoppingListGenerator: getIt<ShoppingListGenerator>(),
+          planEditUseCase: getIt<PlanEditUseCase>(),
         ),
         child: const PlanPreviewPage(),
       ),

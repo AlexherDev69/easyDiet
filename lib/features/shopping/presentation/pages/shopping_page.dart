@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,13 +68,40 @@ class ShoppingPage extends StatelessWidget {
   }
 }
 
-class _ShoppingContent extends StatelessWidget {
+// How long the celebration banner stays visible.
+const Duration _kCelebrationDuration = Duration(seconds: 3);
+
+class _ShoppingContent extends StatefulWidget {
   const _ShoppingContent({required this.state});
 
   final ShoppingState state;
 
   @override
+  State<_ShoppingContent> createState() => _ShoppingContentState();
+}
+
+class _ShoppingContentState extends State<_ShoppingContent> {
+  bool _showCelebration = false;
+  Timer? _celebrationTimer;
+
+  @override
+  void dispose() {
+    _celebrationTimer?.cancel();
+    super.dispose();
+  }
+
+  void _triggerCelebration() {
+    if (!mounted) return;
+    setState(() => _showCelebration = true);
+    _celebrationTimer?.cancel();
+    _celebrationTimer = Timer(_kCelebrationDuration, () {
+      if (mounted) setState(() => _showCelebration = false);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final state = widget.state;
     final theme = Theme.of(context);
     final cubit = context.read<ShoppingCubit>();
 
@@ -82,6 +111,55 @@ class _ShoppingContent extends StatelessWidget {
         totalItems > 0 ? checkedItems / totalItems : 0.0;
     final progressPercent = (progressFraction * 100).round();
 
+    return BlocListener<ShoppingCubit, ShoppingState>(
+      // Fire only when the trip goes to 100% for the first time per transition.
+      listenWhen: (prev, curr) {
+        final prevTotal = prev.items.length;
+        final currTotal = curr.items.length;
+        if (currTotal == 0) return false;
+        final prevPercent =
+            prevTotal > 0 ? (prev.items.where((i) => i.isChecked).length / prevTotal * 100).round() : 0;
+        final currPercent =
+            (curr.items.where((i) => i.isChecked).length / currTotal * 100).round();
+        // Trigger only on the edge from <100 to 100.
+        return prevPercent < 100 && currPercent == 100;
+      },
+      listener: (context, state) => _triggerCelebration(),
+      child: Stack(
+        children: [
+          _ShoppingScaffold(
+            state: state,
+            theme: theme,
+            cubit: cubit,
+            progressFraction: progressFraction,
+            progressPercent: progressPercent,
+          ),
+          // Celebration overlay — shown briefly when all trip items are checked.
+          _CelebrationBanner(visible: _showCelebration),
+        ],
+      ),
+    );
+  }
+}
+
+/// Pure display scaffold, extracted to keep build() readable.
+class _ShoppingScaffold extends StatelessWidget {
+  const _ShoppingScaffold({
+    required this.state,
+    required this.theme,
+    required this.cubit,
+    required this.progressFraction,
+    required this.progressPercent,
+  });
+
+  final ShoppingState state;
+  final ThemeData theme;
+  final ShoppingCubit cubit;
+  final double progressFraction;
+  final int progressPercent;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -140,17 +218,8 @@ class _ShoppingContent extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: LinearProgressIndicator(
-                      value: progressFraction,
-                      minHeight: 10,
-                      backgroundColor: AppColors.gray400
-                          .withValues(alpha: 0.2),
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        AppColors.emeraldPrimary,
-                      ),
-                    ),
+                  _AnimatedProgressBar(
+                    progress: progressFraction,
                   ),
                   if (state.estimatedWeight > 0) ...[
                     const SizedBox(height: 8),
@@ -194,7 +263,7 @@ class _ShoppingContent extends StatelessWidget {
   }
 }
 
-class _TripTabs extends StatelessWidget {
+class _TripTabs extends StatefulWidget {
   const _TripTabs({
     required this.totalTrips,
     required this.selectedTrip,
@@ -208,61 +277,110 @@ class _TripTabs extends StatelessWidget {
   final ValueChanged<int> onSelectTrip;
 
   @override
+  State<_TripTabs> createState() => _TripTabsState();
+}
+
+class _TripTabsState extends State<_TripTabs>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: widget.totalTrips,
+      initialIndex: (widget.selectedTrip - 1).clamp(0, widget.totalTrips - 1),
+      vsync: this,
+    );
+    _tabController.addListener(_onTabChanged);
+  }
+
+  @override
+  void didUpdateWidget(_TripTabs oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.totalTrips != oldWidget.totalTrips) {
+      _tabController.removeListener(_onTabChanged);
+      _tabController.dispose();
+      _tabController = TabController(
+        length: widget.totalTrips,
+        initialIndex:
+            (widget.selectedTrip - 1).clamp(0, widget.totalTrips - 1),
+        vsync: this,
+      );
+      _tabController.addListener(_onTabChanged);
+    } else if (widget.selectedTrip != oldWidget.selectedTrip) {
+      final target = (widget.selectedTrip - 1).clamp(0, widget.totalTrips - 1);
+      if (_tabController.index != target) {
+        _tabController.animateTo(target);
+      }
+    }
+  }
+
+  void _onTabChanged() {
+    if (!_tabController.indexIsChanging) {
+      widget.onSelectTrip(_tabController.index + 1);
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_onTabChanged);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return DefaultTabController(
-      length: totalTrips,
-      initialIndex: (selectedTrip - 1).clamp(0, totalTrips - 1),
-      child: TabBar(
-        isScrollable: true,
-        onTap: (index) => onSelectTrip(index + 1),
-        tabs: List.generate(totalTrips, (i) {
-          final trip = i + 1;
-          final isSelected = trip == selectedTrip;
-          final summary = tripDaySummaries[trip];
+    return TabBar(
+      controller: _tabController,
+      isScrollable: true,
+      tabs: List.generate(widget.totalTrips, (i) {
+        final trip = i + 1;
+        final isSelected = trip == widget.selectedTrip;
+        final summary = widget.tripDaySummaries[trip];
 
-          return Tab(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.shopping_cart,
-                      size: 16,
+        return Tab(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.shopping_cart,
+                    size: 16,
+                    color: isSelected
+                        ? AppColors.emeraldPrimary
+                        : theme.colorScheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Course $trip',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
                       color: isSelected
                           ? AppColors.emeraldPrimary
                           : theme.colorScheme.onSurfaceVariant,
                     ),
-                    const SizedBox(width: 4),
-                    Text(
-                      'Course $trip',
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: isSelected
-                            ? AppColors.emeraldPrimary
-                            : theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-                if (summary != null && summary.isNotEmpty)
-                  Text(
-                    summary,
-                    style: theme.textTheme.labelSmall?.copyWith(
-                      color: (isSelected
-                              ? AppColors.emeraldPrimary
-                              : theme.colorScheme.onSurfaceVariant)
-                          .withValues(alpha: 0.7),
-                    ),
                   ),
-              ],
-            ),
-          );
-        }),
-      ),
+                ],
+              ),
+              if (summary != null && summary.isNotEmpty)
+                Text(
+                  summary,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: (isSelected
+                            ? AppColors.emeraldPrimary
+                            : theme.colorScheme.onSurfaceVariant)
+                        .withValues(alpha: 0.7),
+                  ),
+                ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
@@ -274,6 +392,41 @@ class _GroupedItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (state.items.isEmpty) {
+      final theme = Theme.of(context);
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.shopping_cart_outlined,
+                size: 48,
+                color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Aucun article dans votre liste',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Generez un plan repas pour remplir votre liste',
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     final cubit = context.read<ShoppingCubit>();
     final grouped = <String, List<dynamic>>{};
     for (final item in state.items) {
@@ -334,5 +487,154 @@ class _GroupedItemsList extends StatelessWidget {
     } catch (_) {
       return sectionName;
     }
+  }
+}
+
+/// Custom animated progress bar with quarter marks and glow at 100%.
+class _AnimatedProgressBar extends StatelessWidget {
+  const _AnimatedProgressBar({required this.progress});
+
+  final double progress;
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(begin: 0, end: progress),
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOutCubic,
+      builder: (context, value, _) {
+        return CustomPaint(
+          size: const Size(double.infinity, 12),
+          painter: _ProgressBarPainter(progress: value),
+        );
+      },
+    );
+  }
+}
+
+class _ProgressBarPainter extends CustomPainter {
+  const _ProgressBarPainter({required this.progress});
+
+  final double progress;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final radius = size.height / 2;
+    final bgRect = RRect.fromRectAndRadius(
+      Offset.zero & size,
+      Radius.circular(radius),
+    );
+
+    // Background track
+    canvas.drawRRect(
+      bgRect,
+      Paint()..color = AppColors.gray400.withValues(alpha: 0.15),
+    );
+
+    // Filled portion
+    if (progress > 0) {
+      final fillWidth = size.width * progress.clamp(0.0, 1.0);
+      final fillRect = RRect.fromRectAndRadius(
+        Rect.fromLTWH(0, 0, fillWidth, size.height),
+        Radius.circular(radius),
+      );
+
+      // Glow when complete
+      if (progress >= 1.0) {
+        canvas.drawRRect(
+          fillRect.inflate(2),
+          Paint()
+            ..color = AppColors.emeraldPrimary.withValues(alpha: 0.3)
+            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4),
+        );
+      }
+
+      // Gradient fill: emerald -> warmer gold as it progresses
+      final fillPaint = Paint()
+        ..shader = LinearGradient(
+          colors: [
+            AppColors.emeraldPrimary,
+            progress >= 0.8
+                ? AppColors.accentAmber
+                : AppColors.emeraldLight,
+          ],
+        ).createShader(Offset.zero & size);
+      canvas.drawRRect(fillRect, fillPaint);
+    }
+
+    // Quarter marks (25%, 50%, 75%)
+    final markPaint = Paint()
+      ..color = Colors.white.withValues(alpha: 0.4)
+      ..strokeWidth = 1;
+    for (final fraction in [0.25, 0.5, 0.75]) {
+      final x = size.width * fraction;
+      canvas.drawLine(
+        Offset(x, 2),
+        Offset(x, size.height - 2),
+        markPaint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_ProgressBarPainter oldDelegate) =>
+      oldDelegate.progress != progress;
+}
+
+/// Celebration banner that slides in from the top and fades out.
+/// Shown briefly when all items in the current trip are checked.
+class _CelebrationBanner extends StatelessWidget {
+  const _CelebrationBanner({required this.visible});
+
+  final bool visible;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return AnimatedOpacity(
+      opacity: visible ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+      // Ignore pointer events when invisible so taps fall through.
+      child: IgnorePointer(
+        ignoring: !visible,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: Material(
+              elevation: 8,
+              borderRadius: BorderRadius.circular(24),
+              color: AppColors.emeraldPrimary,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.celebration,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Toutes les courses sont faites !',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

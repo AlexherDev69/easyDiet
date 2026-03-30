@@ -51,6 +51,7 @@ class PlanPreviewState extends Equatable {
   PlanPreviewState copyWith({
     bool? isLoading,
     WeekPlanWithDays? weekPlan,
+    bool clearWeekPlan = false,
     bool? showMoveDialog,
     MealWithRecipe? movingMeal,
     int? movingSourceDayPlanId,
@@ -64,7 +65,7 @@ class PlanPreviewState extends Equatable {
   }) {
     return PlanPreviewState(
       isLoading: isLoading ?? this.isLoading,
-      weekPlan: weekPlan ?? this.weekPlan,
+      weekPlan: clearWeekPlan ? null : (weekPlan ?? this.weekPlan),
       showMoveDialog: showMoveDialog ?? this.showMoveDialog,
       movingMeal: movingMeal ?? this.movingMeal,
       movingSourceDayPlanId:

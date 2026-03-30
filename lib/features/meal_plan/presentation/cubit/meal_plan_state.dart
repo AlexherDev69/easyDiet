@@ -65,6 +65,7 @@ class MealPlanState extends Equatable {
 
   MealPlanState copyWith({
     WeekPlanWithDays? weekPlan,
+    bool clearWeekPlan = false,
     bool? isLoading,
     bool? isRegenerating,
     int? selectedDayIndex,
@@ -81,7 +82,7 @@ class MealPlanState extends Equatable {
     bool clearErrorMessage = false,
   }) {
     return MealPlanState(
-      weekPlan: weekPlan ?? this.weekPlan,
+      weekPlan: clearWeekPlan ? null : (weekPlan ?? this.weekPlan),
       isLoading: isLoading ?? this.isLoading,
       isRegenerating: isRegenerating ?? this.isRegenerating,
       selectedDayIndex: selectedDayIndex ?? this.selectedDayIndex,

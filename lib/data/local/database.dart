@@ -52,6 +52,15 @@ class AppDatabase extends _$AppDatabase {
   /// For testing with an in-memory database.
   AppDatabase.forTesting(super.e);
 
+  // Schema version history:
+  //   v1 (current) — initial schema with 9 tables: UserProfiles, Recipes,
+  //                  RecipeSteps, Ingredients, WeekPlans, DayPlans, Meals,
+  //                  ShoppingItems, WeightLogs.
+  //
+  // IMPORTANT: any future column addition or table change MUST bump this
+  // value and add a corresponding migration block in [onUpgrade] below.
+  // Drift will NOT call [onUpgrade] if the version stays at 1 — new columns
+  // added without a version bump will simply be missing on existing installs.
   @override
   int get schemaVersion => 1;
 
@@ -62,9 +71,9 @@ class AppDatabase extends _$AppDatabase {
         await m.createAll();
       },
       onUpgrade: (Migrator m, int from, int to) async {
-        // For future schema changes, add migration steps here:
-        // if (from < 2) { await m.addColumn(...); }
-        await m.createAll();
+        // Add incremental steps when bumping schemaVersion:
+        // if (from < 2) { await m.addColumn(table, table.newColumn); }
+        // if (from < 3) { await m.createTable(newTable); }
       },
     );
   }

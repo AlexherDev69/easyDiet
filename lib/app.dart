@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'core/theme/app_theme.dart';
-import 'navigation/app_router.dart';
 
 /// Root widget for EasyDiet.
 class EasyDietApp extends StatelessWidget {
-  const EasyDietApp({super.key});
+  const EasyDietApp({required this.router, super.key});
+
+  final GoRouter router;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class EasyDietApp extends StatelessWidget {
         theme: AppTheme.light(),
         darkTheme: AppTheme.dark(),
         themeMode: ThemeMode.system,
-        routerConfig: appRouter,
+        routerConfig: router,
       ),
     );
   }

@@ -16,7 +16,7 @@ class AppColors {
   static const tealLight = Color(0xFF5EEAD4);
 
   // Accent — Amber/Orange (calories, energy)
-  static const accentAmber = Color(0xFFF59E0B);
+  static const accentAmber = Color(0xFFD97706); // amber-600, WCAG AA on white
   static const accentOrange = Color(0xFFF97316);
 
   // Accent — Blue (water, hydration)
@@ -74,8 +74,8 @@ class AppColors {
   static const dinnerColor = Color(0xFF8B5CF6);
   static const snackColor = Color(0xFFF43F5E);
 
-  // Macro nutrient colors
-  static const macroProtein = accentRose;
+  // Macro nutrient colors (must be visually distinct on donut charts)
+  static const macroProtein = accentRose; // pink-red
   static const macroCarbs = Color(0xFFFBBF24); // amber-400
-  static const macroFat = accentAmber;
+  static const macroFat = Color(0xFF06B6D4); // cyan-500 - distinct from amber carbs
 }

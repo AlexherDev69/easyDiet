@@ -40,6 +40,7 @@ class PlanConfigPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => context.pop(),
+              tooltip: 'Retour',
             ),
             title: const Text(
               'Configurer le plan',
@@ -373,6 +374,7 @@ class _StepperCard extends StatelessWidget {
           IconButton(
             onPressed: value > min ? () => onChanged(value - 1) : null,
             icon: const Icon(Icons.remove, size: 18),
+            tooltip: 'Retirer',
           ),
           Text(
             '$value',
@@ -384,6 +386,7 @@ class _StepperCard extends StatelessWidget {
           IconButton(
             onPressed: value < max ? () => onChanged(value + 1) : null,
             icon: const Icon(Icons.add, size: 18),
+            tooltip: 'Ajouter',
           ),
         ],
       ),

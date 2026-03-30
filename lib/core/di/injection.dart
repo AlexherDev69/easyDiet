@@ -20,6 +20,7 @@ import '../../features/settings/domain/repositories/user_profile_repository.dart
 import '../../features/shopping/domain/repositories/shopping_repository.dart';
 import '../../features/batch_cooking/domain/usecases/batch_step_optimizer.dart';
 import '../../features/meal_plan/domain/usecases/meal_plan_generator.dart';
+import '../../features/meal_plan/domain/usecases/plan_edit_use_case.dart';
 import '../../features/onboarding/domain/usecases/calorie_calculator.dart';
 import '../../features/shopping/domain/usecases/shopping_list_generator.dart';
 import '../../features/weight_log/domain/repositories/weight_log_repository.dart';
@@ -47,50 +48,57 @@ Future<void> configureDependencies() async {
     DatabaseSeeder(getIt<AppDatabase>()),
   );
 
-  // ── Repositories ────────────────────────────────────────────────────
-  getIt.registerSingleton<UserProfileRepository>(
-    UserProfileRepositoryImpl(getIt<UserProfileDao>()),
+  // ── Repositories (lazy - created on first access) ───────────────────
+  getIt.registerLazySingleton<UserProfileRepository>(
+    () => UserProfileRepositoryImpl(getIt<UserProfileDao>()),
   );
-  getIt.registerSingleton<RecipeRepository>(
-    RecipeRepositoryImpl(getIt<RecipeDao>()),
+  getIt.registerLazySingleton<RecipeRepository>(
+    () => RecipeRepositoryImpl(getIt<RecipeDao>()),
   );
-  getIt.registerSingleton<MealPlanRepository>(
-    MealPlanRepositoryImpl(
+  getIt.registerLazySingleton<MealPlanRepository>(
+    () => MealPlanRepositoryImpl(
       getIt<WeekPlanDao>(),
       getIt<DayPlanDao>(),
       getIt<MealDao>(),
-      getIt<AppDatabase>(),
     ),
   );
-  getIt.registerSingleton<ShoppingRepository>(
-    ShoppingRepositoryImpl(getIt<ShoppingItemDao>()),
+  getIt.registerLazySingleton<ShoppingRepository>(
+    () => ShoppingRepositoryImpl(getIt<ShoppingItemDao>()),
   );
-  getIt.registerSingleton<WeightLogRepository>(
-    WeightLogRepositoryImpl(getIt<WeightLogDao>()),
+  getIt.registerLazySingleton<WeightLogRepository>(
+    () => WeightLogRepositoryImpl(getIt<WeightLogDao>()),
   );
 
-  // ── Use Cases ──────────────────────────────────────────────────────
-  getIt.registerSingleton<CalorieCalculator>(const CalorieCalculator());
-  getIt.registerSingleton<MealPlanGenerator>(
-    MealPlanGenerator(
+  // ── Use Cases (lazy - created on first access) ─────────────────────
+  getIt.registerLazySingleton<CalorieCalculator>(
+    () => const CalorieCalculator(),
+  );
+  getIt.registerLazySingleton<MealPlanGenerator>(
+    () => MealPlanGenerator(
       getIt<MealPlanRepository>(),
       getIt<RecipeRepository>(),
     ),
   );
-  getIt.registerSingleton<ShoppingListGenerator>(
-    ShoppingListGenerator(
+  getIt.registerLazySingleton<ShoppingListGenerator>(
+    () => ShoppingListGenerator(
       getIt<RecipeRepository>(),
       getIt<ShoppingRepository>(),
     ),
   );
-  getIt.registerSingleton<BatchStepOptimizer>(const BatchStepOptimizer());
-  getIt.registerSingleton<WeightProjectionCalculator>(
-    const WeightProjectionCalculator(),
+  getIt.registerLazySingleton<PlanEditUseCase>(
+    () => PlanEditUseCase(
+      mealPlanRepository: getIt<MealPlanRepository>(),
+      mealPlanGenerator: getIt<MealPlanGenerator>(),
+      userProfileRepository: getIt<UserProfileRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<BatchStepOptimizer>(
+    () => const BatchStepOptimizer(),
+  );
+  getIt.registerLazySingleton<WeightProjectionCalculator>(
+    () => const WeightProjectionCalculator(),
   );
 
-  // ── Seed recipes if empty ───────────────────────────────────────────
-  final recipeCount = await getIt<RecipeDao>().getRecipeCount();
-  if (recipeCount == 0) {
-    await getIt<DatabaseSeeder>().seedRecipes();
-  }
+  // ── Seed new recipes (incremental) ──────────────────────────────────
+  await getIt<DatabaseSeeder>().seedRecipes();
 }

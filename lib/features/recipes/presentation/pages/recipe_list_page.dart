@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../data/local/models/recipe_with_details.dart';
+
 import '../../../../navigation/app_router.dart';
 import '../cubit/recipe_list_cubit.dart';
 import '../cubit/recipe_list_state.dart';
@@ -106,92 +106,86 @@ class _RecipeListBody extends StatelessWidget {
 
   final RecipeListState state;
 
-  static const _mealTypeOrder = ['BREAKFAST', 'LUNCH', 'DINNER', 'SNACK'];
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final orderedGroups = state.filteredGroupedRecipes;
 
-    // Filter by tab
-    final baseRecipes = state.selectedTab == 0
-        ? state.allRecipes
-            .where((r) => state.weekRecipeIds.contains(r.recipe.id))
-            .toList()
-        : state.allRecipes;
-
-    // Filter by category
-    final filteredRecipes = state.selectedCategory != null
-        ? baseRecipes
-            .where((r) => r.recipe.category == state.selectedCategory)
-            .toList()
-        : baseRecipes;
-
-    // Sort by meal type order
-    final sortedRecipes = List.of(filteredRecipes)
-      ..sort((a, b) {
-        final ai = _mealTypeOrder.indexOf(a.recipe.category);
-        final bi = _mealTypeOrder.indexOf(b.recipe.category);
-        return (ai == -1 ? 999 : ai).compareTo(bi == -1 ? 999 : bi);
-      });
-
-    if (sortedRecipes.isEmpty) {
+    if (orderedGroups.isEmpty) {
+      final hasFilter = state.selectedCategory != null;
+      final message = hasFilter
+          ? 'Aucune recette ne correspond a ce filtre'
+          : state.selectedTab == 0
+              ? 'Aucune recette cette semaine'
+              : 'Aucune recette disponible';
       return Center(
         child: Padding(
           padding: const EdgeInsets.all(32),
-          child: Text(
-            state.selectedTab == 0
-                ? 'Aucune recette cette semaine'
-                : 'Aucune recette disponible',
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                hasFilter ? Icons.filter_list_off : Icons.restaurant_menu,
+                size: 48,
+                color: theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+              if (hasFilter) ...[
+                const SizedBox(height: 12),
+                TextButton(
+                  onPressed: () =>
+                      context.read<RecipeListCubit>().selectCategory(null),
+                  child: const Text('Effacer le filtre'),
+                ),
+              ],
+              if (!hasFilter && state.selectedTab == 0) ...[
+                const SizedBox(height: 12),
+                FilledButton.tonal(
+                  onPressed: () => context.push(AppRoutes.planConfig),
+                  child: const Text('Generer un plan'),
+                ),
+              ],
+            ],
           ),
         ),
       );
     }
 
-    // Group by category, sorted alphabetically within each group
-    final grouped = <String, List<RecipeWithDetails>>{};
-    for (final recipe in sortedRecipes) {
-      grouped.putIfAbsent(recipe.recipe.category, () => []).add(recipe);
-    }
-    for (final list in grouped.values) {
-      list.sort((a, b) => a.recipe.name.compareTo(b.recipe.name));
-    }
-
-    final orderedGroups = _mealTypeOrder
-        .where(grouped.containsKey)
-        .map((cat) => MapEntry(cat, grouped[cat]!))
-        .toList();
-
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
       itemCount: orderedGroups.fold<int>(
         0,
-        (sum, g) => sum + 1 + g.value.length, // header + items
+        (sum, g) => sum + 1 + g.$2.length, // header + items
       ),
       itemBuilder: (context, index) {
         var offset = 0;
-        for (final group in orderedGroups) {
+        for (final (category, recipes) in orderedGroups) {
           // Header
           if (index == offset) {
-            final filter = categoryFilters.where((f) => f.key == group.key);
+            final filter = categoryFilters.where((f) => f.key == category);
             final label =
-                filter.isNotEmpty ? filter.first.label : group.key;
+                filter.isNotEmpty ? filter.first.label : category;
             final color =
                 filter.isNotEmpty ? filter.first.color : AppColors.emeraldPrimary;
             return CategoryHeader(
               label: label,
               color: color,
-              count: group.value.length,
+              count: recipes.length,
             );
           }
           offset++;
 
           // Items
-          if (index < offset + group.value.length) {
-            final recipe = group.value[index - offset];
-            final filter = categoryFilters.where((f) => f.key == group.key);
+          if (index < offset + recipes.length) {
+            final recipe = recipes[index - offset];
+            final filter = categoryFilters.where((f) => f.key == category);
             final color =
                 filter.isNotEmpty ? filter.first.color : AppColors.emeraldPrimary;
             return RecipeListCard(
@@ -202,7 +196,7 @@ class _RecipeListBody extends StatelessWidget {
               ),
             );
           }
-          offset += group.value.length;
+          offset += recipes.length;
         }
         return const SizedBox.shrink();
       },

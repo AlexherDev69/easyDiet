@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/date_utils.dart';
+import '../../../../core/utils/profile_json_parser.dart';
 import '../../../../data/local/database.dart';
 import '../../../onboarding/domain/models/models.dart';
 import '../../../settings/domain/repositories/user_profile_repository.dart';
@@ -26,8 +27,8 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
       final profile = await _userProfileRepository.getProfile();
       if (profile == null) return;
 
-      final freeDaysList = _parseIntList(profile.freeDays).toSet();
-      final enabledMealTypes = _parseEnabledMealTypes(profile.enabledMealTypes);
+      final freeDaysList = ProfileJsonParser.parseIntSet(profile.freeDays);
+      final enabledMealTypes = ProfileJsonParser.parseMealTypes(profile.enabledMealTypes);
       final dietType = DietType.values.firstWhere(
         (d) => d.name == profile.dietType,
         orElse: () => DietType.omnivore,
@@ -138,28 +139,4 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
     }
   }
 
-  // ── JSON parsing ──────────────────────────────────────────────────
-
-  List<int> _parseIntList(String jsonStr) {
-    try {
-      final decoded = json.decode(jsonStr);
-      if (decoded is List) return decoded.cast<int>();
-    } catch (_) {}
-    return [];
-  }
-
-  Set<MealType> _parseEnabledMealTypes(String jsonStr) {
-    try {
-      final decoded = json.decode(jsonStr);
-      if (decoded is List) {
-        return decoded
-            .cast<String>()
-            .map(
-                (n) => MealType.values.where((m) => m.name == n).firstOrNull)
-            .whereType<MealType>()
-            .toSet();
-      }
-    } catch (_) {}
-    return MealType.values.toSet();
-  }
 }

@@ -21,8 +21,81 @@ class ShoppingListGenerator {
     WeekPlanWithDays weekPlan, {
     int shoppingTripsPerWeek = 1,
   }) async {
-    await _shoppingRepository.deleteGeneratedItems(weekPlan.weekPlan.id);
+    final weekPlanId = weekPlan.weekPlan.id;
+    final newItems = await _computeNewItems(weekPlan, shoppingTripsPerWeek);
+    final oldItems =
+        await _shoppingRepository.getGeneratedItemsForWeek(weekPlanId);
 
+    // Index old items by match key: "name|unit|tripNumber"
+    final oldMap = <String, ShoppingItem>{};
+    for (final item in oldItems) {
+      oldMap['${item.name}|${item.unit}|${item.tripNumber}'] = item;
+    }
+
+    final toInsert = <ShoppingItemsCompanion>[];
+    final toUpdate = <ShoppingItem>[];
+    final matchedOldIds = <int>{};
+
+    for (final entry in newItems.entries) {
+      final newItem = entry.value;
+      final matchKey =
+          '${newItem.displayName}|${newItem.displayUnit}|${newItem.tripNumber}';
+      final oldItem = oldMap[matchKey];
+
+      if (oldItem != null) {
+        matchedOldIds.add(oldItem.id);
+        // Uncheck only if quantity increased (user needs to buy more)
+        final keepChecked =
+            newItem.quantity <= oldItem.quantity && oldItem.isChecked;
+        toUpdate.add(ShoppingItem(
+          id: oldItem.id,
+          weekPlanId: weekPlanId,
+          name: newItem.displayName,
+          quantity: newItem.quantity,
+          unit: newItem.displayUnit,
+          supermarketSection: newItem.section,
+          isChecked: keepChecked,
+          isManuallyAdded: false,
+          sourceDetails: newItem.sourceDetailsJson,
+          tripNumber: newItem.tripNumber,
+        ));
+      } else {
+        toInsert.add(ShoppingItemsCompanion.insert(
+          weekPlanId: weekPlanId,
+          name: newItem.displayName,
+          quantity: newItem.quantity,
+          unit: newItem.displayUnit,
+          supermarketSection: newItem.section,
+          isChecked: const Value(false),
+          isManuallyAdded: const Value(false),
+          sourceDetails: Value(newItem.sourceDetailsJson),
+          tripNumber: Value(newItem.tripNumber),
+        ));
+      }
+    }
+
+    // Old items not matched by any new item should be deleted
+    final toDeleteIds = oldItems
+        .where((item) => !matchedOldIds.contains(item.id))
+        .map((item) => item.id)
+        .toList();
+
+    if (toDeleteIds.isNotEmpty) {
+      await _shoppingRepository.deleteItemsByIds(toDeleteIds);
+    }
+    for (final item in toUpdate) {
+      await _shoppingRepository.updateItem(item);
+    }
+    if (toInsert.isNotEmpty) {
+      await _shoppingRepository.insertItems(toInsert);
+    }
+  }
+
+  /// Computes the desired new shopping items from the week plan.
+  Future<Map<String, _ComputedItem>> _computeNewItems(
+    WeekPlanWithDays weekPlan,
+    int shoppingTripsPerWeek,
+  ) async {
     final dietDays = weekPlan.days
         .where((d) => !d.dayPlan.isFreeDay)
         .toList()
@@ -33,17 +106,19 @@ class ShoppingListGenerator {
       shoppingTripsPerWeek,
     );
 
-    // One aggregation map per trip
+    final allRecipes = await _recipeRepository.getAllRecipesWithDetails();
+    final recipeMap = {for (final r in allRecipes) r.recipe.id: r};
+
+    // Aggregate ingredients per trip
     final tripMaps = <int, Map<String, _AggregatedIngredient>>{};
 
     for (final day in dietDays) {
       final tripNumber = tripDayMap[day.dayPlan.dayOfWeek] ?? 1;
 
       for (final mealWithRecipe in day.meals) {
-        final recipe = await _recipeRepository.getRecipeWithDetails(
-          mealWithRecipe.recipe.id,
-        );
+        final recipe = recipeMap[mealWithRecipe.recipe.id];
         if (recipe == null) continue;
+        if (recipe.recipe.servings == 0) continue;
         final servingsMultiplier =
             mealWithRecipe.meal.servings / recipe.recipe.servings;
 
@@ -87,29 +162,31 @@ class ShoppingListGenerator {
       }
     }
 
-    final shoppingItems = <ShoppingItemsCompanion>[];
+    // Convert to display-ready computed items
+    final result = <String, _ComputedItem>{};
     for (final entry in tripMaps.entries) {
       final tripNumber = entry.key;
       for (final agg in entry.value.values) {
+        // Round in base unit BEFORE converting to avoid overestimates
+        // (e.g. 1050g -> round -> 1050g -> 1.05kg, not 1050g -> 1.05kg -> 1.5kg)
+        final roundedBase = QuantityFormatter.roundForCooking(agg.quantity);
         final (displayQty, displayUnit) =
-            _toDisplayUnit(agg.quantity, agg.unit);
-        shoppingItems.add(ShoppingItemsCompanion.insert(
-          weekPlanId: weekPlan.weekPlan.id,
-          name: agg.displayName,
-          quantity: QuantityFormatter.roundForCooking(displayQty),
-          unit: displayUnit,
-          supermarketSection: agg.section,
-          isChecked: const Value(false),
-          isManuallyAdded: const Value(false),
-          sourceDetails: Value(json.encode(
+            _toDisplayUnit(roundedBase, agg.unit);
+        final quantity = displayQty;
+        final key = '${agg.displayName}|$displayUnit|$tripNumber';
+        result[key] = _ComputedItem(
+          displayName: agg.displayName,
+          quantity: quantity,
+          displayUnit: displayUnit,
+          section: agg.section,
+          sourceDetailsJson: json.encode(
             agg.sources.map((s) => s.toJson()).toList(),
-          )),
-          tripNumber: Value(tripNumber),
-        ));
+          ),
+          tripNumber: tripNumber,
+        );
       }
     }
-
-    await _shoppingRepository.insertItems(shoppingItems);
+    return result;
   }
 
   Map<int, int> _buildTripDayMap(List<int> dietDayNumbers, int tripsPerWeek) {
@@ -235,6 +312,24 @@ class ShoppingListGenerator {
     'farine', 'sucre', 'cacao', 'maizena',
     'poudre', 'moulu', 'moulue', 'seche', 'sechee',
   ];
+}
+
+class _ComputedItem {
+  const _ComputedItem({
+    required this.displayName,
+    required this.quantity,
+    required this.displayUnit,
+    required this.section,
+    required this.sourceDetailsJson,
+    required this.tripNumber,
+  });
+
+  final String displayName;
+  final double quantity;
+  final String displayUnit;
+  final String section;
+  final String sourceDetailsJson;
+  final int tripNumber;
 }
 
 class _AggregatedIngredient {

@@ -37,6 +37,7 @@ class StepperCard extends StatelessWidget {
                 ? () => onValueChange(value - 1)
                 : null,
             icon: const Icon(Icons.remove),
+            tooltip: 'Retirer',
             iconSize: 20,
             constraints: const BoxConstraints.tightFor(
               width: 48,
@@ -58,6 +59,7 @@ class StepperCard extends StatelessWidget {
                 ? () => onValueChange(value + 1)
                 : null,
             icon: const Icon(Icons.add),
+            tooltip: 'Ajouter',
             iconSize: 20,
             constraints: const BoxConstraints.tightFor(
               width: 48,

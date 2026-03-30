@@ -15,16 +15,20 @@ class DatabaseSeeder {
   Future<void> seedRecipes() async {
     final recipeDao = _db.recipeDao;
 
-    // Idempotency guard: skip seeding if recipes already exist.
-    final count = await recipeDao.getRecipeCount();
-    if (count > 0) return;
+    final existingNames = await recipeDao.getAllRecipeNames();
 
     final jsonString = await rootBundle.loadString('assets/recipes.json');
     final data = json.decode(jsonString) as Map<String, dynamic>;
-    final recipes = data['recipes'] as List<dynamic>;
+    final allRecipes = data['recipes'] as List<dynamic>;
+
+    final newRecipes =
+        allRecipes.where((r) => !existingNames.contains(r['name'])).toList();
+    if (newRecipes.isEmpty) return;
+
+    debugPrint('DatabaseSeeder: inserting ${newRecipes.length} new recipes');
 
     await _db.transaction(() async {
-      for (final raw in recipes) {
+      for (final raw in newRecipes) {
         try {
           final recipe = raw as Map<String, dynamic>;
 

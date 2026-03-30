@@ -10,4 +10,6 @@ abstract class ShoppingRepository {
   Future<void> uncheckAll(int weekPlanId);
   Future<void> deleteItem(int itemId);
   Future<void> deleteGeneratedItems(int weekPlanId);
+  Future<List<ShoppingItem>> getGeneratedItemsForWeek(int weekPlanId);
+  Future<void> deleteItemsByIds(List<int> ids);
 }

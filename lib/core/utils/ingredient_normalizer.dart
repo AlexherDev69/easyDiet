@@ -28,30 +28,34 @@ class IngredientNormalizer {
     'ciboulette': ['ciboulette fraiche'],
     'menthe': ['menthe fraiche'],
     'aneth': ['aneth frai'],
-    // Vegetables — singular/plural
+    // Vegetables — singularizer skips words ending in 'is', handle manually
+    'brocoli': ['brocolis'],
     'carotte': ['carotte (batonnet)'],
-    'aubergine': ['aubergine'],
-    'courgette': ['courgette'],
-    'brocoli': ['brocoli'],
-    'tomate': ['tomate'],
-    'echalote': ['echalote'],
     'champignon': ['champignon de pari'],
     // Garlic
     'ail': ["gousse d'ail", "gousses d'ail", 'gousse d ail', 'gousses d ail'],
-    // Eggs
-    'oeuf': ["blanc d'oeuf"],
-    // Oils — normalize apostrophe variants
-    "huile d'olive": ['huile d olive'],
-    // Edamame variants
-    'edamame': ['edamame (decortique)', 'edamame (surgele)', 'edamame surgele'],
+    // Eggs — do NOT merge blancs d'oeufs with whole eggs (different ingredients)
+    // Oils — normalize apostrophe variants and qualifiers
+    "huile d'olive": ['huile d olive', "huile d'olive extra vierge"],
+    // Edamame variants — includes post-singularization forms
+    'edamame': [
+      'edamame (decortique)',
+      'edamame (surgele)',
+      'edamame surgele',
+      'edamames surgele',
+    ],
+    // Pois chiches — canned/cooked variants
+    'pois chiche': ['pois chiche en conserve', 'pois chiches en conserve'],
     // Cacao
     'cacao en poudre': ['cacao en poudre non sucre'],
-    // Lait de coco
-    'lait de coco': ['lait de coco allege', 'lait de coco light'],
+    // Lait de coco — all light variants
+    'lait de coco': ['lait de coco allege', 'lait de coco light', 'lait de coco leger'],
     // Mozzarella
     'mozzarella': ['mozzarella allegee'],
-    // Moutarde
-    'moutarde de dijon': ["moutarde a l ancienne"],
+    // Moutarde — with and without apostrophe to be safe
+    "moutarde de dijon": ["moutarde a l'ancienne", "moutarde a l ancienne"],
+    // Sauce soja
+    'sauce soja': ['sauce soja allege'],
     // Fromage rape
     'fromage rape': ['emmental rape', 'gruyere rape'],
     // Granola
@@ -78,6 +82,7 @@ class IngredientNormalizer {
     'aneth': 'Aneth',
     'ail': 'Ail',
     'oeuf': 'Oeufs',
+    'blanc d\'oeuf': 'Blancs d\'oeufs',
     "huile d'olive": "Huile d'olive",
     'edamame': 'Edamames',
     'cacao en poudre': 'Cacao en poudre',
@@ -90,6 +95,9 @@ class IngredientNormalizer {
     'farine': 'Farine',
     'gingembre moulu': 'Gingembre',
     'champignon': 'Champignons',
+    'brocoli': 'Brocoli',
+    'pois chiche': 'Pois chiches',
+    'sauce soja': 'Sauce soja',
   };
 
   /// Returns the preferred display name for a normalized key,

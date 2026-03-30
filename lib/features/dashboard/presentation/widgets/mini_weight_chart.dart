@@ -7,6 +7,8 @@ import '../../../../core/utils/date_utils.dart';
 import '../../../../data/local/database.dart';
 
 /// Small line chart with gradient fill for recent weight logs.
+/// Animates with a left-to-right draw-in effect on first render and whenever
+/// a new entry is added.
 class MiniWeightChart extends StatefulWidget {
   const MiniWeightChart({
     required this.logs,
@@ -28,18 +30,38 @@ class _MiniWeightChartState extends State<MiniWeightChart> {
   Widget build(BuildContext context) {
     if (widget.logs.length < 2) return const SizedBox.shrink();
 
-    return GestureDetector(
-      onTapDown: (details) => _handleTap(details.localPosition),
-      child: SizedBox(
-        height: widget.height,
-        child: CustomPaint(
-          size: Size.infinite,
-          painter: _WeightChartPainter(
-            logs: widget.logs,
-            selectedIndex: _selectedIndex,
+    // Use Material inverseSurface so the tooltip adapts to light/dark mode
+    // without a hardcoded color in the CustomPainter.
+    final colorScheme = Theme.of(context).colorScheme;
+
+    // ValueKey(logs.length) re-triggers the draw-in whenever a new entry is
+    // added, so the chart always "arrives" with the reveal animation.
+    return TweenAnimationBuilder<double>(
+      key: ValueKey(widget.logs.length),
+      tween: Tween(begin: 0.0, end: 1.0),
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeOutCubic,
+      builder: (context, drawProgress, _) {
+        return Semantics(
+          label: 'Mini graphique de poids',
+          child: GestureDetector(
+            onTapDown: (details) => _handleTap(details.localPosition),
+            child: SizedBox(
+              height: widget.height,
+              child: CustomPaint(
+                size: Size.infinite,
+                painter: _WeightChartPainter(
+                  logs: widget.logs,
+                  selectedIndex: _selectedIndex,
+                  tooltipBgColor: colorScheme.inverseSurface,
+                  tooltipTextColor: colorScheme.onInverseSurface,
+                  drawProgress: drawProgress,
+                ),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -79,10 +101,23 @@ class _WeightChartPainter extends CustomPainter {
   _WeightChartPainter({
     required this.logs,
     required this.selectedIndex,
+    required this.tooltipBgColor,
+    required this.tooltipTextColor,
+    required this.drawProgress,
   });
 
   final List<WeightLog> logs;
   final int? selectedIndex;
+
+  /// Background of the tap tooltip bubble - injected from the widget so the
+  /// painter has no direct dependency on BuildContext or Theme.
+  final Color tooltipBgColor;
+  final Color tooltipTextColor;
+
+  /// 0.0 to 1.0 left-to-right draw-in progress driven by TweenAnimationBuilder.
+  /// At 0.5, only the left half of the chart line is visible; at 1.0 it is
+  /// fully drawn. This gives a satisfying "charting" reveal on entry.
+  final double drawProgress;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -97,10 +132,15 @@ class _WeightChartPainter extends CustomPainter {
     final linePath = Path();
     final fillPath = Path();
 
+    // The x-coordinate frontier up to which the chart is currently drawn.
+    final maxDrawX = size.width * drawProgress;
+
     final dotPaint = Paint()..color = AppColors.emeraldPrimary;
 
     for (var i = 0; i < logs.length; i++) {
-      final x = i * stepX;
+      final rawX = i * stepX;
+      // Clamp drawn x to the current frontier so the line never exceeds it.
+      final x = rawX.clamp(0.0, maxDrawX);
       final y =
           size.height - ((logs[i].weightKg - minWeight) / range) * size.height;
 
@@ -113,17 +153,20 @@ class _WeightChartPainter extends CustomPainter {
         fillPath.lineTo(x, y);
       }
 
-      final isSelected = i == selectedIndex;
-      canvas.drawCircle(Offset(x, y), isSelected ? 6 : 4, dotPaint);
+      // Only draw dots for points whose natural x has been revealed.
+      if (rawX <= maxDrawX) {
+        final isSelected = i == selectedIndex;
+        canvas.drawCircle(Offset(rawX, y), isSelected ? 6 : 4, dotPaint);
+      }
     }
 
-    // Fill gradient under curve
-    fillPath.lineTo(size.width, size.height);
+    // Close the fill path at the current draw frontier.
+    fillPath.lineTo(maxDrawX, size.height);
     fillPath.close();
 
     final fillPaint = Paint()
       ..shader = ui.Gradient.linear(
-        Offset(0, 0),
+        Offset.zero,
         Offset(0, size.height),
         [
           AppColors.emeraldLight.withValues(alpha: 0.3),
@@ -141,8 +184,10 @@ class _WeightChartPainter extends CustomPainter {
       ..strokeJoin = StrokeJoin.round;
     canvas.drawPath(linePath, linePaint);
 
-    // Selected point tooltip.
-    if (selectedIndex != null &&
+    // Selected point tooltip - only shown once the draw-in animation has
+    // completed so it never appears before its data point has been rendered.
+    if (drawProgress >= 1.0 &&
+        selectedIndex != null &&
         selectedIndex! >= 0 &&
         selectedIndex! < logs.length) {
       final i = selectedIndex!;
@@ -162,10 +207,10 @@ class _WeightChartPainter extends CustomPainter {
     final textPainter = TextPainter(
       text: TextSpan(
         text: label,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: tooltipTextColor,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -176,21 +221,27 @@ class _WeightChartPainter extends CustomPainter {
     final boxHeight = textPainter.height + padding * 2;
 
     var left = point.dx - boxWidth / 2;
-    left = left.clamp(0.0, maxWidth - boxWidth);
-    final top = point.dy - boxHeight - 8;
+    left = left.clamp(4.0, maxWidth - boxWidth - 4);
+    var top = point.dy - boxHeight - 8;
+    if (top < 0) {
+      top = point.dy + 8;
+    }
 
     final rect = RRect.fromRectAndRadius(
       Rect.fromLTWH(left, top, boxWidth, boxHeight),
       const Radius.circular(6),
     );
 
-    canvas.drawRRect(rect, Paint()..color = const Color(0xDD333333));
+    canvas.drawRRect(rect, Paint()..color = tooltipBgColor);
     textPainter.paint(canvas, Offset(left + padding, top + padding));
   }
 
   @override
   bool shouldRepaint(covariant _WeightChartPainter oldDelegate) {
     return oldDelegate.logs != logs ||
-        oldDelegate.selectedIndex != selectedIndex;
+        oldDelegate.selectedIndex != selectedIndex ||
+        oldDelegate.drawProgress != drawProgress ||
+        oldDelegate.tooltipBgColor != tooltipBgColor ||
+        oldDelegate.tooltipTextColor != tooltipTextColor;
   }
 }

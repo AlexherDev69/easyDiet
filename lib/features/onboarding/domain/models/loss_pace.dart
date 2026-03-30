@@ -1,11 +1,18 @@
-enum LossPace {
-  gentle(350, 0.3, 'Doux', '0.3 kg/semaine'),
-  moderate(500, 0.5, 'Modere', '0.5 kg/semaine'),
-  fast(750, 0.7, 'Rapide', '0.7 kg/semaine');
+import '../../../../core/constants/app_constants.dart';
 
-  const LossPace(this.deficitKcal, this.kgPerWeek, this.displayName, this.description);
+enum LossPace {
+  gentle(350, 'Doux'),
+  moderate(500, 'Modere'),
+  fast(750, 'Rapide');
+
+  const LossPace(this.deficitKcal, this.displayName);
   final int deficitKcal;
-  final double kgPerWeek;
   final String displayName;
-  final String description;
+
+  /// Accurate kg/week derived from the deficit and the energy density of fat.
+  double get kgPerWeek =>
+      (deficitKcal * 7) / AppConstants.kcalPerKgFat;
+
+  String get description =>
+      '${kgPerWeek.toStringAsFixed(1)} kg/semaine';
 }

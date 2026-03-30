@@ -1,3 +1,5 @@
+import '../../../../core/constants/app_constants.dart';
+
 enum MealType {
   breakfast('Petit-dejeuner'),
   lunch('Dejeuner'),
@@ -22,17 +24,16 @@ enum MealType {
   }
 
   /// Fraction of daily calorie target allocated to this meal slot.
-  /// Balanced split: breakfast 25%, lunch 35%, dinner 30%, snack 10%.
   double get calorieShare {
     switch (this) {
       case MealType.breakfast:
-        return 0.25;
+        return AppConstants.calorieShareBreakfast;
       case MealType.lunch:
-        return 0.35;
+        return AppConstants.calorieShareLunch;
       case MealType.dinner:
-        return 0.30;
+        return AppConstants.calorieShareDinner;
       case MealType.snack:
-        return 0.10;
+        return AppConstants.calorieShareSnack;
     }
   }
 }

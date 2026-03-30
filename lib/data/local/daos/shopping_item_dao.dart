@@ -65,4 +65,21 @@ class ShoppingItemDao extends DatabaseAccessor<AppDatabase>
           ))
         .go();
   }
+
+  /// Get all generated (non-manual) items for a week plan.
+  Future<List<ShoppingItem>> getGeneratedItemsForWeek(int weekPlanId) {
+    return (select(shoppingItems)
+          ..where(
+            (t) =>
+                t.weekPlanId.equals(weekPlanId) &
+                t.isManuallyAdded.equals(false),
+          ))
+        .get();
+  }
+
+  /// Delete items by their IDs.
+  Future<void> deleteItemsByIds(List<int> ids) {
+    if (ids.isEmpty) return Future.value();
+    return (delete(shoppingItems)..where((t) => t.id.isIn(ids))).go();
+  }
 }

@@ -3,6 +3,27 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 
+/// Named radius scale for consistent corner rounding across the app.
+///
+/// Use these constants instead of raw numeric literals so that a single
+/// change here propagates everywhere. Individual widgets can still deviate
+/// when a specific design requires it.
+class AppRadius {
+  AppRadius._();
+
+  /// 8 dp — tight, used for chips, small tags, input fields.
+  static const double sm = 8;
+
+  /// 12 dp — default for interactive controls (buttons, text fields).
+  static const double md = 12;
+
+  /// 16 dp — standard card / list-item radius.
+  static const double lg = 16;
+
+  /// 20 dp — prominent cards, hero containers.
+  static const double xl = 20;
+}
+
 /// Extended colors not covered by Material 3's ColorScheme.
 class ExtendedColors {
   const ExtendedColors({
@@ -236,7 +257,7 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: _lightColorScheme,
       textTheme: textTheme,
-      scaffoldBackgroundColor: AppColors.gray50,
+      scaffoldBackgroundColor: AppColors.emeraldBackground,
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         foregroundColor: AppColors.gray900,
@@ -249,7 +270,7 @@ class AppTheme {
       cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppRadius.xl),
         ),
         color: Colors.white,
       ),
@@ -258,7 +279,7 @@ class AppTheme {
           backgroundColor: AppColors.emeraldPrimary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: textTheme.labelLarge,
@@ -269,7 +290,7 @@ class AppTheme {
           foregroundColor: AppColors.emeraldPrimary,
           side: const BorderSide(color: AppColors.emeraldPrimary),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: textTheme.labelLarge,
@@ -280,17 +301,35 @@ class AppTheme {
           backgroundColor: AppColors.emeraldPrimary,
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: textTheme.labelLarge,
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: AppColors.emeraldPrimary,
-        unselectedItemColor: AppColors.gray400,
-        type: BottomNavigationBarType.fixed,
+      navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.white,
+        indicatorColor: AppColors.emeraldSurface,
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.emeraldPrimary);
+          }
+          return const IconThemeData(color: AppColors.gray400);
+        }),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return GoogleFonts.nunito(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppColors.emeraldPrimary,
+            );
+          }
+          return GoogleFonts.nunito(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: AppColors.gray400,
+          );
+        }),
       ),
     );
   }
@@ -314,7 +353,7 @@ class AppTheme {
       cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(AppRadius.xl),
         ),
         color: AppColors.darkSurface,
       ),
@@ -323,7 +362,7 @@ class AppTheme {
           backgroundColor: AppColors.emeraldPrimaryDark,
           foregroundColor: AppColors.darkBackground,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: textTheme.labelLarge,
@@ -334,7 +373,7 @@ class AppTheme {
           foregroundColor: AppColors.emeraldPrimaryDark,
           side: const BorderSide(color: AppColors.emeraldPrimaryDark),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: textTheme.labelLarge,
@@ -345,17 +384,35 @@ class AppTheme {
           backgroundColor: AppColors.emeraldPrimaryDark,
           foregroundColor: AppColors.darkBackground,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(AppRadius.md),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: textTheme.labelLarge,
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        selectedItemColor: AppColors.emeraldPrimaryDark,
-        unselectedItemColor: AppColors.gray500,
-        type: BottomNavigationBarType.fixed,
+      navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.darkSurface,
+        indicatorColor: AppColors.emeraldDark.withValues(alpha: 0.3),
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return const IconThemeData(color: AppColors.emeraldPrimaryDark);
+          }
+          return const IconThemeData(color: AppColors.gray500);
+        }),
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
+            return GoogleFonts.nunito(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppColors.emeraldPrimaryDark,
+            );
+          }
+          return GoogleFonts.nunito(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: AppColors.gray500,
+          );
+        }),
       ),
     );
   }

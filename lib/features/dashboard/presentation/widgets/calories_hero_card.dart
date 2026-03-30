@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../shared/widgets/gradient_card.dart';
+import 'macro_radial_chart.dart';
 
-/// Main hero card showing animated circular calorie progress + macro bars.
+/// Main hero card showing animated circular calorie progress + macro donut.
 class CaloriesHeroCard extends StatelessWidget {
   const CaloriesHeroCard({
     required this.todayCalories,
@@ -68,12 +69,16 @@ class CaloriesHeroCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Animated circular progress
+          // Animated circular progress.
+          // ValueKey(progress) forces a full restart from 0 each time the
+          // target changes (e.g. after marking a meal consumed), so every
+          // update produces a visible animated fill rather than a no-op.
           SizedBox(
             width: 160,
             height: 160,
             child: TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0, end: progress),
+              key: ValueKey(progress),
+              tween: Tween(begin: 0.0, end: progress),
               duration: const Duration(milliseconds: 800),
               curve: Curves.easeOutCubic,
               builder: (context, animatedProgress, _) {
@@ -97,20 +102,26 @@ class CaloriesHeroCard extends StatelessWidget {
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        // Animated counter
+                        // Animated counter — tabular figures prevent digit
+                        // width changes from making the layout jump.
                         _AnimatedCalorieCounter(
                           targetValue: todayCalories,
                           style: theme.textTheme.headlineLarge?.copyWith(
                                 fontWeight: FontWeight.w800,
+                                fontFeatures: const [
+                                  FontFeature.tabularFigures(),
+                                ],
                               ) ??
                               const TextStyle(
                                 fontWeight: FontWeight.w800,
+                                fontFeatures: [FontFeature.tabularFigures()],
                               ),
                         ),
                         Text(
                           '/ $dailyTarget kcal',
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
+                            fontFeatures: const [FontFeature.tabularFigures()],
                           ),
                         ),
                       ],
@@ -121,28 +132,13 @@ class CaloriesHeroCard extends StatelessWidget {
             ),
           ),
 
-          // Macro bars
+          // Macro donut chart replaces the linear bars for a more visual feel
           if (protein + carbs + fat > 0) ...[
             const SizedBox(height: 12),
-            _MacroBar(
-              label: 'P',
-              grams: protein,
-              total: protein + carbs + fat,
-              color: AppColors.accentRose,
-            ),
-            const SizedBox(height: 6),
-            _MacroBar(
-              label: 'C',
-              grams: carbs,
-              total: protein + carbs + fat,
-              color: AppColors.accentAmber,
-            ),
-            const SizedBox(height: 6),
-            _MacroBar(
-              label: 'L',
-              grams: fat,
-              total: protein + carbs + fat,
-              color: AppColors.waterBlue,
+            MacroRadialChart(
+              protein: protein,
+              carbs: carbs,
+              fat: fat,
             ),
           ],
         ],
@@ -163,7 +159,10 @@ class _AnimatedCalorieCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ValueKey(targetValue) restarts the count-up animation from 0 each time
+    // the calorie total changes rather than interpolating from the old value.
     return TweenAnimationBuilder<int>(
+      key: ValueKey(targetValue),
       tween: IntTween(begin: 0, end: targetValue),
       duration: const Duration(milliseconds: 800),
       curve: Curves.easeOutCubic,
@@ -174,67 +173,3 @@ class _AnimatedCalorieCounter extends StatelessWidget {
   }
 }
 
-class _MacroBar extends StatelessWidget {
-  const _MacroBar({
-    required this.label,
-    required this.grams,
-    required this.total,
-    required this.color,
-  });
-
-  final String label;
-  final double grams;
-  final double total;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final progress = total > 0 ? (grams / total).clamp(0.0, 1.0) : 0.0;
-
-    return TweenAnimationBuilder<double>(
-      tween: Tween(begin: 0, end: progress),
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeOutCubic,
-      builder: (context, animatedProgress, _) {
-        return Row(
-          children: [
-            SizedBox(
-              width: 16,
-              child: Text(
-                label,
-                style: theme.textTheme.labelSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: animatedProgress,
-                  minHeight: 8,
-                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
-                  valueColor: AlwaysStoppedAnimation<Color>(color),
-                ),
-              ),
-            ),
-            const SizedBox(width: 8),
-            SizedBox(
-              width: 36,
-              child: Text(
-                '${grams.round()}g',
-                style: theme.textTheme.labelSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}

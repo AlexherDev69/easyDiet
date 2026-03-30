@@ -51,6 +51,37 @@ const _navItems = [
   ),
 ];
 
+/// Duration for the icon switch and scale bounce animation.
+const _kIconAnimationDuration = Duration(milliseconds: 250);
+
+/// Animated icon that bounces to filled when selected and fades to outlined
+/// when deselected. Uses [AnimatedSwitcher] so no [StatefulWidget] is needed.
+class _AnimatedNavIcon extends StatelessWidget {
+  const _AnimatedNavIcon({required this.item, required this.isSelected});
+
+  final _NavItem item;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: _kIconAnimationDuration,
+      // Scale bounce on entry: overshoots to 1.25 then settles at 1.0.
+      transitionBuilder: (child, animation) {
+        final scaleAnimation = Tween<double>(begin: 0.6, end: 1.0).animate(
+          CurvedAnimation(parent: animation, curve: Curves.elasticOut),
+        );
+        return ScaleTransition(scale: scaleAnimation, child: child);
+      },
+      child: Icon(
+        isSelected ? item.selectedIcon : item.unselectedIcon,
+        // ValueKey ensures AnimatedSwitcher detects the state change.
+        key: ValueKey<bool>(isSelected),
+      ),
+    );
+  }
+}
+
 /// Shell scaffold with a bottom navigation bar for the 5 main tabs.
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({required this.child, super.key});
@@ -59,20 +90,30 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = _calculateSelectedIndex(context);
     return Scaffold(
-      body: child,
+      // FadeThroughTransition equivalent: AnimatedSwitcher with a cross-fade
+      // between tabs. ValueKey on the route path ensures the animation fires
+      // on every top-level tab change while sub-route pushes (e.g. recipe
+      // detail) are handled by the nested navigator and don't re-trigger it.
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        child: KeyedSubtree(
+          key: ValueKey(GoRouterState.of(context).uri.path),
+          child: child,
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: _calculateSelectedIndex(context),
-        onDestinationSelected: (index) => _onItemTapped(index, context),
-        destinations: _navItems
-            .map(
-              (item) => NavigationDestination(
-                icon: Icon(item.unselectedIcon),
-                selectedIcon: Icon(item.selectedIcon),
-                label: item.label,
-              ),
-            )
-            .toList(),
+        selectedIndex: selectedIndex,
+        onDestinationSelected: (index) => context.go(_navItems[index].path),
+        destinations: [
+          for (var i = 0; i < _navItems.length; i++)
+            NavigationDestination(
+              icon: _AnimatedNavIcon(item: _navItems[i], isSelected: false),
+              selectedIcon: _AnimatedNavIcon(item: _navItems[i], isSelected: true),
+              label: _navItems[i].label,
+            ),
+        ],
       ),
     );
   }
@@ -83,9 +124,5 @@ class ScaffoldWithNavBar extends StatelessWidget {
       if (location.startsWith(_navItems[i].path)) return i;
     }
     return 0;
-  }
-
-  void _onItemTapped(int index, BuildContext context) {
-    context.go(_navItems[index].path);
   }
 }

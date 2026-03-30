@@ -124,16 +124,18 @@ class _RecipeDetailContent extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            ...List.generate(recipe.ingredients.length, (index) {
-              final sortedIngredients = List.of(recipe.ingredients)
-                ..sort((a, b) => a.name.compareTo(b.name));
-              final ingredient = sortedIngredients[index];
-              final adjustedQty = ingredient.quantity * servingsMultiplier;
+            ...(List.of(recipe.ingredients)
+                  ..sort((a, b) => a.name.compareTo(b.name)))
+                .asMap()
+                .entries
+                .map((entry) {
+              final adjustedQty =
+                  entry.value.quantity * servingsMultiplier;
               return _IngredientRow(
-                name: ingredient.name,
+                name: entry.value.name,
                 quantity: adjustedQty,
-                unit: ingredient.unit,
-                isAlternate: index.isOdd,
+                unit: entry.value.unit,
+                isAlternate: entry.key.isOdd,
               );
             }),
             const SizedBox(height: 20),
@@ -151,16 +153,13 @@ class _RecipeDetailContent extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            ...List.generate(recipe.steps.length, (index) {
-              final sortedSteps = List.of(recipe.steps)
-                ..sort((a, b) => a.stepNumber.compareTo(b.stepNumber));
-              final step = sortedSteps[index];
-              return _StepRow(
-                stepNumber: step.stepNumber,
-                instruction: step.instruction,
-                timerSeconds: step.timerSeconds,
-              );
-            }),
+            ...(List.of(recipe.steps)
+                  ..sort((a, b) => a.stepNumber.compareTo(b.stepNumber)))
+                .map((step) => _StepRow(
+                      stepNumber: step.stepNumber,
+                      instruction: step.instruction,
+                      timerSeconds: step.timerSeconds,
+                    )),
             const SizedBox(height: 24),
 
             // Start cooking button
@@ -202,12 +201,11 @@ class _MacrosCard extends StatelessWidget {
       ],
       elevation: 2,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _MacroItem('Calories', '$calories', 'kcal', AppColors.emeraldPrimary),
-          _MacroItem('Proteines', '$protein', 'g', AppColors.accentAmber),
-          _MacroItem('Glucides', '$carbs', 'g', AppColors.waterBlue),
-          _MacroItem('Lipides', '$fat', 'g', AppColors.accentPurple),
+          Expanded(child: _MacroItem('Calories', '$calories', 'kcal', AppColors.emeraldPrimary)),
+          Expanded(child: _MacroItem('Proteines', '$protein', 'g', AppColors.macroProtein)),
+          Expanded(child: _MacroItem('Glucides', '$carbs', 'g', AppColors.macroCarbs)),
+          Expanded(child: _MacroItem('Lipides', '$fat', 'g', AppColors.macroFat)),
         ],
       ),
     );
@@ -344,6 +342,7 @@ class _ServingsAdjuster extends StatelessWidget {
           IconButton(
             onPressed: servings > 0.5 ? onDecrease : null,
             icon: const Icon(Icons.remove, size: 20),
+            tooltip: 'Retirer',
           ),
           Text(
             _formatServings(servings),
@@ -354,6 +353,7 @@ class _ServingsAdjuster extends StatelessWidget {
           IconButton(
             onPressed: servings < 12 ? onIncrease : null,
             icon: const Icon(Icons.add, size: 20),
+            tooltip: 'Ajouter',
           ),
         ],
       ),

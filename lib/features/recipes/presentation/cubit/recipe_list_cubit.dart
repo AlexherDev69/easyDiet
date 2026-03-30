@@ -43,21 +43,28 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   // ── Private ───────────────────────────────────────────────────────
 
   void _loadRecipes() {
-    _recipesSubscription = _recipeRepository.watchAllRecipes().listen((recipes) {
-      // watchAllRecipes returns List<Recipe>, but we need RecipeWithDetails
-      // Load full details asynchronously
-      _loadAllRecipesWithDetails();
-    });
+    _recipesSubscription = _recipeRepository.watchAllRecipes().listen(
+      (_) => _loadAllRecipesWithDetails(),
+      onError: (Object e) {
+        debugPrint('Error in watchAllRecipes: $e');
+        emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
+      },
+    );
 
     _planSubscription =
-        _mealPlanRepository.watchCurrentWeekPlan().listen((plan) {
-      if (plan != null) {
-        final ids = plan.days
-            .expand((day) => day.meals.map((m) => m.recipe.id))
-            .toSet();
-        emit(state.copyWith(weekRecipeIds: ids));
-      }
-    });
+        _mealPlanRepository.watchCurrentWeekPlan().listen(
+      (plan) {
+        if (plan != null) {
+          final ids = plan.days
+              .expand((day) => day.meals.map((m) => m.recipe.id))
+              .toSet();
+          emit(state.copyWith(weekRecipeIds: ids));
+        }
+      },
+      onError: (Object e) {
+        debugPrint('Error in watchCurrentWeekPlan: $e');
+      },
+    );
   }
 
   Future<void> _loadAllRecipesWithDetails() async {

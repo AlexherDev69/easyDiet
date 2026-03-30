@@ -89,6 +89,14 @@ class RecipeDao extends DatabaseAccessor<AppDatabase> with _$RecipeDaoMixin {
   /// Get all recipes (one-shot).
   Future<List<Recipe>> getAllRecipes() => select(recipes).get();
 
+  /// Get all recipe names (for incremental seeding).
+  Future<Set<String>> getAllRecipeNames() async {
+    final nameCol = recipes.name;
+    final query = selectOnly(recipes)..addColumns([nameCol]);
+    final rows = await query.get();
+    return rows.map((row) => row.read(nameCol)!).toSet();
+  }
+
   /// Get recipe count.
   Future<int> getRecipeCount() async {
     final count = countAll();

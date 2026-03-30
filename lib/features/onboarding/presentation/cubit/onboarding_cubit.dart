@@ -5,10 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/date_utils.dart';
+import '../../../../core/utils/profile_json_parser.dart';
 import '../../../../data/local/database.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
 import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
 import '../../../meal_plan/domain/usecases/meal_plan_generator.dart';
+import '../../../meal_plan/domain/usecases/plan_edit_use_case.dart';
 import '../../../settings/domain/repositories/user_profile_repository.dart';
 import '../../../shopping/domain/usecases/shopping_list_generator.dart';
 import '../../../weight_log/domain/repositories/weight_log_repository.dart';
@@ -25,13 +27,15 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     required MealPlanGenerator mealPlanGenerator,
     required MealPlanRepository mealPlanRepository,
     required ShoppingListGenerator shoppingListGenerator,
+    required PlanEditUseCase planEditUseCase,
   })  : _userProfileRepository = userProfileRepository,
         _weightLogRepository = weightLogRepository,
         _calorieCalculator = calorieCalculator,
         _mealPlanGenerator = mealPlanGenerator,
         _mealPlanRepository = mealPlanRepository,
         _shoppingListGenerator = shoppingListGenerator,
-        super(OnboardingState(dietStartDate: AppDateUtils.today())) {
+        _planEditUseCase = planEditUseCase,
+        super(OnboardingState(dietStartDate: AppDateUtils.today(), isLoading: true)) {
     _checkOnboardingStatus();
   }
 
@@ -41,6 +45,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   final MealPlanGenerator _mealPlanGenerator;
   final MealPlanRepository _mealPlanRepository;
   final ShoppingListGenerator _shoppingListGenerator;
+  final PlanEditUseCase _planEditUseCase;
 
   // ── Simple field updates ────────────────────────────────────────────
 
@@ -150,6 +155,9 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     final nextStep = state.currentStep + 1;
     emit(state.copyWith(currentStep: nextStep));
 
+    // Save progress after each step so data survives app restart
+    _savePartialProfile();
+
     if (nextStep == 2) _calculateCalories();
     if (nextStep == 5) _generateAndShowPlan();
   }
@@ -165,17 +173,11 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void openMoveMealDialog(MealWithRecipe meal, int sourceDayPlanId) {
     final weekPlan = state.generatedWeekPlan;
     if (weekPlan == null) return;
-
-    final targetDays = weekPlan.days
-        .where((d) => !d.dayPlan.isFreeDay && d.dayPlan.id != sourceDayPlanId)
-        .toList()
-      ..sort((a, b) => a.dayPlan.date.compareTo(b.dayPlan.date));
-
     emit(state.copyWith(
       showMoveDialog: true,
       movingMeal: meal,
       movingSourceDayPlanId: sourceDayPlanId,
-      moveTargetDays: targetDays,
+      moveTargetDays: _planEditUseCase.getMovableTargetDays(weekPlan, sourceDayPlanId),
     ));
   }
 
@@ -192,13 +194,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     try {
       final meal = state.movingMeal;
       if (meal == null) return;
-
-      await _mealPlanRepository.swapMealsBetweenDays(
-        meal.meal.id,
-        targetDayPlanId,
-      );
-
-      final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      final updatedPlan =
+          await _planEditUseCase.moveMealToDay(meal.meal.id, targetDayPlanId);
       emit(state.copyWith(
         generatedWeekPlan: updatedPlan,
         showMoveDialog: false,
@@ -216,29 +213,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   Future<void> openReplaceDialog(MealWithRecipe meal) async {
     emit(state.copyWith(clearErrorMessage: true));
     try {
-      final profile = await _userProfileRepository.getProfile();
       final weekPlan = state.generatedWeekPlan;
-      if (profile == null || weekPlan == null) return;
-
-      final usedRecipeIds =
-          weekPlan.days.expand((d) => d.meals).map((m) => m.recipe.id).toSet();
-
-      final candidates = await _mealPlanGenerator.getCompatibleReplacements(
-        meal.recipe.category,
-        usedRecipeIds,
-        profile,
-      );
-
-      final otherOccurrences = weekPlan.days
-          .expand((d) => d.meals)
-          .where((m) => m.meal.id != meal.meal.id && m.recipe.id == meal.recipe.id)
-          .length;
-
+      if (weekPlan == null) return;
+      final data = await _planEditUseCase.getReplaceDialogData(meal, weekPlan);
       emit(state.copyWith(
         showReplaceDialog: true,
         replacingMeal: meal,
-        replacementCandidates: candidates,
-        otherOccurrencesCount: otherOccurrences,
+        replacementCandidates: data.candidates,
+        otherOccurrencesCount: data.otherOccurrencesCount,
       ));
     } catch (e) {
       debugPrint('Error in openReplaceDialog: $e');
@@ -261,40 +243,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       final currentMeal = state.replacingMeal;
       final weekPlan = state.generatedWeekPlan;
       if (currentMeal == null || weekPlan == null) return;
-
-      final profile = await _userProfileRepository.getProfile();
-      if (profile == null) return;
-
-      final mealType = MealType.values.firstWhere(
-        (m) => m.name.toUpperCase() == currentMeal.meal.mealType,
-        orElse: () => MealType.lunch,
+      final updatedPlan = await _planEditUseCase.replaceRecipe(
+        currentMeal,
+        weekPlan,
+        newRecipe,
+        replaceAll: replaceAll,
       );
-
-      final mealsToUpdate = replaceAll
-          ? weekPlan.days
-              .expand((d) => d.meals)
-              .where((m) => m.recipe.id == currentMeal.recipe.id)
-              .map((m) => m.meal)
-              .toList()
-          : [currentMeal.meal];
-
-      for (final meal in mealsToUpdate) {
-        final type = MealType.values.firstWhere(
-          (m) => m.name.toUpperCase() == meal.mealType,
-          orElse: () => mealType,
-        );
-        final servings = _mealPlanGenerator.calculateServings(
-          newRecipe,
-          profile.dailyCalorieTarget,
-          type,
-        );
-        await _mealPlanRepository.updateMeal(meal.copyWith(
-          recipeId: newRecipe.id,
-          servings: servings,
-        ));
-      }
-
-      final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
       emit(state.copyWith(
         generatedWeekPlan: updatedPlan,
         showReplaceDialog: false,
@@ -376,12 +330,133 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   Future<void> _checkOnboardingStatus() async {
     try {
       final profile = await _userProfileRepository.getProfile();
-      if (profile?.onboardingCompleted == true) {
-        emit(state.copyWith(isOnboardingCompleted: true));
+      if (profile == null) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
+
+      if (profile.onboardingCompleted) {
+        emit(state.copyWith(isLoading: false, isOnboardingCompleted: true));
+        return;
+      }
+
+      // Resume partial onboarding from saved profile
+      final resumeStep = await _determineResumeStep(profile);
+      emit(state.copyWith(
+        isLoading: false,
+        currentStep: resumeStep,
+        name: profile.name,
+        age: profile.age > 0 ? profile.age.toString() : '',
+        sex: Sex.values.firstWhere(
+          (s) => s.name == profile.sex,
+          orElse: () => Sex.male,
+        ),
+        heightCm: profile.heightCm > 0 ? profile.heightCm.toString() : '',
+        weightKg: profile.weightKg > 0 ? profile.weightKg.toString() : '',
+        targetWeightKg: profile.targetWeightKg > 0
+            ? profile.targetWeightKg.toString()
+            : '',
+        lossPace: LossPace.values.firstWhere(
+          (l) => l.name == profile.lossPace,
+          orElse: () => LossPace.moderate,
+        ),
+        activityLevel: ActivityLevel.values.firstWhere(
+          (a) => a.name == profile.activityLevel,
+          orElse: () => ActivityLevel.sedentary,
+        ),
+        dietType: DietType.values.firstWhere(
+          (d) => d.name == profile.dietType,
+          orElse: () => DietType.omnivore,
+        ),
+        freeDays: ProfileJsonParser.parseIntSet(profile.freeDays),
+        batchCookingEnabled: profile.batchCookingSessionsPerWeek > 0,
+        batchCookingSessions:
+            profile.batchCookingSessionsPerWeek.clamp(1, 2),
+        shoppingTrips: profile.shoppingTripsPerWeek.clamp(1, 2),
+        distinctBreakfasts: profile.distinctBreakfasts.clamp(1, 6),
+        distinctLunches: profile.distinctLunches.clamp(1, 7),
+        distinctDinners: profile.distinctDinners.clamp(1, 7),
+        distinctSnacks: profile.distinctSnacks.clamp(1, 5),
+        enabledMealTypes: ProfileJsonParser.parseMealTypes(profile.enabledMealTypes),
+        batchCookingBeforeDiet: profile.batchCookingBeforeDiet,
+        economicMode: profile.economicMode,
+        selectedAllergies: ProfileJsonParser.parseAllergies(profile.allergies),
+        excludedMeats: ProfileJsonParser.parseExcludedMeats(profile.excludedMeats),
+        calculatedCalories: profile.dailyCalorieTarget,
+        calculatedWaterMl: profile.dailyWaterMl,
+      ));
+
+      // If resuming at plan preview, reload the plan
+      if (resumeStep == 5) {
+        final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
+        if (weekPlan != null) {
+          emit(state.copyWith(generatedWeekPlan: weekPlan));
+        } else {
+          _generateAndShowPlan();
+        }
       }
     } catch (e) {
       debugPrint('Error in _checkOnboardingStatus: $e');
-      emit(state.copyWith(errorMessage: e.toString()));
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
+    }
+  }
+
+  Future<int> _determineResumeStep(UserProfile profile) async {
+    if (profile.name.isEmpty) return 0;
+    if (profile.heightCm == 0 || profile.weightKg == 0) return 1;
+    if (profile.dailyCalorieTarget == 0) return 2;
+    // Check if a plan already exists (step 5 was reached)
+    final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
+    if (weekPlan != null) return 5;
+    // Steps 3-4 data is present, resume at step 4 (quick to pass)
+    return 4;
+  }
+
+  Future<void> _savePartialProfile() async {
+    try {
+      final weight = double.tryParse(state.weightKg) ?? 0;
+      final height = int.tryParse(state.heightCm) ?? 0;
+      final age = int.tryParse(state.age) ?? 0;
+      final startDate = state.dietStartDate ?? AppDateUtils.today();
+
+      final profile = UserProfilesCompanion.insert(
+        name: state.name,
+        age: age,
+        sex: state.sex.name,
+        heightCm: height,
+        weightKg: weight,
+        targetWeightKg: double.tryParse(state.targetWeightKg) ?? weight,
+        lossPace: state.lossPace.name,
+        activityLevel: state.activityLevel.name,
+        dietType: Value(state.dietType.name),
+        dietDaysPerWeek: state.dietDaysPerWeek,
+        batchCookingSessionsPerWeek:
+            state.batchCookingEnabled ? state.batchCookingSessions : 0,
+        shoppingTripsPerWeek: state.shoppingTrips,
+        distinctBreakfasts: Value(state.distinctBreakfasts),
+        distinctLunches: Value(state.distinctLunches),
+        distinctDinners: Value(state.distinctDinners),
+        distinctSnacks: Value(state.distinctSnacks),
+        enabledMealTypes: Value(
+            json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
+        allergies:
+            json.encode(state.selectedAllergies.map((a) => a.name).toList()),
+        customAllergies: '',
+        excludedMeats: Value(
+            json.encode(state.excludedMeats.map((m) => m.name).toList())),
+        dietStartDate: AppDateUtils.toEpochMillis(startDate),
+        freeDays: Value(json.encode(state.freeDays.toList())),
+        dailyCalorieTarget: state.calculatedCalories,
+        dailyWaterMl: Value(state.calculatedWaterMl),
+        batchCookingBeforeDiet: Value(state.batchCookingBeforeDiet),
+        economicMode: Value(state.economicMode),
+        onboardingCompleted: const Value(false),
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+      );
+
+      await _userProfileRepository.saveProfile(profile);
+    } catch (e) {
+      debugPrint('Error saving partial profile: $e');
     }
   }
 

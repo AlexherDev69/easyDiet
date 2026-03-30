@@ -317,6 +317,7 @@ class _BatchCookingSection extends StatelessWidget {
                     IconButton(
                       onPressed: onShowInfo,
                       iconSize: 18,
+                      tooltip: 'Informations',
                       constraints: const BoxConstraints.tightFor(
                         width: 32,
                         height: 32,

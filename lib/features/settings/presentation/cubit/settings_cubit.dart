@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/profile_json_parser.dart';
 
 import '../../../../core/utils/date_utils.dart';
 import '../../../../data/local/database.dart';
@@ -46,7 +47,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           .whereType<Allergy>()
           .toSet();
 
-      final freeDaysList = _parseIntList(profile.freeDays).toSet();
+      final freeDaysList = ProfileJsonParser.parseIntSet(profile.freeDays);
 
       final excludedMeats = _parseStringList(profile.excludedMeats)
           .map(
@@ -54,7 +55,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           .whereType<ExcludedMeat>()
           .toSet();
 
-      final enabledMealTypes = _parseEnabledMealTypes(profile.enabledMealTypes);
+      final enabledMealTypes = ProfileJsonParser.parseMealTypes(profile.enabledMealTypes);
 
       final dietStartDate = AppDateUtils.fromEpochMillis(profile.dietStartDate);
 
@@ -331,23 +332,4 @@ class SettingsCubit extends Cubit<SettingsState> {
     return [];
   }
 
-  List<int> _parseIntList(String jsonStr) {
-    try {
-      final decoded = json.decode(jsonStr);
-      if (decoded is List) return decoded.cast<int>();
-    } catch (_) {}
-    return [];
-  }
-
-  Set<MealType> _parseEnabledMealTypes(String jsonStr) {
-    try {
-      final names = _parseStringList(jsonStr);
-      return names
-          .map((n) => MealType.values.where((m) => m.name == n).firstOrNull)
-          .whereType<MealType>()
-          .toSet();
-    } catch (_) {
-      return MealType.values.toSet();
-    }
-  }
 }

@@ -121,8 +121,7 @@ class _DashboardMealRow extends StatelessWidget {
         children: [
           IconButton(
             onPressed: onToggleConsumed,
-            constraints: const BoxConstraints(maxWidth: 36, maxHeight: 36),
-            padding: EdgeInsets.zero,
+            tooltip: isConsumed ? 'Marquer non consomme' : 'Marquer consomme',
             iconSize: 22,
             icon: Icon(
               isConsumed ? Icons.check_circle : Icons.radio_button_unchecked,

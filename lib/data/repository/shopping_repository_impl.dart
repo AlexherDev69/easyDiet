@@ -34,4 +34,12 @@ class ShoppingRepositoryImpl implements ShoppingRepository {
   @override
   Future<void> deleteGeneratedItems(int weekPlanId) =>
       _dao.deleteGeneratedItems(weekPlanId);
+
+  @override
+  Future<List<ShoppingItem>> getGeneratedItemsForWeek(int weekPlanId) =>
+      _dao.getGeneratedItemsForWeek(weekPlanId);
+
+  @override
+  Future<void> deleteItemsByIds(List<int> ids) =>
+      _dao.deleteItemsByIds(ids);
 }

@@ -90,7 +90,7 @@ class _PlanPreviewStepState extends State<PlanPreviewStep>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Votre plan de la semaine',
-            style: theme.textTheme.headlineMedium),
+            style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
         const SizedBox(height: 4),
         Text(
           'Verifiez et ajustez les repas si besoin.',
@@ -98,7 +98,7 @@ class _PlanPreviewStepState extends State<PlanPreviewStep>
             color: theme.colorScheme.onSurfaceVariant,
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8),
 
         // Day tabs
         DefaultTabController(
@@ -109,6 +109,7 @@ class _PlanPreviewStepState extends State<PlanPreviewStep>
                 TabBar(
                   isScrollable: true,
                   tabAlignment: TabAlignment.start,
+                  labelPadding: const EdgeInsets.symmetric(horizontal: 12),
                   onTap: (i) => setState(() => _selectedTabIndex = i),
                   tabs: sortedDays.map((day) {
                     final dayName = AppDateUtils.getDayOfWeekFrench(
@@ -121,7 +122,7 @@ class _PlanPreviewStepState extends State<PlanPreviewStep>
                     );
                   }).toList(),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 Expanded(
                   child: _buildDayContent(
                     sortedDays.elementAtOrNull(_selectedTabIndex),
@@ -293,6 +294,7 @@ class _MealPreviewCard extends StatelessWidget {
           IconButton(
             onPressed: onReplaceClick,
             iconSize: 20,
+            tooltip: 'Remplacer',
             constraints: const BoxConstraints.tightFor(
               width: 36,
               height: 36,
@@ -305,6 +307,7 @@ class _MealPreviewCard extends StatelessWidget {
           IconButton(
             onPressed: onMoveClick,
             iconSize: 20,
+            tooltip: 'Deplacer',
             constraints: const BoxConstraints.tightFor(
               width: 36,
               height: 36,
@@ -356,27 +359,38 @@ class _RecipePreviewDialog extends StatelessWidget {
           const Divider(),
           const SizedBox(height: 12),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              _MacroItem(
-                label: 'Calories',
-                value: '${recipe.caloriesPerServing}',
-                unit: 'kcal',
+              Expanded(
+                child: _MacroItem(
+                  label: 'Calories',
+                  value: '${recipe.caloriesPerServing}',
+                  unit: 'kcal',
+                  color: AppColors.emeraldPrimary,
+                ),
               ),
-              _MacroItem(
-                label: 'Proteines',
-                value: recipe.proteinGrams.round().toString(),
-                unit: 'g',
+              Expanded(
+                child: _MacroItem(
+                  label: 'Proteines',
+                  value: recipe.proteinGrams.round().toString(),
+                  unit: 'g',
+                  color: AppColors.macroProtein,
+                ),
               ),
-              _MacroItem(
-                label: 'Glucides',
-                value: recipe.carbsGrams.round().toString(),
-                unit: 'g',
+              Expanded(
+                child: _MacroItem(
+                  label: 'Glucides',
+                  value: recipe.carbsGrams.round().toString(),
+                  unit: 'g',
+                  color: AppColors.macroCarbs,
+                ),
               ),
-              _MacroItem(
-                label: 'Lipides',
-                value: recipe.fatGrams.round().toString(),
-                unit: 'g',
+              Expanded(
+                child: _MacroItem(
+                  label: 'Lipides',
+                  value: recipe.fatGrams.round().toString(),
+                  unit: 'g',
+                  color: AppColors.macroFat,
+                ),
               ),
             ],
           ),
@@ -387,9 +401,11 @@ class _RecipePreviewDialog extends StatelessWidget {
             children: [
               Icon(Icons.schedule, size: 16, color: theme.colorScheme.primary),
               const SizedBox(width: 4),
-              Text(
-                '$totalTime min (${recipe.prepTimeMinutes} prep + ${recipe.cookTimeMinutes} cuisson)',
-                style: theme.textTheme.bodySmall,
+              Flexible(
+                child: Text(
+                  '$totalTime min (${recipe.prepTimeMinutes} prep + ${recipe.cookTimeMinutes} cuisson)',
+                  style: theme.textTheme.bodySmall,
+                ),
               ),
             ],
           ),
@@ -424,11 +440,13 @@ class _MacroItem extends StatelessWidget {
     required this.label,
     required this.value,
     required this.unit,
+    required this.color,
   });
 
   final String label;
   final String value;
   final String unit;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -439,7 +457,7 @@ class _MacroItem extends StatelessWidget {
           value,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
-            color: theme.colorScheme.primary,
+            color: color,
           ),
         ),
         Text(unit, style: theme.textTheme.labelSmall?.copyWith(
@@ -615,8 +633,7 @@ class _ReplaceRecipeDialogState extends State<ReplaceRecipeDialog> {
                 ),
               )
             else
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 400),
+              Flexible(
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: widget.candidates.length,
@@ -639,11 +656,7 @@ class _ReplaceRecipeDialogState extends State<ReplaceRecipeDialog> {
                         child: Row(
                           children: [
                             Expanded(
-                              child: Text(
-                                recipe.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              child: Text(recipe.name),
                             ),
                             const SizedBox(width: 8),
                             Text(

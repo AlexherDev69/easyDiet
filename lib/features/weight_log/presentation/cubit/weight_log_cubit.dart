@@ -50,12 +50,15 @@ class WeightLogCubit extends Cubit<WeightLogState> {
         final latestLog = await _weightLogRepository.getLatestLog();
         final latestWeight = latestLog?.weightKg ?? profile.weightKg;
 
+        final dietStartDate =
+            DateTime.fromMillisecondsSinceEpoch(profile.dietStartDate);
         final initialDate =
             _weightProjectionCalculator.calculateEstimatedGoalDate(
           currentWeight: latestWeight,
           targetWeight: profile.targetWeightKg,
           lossPace: lossPace,
           dietDaysPerWeek: profile.dietDaysPerWeek,
+          startDate: dietStartDate,
         );
         emit(state.copyWith(initialProjectedDate: initialDate));
       }
@@ -180,7 +183,8 @@ class WeightLogCubit extends Cubit<WeightLogState> {
 
   Future<void> _insertWeightLog(double weight, int date) async {
     try {
-      final latestLog = await _weightLogRepository.getLatestLog();
+      // Find the chronologically adjacent log for outlier detection.
+      final adjacentWeight = _findAdjacentWeight(date);
 
       await _weightLogRepository.insertLog(
         WeightLogsCompanion.insert(
@@ -194,8 +198,8 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       // Sync profile weight and recalculate calories.
       await _syncProfileWeight(weight);
 
-      if (latestLog != null) {
-        final diff = (weight - latestLog.weightKg).abs();
+      if (adjacentWeight != null) {
+        final diff = (weight - adjacentWeight).abs();
         if (diff > _outlierThresholdKg) {
           emit(state.copyWith(
             outlierWarning:
@@ -253,6 +257,22 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       debugPrint('Error in _syncProfileWeight: $e');
       emit(state.copyWith(errorMessage: e.toString()));
     }
+  }
+
+  /// Finds the weight of the chronologically closest log to [date].
+  double? _findAdjacentWeight(int date) {
+    final logs = state.allLogs;
+    if (logs.isEmpty) return null;
+    double? closestWeight;
+    int closestDiff = 0x7FFFFFFFFFFFFFFF;
+    for (final log in logs) {
+      final diff = (log.date - date).abs();
+      if (diff > 0 && diff < closestDiff) {
+        closestDiff = diff;
+        closestWeight = log.weightKg;
+      }
+    }
+    return closestWeight;
   }
 
   Future<void> deleteLog(WeightLog log) async {

@@ -109,15 +109,8 @@ class _DashboardContent extends StatelessWidget {
             const SizedBox(height: 16),
           ],
 
-          // Hero Calories Card
-          CaloriesHeroCard(
-            todayCalories: s.todayCalories,
-            dailyTarget: s.dailyTarget,
-            isFreeDay: s.selectedDayIsFreeDay,
-            protein: s.todayProtein,
-            carbs: s.todayCarbs,
-            fat: s.todayFat,
-          ),
+          // Bento grid: CaloriesHeroCard (60 %) + stacked Hydration/NextMeal (40 %)
+          _BentoGrid(state: s),
           const SizedBox(height: 16),
 
           // Day meals program
@@ -130,24 +123,6 @@ class _DashboardContent extends StatelessWidget {
             ),
             const SizedBox(height: 16),
           ],
-
-          // Hydration + Next Meal row
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (s.dailyWaterMl > 0)
-                Expanded(
-                  child: HydrationCard(dailyWaterMl: s.dailyWaterMl),
-                ),
-              if (s.dailyWaterMl > 0 && s.nextMeal != null)
-                const SizedBox(width: 12),
-              if (s.nextMeal != null)
-                Expanded(
-                  child: NextMealCard(nextMeal: s.nextMeal!),
-                ),
-            ],
-          ),
-          const SizedBox(height: 16),
 
           // Next batch cooking
           if (s.nextBatchCooking != null) ...[
@@ -270,6 +245,78 @@ class _DashboardContent extends StatelessWidget {
           ),
 
           const SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Bento grid
+// ---------------------------------------------------------------------------
+
+/// 2-column asymmetric bento grid layout.
+///
+/// Left column (60 % width): CaloriesHeroCard spanning full height.
+/// Right column (40 % width): HydrationCard on top, NextMealCard below,
+/// each taking roughly half the available height via intrinsic sizing.
+///
+/// When neither hydration nor next-meal data is available the CaloriesHeroCard
+/// renders full-width, matching the previous layout so no data is ever hidden.
+class _BentoGrid extends StatelessWidget {
+  const _BentoGrid({required this.state});
+
+  final DashboardState state;
+
+  bool get _hasRightColumn =>
+      state.dailyWaterMl > 0 || state.nextMeal != null;
+
+  @override
+  Widget build(BuildContext context) {
+    final caloriesCard = CaloriesHeroCard(
+      todayCalories: state.todayCalories,
+      dailyTarget: state.dailyTarget,
+      isFreeDay: state.selectedDayIsFreeDay,
+      protein: state.todayProtein,
+      carbs: state.todayCarbs,
+      fat: state.todayFat,
+    );
+
+    if (!_hasRightColumn) {
+      // Fall back to the old full-width card when no companion data exists.
+      return caloriesCard;
+    }
+
+    return SizedBox(
+      height: 320,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Left — calories (60 %)
+          Expanded(
+            flex: 60,
+            child: caloriesCard,
+          ),
+          const SizedBox(width: 12),
+          // Right — hydration stacked above next meal (40 %)
+          Expanded(
+            flex: 40,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (state.dailyWaterMl > 0)
+                  Expanded(
+                    child: HydrationCard(dailyWaterMl: state.dailyWaterMl),
+                  ),
+                if (state.dailyWaterMl > 0 && state.nextMeal != null)
+                  const SizedBox(height: 12),
+                if (state.nextMeal != null)
+                  Expanded(
+                    child: NextMealCard(nextMeal: state.nextMeal!),
+                  ),
+              ],
+            ),
+          ),
         ],
       ),
     );

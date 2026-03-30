@@ -50,6 +50,37 @@ class MealPlanPage extends StatelessWidget {
           );
         }
 
+        if (state.errorMessage != null) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    size: 48,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    'Erreur lors de la generation du plan',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 16),
+                  FilledButton(
+                    onPressed: () => context.push(AppRoutes.planConfig),
+                    child: const Text('Reessayer'),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
         if (state.weekPlan == null) {
           return Center(
             child: Column(
@@ -292,7 +323,12 @@ class _MealPlanContent extends StatelessWidget {
 }
 
 /// Scrollable tab row for day selection.
-class ScrollableTabBar extends StatelessWidget {
+///
+/// Uses an explicit [TabController] so that programmatic changes to
+/// [selectedIndex] (e.g. from the cubit) are reflected in the indicator
+/// position — [DefaultTabController.initialIndex] is only read once on
+/// creation and would otherwise cause the indicator to desync.
+class ScrollableTabBar extends StatefulWidget {
   const ScrollableTabBar({
     required this.tabs,
     required this.selectedIndex,
@@ -305,19 +341,61 @@ class ScrollableTabBar extends StatelessWidget {
   final ValueChanged<int> onSelectDay;
 
   @override
+  State<ScrollableTabBar> createState() => _ScrollableTabBarState();
+}
+
+class _ScrollableTabBarState extends State<ScrollableTabBar>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      length: widget.tabs.length,
+      initialIndex: widget.selectedIndex,
+      vsync: this,
+    );
+    _tabController.addListener(_onTabChange);
+  }
+
+  @override
+  void didUpdateWidget(ScrollableTabBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.tabs.length != oldWidget.tabs.length) {
+      _tabController.removeListener(_onTabChange);
+      _tabController.dispose();
+      _tabController = TabController(
+        length: widget.tabs.length,
+        initialIndex: widget.selectedIndex,
+        vsync: this,
+      );
+      _tabController.addListener(_onTabChange);
+    } else if (widget.selectedIndex != oldWidget.selectedIndex) {
+      _tabController.animateTo(widget.selectedIndex);
+    }
+  }
+
+  void _onTabChange() {
+    // Only fire when the user taps (not during programmatic animation).
+    if (!_tabController.indexIsChanging) {
+      widget.onSelectDay(_tabController.index);
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_onTabChange);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: tabs.length,
-      initialIndex: selectedIndex,
-      child: TabBar(
-        isScrollable: true,
-        onTap: onSelectDay,
-        tabs: tabs
-            .map((t) => Tab(
-                  text: t,
-                ))
-            .toList(),
-      ),
+    return TabBar(
+      controller: _tabController,
+      isScrollable: true,
+      tabs: widget.tabs.map((t) => Tab(text: t)).toList(),
     );
   }
 }

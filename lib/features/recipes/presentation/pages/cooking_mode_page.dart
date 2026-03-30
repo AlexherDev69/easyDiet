@@ -84,6 +84,7 @@ class _CookingModePageState extends State<CookingModePage> {
                     Navigator.of(context).pop();
                   }
                 },
+                tooltip: 'Fermer',
               ),
             ),
             body: Column(

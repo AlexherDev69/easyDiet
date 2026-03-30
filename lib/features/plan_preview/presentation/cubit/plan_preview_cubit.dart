@@ -5,7 +5,7 @@ import '../../../../data/local/database.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
 import '../../../meal_plan/domain/repositories/meal_plan_repository.dart';
 import '../../../meal_plan/domain/usecases/meal_plan_generator.dart';
-import '../../../onboarding/domain/models/meal_type.dart';
+import '../../../meal_plan/domain/usecases/plan_edit_use_case.dart';
 import '../../../settings/domain/repositories/user_profile_repository.dart';
 import '../../../shopping/domain/usecases/shopping_list_generator.dart';
 import 'plan_preview_state.dart';
@@ -17,10 +17,12 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
     required MealPlanGenerator mealPlanGenerator,
     required UserProfileRepository userProfileRepository,
     required ShoppingListGenerator shoppingListGenerator,
+    required PlanEditUseCase planEditUseCase,
   })  : _mealPlanRepository = mealPlanRepository,
         _mealPlanGenerator = mealPlanGenerator,
         _userProfileRepository = userProfileRepository,
         _shoppingListGenerator = shoppingListGenerator,
+        _planEditUseCase = planEditUseCase,
         super(const PlanPreviewState()) {
     _generateNewPlan();
   }
@@ -29,6 +31,7 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   final MealPlanGenerator _mealPlanGenerator;
   final UserProfileRepository _userProfileRepository;
   final ShoppingListGenerator _shoppingListGenerator;
+  final PlanEditUseCase _planEditUseCase;
 
   Future<void> _generateNewPlan() async {
     emit(state.copyWith(isLoading: true, clearErrorMessage: true));
@@ -73,17 +76,11 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   void openMoveMealDialog(MealWithRecipe meal, int sourceDayPlanId) {
     final weekPlan = state.weekPlan;
     if (weekPlan == null) return;
-
-    final targetDays = weekPlan.days
-        .where((d) => !d.dayPlan.isFreeDay && d.dayPlan.id != sourceDayPlanId)
-        .toList()
-      ..sort((a, b) => a.dayPlan.date.compareTo(b.dayPlan.date));
-
     emit(state.copyWith(
       showMoveDialog: true,
       movingMeal: meal,
       movingSourceDayPlanId: sourceDayPlanId,
-      moveTargetDays: targetDays,
+      moveTargetDays: _planEditUseCase.getMovableTargetDays(weekPlan, sourceDayPlanId),
     ));
   }
 
@@ -99,10 +96,8 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
     try {
       final meal = state.movingMeal;
       if (meal == null) return;
-
-      await _mealPlanRepository.swapMealsBetweenDays(
-          meal.meal.id, targetDayPlanId);
-      final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      final updatedPlan =
+          await _planEditUseCase.moveMealToDay(meal.meal.id, targetDayPlanId);
       emit(state.copyWith(
         weekPlan: updatedPlan,
         showMoveDialog: false,
@@ -119,32 +114,14 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   Future<void> openReplaceDialog(MealWithRecipe meal) async {
     emit(state.copyWith(clearErrorMessage: true));
     try {
-      final profile = await _userProfileRepository.getProfile();
-      if (profile == null) return;
       final weekPlan = state.weekPlan;
       if (weekPlan == null) return;
-
-      final usedRecipeIds = weekPlan.days
-          .expand((d) => d.meals)
-          .map((m) => m.recipe.id)
-          .toSet();
-
-      final candidates = await _mealPlanGenerator.getCompatibleReplacements(
-        meal.recipe.category,
-        usedRecipeIds,
-        profile,
-      );
-
-      final otherOccurrences = weekPlan.days
-          .expand((d) => d.meals)
-          .where((m) => m.meal.id != meal.meal.id && m.recipe.id == meal.recipe.id)
-          .length;
-
+      final data = await _planEditUseCase.getReplaceDialogData(meal, weekPlan);
       emit(state.copyWith(
         showReplaceDialog: true,
         replacingMeal: meal,
-        replacementCandidates: candidates,
-        otherOccurrencesCount: otherOccurrences,
+        replacementCandidates: data.candidates,
+        otherOccurrencesCount: data.otherOccurrencesCount,
       ));
     } catch (e) {
       debugPrint('Error in openReplaceDialog: $e');
@@ -166,46 +143,12 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       final currentMeal = state.replacingMeal;
       final weekPlan = state.weekPlan;
       if (currentMeal == null || weekPlan == null) return;
-
-      final profile = await _userProfileRepository.getProfile();
-      if (profile == null) return;
-
-      final mealType = MealType.values.firstWhere(
-        (m) => m.name.toUpperCase() == currentMeal.meal.mealType,
-        orElse: () => MealType.lunch,
+      final updatedPlan = await _planEditUseCase.replaceRecipe(
+        currentMeal,
+        weekPlan,
+        newRecipe,
+        replaceAll: replaceAll,
       );
-
-      final mealsToUpdate = replaceAll
-          ? weekPlan.days
-              .expand((d) => d.meals)
-              .where((m) => m.recipe.id == currentMeal.recipe.id)
-              .map((m) => m.meal)
-              .toList()
-          : [currentMeal.meal];
-
-      for (final meal in mealsToUpdate) {
-        final type = MealType.values.firstWhere(
-          (m) => m.name.toUpperCase() == meal.mealType,
-          orElse: () => mealType,
-        );
-        final servings = _mealPlanGenerator.calculateServings(
-          newRecipe,
-          profile.dailyCalorieTarget,
-          type,
-        );
-        await _mealPlanRepository.updateMeal(
-          Meal(
-            id: meal.id,
-            dayPlanId: meal.dayPlanId,
-            mealType: meal.mealType,
-            recipeId: newRecipe.id,
-            servings: servings,
-            isConsumed: meal.isConsumed,
-          ),
-        );
-      }
-
-      final updatedPlan = await _mealPlanRepository.getCurrentWeekPlan();
       emit(state.copyWith(
         weekPlan: updatedPlan,
         showReplaceDialog: false,

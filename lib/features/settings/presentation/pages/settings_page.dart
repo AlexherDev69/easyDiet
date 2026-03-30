@@ -15,9 +15,68 @@ import '../widgets/settings_widgets.dart';
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
+  void _showRegenerateDialog(BuildContext context, SettingsCubit cubit) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (_) => BlocProvider.value(
+        value: cubit,
+        child: _RegenerateDialogWrapper(
+          onConfirmed: () {
+            cubit.onRegenerateConfirmed();
+            context.push(AppRoutes.planConfig);
+          },
+        ),
+      ),
+    ).then((_) {
+      if (cubit.state.showRegenerateDialog) {
+        cubit.dismissRegenerateDialog();
+      }
+    });
+  }
+
+  void _showResetDialog(BuildContext context, SettingsCubit cubit) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (_) => BlocProvider.value(
+        value: cubit,
+        child: _ResetDialogWrapper(
+          onConfirmed: () async {
+            await cubit.resetApp();
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Donnees reinitialisees avec succes'),
+                ),
+              );
+              context.go(AppRoutes.onboarding);
+            }
+          },
+        ),
+      ),
+    ).then((_) {
+      if (cubit.state.showResetDialog) {
+        cubit.hideResetDialog();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsCubit, SettingsState>(
+    return BlocConsumer<SettingsCubit, SettingsState>(
+      listenWhen: (previous, current) =>
+          (!previous.showRegenerateDialog && current.showRegenerateDialog) ||
+          (!previous.showResetDialog && current.showResetDialog),
+      listener: (context, state) {
+        final cubit = context.read<SettingsCubit>();
+        if (state.showRegenerateDialog) {
+          _showRegenerateDialog(context, cubit);
+        }
+        if (state.showResetDialog) {
+          _showResetDialog(context, cubit);
+        }
+      },
       builder: (context, state) {
         if (state.isLoading) {
           return Scaffold(
@@ -42,6 +101,7 @@ class SettingsPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => context.pop(),
+              tooltip: 'Retour',
             ),
             title: const Text(
               'Parametres',
@@ -60,51 +120,95 @@ class SettingsPage extends StatelessWidget {
               ),
             ],
           ),
-          body: Stack(
-            children: [
-              SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 8),
-                    _ProfileSection(state: state, cubit: cubit),
-                    const SizedBox(height: 16),
-                    const SettingsDivider(),
-                    const SizedBox(height: 16),
-                    _ObjectiveSection(state: state, cubit: cubit),
-                    const SizedBox(height: 16),
-                    const SettingsDivider(),
-                    const SizedBox(height: 16),
-                    _AllergiesSection(state: state, cubit: cubit),
-                    const SizedBox(height: 16),
-                    _ObjectiveSummary(state: state),
-                    const SizedBox(height: 24),
-                    _ResetButton(onPressed: cubit.showResetDialog),
-                    const SizedBox(height: 16),
-                  ],
-                ),
-              ),
-              if (state.showRegenerateDialog)
-                RegenerateDialog(
-                  onConfirm: () {
-                    cubit.onRegenerateConfirmed();
-                    context.push(AppRoutes.planConfig);
-                  },
-                  onDismiss: cubit.dismissRegenerateDialog,
-                ),
-              if (state.showResetDialog)
-                ResetDialog(
-                  onConfirm: () async {
-                    await cubit.resetApp();
-                    if (context.mounted) {
-                      context.go(AppRoutes.onboarding);
-                    }
-                  },
-                  onDismiss: cubit.hideResetDialog,
-                ),
-            ],
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 8),
+                _ProfileSection(state: state, cubit: cubit),
+                const SizedBox(height: 16),
+                const SettingsDivider(),
+                const SizedBox(height: 16),
+                _ObjectiveSection(state: state, cubit: cubit),
+                const SizedBox(height: 16),
+                const SettingsDivider(),
+                const SizedBox(height: 16),
+                _AllergiesSection(state: state, cubit: cubit),
+                const SizedBox(height: 16),
+                _ObjectiveSummary(state: state),
+                const SizedBox(height: 24),
+                _ResetButton(onPressed: cubit.showResetDialog),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
+        );
+      },
+    );
+  }
+}
+
+// ── Regenerate dialog wrapper ────────────────────────────────────────
+
+class _RegenerateDialogWrapper extends StatelessWidget {
+  const _RegenerateDialogWrapper({required this.onConfirmed});
+
+  final VoidCallback onConfirmed;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SettingsCubit, SettingsState>(
+      listenWhen: (previous, current) =>
+          previous.showRegenerateDialog && !current.showRegenerateDialog,
+      listener: (context, state) {
+        if (ModalRoute.of(context)?.isCurrent ?? false) {
+          Navigator.of(context).pop();
+        }
+      },
+      builder: (context, state) {
+        return RegenerateDialog(
+          onConfirm: () {
+            Navigator.of(context).pop();
+            onConfirmed();
+          },
+          onDismiss: () {
+            Navigator.of(context).pop();
+            context.read<SettingsCubit>().dismissRegenerateDialog();
+          },
+        );
+      },
+    );
+  }
+}
+
+// ── Reset dialog wrapper ─────────────────────────────────────────────
+
+class _ResetDialogWrapper extends StatelessWidget {
+  const _ResetDialogWrapper({required this.onConfirmed});
+
+  final VoidCallback onConfirmed;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SettingsCubit, SettingsState>(
+      listenWhen: (previous, current) =>
+          previous.showResetDialog && !current.showResetDialog,
+      listener: (context, state) {
+        if (ModalRoute.of(context)?.isCurrent ?? false) {
+          Navigator.of(context).pop();
+        }
+      },
+      builder: (context, state) {
+        return ResetDialog(
+          onConfirm: () {
+            Navigator.of(context).pop();
+            onConfirmed();
+          },
+          onDismiss: () {
+            Navigator.of(context).pop();
+            context.read<SettingsCubit>().hideResetDialog();
+          },
         );
       },
     );

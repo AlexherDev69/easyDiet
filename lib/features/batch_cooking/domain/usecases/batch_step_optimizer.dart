@@ -60,6 +60,15 @@ class BatchPage {
   final int pageNumber;
   final StepPhase phase;
   final List<RecipeStepItem> recipeSteps;
+
+  /// Max timer on this page (parallel steps take the max, not sum).
+  int get pageTimerSeconds => recipeSteps.fold(
+        0,
+        (max, step) =>
+            step.timerSeconds != null && step.timerSeconds! > max
+                ? step.timerSeconds!
+                : max,
+      );
 }
 
 enum StepPhase { prep, cook, finish }
@@ -73,6 +82,20 @@ class BatchStepOptimizer {
   ) {
     final recipePhaseSteps = _classifyStepsByRecipe(recipePairs);
     return _buildPages(recipePhaseSteps, recipePairs);
+  }
+
+  /// Estimated total cook time accounting for parallel steps.
+  /// Each page runs its steps in parallel, so the page duration is the max
+  /// timer of its steps. Pages run sequentially.
+  /// Prep/finish pages without timers count as ~2 min each (manual work).
+  static int estimatedTotalMinutes(List<BatchPage> pages) {
+    const manualStepMinutes = 2;
+    var totalSeconds = 0;
+    for (final page in pages) {
+      final timerSec = page.pageTimerSeconds;
+      totalSeconds += timerSec > 0 ? timerSec : manualStepMinutes * 60;
+    }
+    return (totalSeconds / 60).ceil();
   }
 
   Map<int, Map<StepPhase, List<RecipeStep>>> _classifyStepsByRecipe(

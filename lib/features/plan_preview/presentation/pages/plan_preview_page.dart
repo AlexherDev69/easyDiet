@@ -40,6 +40,7 @@ class PlanPreviewPage extends StatelessWidget {
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () => context.pop(),
+              tooltip: 'Retour',
             ),
             title: const Text(
               'Nouveau plan',
@@ -298,10 +299,7 @@ class _ReplaceRecipePreviewDialogState
                 ),
               )
             else
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxHeight: MediaQuery.of(context).size.height * 0.5,
-                ),
+              Flexible(
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemCount: widget.candidates.length,
@@ -324,11 +322,7 @@ class _ReplaceRecipePreviewDialogState
                         child: Row(
                           children: [
                             Expanded(
-                              child: Text(
-                                recipe.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              child: Text(recipe.name),
                             ),
                             const SizedBox(width: 8),
                             Text(

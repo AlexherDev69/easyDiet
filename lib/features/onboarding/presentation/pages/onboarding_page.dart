@@ -10,6 +10,7 @@ import '../widgets/allergies_step.dart';
 import '../widgets/body_metrics_step.dart';
 import '../widgets/goal_step.dart';
 import '../widgets/lifestyle_step.dart';
+import '../widgets/onboarding_illustration.dart';
 import '../widgets/personal_info_step.dart';
 import '../widgets/plan_preview_step.dart';
 
@@ -113,67 +114,82 @@ class OnboardingPage extends StatelessWidget {
       child: KeyedSubtree(
         key: ValueKey(state.currentStep),
         child: switch (state.currentStep) {
-          0 => PersonalInfoStep(
-              name: state.name,
-              age: state.age,
-              sex: state.sex,
-              onNameChange: cubit.updateName,
-              onAgeChange: cubit.updateAge,
-              onSexChange: cubit.updateSex,
+          0 => _StepWithIllustration(
+              step: 0,
+              child: PersonalInfoStep(
+                name: state.name,
+                age: state.age,
+                sex: state.sex,
+                onNameChange: cubit.updateName,
+                onAgeChange: cubit.updateAge,
+                onSexChange: cubit.updateSex,
+              ),
             ),
-          1 => BodyMetricsStep(
-              height: state.heightCm,
-              weight: state.weightKg,
-              onHeightChange: cubit.updateHeight,
-              onWeightChange: cubit.updateWeight,
+          1 => _StepWithIllustration(
+              step: 1,
+              child: BodyMetricsStep(
+                height: state.heightCm,
+                weight: state.weightKg,
+                onHeightChange: cubit.updateHeight,
+                onWeightChange: cubit.updateWeight,
+              ),
             ),
-          2 => GoalStep(
-              targetWeight: state.targetWeightKg,
-              currentWeight: state.weightKg,
-              lossPace: state.lossPace,
-              activityLevel: state.activityLevel,
-              dietType: state.dietType,
-              calculatedCalories: state.calculatedCalories,
-              calculatedWaterMl: state.calculatedWaterMl,
-              onTargetWeightChange: cubit.updateTargetWeight,
-              onLossPaceChange: cubit.updateLossPace,
-              onActivityLevelChange: cubit.updateActivityLevel,
-              onDietTypeChange: cubit.updateDietType,
+          2 => _StepWithIllustration(
+              step: 2,
+              child: GoalStep(
+                targetWeight: state.targetWeightKg,
+                currentWeight: state.weightKg,
+                lossPace: state.lossPace,
+                activityLevel: state.activityLevel,
+                dietType: state.dietType,
+                calculatedCalories: state.calculatedCalories,
+                calculatedWaterMl: state.calculatedWaterMl,
+                onTargetWeightChange: cubit.updateTargetWeight,
+                onLossPaceChange: cubit.updateLossPace,
+                onActivityLevelChange: cubit.updateActivityLevel,
+                onDietTypeChange: cubit.updateDietType,
+              ),
             ),
-          3 => LifestyleStep(
-              freeDays: state.freeDays,
-              batchCookingEnabled: state.batchCookingEnabled,
-              batchCooking: state.batchCookingSessions,
-              shoppingTrips: state.shoppingTrips,
-              distinctBreakfasts: state.distinctBreakfasts,
-              distinctLunches: state.distinctLunches,
-              distinctDinners: state.distinctDinners,
-              distinctSnacks: state.distinctSnacks,
-              enabledMealTypes: state.enabledMealTypes,
-              dietStartDate: state.dietStartDate,
-              batchCookingBeforeDiet: state.batchCookingBeforeDiet,
-              showBatchCookingInfo: state.showBatchCookingInfo,
-              economicMode: state.economicMode,
-              onToggleMealType: cubit.toggleMealType,
-              onToggleFreeDay: cubit.toggleFreeDay,
-              onBatchCookingEnabledChange: cubit.updateBatchCookingEnabled,
-              onBatchCookingChange: cubit.updateBatchCooking,
-              onShoppingTripsChange: cubit.updateShoppingTrips,
-              onDistinctBreakfastsChange: cubit.updateDistinctBreakfasts,
-              onDistinctLunchesChange: cubit.updateDistinctLunches,
-              onDistinctDinnersChange: cubit.updateDistinctDinners,
-              onDistinctSnacksChange: cubit.updateDistinctSnacks,
-              onDietStartDateChange: cubit.updateDietStartDate,
-              onBatchCookingBeforeDietChange: cubit.updateBatchCookingBeforeDiet,
-              onEconomicModeChange: cubit.updateEconomicMode,
-              onShowBatchCookingInfo: cubit.showBatchCookingInfo,
-              onHideBatchCookingInfo: cubit.hideBatchCookingInfo,
+          3 => _StepWithIllustration(
+              step: 3,
+              child: LifestyleStep(
+                freeDays: state.freeDays,
+                batchCookingEnabled: state.batchCookingEnabled,
+                batchCooking: state.batchCookingSessions,
+                shoppingTrips: state.shoppingTrips,
+                distinctBreakfasts: state.distinctBreakfasts,
+                distinctLunches: state.distinctLunches,
+                distinctDinners: state.distinctDinners,
+                distinctSnacks: state.distinctSnacks,
+                enabledMealTypes: state.enabledMealTypes,
+                dietStartDate: state.dietStartDate,
+                batchCookingBeforeDiet: state.batchCookingBeforeDiet,
+                showBatchCookingInfo: state.showBatchCookingInfo,
+                economicMode: state.economicMode,
+                onToggleMealType: cubit.toggleMealType,
+                onToggleFreeDay: cubit.toggleFreeDay,
+                onBatchCookingEnabledChange: cubit.updateBatchCookingEnabled,
+                onBatchCookingChange: cubit.updateBatchCooking,
+                onShoppingTripsChange: cubit.updateShoppingTrips,
+                onDistinctBreakfastsChange: cubit.updateDistinctBreakfasts,
+                onDistinctLunchesChange: cubit.updateDistinctLunches,
+                onDistinctDinnersChange: cubit.updateDistinctDinners,
+                onDistinctSnacksChange: cubit.updateDistinctSnacks,
+                onDietStartDateChange: cubit.updateDietStartDate,
+                onBatchCookingBeforeDietChange: cubit.updateBatchCookingBeforeDiet,
+                onEconomicModeChange: cubit.updateEconomicMode,
+                onShowBatchCookingInfo: cubit.showBatchCookingInfo,
+                onHideBatchCookingInfo: cubit.hideBatchCookingInfo,
+              ),
             ),
-          4 => AllergiesStep(
-              selectedAllergies: state.selectedAllergies,
-              excludedMeats: state.excludedMeats,
-              onToggleAllergy: cubit.toggleAllergy,
-              onToggleExcludedMeat: cubit.toggleExcludedMeat,
+          4 => _StepWithIllustration(
+              step: 4,
+              child: AllergiesStep(
+                selectedAllergies: state.selectedAllergies,
+                excludedMeats: state.excludedMeats,
+                onToggleAllergy: cubit.toggleAllergy,
+                onToggleExcludedMeat: cubit.toggleExcludedMeat,
+              ),
             ),
           5 => _buildPlanPreview(context, state, cubit),
           _ => const SizedBox.shrink(),
@@ -355,6 +371,33 @@ class _NavigationButtons extends StatelessWidget {
             child: const Text('Terminer',
                 style: TextStyle(fontWeight: FontWeight.bold)),
           ),
+      ],
+    );
+  }
+}
+
+/// Wraps a step widget with its illustration centered above it.
+///
+/// Uses a [Column] so the illustration sits directly above the step content.
+/// The step content is placed inside an [Expanded] + [SingleChildScrollView]
+/// so long forms (e.g. LifestyleStep) remain scrollable without the
+/// illustration being pushed off screen.
+class _StepWithIllustration extends StatelessWidget {
+  const _StepWithIllustration({
+    required this.step,
+    required this.child,
+  });
+
+  final int step;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Center(child: OnboardingIllustration(step: step)),
+        const SizedBox(height: 16),
+        Expanded(child: child),
       ],
     );
   }

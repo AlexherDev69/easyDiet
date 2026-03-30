@@ -43,6 +43,7 @@ class DashboardHeader extends StatelessWidget {
         ),
         IconButton(
           onPressed: onSettingsClick,
+          tooltip: 'Parametres',
           style: IconButton.styleFrom(
             backgroundColor: theme.colorScheme.surfaceContainerHighest,
             fixedSize: const Size(44, 44),

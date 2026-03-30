@@ -134,6 +134,7 @@ class StepperField extends StatelessWidget {
           IconButton(
             onPressed: value > min ? () => onChanged(value - 1) : null,
             icon: const Icon(Icons.remove, size: 18),
+            tooltip: 'Retirer',
           ),
           Text(
             '$value',
@@ -145,6 +146,7 @@ class StepperField extends StatelessWidget {
           IconButton(
             onPressed: value < max ? () => onChanged(value + 1) : null,
             icon: const Icon(Icons.add, size: 18),
+            tooltip: 'Ajouter',
           ),
         ],
       ),

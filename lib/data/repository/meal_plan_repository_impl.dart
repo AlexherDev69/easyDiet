@@ -14,13 +14,11 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
     this._weekPlanDao,
     this._dayPlanDao,
     this._mealDao,
-    this._db,
   );
 
   final WeekPlanDao _weekPlanDao;
   final DayPlanDao _dayPlanDao;
   final MealDao _mealDao;
-  final AppDatabase _db;
 
   @override
   Stream<WeekPlanWithDays?> watchCurrentWeekPlan() =>
@@ -53,7 +51,7 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
 
   @override
   Future<void> swapMealsBetweenDays(int mealId, int targetDayPlanId) async {
-    await _db.transaction(() async {
+    await _mealDao.runInTransaction(() async {
       final sourceMeal = await _mealDao.getMealById(mealId);
       if (sourceMeal == null) return;
 
@@ -93,7 +91,7 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
     );
     if (futureDays.length < 2) return;
 
-    await _db.transaction(() async {
+    await _mealDao.runInTransaction(() async {
       // Create a new day after the last one to receive its meals.
       final lastDay = futureDays.last;
       final lastDate = DateTime.fromMillisecondsSinceEpoch(lastDay.date);

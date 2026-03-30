@@ -60,4 +60,9 @@ class MealDao extends DatabaseAccessor<AppDatabase> with _$MealDaoMixin {
     return (update(meals)..where((t) => t.dayPlanId.equals(fromDayPlanId)))
         .write(MealsCompanion(dayPlanId: Value(toDayPlanId)));
   }
+
+  /// Run a callback inside a database transaction.
+  Future<T> runInTransaction<T>(Future<T> Function() action) {
+    return attachedDatabase.transaction(action);
+  }
 }
