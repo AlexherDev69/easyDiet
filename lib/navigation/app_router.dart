@@ -102,7 +102,10 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
       routes: [
         GoRoute(
           path: AppRoutes.dashboard,
-          pageBuilder: (context, state) => NoTransitionPage(
+          pageBuilder: (context, state) => CustomTransitionPage(
+            transitionsBuilder: (context, animation, _, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 150),
             child: BlocProvider(
               create: (_) => DashboardCubit(
                 userProfileRepository: getIt<UserProfileRepository>(),
@@ -117,7 +120,10 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.mealPlan,
-          pageBuilder: (context, state) => NoTransitionPage(
+          pageBuilder: (context, state) => CustomTransitionPage(
+            transitionsBuilder: (context, animation, _, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 150),
             child: BlocProvider(
               create: (_) => MealPlanCubit(
                 mealPlanRepository: getIt<MealPlanRepository>(),
@@ -132,7 +138,10 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.shoppingList,
-          pageBuilder: (context, state) => NoTransitionPage(
+          pageBuilder: (context, state) => CustomTransitionPage(
+            transitionsBuilder: (context, animation, _, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 150),
             child: BlocProvider(
               create: (_) => ShoppingCubit(
                 shoppingRepository: getIt<ShoppingRepository>(),
@@ -146,7 +155,10 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.recipeList,
-          pageBuilder: (context, state) => NoTransitionPage(
+          pageBuilder: (context, state) => CustomTransitionPage(
+            transitionsBuilder: (context, animation, _, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 150),
             child: BlocProvider(
               create: (_) => RecipeListCubit(
                 recipeRepository: getIt<RecipeRepository>(),
@@ -158,7 +170,10 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.weightLog,
-          pageBuilder: (context, state) => NoTransitionPage(
+          pageBuilder: (context, state) => CustomTransitionPage(
+            transitionsBuilder: (context, animation, _, child) =>
+                FadeTransition(opacity: animation, child: child),
+            transitionDuration: const Duration(milliseconds: 150),
             child: BlocProvider(
               create: (_) => WeightLogCubit(
                 weightLogRepository: getIt<WeightLogRepository>(),

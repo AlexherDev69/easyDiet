@@ -74,11 +74,15 @@ class WeightLogCubit extends Cubit<WeightLogState> {
             _weightProjectionCalculator.calculateAverageWeeklyLoss(sorted);
 
         final currentWeight = sorted.lastOrNull?.weightKg ?? 0.0;
+        final lastLogDate = sorted.lastOrNull?.date;
         final projectedDate =
             _weightProjectionCalculator.calculateProjectedDateAtCurrentPace(
           currentWeight: currentWeight,
           targetWeight: state.targetWeight,
           averageWeeklyLoss: avgLoss,
+          referenceDate: lastLogDate != null
+              ? DateTime.fromMillisecondsSinceEpoch(lastLogDate)
+              : null,
         );
 
         emit(state.copyWith(
@@ -128,11 +132,8 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       final weight = double.tryParse(state.weightInput);
       if (weight == null) return;
 
-      final selectedDate = DateTime(
-        state.selectedDate.year,
-        state.selectedDate.month,
-        state.selectedDate.day,
-      );
+      final date = state.selectedDate ?? DateTime.now();
+      final selectedDate = DateTime(date.year, date.month, date.day);
       final dateMillis = selectedDate.millisecondsSinceEpoch;
       final existingLog = await _weightLogRepository.getLogByDate(dateMillis);
 
@@ -154,11 +155,8 @@ class WeightLogCubit extends Cubit<WeightLogState> {
       final weight = double.tryParse(state.weightInput);
       if (weight == null) return;
 
-      final selectedDate = DateTime(
-        state.selectedDate.year,
-        state.selectedDate.month,
-        state.selectedDate.day,
-      );
+      final date = state.selectedDate ?? DateTime.now();
+      final selectedDate = DateTime(date.year, date.month, date.day);
       final dateMillis = selectedDate.millisecondsSinceEpoch;
       final existingLog = await _weightLogRepository.getLogByDate(dateMillis);
       if (existingLog != null) {

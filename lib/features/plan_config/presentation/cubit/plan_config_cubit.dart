@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +25,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
       final profile = await _userProfileRepository.getProfile();
       if (profile == null) return;
 
-      final freeDaysList = ProfileJsonParser.parseIntSet(profile.freeDays);
+      final freeDaysList = profile.freeDays.toSet();
       final enabledMealTypes = ProfileJsonParser.parseMealTypes(profile.enabledMealTypes);
       final dietType = DietType.values.firstWhere(
         (d) => d.name == profile.dietType,
@@ -133,7 +131,7 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
           activityLevel: Value(profile.activityLevel),
           dietType: Value(state.dietType.name),
           dietDaysPerWeek: Value(state.dietDaysPerWeek),
-          freeDays: Value(json.encode(state.freeDays.toList())),
+          freeDays: Value(state.freeDays.toList()),
           batchCookingSessionsPerWeek:
               Value(profile.batchCookingSessionsPerWeek),
           shoppingTripsPerWeek: Value(profile.shoppingTripsPerWeek),
@@ -142,12 +140,12 @@ class PlanConfigCubit extends Cubit<PlanConfigState> {
           distinctDinners: Value(state.distinctDinners),
           distinctSnacks: Value(state.distinctSnacks),
           enabledMealTypes: Value(
-              json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
+              state.enabledMealTypes.map((m) => m.name).toList()),
           allergies: Value(
-              json.encode(state.selectedAllergies.map((a) => a.name).toList())),
+              state.selectedAllergies.map((a) => a.name).toList()),
           customAllergies: Value(profile.customAllergies),
           excludedMeats: Value(
-              json.encode(state.excludedMeats.map((m) => m.name).toList())),
+              state.excludedMeats.map((m) => m.name).toList()),
           dietStartDate: Value(AppDateUtils.toEpochMillis(startDate)),
           batchCookingBeforeDiet: Value(profile.batchCookingBeforeDiet),
           economicMode: Value(state.economicMode),

@@ -617,7 +617,7 @@ class _AddWeightDialogShell extends StatelessWidget {
                 onTap: () async {
                   final picked = await showDatePicker(
                     context: context,
-                    initialDate: state.selectedDate,
+                    initialDate: state.selectedDate ?? DateTime.now(),
                     firstDate: DateTime(2020),
                     lastDate: DateTime.now(),
                   );
@@ -631,7 +631,7 @@ class _AddWeightDialogShell extends StatelessWidget {
                     prefixIcon: Icon(Icons.calendar_today, size: 20),
                   ),
                   child: Text(
-                    AppDateUtils.formatFrenchDate(state.selectedDate),
+                    AppDateUtils.formatFrenchDate(state.selectedDate ?? DateTime.now()),
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),

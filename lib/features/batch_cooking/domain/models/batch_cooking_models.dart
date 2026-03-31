@@ -24,7 +24,8 @@ class BatchCookingRecipeInfo {
   final List<Ingredient> ingredients;
   final String mealType;
 
-  double get servingsMultiplier => servings / baseServings;
+  double get servingsMultiplier =>
+      baseServings > 0 ? servings / baseServings : 1.0;
 }
 
 /// Merged ingredient from multiple recipes.

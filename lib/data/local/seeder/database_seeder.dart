@@ -6,20 +6,36 @@ import 'package:flutter/services.dart';
 
 import '../database.dart';
 
-/// Seeds the database with recipes from assets/recipes.json.
+/// Seeds the database with recipes from assets/recipes/.
 class DatabaseSeeder {
   DatabaseSeeder(this._db);
 
   final AppDatabase _db;
+
+  static const _recipeFiles = [
+    'assets/recipes/breakfast.json',
+    'assets/recipes/lunch.json',
+    'assets/recipes/dinner.json',
+    'assets/recipes/snack.json',
+  ];
 
   Future<void> seedRecipes() async {
     final recipeDao = _db.recipeDao;
 
     final existingNames = await recipeDao.getAllRecipeNames();
 
-    final jsonString = await rootBundle.loadString('assets/recipes.json');
-    final data = json.decode(jsonString) as Map<String, dynamic>;
-    final allRecipes = data['recipes'] as List<dynamic>;
+    final allRecipes = <dynamic>[];
+    for (final path in _recipeFiles) {
+      try {
+        final jsonString = await rootBundle.loadString(path);
+        final data = json.decode(jsonString) as Map<String, dynamic>;
+        final recipes = data['recipes'] as List<dynamic>;
+        allRecipes.addAll(recipes);
+      } catch (e) {
+        debugPrint('DatabaseSeeder: failed to load $path - $e');
+      }
+    }
+    if (allRecipes.isEmpty) return;
 
     final newRecipes =
         allRecipes.where((r) => !existingNames.contains(r['name'])).toList();
@@ -32,8 +48,12 @@ class DatabaseSeeder {
         try {
           final recipe = raw as Map<String, dynamic>;
 
-          final allergens = json.encode(recipe['allergens'] ?? <String>[]);
-          final meatTypes = json.encode(recipe['meatTypes'] ?? <String>[]);
+          final allergens = (recipe['allergens'] as List?)
+                  ?.cast<String>() ??
+              <String>[];
+          final meatTypes = (recipe['meatTypes'] as List?)
+                  ?.cast<String>() ??
+              <String>[];
 
           final recipeId = await recipeDao.insertRecipe(
             RecipesCompanion.insert(

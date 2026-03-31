@@ -59,16 +59,20 @@ class WeightProjectionCalculator {
   }
 
   /// Projected goal date at current observed pace.
+  /// Anchors to [referenceDate] (typically the latest log date) instead of
+  /// DateTime.now() so retroactive entries produce correct projections.
   DateTime? calculateProjectedDateAtCurrentPace({
     required double currentWeight,
     required double targetWeight,
     required double averageWeeklyLoss,
+    DateTime? referenceDate,
   }) {
     if (averageWeeklyLoss <= 0 || currentWeight <= targetWeight) return null;
     final kgToLose = currentWeight - targetWeight;
     final weeksNeeded = kgToLose / averageWeeklyLoss;
     final daysNeeded = (weeksNeeded * 7).toInt();
-    return DateTime.now().add(Duration(days: daysNeeded));
+    final anchor = referenceDate ?? DateTime.now();
+    return anchor.add(Duration(days: daysNeeded));
   }
 
   /// Whether the observed loss rate exceeds safe thresholds (> 1 kg/week).

@@ -1,0 +1,5198 @@
+{
+  "recipes": [
+    {
+      "name": "Poulet roti aux herbes",
+      "description": "Des hauts de cuisse de poulet rotis aux herbes de Provence avec des pommes de terre fondantes",
+      "category": "DINNER",
+      "caloriesPerServing": 480,
+      "proteinGrams": 38,
+      "carbsGrams": 32,
+      "fatGrams": 22,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 45,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 200°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Assaisonner les hauts de cuisse avec les herbes de Provence, sel, poivre et huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Couper les pommes de terre en quartiers et les disposer autour du poulet dans un plat.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les gousses d'ail entieres et un filet d'huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Enfourner et cuire jusqu'a ce que le poulet soit bien dore.",
+          "timerSeconds": 2700
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Laisser reposer 5 minutes avant de servir.",
+          "timerSeconds": 300
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "hauts de cuisse de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "pommes de terre",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "herbes de Provence",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "SPICES"
+        },
+        {
+          "name": "gousse d'ail",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        },
+        {
+          "name": "poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Saumon grille citron aneth",
+      "description": "Un pave de saumon grille avec une sauce legere au citron et a l'aneth, accompagne d'asperges",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 34,
+      "carbsGrams": 12,
+      "fatGrams": 26,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 12,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "FISH"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 200°C. Assaisonner le pave de saumon avec sel et poivre.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Deposer le saumon sur une plaque chemisee de papier cuisson, arroser d'huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Deposer les rondelles de citron et l'aneth sur le saumon.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Disposer les asperges a cote du saumon, assaisonner legerement.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Enfourner et cuire jusqu'a ce que le saumon soit juste cuit a coeur.",
+          "timerSeconds": 720
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pave de saumon",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "citron",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "aneth frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "asperges vertes",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Wok de legumes au tofu",
+      "description": "Un wok colore de legumes croquants et de tofu marine a la sauce soja et au gingembre",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 22,
+      "carbsGrams": 35,
+      "fatGrams": 18,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 12,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "SOY",
+        "SESAME"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le tofu en des et le faire mariner dans la sauce soja et le gingembre rape.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Emincer les legumes (poivron, brocoli, carotte) en morceaux reguliers.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire dorer le tofu dans un wok bien chaud avec un filet d'huile de sesame.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Retirer le tofu, ajouter les legumes et les faire sauter a feu vif.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Remettre le tofu, ajouter le reste de marinade et melanger.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir avec du riz basmati ou des nouilles.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "tofu ferme",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "brocoli",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carotte",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Gratin de courgettes",
+      "description": "Un gratin leger de courgettes avec une bechamel allegee au fromage et des herbes",
+      "category": "DINNER",
+      "caloriesPerServing": 350,
+      "proteinGrams": 18,
+      "carbsGrams": 22,
+      "fatGrams": 20,
+      "servings": 4,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE",
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180°C. Couper les courgettes en rondelles.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir les courgettes a la poele avec un filet d'huile d'olive pendant 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Preparer la bechamel allegee : faire fondre le beurre, ajouter la farine, puis le lait progressivement.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Disposer les courgettes dans un plat a gratin, napper de bechamel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Parsemer de gruyere rape et enfourner.",
+          "timerSeconds": 1500
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir dore et gratine.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "courgettes",
+          "quantity": 600,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 250,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "beurre",
+          "quantity": 15,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "farine",
+          "quantity": 15,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "gruyere rape",
+          "quantity": 60,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "muscade",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Chili con carne allege",
+      "description": "Un chili con carne savoureux avec du boeuf haché maigre, des haricots rouges et des epices",
+      "category": "DINNER",
+      "caloriesPerServing": 450,
+      "proteinGrams": 32,
+      "carbsGrams": 40,
+      "fatGrams": 16,
+      "servings": 4,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 40,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire revenir l'oignon et l'ail eminces dans un filet d'huile d'olive.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter la viande hachee et la faire dorer en l'emiettant.",
+          "timerSeconds": 420
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les epices (cumin, paprika, piment), remuer 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les tomates concassees, les haricots rouges egouttes et le concentre de tomate.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Laisser mijoter a feu doux a couvert.",
+          "timerSeconds": 1800
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Ajuster l'assaisonnement et servir avec du riz ou seul.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "boeuf hache 5% MG",
+          "quantity": 400,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "haricots rouges (en conserve)",
+          "quantity": 250,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gousse d'ail",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "concentre de tomate",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "piment en poudre",
+          "quantity": 0.5,
+          "unit": "cac",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "BEEF"
+      ]
+    },
+    {
+      "name": "Curry de pois chiches",
+      "description": "Un curry vegetarien onctueux aux pois chiches, lait de coco et epices indiennes",
+      "category": "DINNER",
+      "caloriesPerServing": 400,
+      "proteinGrams": 14,
+      "carbsGrams": 42,
+      "fatGrams": 20,
+      "servings": 4,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Emincer l'oignon et l'ail, les faire revenir dans l'huile d'olive.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter la pate de curry, le curcuma et le cumin. Cuire 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Verser les tomates concassees et le lait de coco, melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les pois chiches egouttes et les epinards. Laisser mijoter.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajuster l'assaisonnement et servir avec du riz basmati.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pois chiches (en conserve)",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait de coco light",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gousse d'ail",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de curry",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Filet de cabillaud en papillote",
+      "description": "Un filet de cabillaud cuit en papillote avec des legumes, du citron et des herbes fraiches",
+      "category": "DINNER",
+      "caloriesPerServing": 300,
+      "proteinGrams": 32,
+      "carbsGrams": 16,
+      "fatGrams": 12,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180°C. Preparer une grande feuille de papier cuisson.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Deposer les rondelles de courgette et les tomates cerises sur le papier.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Poser le filet de cabillaud par-dessus, saler, poivrer et arroser d'huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les rondelles de citron et le thym. Fermer la papillote hermetiquement.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Enfourner et cuire.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Ouvrir la papillote a table et servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filet de cabillaud",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "courgette",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomates cerises",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "thym frais",
+          "quantity": 2,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Ratatouille provencale",
+      "description": "Une ratatouille traditionnelle avec aubergine, courgette, poivrons et tomates mijotes lentement",
+      "category": "DINNER",
+      "caloriesPerServing": 310,
+      "proteinGrams": 6,
+      "carbsGrams": 28,
+      "fatGrams": 18,
+      "servings": 4,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 45,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper tous les legumes en des reguliers d'environ 2 cm.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir l'oignon et l'ail dans l'huile d'olive a feu moyen.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter l'aubergine et les poivrons, cuire 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter la courgette et les tomates concassees. Assaisonner avec herbes de Provence, sel et poivre.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Couvrir et laisser mijoter a feu doux en remuant de temps en temps.",
+          "timerSeconds": 2400
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Ajuster l'assaisonnement et servir chaud ou tiede avec du basilic frais.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "aubergine",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "courgette",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron jaune",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gousse d'ail",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 3,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "basilic frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Blanquette de veau allegee",
+      "description": "Une blanquette de veau traditionnelle allegee avec une sauce onctueuse a la creme legere",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 35,
+      "carbsGrams": 25,
+      "fatGrams": 20,
+      "servings": 4,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 90,
+      "isBatchFriendly": true,
+      "difficulty": "HARD",
+      "allergens": [
+        "LACTOSE",
+        "BIRCH_POLLEN",
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le veau en morceaux et le faire blanchir dans de l'eau bouillante. Egoutter et rincer.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Remettre la viande dans une cocotte avec le bouillon, les carottes, l'oignon pique et le bouquet garni. Cuire a feu doux.",
+          "timerSeconds": 4500
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Cuire les champignons a part dans une poele avec un filet de citron.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Preparer le roux avec la farine et un peu de bouillon de cuisson, puis ajouter la creme legere.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Melanger la sauce avec la viande et les champignons. Rectifier l'assaisonnement.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir chaud avec du riz basmati.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "epaule de veau",
+          "quantity": 600,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "carottes",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "champignons de Paris",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "creme legere (15%)",
+          "quantity": 100,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "bouillon de volaille",
+          "quantity": 500,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "farine",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron (jus)",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "VEAL"
+      ]
+    },
+    {
+      "name": "Tajine de poulet aux olives",
+      "description": "Un tajine marocain parfume au poulet tendre, olives vertes et citron confit",
+      "category": "DINNER",
+      "caloriesPerServing": 450,
+      "proteinGrams": 38,
+      "carbsGrams": 18,
+      "fatGrams": 24,
+      "servings": 4,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 60,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire dorer les morceaux de poulet assaisonnes dans l'huile d'olive a feu vif.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter l'oignon emince, l'ail et les epices (curcuma, gingembre, cannelle). Faire revenir.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Mouiller avec le bouillon, ajouter le citron confit coupe en morceaux. Couvrir et laisser mijoter.",
+          "timerSeconds": 2700
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les olives vertes 10 minutes avant la fin de cuisson.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Parsemer de coriandre fraiche et servir avec de la semoule.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "cuisses de poulet",
+          "quantity": 800,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "olives vertes denoyautees",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron confit",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "bouillon de volaille",
+          "quantity": 300,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "curcuma moulu",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "gingembre moulu",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cannelle",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "semoule",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Dos de saumon en croute d'herbes",
+      "description": "Un pave de saumon recouvert d'une croute croustillante aux herbes fraiches et chapelure",
+      "category": "DINNER",
+      "caloriesPerServing": 440,
+      "proteinGrams": 36,
+      "carbsGrams": 12,
+      "fatGrams": 28,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 18,
+      "isBatchFriendly": false,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "GLUTEN",
+        "FISH",
+        "MUSTARD"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 200°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mixer la chapelure avec le persil, l'aneth, l'ail et l'huile d'olive pour former la croute.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Badigeonner les paves de saumon de moutarde et les recouvrir du melange chapelure-herbes.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Enfourner les paves sur une plaque recouverte de papier cuisson.",
+          "timerSeconds": 1080
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir avec un filet de citron et des haricots verts vapeur.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "paves de saumon",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "chapelure",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "persil frais",
+          "quantity": 15,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "aneth frais",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "moutarde de Dijon",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron (jus)",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 1,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Poivrons farcis au quinoa",
+      "description": "Des poivrons colores farcis d'un melange de quinoa, legumes et feta, gratines au four",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 16,
+      "carbsGrams": 42,
+      "fatGrams": 16,
+      "servings": 3,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 35,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 190°C. Cuire le quinoa dans de l'eau bouillante salee.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper le dessus des poivrons et les evider. Les placer dans un plat allant au four.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire revenir l'oignon et la courgette en des, puis melanger avec le quinoa cuit et la feta emiettee.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Farcir les poivrons avec le melange et enfourner.",
+          "timerSeconds": 1500
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir chaud avec un filet d'huile d'olive et du basilic frais.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "poivrons (rouge, jaune, vert)",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "quinoa",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "feta",
+          "quantity": 80,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "courgette",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "basilic frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Gratin dauphinois leger",
+      "description": "Un gratin dauphinois allegee avec creme legere et lait, dore et fondant au four",
+      "category": "DINNER",
+      "caloriesPerServing": 350,
+      "proteinGrams": 12,
+      "carbsGrams": 40,
+      "fatGrams": 15,
+      "servings": 4,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 65,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180°C. Eplucher et couper les pommes de terre en fines rondelles.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Frotter le plat a gratin avec la gousse d'ail coupee en deux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Disposer les rondelles de pommes de terre en couches dans le plat, saler et poivrer.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Melanger le lait et la creme legere, verser sur les pommes de terre. Raper la noix de muscade.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Enfourner et cuire jusqu'a ce que le dessus soit bien dore.",
+          "timerSeconds": 3000
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pommes de terre (type charlotte)",
+          "quantity": 800,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "creme legere (15%)",
+          "quantity": 150,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "gousse d'ail",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "noix de muscade",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Crevettes sautees a l'ail et brocolis",
+      "description": "Des crevettes sautees a l'ail avec des brocolis croquants, servies avec du riz parfume",
+      "category": "DINNER",
+      "caloriesPerServing": 390,
+      "proteinGrams": 32,
+      "carbsGrams": 38,
+      "fatGrams": 12,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "SHELLFISH",
+        "SOY"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire le riz basmati dans de l'eau bouillante salee.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire blanchir les brocolis a la vapeur jusqu'a tendrete.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire chauffer l'huile d'olive dans un wok, y faire revenir l'ail emince.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les crevettes et les sauter a feu vif jusqu'a coloration.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter les brocolis, la sauce soja et un filet de citron. Melanger et servir sur le riz.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "crevettes decortiquees",
+          "quantity": 250,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "brocolis",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "riz basmati",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "gousses d'ail",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron (jus)",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "SHELLFISH"
+      ]
+    },
+    {
+      "name": "Escalope de dinde aux champignons",
+      "description": "Des escalopes de dinde poelees nappees d'une sauce cremeuse aux champignons",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 38,
+      "carbsGrams": 10,
+      "fatGrams": 20,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Assaisonner les escalopes de dinde avec sel, poivre et les cuire dans une poele chaude.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Retirer les escalopes et les garder au chaud. Dans la meme poele, faire sauter les champignons eminces.",
+          "timerSeconds": 360
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter l'echalote emincee et cuire jusqu'a tendrete.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Deglacer avec le vin blanc, puis ajouter la creme legere. Laisser reduire.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Remettre les escalopes dans la sauce, parsemer de persil et servir.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "escalopes de dinde",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "champignons de Paris",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "creme legere (15%)",
+          "quantity": 100,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "echalote",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "vin blanc sec",
+          "quantity": 50,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "persil frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Lasagnes de legumes",
+      "description": "Des lasagnes vegetariennes aux courgettes, aubergines et sauce tomate maison gratinees",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 20,
+      "carbsGrams": 42,
+      "fatGrams": 18,
+      "servings": 4,
+      "prepTimeMinutes": 25,
+      "cookTimeMinutes": 45,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "GLUTEN",
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180°C. Couper les courgettes et les aubergines en fines tranches.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire griller les tranches de legumes dans une poele avec un filet d'huile d'olive.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Preparer la bechamel legere en melangeant la farine, le lait et une pointe de noix de muscade.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Alterner les couches dans le plat : sauce tomate, feuilles de lasagne, legumes grilles, bechamel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Terminer par une couche de bechamel et de mozzarella rapee. Enfourner.",
+          "timerSeconds": 2100
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Laisser reposer 5 minutes avant de servir pour que les lasagnes se tiennent.",
+          "timerSeconds": 300
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "feuilles de lasagne",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "courgettes",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "aubergine",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce tomate",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "mozzarella",
+          "quantity": 125,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 300,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "farine",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Ragout de champignons et lentilles",
+      "description": "Un ragout reconfortant aux champignons, lentilles vertes et lait de coco, riche en proteines vegetales",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 19,
+      "carbsGrams": 40,
+      "fatGrams": 14,
+      "servings": 4,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 40,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire revenir les echalotes et l'ail emince dans l'huile d'olive pendant 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les champignons emincees et les carottes coupees en rondelles. Cuire 8 minutes.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Incorporer les lentilles vertes, le cumin, le paprika et le curcuma. Remuer 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter le lait de coco, le bouillon de legumes et la pate de tomate. Porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Reduire le feu et laisser mijoter 25 minutes jusqu'a ce que les lentilles soient tendres.",
+          "timerSeconds": 1500
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Ajouter le jus de citron vert et le chou kale. Cuire 3 minutes et servir.",
+          "timerSeconds": 180
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "champignons",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "lentilles vertes",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait de coco",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "bouillon de legumes",
+          "quantity": 300,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "echalotes",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 3,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carottes",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "concentre de tomate",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "chou kale",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cumin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "citron vert",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Poulet citron patate douce au four",
+      "description": "Des filets de poulet marines au citron et herbes, rotis au four avec des patates douces et des legumes",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 38,
+      "carbsGrams": 30,
+      "fatGrams": 14,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 35,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 200°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper les patates douces en cubes et les brocolis en bouquets. Les disposer sur une plaque avec un filet d'huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Mariner les filets de poulet avec le jus de citron, l'ail ecrase, le thym et le romarin.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Placer les filets de poulet sur la plaque avec les legumes. Enfourner 35 minutes.",
+          "timerSeconds": 2100
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Verifier la cuisson du poulet, servir chaud avec un filet de citron.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filets de poulet",
+          "quantity": 250,
+          "unit": "g",
+          "section": "MEAT_FISH"
+        },
+        {
+          "name": "patate douce",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "brocoli",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "thym",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "romarin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Aubergines gratinees a la tomate",
+      "description": "Des tranches d'aubergine gratinees avec une sauce tomate maison et de la mozzarella allegee, inspirees de la parmigiana",
+      "category": "DINNER",
+      "caloriesPerServing": 320,
+      "proteinGrams": 16,
+      "carbsGrams": 22,
+      "fatGrams": 18,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 190°C. Couper les aubergines en tranches de 1 cm d'epaisseur.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Badigeonner les tranches d'aubergine d'huile d'olive, saler et enfourner 15 minutes sur une plaque.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Pendant ce temps, faire chauffer la sauce tomate avec l'ail, le basilic et l'origan pendant 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Dans un plat a gratin, alterner les couches d'aubergine, de sauce tomate et de mozzarella.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Enfourner 15 minutes jusqu'a ce que le fromage soit fondu et dore.",
+          "timerSeconds": 900
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "aubergines",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce tomate",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "mozzarella allegee",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "basilic frais",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "origan",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Saumon citron ail au four",
+      "description": "Un filet de saumon cuit au four avec du citron, de l'ail et des herbes, accompagne de legumes verts",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 34,
+      "carbsGrams": 12,
+      "fatGrams": 22,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "FISH"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 200°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Placer les filets de saumon sur une plaque tapissee de papier cuisson.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Melanger l'ail ecrase, le jus de citron, l'huile d'olive et le persil. Badigeonner les filets de saumon.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Disposer les haricots verts autour du saumon. Saler, poivrer et enfourner 20 minutes.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir avec des rondelles de citron.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filets de saumon",
+          "quantity": 250,
+          "unit": "g",
+          "section": "MEAT_FISH"
+        },
+        {
+          "name": "citron",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 3,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "haricots verts",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil plat",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Dhal de lentilles corail epinards",
+      "description": "Un dhal indien onctueux aux lentilles corail et epinards, parfume au curcuma et au gingembre",
+      "category": "DINNER",
+      "caloriesPerServing": 350,
+      "proteinGrams": 18,
+      "carbsGrams": 45,
+      "fatGrams": 10,
+      "servings": 4,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire revenir l'oignon, l'ail et le gingembre rape dans l'huile de coco pendant 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter le curcuma, le cumin, la coriandre moulue et le piment. Remuer 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Incorporer les lentilles corail rincees, les tomates concassees et l'eau. Porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Reduire le feu et laisser mijoter 20 minutes en remuant de temps en temps.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter les epinards frais et cuire 2 minutes jusqu'a ce qu'ils soient fondus. Servir avec du riz.",
+          "timerSeconds": 120
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "lentilles corail",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile de coco",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre moulue",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Boulettes de boeuf sauce tomate",
+      "description": "Des boulettes de boeuf haché maigre cuites dans une sauce tomate aux herbes de Provence",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 32,
+      "carbsGrams": 18,
+      "fatGrams": 24,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Melanger le boeuf hache avec l'oeuf, l'oignon rape, le persil, le sel et le poivre. Former des boulettes.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire dorer les boulettes dans une poele avec un filet d'huile d'olive pendant 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter la sauce tomate, l'ail ecrase et les herbes de Provence.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Couvrir et laisser mijoter 20 minutes a feu doux.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir avec des courgettes sautees ou du riz complet.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "boeuf hache 5% MG",
+          "quantity": 250,
+          "unit": "g",
+          "section": "MEAT_FISH"
+        },
+        {
+          "name": "sauce tomate",
+          "quantity": 300,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil plat",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "herbes de Provence",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "BEEF"
+      ]
+    },
+    {
+      "name": "Courgettes farcies au quinoa et legumes",
+      "description": "Des courgettes evidees et farcies d'un melange de quinoa, tomates sechees et herbes fraiches",
+      "category": "DINNER",
+      "caloriesPerServing": 330,
+      "proteinGrams": 14,
+      "carbsGrams": 38,
+      "fatGrams": 12,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 190°C. Couper les courgettes en deux et les evider a l'aide d'une cuillere.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire le quinoa dans de l'eau salee pendant 12 minutes, puis egoutter.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire revenir l'oignon et la chair de courgette emincee dans l'huile d'olive 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Melanger le quinoa cuit avec les legumes sautes, les tomates sechees, le basilic et le persil.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Farcir les courgettes avec le melange et enfourner 25 minutes.",
+          "timerSeconds": 1500
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "courgettes",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "quinoa",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tomates sechees",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "basilic frais",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil plat",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Wok de crevettes aux legumes croquants",
+      "description": "Des crevettes sautees au wok avec des legumes croquants et une sauce gingembre-soja legere",
+      "category": "DINNER",
+      "caloriesPerServing": 340,
+      "proteinGrams": 28,
+      "carbsGrams": 20,
+      "fatGrams": 16,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "SHELLFISH",
+        "SOY",
+        "SESAME"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Decortiquer les crevettes si necessaire. Emincer les legumes en julienne.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer l'huile de sesame dans un wok a feu vif. Saisir les crevettes 2 minutes de chaque cote.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Retirer les crevettes. Ajouter les poivrons, les pois mange-tout et les carottes. Sauter 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Remettre les crevettes, ajouter la sauce soja et le gingembre rape. Melanger 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir immediatement parseme de graines de sesame.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "crevettes crues",
+          "quantity": 200,
+          "unit": "g",
+          "section": "MEAT_FISH"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pois mange-tout",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carotte",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "SHELLFISH"
+      ]
+    },
+    {
+      "name": "Curry vert de tofu et legumes",
+      "description": "Un curry vert thai au lait de coco avec du tofu croustillant, des courgettes et des pois chiches",
+      "category": "DINNER",
+      "caloriesPerServing": 370,
+      "proteinGrams": 16,
+      "carbsGrams": 28,
+      "fatGrams": 22,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "SOY"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le tofu en cubes et les faire dorer dans une poele avec un peu d'huile pendant 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Dans une casserole, faire revenir la pate de curry vert avec l'oignon emince pendant 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter le lait de coco, les courgettes coupees en rondelles et les pois chiches. Porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Reduire le feu et laisser mijoter 15 minutes.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter le tofu dore et le basilic thai. Servir avec du riz jasmin.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "tofu ferme",
+          "quantity": 200,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "lait de coco",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "pate de curry vert",
+          "quantity": 1.5,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "courgette",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pois chiches (en conserve)",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "basilic thai",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Galettes de haricots noirs",
+      "description": "Des galettes croustillantes a base de haricots noirs, avoine et epices, servies avec une salade verte",
+      "category": "DINNER",
+      "caloriesPerServing": 340,
+      "proteinGrams": 16,
+      "carbsGrams": 40,
+      "fatGrams": 12,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Egoutter et rincer les haricots noirs. Les ecraser grossierement a la fourchette dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les flocons d'avoine, l'oignon rape, le cumin, le paprika, le sel et le poivre. Bien melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Former 4 galettes avec les mains.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Faire chauffer l'huile dans une poele et cuire les galettes 5 minutes de chaque cote jusqu'a ce qu'elles soient croustillantes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Retourner delicatement et cuire l'autre cote 5 minutes. Servir avec une salade.",
+          "timerSeconds": 300
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "haricots noirs (en conserve)",
+          "quantity": 240,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "flocons d'avoine",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cumin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "salade melangee",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Souris d agneau confite aux herbes",
+      "description": "Souris d agneau fondante cuite lentement avec romarin, thym et ail, accompagnee de legumes racines",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 38,
+      "carbsGrams": 18,
+      "fatGrams": 22,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 150,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "dietType": "OMNIVORE",
+      "allergens": [],
+      "meatTypes": [
+        "LAMB"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 150°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Saisir les souris d agneau dans une cocotte avec un filet d huile d olive.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter l ail, le romarin, le thym et les legumes coupes en morceaux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Verser le bouillon, couvrir et enfourner.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Cuire 2h30 jusqu a ce que la viande se detache de l os.",
+          "timerSeconds": 9000
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "souris d agneau",
+          "quantity": 400,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "carottes",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "navets",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "piece",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 3,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "romarin frais",
+          "quantity": 2,
+          "unit": "branches",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "thym frais",
+          "quantity": 3,
+          "unit": "branches",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "bouillon de volaille",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ]
+    },
+    {
+      "name": "Filet mignon de porc aux pommes",
+      "description": "Filet mignon de porc tendre cuit au four avec des pommes caramelisees et une touche de moutarde",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 35,
+      "carbsGrams": 22,
+      "fatGrams": 16,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 35,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "dietType": "OMNIVORE",
+      "allergens": [
+        "LACTOSE",
+        "MUSTARD"
+      ],
+      "meatTypes": [
+        "PORK"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Badigeonner le filet mignon de moutarde a l ancienne.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saisir le filet mignon dans une poele chaude sur toutes les faces.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Couper les pommes en quartiers et les disposer autour du filet dans un plat allant au four.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter un filet de miel sur les pommes et enfourner.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Cuire 25 minutes jusqu a cuisson complete.",
+          "timerSeconds": 1500
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filet mignon de porc",
+          "quantity": 400,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "pommes",
+          "quantity": 2,
+          "unit": "pieces",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "moutarde a l ancienne",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "beurre",
+          "quantity": 10,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "thym frais",
+          "quantity": 2,
+          "unit": "branches",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ]
+    },
+    {
+      "name": "Cabillaud vapeur legumes",
+      "description": "Dos de cabillaud cuit a la vapeur avec brocoli, carottes et une sauce citron legere",
+      "category": "DINNER",
+      "caloriesPerServing": 320,
+      "proteinGrams": 35,
+      "carbsGrams": 20,
+      "fatGrams": 5,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Preparer le panier vapeur et porter l'eau a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Disposer le cabillaud assaisonne et les legumes dans le panier.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Cuire a la vapeur.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Preparer la sauce : jus de citron, un filet d'huile d'olive, persil hache.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir le cabillaud et les legumes nappes de sauce citron.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "dos de cabillaud",
+          "quantity": 180,
+          "unit": "g",
+          "section": "SEAFOOD"
+        },
+        {
+          "name": "brocoli",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carotte",
+          "quantity": 2,
+          "unit": "pieces",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 0.5,
+          "unit": "pieces",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "persil frais",
+          "quantity": 1,
+          "unit": "bouquet",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Poulet sauce tomate couscous",
+      "description": "Filet de poulet mijote dans une sauce tomate parfumee au cumin, servi avec du couscous",
+      "category": "DINNER",
+      "caloriesPerServing": 400,
+      "proteinGrams": 36,
+      "carbsGrams": 44,
+      "fatGrams": 7,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le poulet en morceaux et le faire dorer dans une poele.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter l'oignon emince et l'ail, faire revenir.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter la sauce tomate, le cumin et laisser mijoter.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Preparer le couscous avec de l'eau bouillante.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir le poulet sauce tomate sur le couscous.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filet de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "sauce tomate",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "couscous",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "pieces",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cumin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Crevettes grillees quinoa brocoli",
+      "description": "Crevettes grillees a l'ail sur un lit de quinoa avec du brocoli vapeur",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 34,
+      "carbsGrams": 40,
+      "fatGrams": 7,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "SHELLFISH"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Rincer et cuire le quinoa.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire le brocoli a la vapeur.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire sauter les crevettes avec l'ail dans un filet d'huile.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Dresser le quinoa, le brocoli et les crevettes. Arroser de citron.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "crevettes decortiquees",
+          "quantity": 150,
+          "unit": "g",
+          "section": "SEAFOOD"
+        },
+        {
+          "name": "quinoa",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "brocoli",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 0.5,
+          "unit": "pieces",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "SHELLFISH"
+      ]
+    },
+    {
+      "name": "Escalope de veau puree patate douce",
+      "description": "Escalope de veau poelée accompagnee d'une puree de patate douce onctueuse et legere",
+      "category": "DINNER",
+      "caloriesPerServing": 390,
+      "proteinGrams": 32,
+      "carbsGrams": 42,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Eplucher et couper la patate douce en morceaux. Cuire a l'eau.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ecraser la patate douce avec un filet de lait. Assaisonner.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Cuire l'escalope de veau a la poele a feu vif.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Servir l'escalope sur la puree de patate douce.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "escalope de veau",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "patate douce",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 30,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "VEAL"
+      ]
+    },
+    {
+      "name": "Pave de thon grille riz basmati",
+      "description": "Pave de thon frais grille avec du riz basmati et une salade de concombre au vinaigre de riz",
+      "category": "DINNER",
+      "caloriesPerServing": 400,
+      "proteinGrams": 38,
+      "carbsGrams": 44,
+      "fatGrams": 6,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "SOY",
+        "FISH",
+        "SESAME"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire le riz basmati.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Emincer le concombre et l'assaisonner avec le vinaigre de riz et le sesame.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saisir le pave de thon a la poele tres chaude, 2 min par face.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Servir le thon rose a coeur avec le riz et la salade de concombre.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pave de thon frais",
+          "quantity": 160,
+          "unit": "g",
+          "section": "SEAFOOD"
+        },
+        {
+          "name": "riz basmati",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "concombre",
+          "quantity": 0.5,
+          "unit": "pieces",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "vinaigre de riz",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Steak hache 5% brocoli riz",
+      "description": "Steak hache de boeuf a 5% de matiere grasse avec du riz complet et du brocoli vapeur",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 36,
+      "carbsGrams": 46,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire le riz complet.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire le brocoli a la vapeur.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Cuire le steak hache a la poele a feu vif.",
+          "timerSeconds": 360
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Assaisonner et servir ensemble.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "steak hache 5%",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "riz complet",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "brocoli",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "BEEF"
+      ]
+    },
+    {
+      "name": "Sardines grillees citron tomates cerises",
+      "description": "Sardines fraiches grillees au citron avec tomates cerises roties et riz complet, riches en omega-3",
+      "category": "DINNER",
+      "caloriesPerServing": 410,
+      "proteinGrams": 32,
+      "carbsGrams": 38,
+      "fatGrams": 14,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 12,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "FISH"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Rincer les sardines et les secher avec du papier absorbant.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Les assaisonner avec sel, poivre, un filet d'huile d'olive et le jus d'un demi-citron.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire cuire le riz complet selon les instructions du paquet.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Griller les sardines a la poele ou au four a 220°C avec les tomates cerises coupees en deux.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir les sardines sur le riz avec les tomates roties et un quartier de citron.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "sardines fraiches",
+          "quantity": 200,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "riz complet",
+          "quantity": 70,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tomates cerises",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        },
+        {
+          "name": "poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Filet de maquereau moutarde legumes vapeur",
+      "description": "Filet de maquereau cuit au four avec une marinade moutarde-miel, accompagne de brocolis et carottes vapeur",
+      "category": "DINNER",
+      "caloriesPerServing": 430,
+      "proteinGrams": 30,
+      "carbsGrams": 22,
+      "fatGrams": 24,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "FISH",
+        "MUSTARD"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 200°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Melanger la moutarde, le miel et un trait de jus de citron dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Badigeonner les filets de maquereau avec la sauce moutarde-miel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Deposer les filets sur une plaque chemisee et enfourner.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Pendant ce temps, cuire les brocolis et carottes a la vapeur.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir le maquereau sur les legumes vapeur.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filets de maquereau",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "moutarde de Dijon",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "brocoli",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carottes",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Gratin saumon epinards",
+      "description": "Gratin leger de saumon et epinards frais avec une bechamel allegee au fromage rape, riche en omega-3 et calcium",
+      "category": "DINNER",
+      "caloriesPerServing": 450,
+      "proteinGrams": 36,
+      "carbsGrams": 18,
+      "fatGrams": 26,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "LACTOSE",
+        "GLUTEN",
+        "FISH"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 190°C.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir les epinards dans une poele avec un peu d'huile jusqu'a ce qu'ils soient tombes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Preparer la bechamel allegee : faire fondre le beurre, ajouter la farine, puis le lait petit a petit en remuant.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Disposer les epinards dans un plat a gratin, poser les morceaux de saumon par-dessus.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Napper de bechamel et parsemer de fromage rape.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Enfourner jusqu'a ce que le dessus soit dore.",
+          "timerSeconds": 1200
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pave de saumon",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 300,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "farine de ble",
+          "quantity": 20,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "beurre",
+          "quantity": 15,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "fromage rape",
+          "quantity": 40,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        },
+        {
+          "name": "poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        },
+        {
+          "name": "noix de muscade",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Buldak legeres aux legumes",
+      "description": "Des nouilles epices a la coreenne revisitees en version legere avec poulet grille et legumes croquants",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 35,
+      "carbsGrams": 45,
+      "fatGrams": 10,
+      "servings": 1,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": false,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "SESAME"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire les nouilles de ble selon les instructions du paquet, egoutter et reserver.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce : melanger la pate de gochujang, la sauce soja, le vinaigre de riz, le miel et l'ail emince.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire griller le blanc de poulet coupe en lamelles dans une poele antiadhesive a feu vif.",
+          "timerSeconds": 360
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter le brocoli et le poivron, faire sauter 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Incorporer les nouilles et la sauce, melanger vivement pendant 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir garni de graines de sesame et d'oignon vert emince.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "nouilles de ble (type ramen)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "blanc de poulet",
+          "quantity": 150,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "brocoli (fleurettes)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de gochujang",
+          "quantity": 15,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "vinaigre de riz",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "miel",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "ail",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Ramen proteines au poulet et miso",
+      "description": "Un ramen maison leger au bouillon miso avec poulet grille, oeuf mollet et legumes frais",
+      "category": "DINNER",
+      "caloriesPerServing": 450,
+      "proteinGrams": 38,
+      "carbsGrams": 42,
+      "fatGrams": 14,
+      "servings": 1,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "GLUTEN",
+        "SOY",
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire chauffer le bouillon de poulet dans une casserole, ajouter la pate miso et bien melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire les nouilles ramen dans une eau bouillante separee, egoutter.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire griller le blanc de poulet emince dans une poele avec un filet d'huile de sesame.",
+          "timerSeconds": 420
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Cuire l'oeuf mollet : plonger dans l'eau bouillante puis refroidir immediatement.",
+          "timerSeconds": 390
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Blanchir le pak choi dans le bouillon pendant 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Assembler le bol : deposer les nouilles, verser le bouillon, disposer le poulet, l'oeuf coupe en deux, le pak choi, le mais et l'oignon vert.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "nouilles ramen",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "blanc de poulet",
+          "quantity": 130,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "bouillon de poulet",
+          "quantity": 400,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "pate de miso blanc",
+          "quantity": 15,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "piece",
+          "section": "DAIRY"
+        },
+        {
+          "name": "pak choi",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "mais en conserve",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Nouilles udon au boeuf teriyaki et brocoli",
+      "description": "Des udon epaisses accompagnees de boeuf maigre grille en sauce teriyaki allegee et brocoli vapeur",
+      "category": "DINNER",
+      "caloriesPerServing": 460,
+      "proteinGrams": 36,
+      "carbsGrams": 48,
+      "fatGrams": 12,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN",
+        "SOY"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire les nouilles udon dans l'eau bouillante, egoutter et reserver.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Preparer la sauce teriyaki legere : melanger la sauce soja, le mirin, le miel et la fecule de mais diluee.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saisir les lamelles de boeuf a feu tres vif dans une poele legerement huilee.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Cuire le brocoli a la vapeur ou le blanchir rapidement.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Reunir les udon, le boeuf et le brocoli, napper de sauce teriyaki et melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir parseme de graines de sesame et d'oignon vert.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "nouilles udon",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "rumsteck de boeuf",
+          "quantity": 130,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "brocoli (fleurettes)",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja allege",
+          "quantity": 20,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "mirin",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "SPICES"
+        },
+        {
+          "name": "miel",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "fecule de mais",
+          "quantity": 3,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "BEEF"
+      ]
+    },
+    {
+      "name": "Poulet tikka masala leger",
+      "description": "Un tikka masala onctueux au poulet marine dans le yaourt et les epices, sauce tomate legere au lait de coco",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 38,
+      "carbsGrams": 18,
+      "fatGrams": 16,
+      "servings": 2,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le poulet en cubes et le faire mariner dans le yaourt, le curcuma, le cumin, le paprika et le garam masala pendant 15 minutes minimum.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire griller les morceaux de poulet marines dans une poele bien chaude sans matiere grasse.",
+          "timerSeconds": 420
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Dans une autre poele, faire revenir l'oignon et l'ail emince dans l'huile d'olive.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter la pate de tomate, les tomates concassees et le lait de coco, laisser mijoter.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Incorporer les morceaux de poulet grilles dans la sauce et laisser mijoter encore 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir parseme de coriandre fraiche.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "blanc de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "yaourt nature 0%",
+          "quantity": 80,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait de coco leger",
+          "quantity": 80,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de tomate",
+          "quantity": 15,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "garam masala",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Poulet tandoori au yaourt",
+      "description": "Des cuisses de poulet desossees marines au yaourt et epices tandoori, grillees au four avec concombre raita",
+      "category": "DINNER",
+      "caloriesPerServing": 340,
+      "proteinGrams": 40,
+      "carbsGrams": 8,
+      "fatGrams": 14,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Melanger le yaourt avec les epices tandoori, le curcuma, le paprika fume, le jus de citron et l'ail. Entailler le poulet et le faire mariner.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Laisser mariner au refrigerateur au minimum 30 minutes.",
+          "timerSeconds": 1800
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Prechauffer le four a 220 degres. Disposer le poulet sur une grille avec un plat en dessous.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Enfourner et cuire jusqu'a ce que le poulet soit bien dore et cuit a coeur.",
+          "timerSeconds": 1500
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Preparer le raita : melanger le yaourt, le concombre rape et la menthe.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir le poulet avec le raita et des quartiers de citron.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "cuisses de poulet desossees",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "yaourt nature 0%",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "epices tandoori",
+          "quantity": 10,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika fume",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 30,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "concombre",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "menthe fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Butter chicken leger",
+      "description": "Un butter chicken allege sans beurre ni creme, avec une sauce onctueuse au yaourt grec et tomates",
+      "category": "DINNER",
+      "caloriesPerServing": 390,
+      "proteinGrams": 36,
+      "carbsGrams": 20,
+      "fatGrams": 18,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le poulet en cubes et le faire mariner dans le yaourt grec, le garam masala et le curcuma.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir l'oignon emince dans l'huile d'olive a feu moyen jusqu'a coloration.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter l'ail, le gingembre, le cumin et la coriandre moulue, cuire 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Incorporer la pate de tomate et les tomates concassees, laisser mijoter 10 minutes.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter les morceaux de poulet marines et laisser cuire dans la sauce.",
+          "timerSeconds": 720
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Hors du feu, incorporer le yaourt grec et melanger delicatement. Servir parseme de coriandre.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "blanc de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "yaourt grec 0%",
+          "quantity": 80,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 250,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "pate de tomate",
+          "quantity": 20,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oignon",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "garam masala",
+          "quantity": 5,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 3,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "coriandre moulue",
+          "quantity": 2,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Soupe miso proteines au tofu et champignons",
+      "description": "Une soupe miso reconfortante enrichie de tofu soyeux, champignons shiitake, algues wakame et oeuf poche",
+      "category": "DINNER",
+      "caloriesPerServing": 300,
+      "proteinGrams": 24,
+      "carbsGrams": 22,
+      "fatGrams": 12,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "SOY",
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire chauffer le dashi ou bouillon de legumes dans une casserole.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les champignons shiitake eminces et cuire 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les nouilles soba et cuire 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Hors du feu, diluer la pate de miso dans un peu de bouillon chaud, puis incorporer au reste de la soupe.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter le tofu coupe en des et les algues wakame rehydratees.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Pocher l'oeuf delicatement dans la soupe et servir avec l'oignon vert emince.",
+          "timerSeconds": 180
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "tofu soyeux",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "champignons shiitake",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de miso blanc",
+          "quantity": 20,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "bouillon de legumes",
+          "quantity": 500,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "nouilles soba",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "algues wakame sechees",
+          "quantity": 3,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "piece",
+          "section": "DAIRY"
+        },
+        {
+          "name": "oignon vert",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 5,
+          "unit": "ml",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Paella legere aux fruits de mer",
+      "description": "Une paella allegee aux crevettes, moules et calamars avec riz et safran, riche en proteines marines",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 34,
+      "carbsGrams": 46,
+      "fatGrams": 10,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 30,
+      "isBatchFriendly": true,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "SHELLFISH"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire revenir l'oignon et le poivron coupes en des dans l'huile d'olive a feu moyen.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter l'ail, le riz et faire nacrer pendant 2 minutes en remuant.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les tomates concassees, le bouillon chaud et le safran, porter a ebullition puis reduire.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Laisser cuire le riz a couvert sans remuer pendant 15 minutes.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Disposer les crevettes, les moules et les calamars sur le riz, couvrir et cuire 8 minutes.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Retirer du feu, laisser reposer 5 minutes couvert. Servir avec des quartiers de citron et du persil.",
+          "timerSeconds": 300
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "riz rond",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "crevettes decortiquees",
+          "quantity": 120,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "moules nettoyees",
+          "quantity": 100,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "calamars (anneaux)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "oignon",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "bouillon de legumes",
+          "quantity": 400,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "safran",
+          "quantity": 0.5,
+          "unit": "g",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 10,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron",
+          "quantity": 15,
+          "unit": "ml",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "SHELLFISH"
+      ]
+    },
+    {
+      "name": "Jollof rice au poulet",
+      "description": "Un plat emblematique d'Afrique de l'Ouest avec du riz cuit dans une sauce tomate epicee et du poulet grille",
+      "category": "DINNER",
+      "caloriesPerServing": 460,
+      "proteinGrams": 36.0,
+      "carbsGrams": 50.0,
+      "fatGrams": 12.0,
+      "servings": 2,
+      "prepTimeMinutes": 20,
+      "cookTimeMinutes": 40,
+      "isBatchFriendly": true,
+      "allergens": [],
+      "difficulty": "MEDIUM",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mixer les tomates, les poivrons et l'oignon pour obtenir une sauce lisse. Faire revenir dans l'huile a feu vif pendant 10 minutes jusqu'a reduction.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter le bouillon de poulet, le curry, le cumin, le paprika fume et le sel. Porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Incorporer le riz rince, couvrir hermetiquement et cuire a feu tres doux.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Pendant ce temps, griller les hauts de cuisse de poulet assaisonnes au four a 200 degres.",
+          "timerSeconds": 1500
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Verifier que le riz a absorbe tout le liquide. Servir avec le poulet grille et de la coriandre fraiche.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "riz long grain",
+          "quantity": 160,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "hauts de cuisse de poulet",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "tomates",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "bouillon de poulet",
+          "quantity": 300,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "poudre de curry",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika fume",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Moqueca de poisson a la bresilienne",
+      "description": "Un ragout de poisson bresilien leger au lait de coco, coriandre et poivrons, un plat parfume et riche en proteines",
+      "category": "DINNER",
+      "caloriesPerServing": 380,
+      "proteinGrams": 32.0,
+      "carbsGrams": 18.0,
+      "fatGrams": 20.0,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": false,
+      "allergens": [
+        "FISH"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper les filets de poisson en morceaux de 4 cm. Les mariner avec le jus de citron vert, l'ail emince, le curcuma et le sel pendant 10 minutes.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Dans une cocotte, faire revenir l'oignon et les poivrons en rondelles dans l'huile d'olive pendant 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les tomates en des et la coriandre fraiche, cuire 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Disposer les morceaux de poisson marine sur les legumes, verser le lait de coco. Couvrir et laisser mijoter a feu doux.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Verifier la cuisson du poisson, ajouter un filet de citron vert et parsemer de coriandre fraiche. Servir avec du riz.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "filets de poisson blanc (cabillaud ou tilapia)",
+          "quantity": 300,
+          "unit": "g",
+          "section": "MEAT_FISH"
+        },
+        {
+          "name": "lait de coco light",
+          "quantity": 150,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tomates",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron vert",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron vert",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "FISH"
+      ]
+    },
+    {
+      "name": "Tofu ferme sesame riz complet edamames",
+      "description": "Un bowl vegan complet avec du tofu ferme marine au sesame, riz complet et edamames, riche en calcium et zinc",
+      "category": "DINNER",
+      "caloriesPerServing": 420,
+      "proteinGrams": 26.0,
+      "carbsGrams": 46.0,
+      "fatGrams": 14.0,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 25,
+      "isBatchFriendly": true,
+      "allergens": [
+        "SOY",
+        "SESAME",
+        "GLUTEN"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Presser le tofu ferme dans un linge propre pour en extraire le maximum d'eau. Couper en cubes de 2 cm.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mariner le tofu avec la sauce soja, le vinaigre de riz, l'ail rape et le gingembre pendant 10 minutes.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Cuire le riz complet dans de l'eau bouillante salee selon les instructions du paquet.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Faire dorer le tofu marine dans une poele antiadhesive avec l'huile de sesame a feu moyen-vif, 3 a 4 minutes par face.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Cuire les edamames surgeles dans l'eau bouillante salee pendant 5 minutes. Egoutter.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Dresser le riz, le tofu, les edamames et le chou kale. Parsemer de graines de sesame.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "tofu ferme",
+          "quantity": 300,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "riz complet",
+          "quantity": 120,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "edamames surgeles",
+          "quantity": 100,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "vinaigre de riz",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "ail",
+          "quantity": 1,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gingembre frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "chou kale",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Moules mariniere legere a la tomate",
+      "description": "Des moules cuisinees dans un bouillon tomate-ail-persil sans creme, source majeure d'iode, zinc et B12",
+      "category": "DINNER",
+      "caloriesPerServing": 320,
+      "proteinGrams": 28.0,
+      "carbsGrams": 22.0,
+      "fatGrams": 8.0,
+      "servings": 2,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 12,
+      "isBatchFriendly": false,
+      "allergens": [
+        "SHELLFISH"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Gratter et rincer abondamment les moules sous l'eau froide. Retirer les barbillons. Eliminer toutes les moules ouvertes qui ne se ferment pas au toucher.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer l'huile d'olive dans une grande cocotte. Faire revenir l'echalote et l'ail eminces pendant 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les tomates concassees et le thym. Porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les moules, couvrir et cuire a feu vif en secouant la cocotte toutes les minutes pendant 5 a 6 minutes, jusqu'a ce que toutes les moules soient ouvertes.",
+          "timerSeconds": 360
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Eliminer les moules qui ne se sont pas ouvertes. Parsemer de persil frais et servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "moules fraiches",
+          "quantity": 800,
+          "unit": "g",
+          "section": "SEAFOOD"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "echalote",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 3,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil plat frais",
+          "quantity": 15,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "thym frais",
+          "quantity": 2,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "SHELLFISH"
+      ]
+    },
+    {
+      "name": "Bibimbap vegetal au riz complet",
+      "description": "Le celebre bol coreen avec riz complet, legumes sautes individuellement, oeuf et sauce gochujang allegee",
+      "category": "DINNER",
+      "caloriesPerServing": 440,
+      "proteinGrams": 18.0,
+      "carbsGrams": 58.0,
+      "fatGrams": 14.0,
+      "servings": 1,
+      "prepTimeMinutes": 25,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "allergens": [
+        "EGGS",
+        "SOY",
+        "SESAME"
+      ],
+      "difficulty": "MEDIUM",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Cuire le riz complet selon les instructions du paquet.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire sauter les epinards avec un peu d'ail et de sauce soja. Reserver. Faire de meme separement avec les carottes rapees et les courgettes.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire sauter les champignons avec une touche de sauce soja et d'huile de sesame. Reserver.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Cuire l'oeuf au plat dans une poele a feu doux.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Preparer la sauce : melanger la pate de gochujang, le vinaigre de riz, le miel et l'huile de sesame.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Disposer le riz dans un bol chaud, arranger les legumes autour, placer l'oeuf au centre. Arroser de sauce et parsemer de graines de sesame.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "riz complet",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carotte",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "courgette",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "champignons de Paris",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 1,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pate de gochujang",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "huile de sesame",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "vinaigre de riz",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "miel",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Nasi goreng allege poulet oeuf",
+      "description": "Le riz frit indonesien revisite en version saine avec riz complet, poulet, oeuf et sauce kecap manis allegee",
+      "category": "DINNER",
+      "caloriesPerServing": 430,
+      "proteinGrams": 34.0,
+      "carbsGrams": 48.0,
+      "fatGrams": 12.0,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": false,
+      "allergens": [
+        "EGGS",
+        "SOY"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Utiliser du riz complet cuit de la veille (froid). C'est essentiel pour un bon nasi goreng.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer l'huile dans un wok a feu vif. Faire revenir l'ail et les echalotes eminces 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter le poulet coupe en des et sauter jusqu'a coloration.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Pousser le tout sur le bord du wok, casser l'oeuf au centre et brouiller rapidement.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Ajouter le riz froid, la sauce soja et le sambal oelek. Faire sauter a feu vif en melangeant constamment.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Servir garni de concombre emince et de tomate en quartiers.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "riz complet cuit",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "blanc de poulet",
+          "quantity": 120,
+          "unit": "g",
+          "section": "MEAT"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "echalotes",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "sauce soja",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "sambal oelek",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "CONDIMENTS"
+        },
+        {
+          "name": "huile vegetale",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "concombre",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomate",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1168 @@
+{
+  "recipes": [
+    {
+      "name": "Energy balls cacao",
+      "description": "Des boules d'energie au cacao, flocons d'avoine et beurre de cacahuete, sans cuisson",
+      "category": "SNACK",
+      "caloriesPerServing": 150,
+      "proteinGrams": 5,
+      "carbsGrams": 16,
+      "fatGrams": 8,
+      "servings": 8,
+      "prepTimeMinutes": 15,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN",
+        "TREE_NUTS",
+        "PEANUTS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mixer grossierement les flocons d'avoine au blender.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Dans un saladier, melanger les flocons, le cacao, le beurre de cacahuete et le miel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Petrir la pate jusqu'a obtenir une consistance homogene.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Former des petites boules d'environ 2 cm de diametre avec les mains.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Placer au refrigerateur pendant au moins 30 minutes avant de deguster.",
+          "timerSeconds": 1800
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "flocons d'avoine",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cacao en poudre non sucre",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "beurre de cacahuete",
+          "quantity": 3,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de chia",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Houmous et crudites",
+      "description": "Un houmous maison onctueux servi avec des batonnets de legumes frais a tremper",
+      "category": "SNACK",
+      "caloriesPerServing": 180,
+      "proteinGrams": 8,
+      "carbsGrams": 18,
+      "fatGrams": 9,
+      "servings": 4,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "BIRCH_POLLEN",
+        "SESAME"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Egoutter et rincer les pois chiches.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mixer les pois chiches avec le tahini, le jus de citron, l'ail et un filet d'huile d'olive.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter un peu d'eau si necessaire pour obtenir la consistance souhaitee.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Couper les carottes, concombres et celeri en batonnets.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir le houmous dans un bol avec un filet d'huile d'olive et de paprika.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pois chiches (en conserve)",
+          "quantity": 240,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "tahini",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron (jus)",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "gousse d'ail",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carottes (batonnets)",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "concombre",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Fromage blanc aux fruits",
+      "description": "Du fromage blanc onctueux garni de fruits frais de saison et d'un trait de vanille",
+      "category": "SNACK",
+      "caloriesPerServing": 130,
+      "proteinGrams": 12,
+      "carbsGrams": 15,
+      "fatGrams": 2,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le fromage blanc dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Laver et couper les fruits frais en morceaux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Disposer les fruits sur le fromage blanc.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter l'extrait de vanille et un filet de miel si desire.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "fromage blanc 0%",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "fraises",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "banane",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "extrait de vanille",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Compote pomme cannelle",
+      "description": "Une compote maison de pommes parfumee a la cannelle, sans sucre ajoute",
+      "category": "SNACK",
+      "caloriesPerServing": 100,
+      "proteinGrams": 0.5,
+      "carbsGrams": 24,
+      "fatGrams": 0.5,
+      "servings": 4,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "BIRCH_POLLEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Eplucher les pommes, les couper en morceaux et retirer le trognon.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mettre les morceaux de pomme dans une casserole avec un fond d'eau.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter la cannelle et cuire a feu doux a couvert.",
+          "timerSeconds": 1200
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ecraser a la fourchette ou mixer selon la texture souhaitee.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Laisser refroidir et servir tiede ou froid.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pommes (type Golden ou Gala)",
+          "quantity": 4,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cannelle moulue",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "eau",
+          "quantity": 50,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "citron (jus)",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Amandes et fruits secs",
+      "description": "Un melange energetique d'amandes, noix de cajou, raisins secs et cranberries",
+      "category": "SNACK",
+      "caloriesPerServing": 190,
+      "proteinGrams": 6,
+      "carbsGrams": 16,
+      "fatGrams": 12,
+      "servings": 4,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "TREE_NUTS",
+        "BIRCH_POLLEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mesurer les quantites de chaque ingredient.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Melanger tous les fruits secs et oleagineux dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Repartir en portions individuelles dans des petits sachets ou contenants.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "amandes entieres",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "noix de cajou",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "raisins secs",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cranberries sechees",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Barre energetique dattes noix de coco",
+      "description": "Des barres energetiques maison sans cuisson a base de dattes, flocons d'avoine et noix de coco rapee",
+      "category": "SNACK",
+      "caloriesPerServing": 160,
+      "proteinGrams": 4,
+      "carbsGrams": 28,
+      "fatGrams": 4,
+      "servings": 6,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mixer les dattes denoyautees dans un robot jusqu'a obtenir une pate collante.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les flocons d'avoine, la noix de coco rapee et le cacao en poudre. Mixer brievement.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Etaler le melange dans un moule tapisse de papier cuisson, bien presser avec les mains.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Placer au refrigerateur pendant au moins 1 heure puis decouper en barres.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "dattes medjool",
+          "quantity": 150,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "flocons d'avoine",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "noix de coco rapee",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cacao en poudre",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Yaourt grec aux graines et miel",
+      "description": "Un yaourt grec nature garni de graines de chia, de lin et d'un filet de miel pour un en-cas proteine",
+      "category": "SNACK",
+      "caloriesPerServing": 170,
+      "proteinGrams": 15,
+      "carbsGrams": 14,
+      "fatGrams": 6,
+      "servings": 1,
+      "prepTimeMinutes": 3,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le yaourt grec dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Parsemer de graines de chia et de graines de lin.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter un filet de miel et servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "yaourt grec 0%",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "graines de chia",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de lin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Oeuf dur et batonnets de legumes",
+      "description": "Un en-cas simple et proteine avec un oeuf dur et des batonnets de legumes croquants",
+      "category": "SNACK",
+      "caloriesPerServing": 130,
+      "proteinGrams": 10,
+      "carbsGrams": 8,
+      "fatGrams": 6,
+      "servings": 1,
+      "prepTimeMinutes": 2,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Plonger l'oeuf dans une casserole d'eau bouillante et cuire 10 minutes pour un oeuf dur.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Rafraichir l'oeuf sous l'eau froide et l'ecaler.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Couper la carotte et le concombre en batonnets. Servir avec l'oeuf dur.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "carotte",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "concombre",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Edamames sales",
+      "description": "Des edamames cuits a la vapeur et sales, un en-cas japonais riche en proteines vegetales",
+      "category": "SNACK",
+      "caloriesPerServing": 120,
+      "proteinGrams": 12,
+      "carbsGrams": 8,
+      "fatGrams": 5,
+      "servings": 1,
+      "prepTimeMinutes": 2,
+      "cookTimeMinutes": 5,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "SOY"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire bouillir de l'eau dans une casserole. Ajouter les edamames surgeles.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire 5 minutes puis egoutter.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saupoudrer de fleur de sel et servir tiede.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "edamames surgeles (en cosses)",
+          "quantity": 150,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "fleur de sel",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Tranches de concombre houmous",
+      "description": "Des rondelles de concombre garnies de houmous et de paprika, un en-cas frais et leger",
+      "category": "SNACK",
+      "caloriesPerServing": 110,
+      "proteinGrams": 5,
+      "carbsGrams": 10,
+      "fatGrams": 6,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Laver et couper le concombre en rondelles epaisses.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Deposer une cuillere de houmous sur chaque rondelle.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saupoudrer de paprika et servir frais.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "concombre",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "houmous",
+          "quantity": 50,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "paprika",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Galettes de riz beurre de cacahuete banane",
+      "description": "Des galettes de riz soufflé tartinees de beurre de cacahuete avec des rondelles de banane",
+      "category": "SNACK",
+      "caloriesPerServing": 200,
+      "proteinGrams": 7,
+      "carbsGrams": 26,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 3,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "TREE_NUTS",
+        "PEANUTS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Tartiner les galettes de riz avec le beurre de cacahuete.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper la banane en rondelles et les disposer sur les galettes.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saupoudrer de cannelle si desire et servir.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "galettes de riz soufflé",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PANTRY"
+        },
+        {
+          "name": "beurre de cacahuete",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "banane",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cannelle",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Batonnets de carotte et guacamole",
+      "description": "Des batonnets de carotte croquants accompagnes d'un guacamole maison frais et cremeux",
+      "category": "SNACK",
+      "caloriesPerServing": 160,
+      "proteinGrams": 3,
+      "carbsGrams": 14,
+      "fatGrams": 10,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Ecraser l'avocat a la fourchette dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter le jus de citron vert, la tomate coupee en des, le sel et le piment d'Espelette. Melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Eplucher les carottes et les couper en batonnets. Servir avec le guacamole.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "avocat",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron vert",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomate",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "carottes",
+          "quantity": 2,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "piment d'Espelette",
+          "quantity": 0.25,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Smoothie vert proteine",
+      "description": "Un smoothie vert energisant aux epinards, banane et beurre de cacahuete sans allergenes majeurs",
+      "category": "SNACK",
+      "caloriesPerServing": 220,
+      "proteinGrams": 9,
+      "carbsGrams": 30,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "TREE_NUTS",
+        "GLUTEN",
+        "PEANUTS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mettre tous les ingredients dans un blender.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mixer pendant 1 minute jusqu'a obtenir un smoothie lisse et homogene.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Verser dans un verre et servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "epinards frais",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "banane",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "beurre de cacahuete",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait d'avoine",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "DAIRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Cottage cheese aux tomates cerises",
+      "description": "Du cottage cheese assaisonne avec des tomates cerises, du basilic et un filet d'huile d'olive",
+      "category": "SNACK",
+      "caloriesPerServing": 140,
+      "proteinGrams": 14,
+      "carbsGrams": 6,
+      "fatGrams": 6,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le cottage cheese dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper les tomates cerises en deux et les disposer sur le cottage cheese.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les feuilles de basilic, un filet d'huile d'olive, du sel et du poivre.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "cottage cheese",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "tomates cerises",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "basilic frais",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Yaourt grec fruits frais",
+      "description": "Yaourt grec nature avec des fruits frais de saison et un filet de miel",
+      "category": "SNACK",
+      "caloriesPerServing": 150,
+      "proteinGrams": 12,
+      "carbsGrams": 18,
+      "fatGrams": 2,
+      "servings": 1,
+      "prepTimeMinutes": 3,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le yaourt grec dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couper les fruits frais et les disposer sur le yaourt.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter un filet de miel.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "yaourt grec 0%",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "fruits rouges (frais ou surgeles)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Galettes de riz miel cannelle",
+      "description": "Galettes de riz soufflé agrémentées d'un filet de miel et d'une pincee de cannelle",
+      "category": "SNACK",
+      "caloriesPerServing": 120,
+      "proteinGrams": 2,
+      "carbsGrams": 26,
+      "fatGrams": 1,
+      "servings": 1,
+      "prepTimeMinutes": 2,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Disposer les galettes de riz sur une assiette.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Arroser d'un filet de miel et saupoudrer de cannelle.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "galettes de riz soufflé",
+          "quantity": 3,
+          "unit": "pieces",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cannelle",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Gaspacho de concombre au yaourt grec",
+      "description": "Un gaspacho froid de concombre et menthe au yaourt grec, ultra-leger et riche en probiotiques",
+      "category": "SNACK",
+      "caloriesPerServing": 110,
+      "proteinGrams": 10.0,
+      "carbsGrams": 10.0,
+      "fatGrams": 2.0,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "allergens": [
+        "LACTOSE"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper le concombre en troncons (garder un quart pour la garniture). Emincer l'ail.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Mixer le concombre avec le yaourt grec, la menthe, le jus de citron, l'ail et le sel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter un filet d'eau froide si necessaire pour ajuster la consistance. Assaisonner.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Refrigerer minimum 30 minutes. Servir bien frais avec les des de concombre reserves et quelques feuilles de menthe.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "concombre",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "yaourt grec 0%",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "menthe fraiche",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "citron",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 0.5,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Collation cottage cheese amandes",
+      "description": "Une collation haute en proteines avec du cottage cheese, des amandes et un filet de miel, ideale avant ou apres l'entrainement",
+      "category": "SNACK",
+      "caloriesPerServing": 220,
+      "proteinGrams": 22.0,
+      "carbsGrams": 12.0,
+      "fatGrams": 9.0,
+      "servings": 1,
+      "prepTimeMinutes": 3,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "allergens": [
+        "LACTOSE",
+        "TREE_NUTS"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le cottage cheese dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les amandes entieres et arroser de miel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Saupoudrer de cannelle et servir.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "cottage cheese",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "amandes entieres",
+          "quantity": 20,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cannelle moulue",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    }
+  ]
+}

@@ -488,42 +488,46 @@ class _StartCookingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [AppColors.gradientGreenStart, AppColors.gradientGreenEnd],
-          ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: AppColors.emeraldPrimary.withValues(alpha: 0.3),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
+    return Semantics(
+      button: true,
+      label: 'Lancer la cuisson',
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [AppColors.gradientGreenStart, AppColors.gradientGreenEnd],
             ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.play_circle,
-              color: theme.colorScheme.onPrimary,
-              size: 24,
-            ),
-            const SizedBox(width: 10),
-            Text(
-              'Lancer la cuisson',
-              style: theme.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: theme.colorScheme.onPrimary,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.emeraldPrimary.withValues(alpha: 0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
               ),
-            ),
-          ],
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.play_circle,
+                color: theme.colorScheme.onPrimary,
+                size: 24,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Lancer la cuisson',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onPrimary,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

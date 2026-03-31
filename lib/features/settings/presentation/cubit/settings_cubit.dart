@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,14 +40,14 @@ class SettingsCubit extends Cubit<SettingsState> {
       final profile = await _userProfileRepository.getProfile();
       if (profile == null) return;
 
-      final allergies = _parseStringList(profile.allergies)
+      final allergies = profile.allergies
           .map((n) => Allergy.values.where((a) => a.name == n).firstOrNull)
           .whereType<Allergy>()
           .toSet();
 
-      final freeDaysList = ProfileJsonParser.parseIntSet(profile.freeDays);
+      final freeDaysList = profile.freeDays.toSet();
 
-      final excludedMeats = _parseStringList(profile.excludedMeats)
+      final excludedMeats = profile.excludedMeats
           .map(
               (n) => ExcludedMeat.values.where((m) => m.name == n).firstOrNull)
           .whereType<ExcludedMeat>()
@@ -250,7 +248,7 @@ class SettingsCubit extends Cubit<SettingsState> {
           activityLevel: Value(state.activityLevel.name),
           dietType: Value(state.dietType.name),
           dietDaysPerWeek: Value(state.dietDaysPerWeek),
-          freeDays: Value(json.encode(state.freeDays.toList())),
+          freeDays: Value(state.freeDays.toList()),
           batchCookingSessionsPerWeek: Value(state.batchCookingSessions),
           shoppingTripsPerWeek: Value(state.shoppingTrips),
           distinctBreakfasts: Value(state.distinctBreakfasts),
@@ -258,12 +256,12 @@ class SettingsCubit extends Cubit<SettingsState> {
           distinctDinners: Value(state.distinctDinners),
           distinctSnacks: Value(state.distinctSnacks),
           enabledMealTypes: Value(
-              json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
+              state.enabledMealTypes.map((m) => m.name).toList()),
           allergies: Value(
-              json.encode(state.selectedAllergies.map((a) => a.name).toList())),
+              state.selectedAllergies.map((a) => a.name).toList()),
           customAllergies: Value(state.customAllergies),
           excludedMeats: Value(
-              json.encode(state.excludedMeats.map((m) => m.name).toList())),
+              state.excludedMeats.map((m) => m.name).toList()),
           dietStartDate: Value(AppDateUtils.toEpochMillis(startDate)),
           batchCookingBeforeDiet: Value(state.batchCookingBeforeDiet),
           economicMode: Value(state.economicMode),
@@ -320,16 +318,6 @@ class SettingsCubit extends Cubit<SettingsState> {
   void onRegenerateConfirmed() {
     _originalDietFields = extractDietFields(state);
     dismissRegenerateDialog();
-  }
-
-  // ── JSON parsing helpers ────────────────────────────────────────────
-
-  List<String> _parseStringList(String jsonStr) {
-    try {
-      final decoded = json.decode(jsonStr);
-      if (decoded is List) return decoded.cast<String>();
-    } catch (_) {}
-    return [];
   }
 
 }

@@ -50,6 +50,10 @@ class MealPlanRepositoryImpl implements MealPlanRepository {
   Future<void> deleteWeekPlans() => _weekPlanDao.deleteAll();
 
   @override
+  Future<void> deleteWeekPlanById(int weekPlanId) =>
+      _weekPlanDao.deleteById(weekPlanId);
+
+  @override
   Future<void> swapMealsBetweenDays(int mealId, int targetDayPlanId) async {
     await _mealDao.runInTransaction(() async {
       final sourceMeal = await _mealDao.getMealById(mealId);

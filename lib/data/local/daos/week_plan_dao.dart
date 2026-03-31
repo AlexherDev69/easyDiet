@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:drift/drift.dart';
 
 import '../database.dart';
@@ -19,16 +21,30 @@ class WeekPlanDao extends DatabaseAccessor<AppDatabase>
   /// Watch the latest week plan with all nested data.
   /// Listens to changes on weekPlans, dayPlans AND meals tables
   /// so that toggling a meal's consumed status triggers a refresh.
-  Stream<WeekPlanWithDays?> watchCurrentWeekPlan() async* {
-    // Emit initial value immediately.
-    yield await getCurrentWeekPlan();
-
-    // Then re-emit whenever any of the 3 related tables change.
-    yield* db
-        .tableUpdates(
-          TableUpdateQuery.onAllTables([weekPlans, dayPlans, meals]),
-        )
-        .asyncMap((_) => getCurrentWeekPlan());
+  Stream<WeekPlanWithDays?> watchCurrentWeekPlan() {
+    // Wrap table updates in a stream that emits immediately on subscribe,
+    // avoiding the race condition of async*/yield + late subscription.
+    late final StreamController<WeekPlanWithDays?> controller;
+    StreamSubscription<Set<TableUpdate>>? sub;
+    controller = StreamController<WeekPlanWithDays?>(
+      onListen: () {
+        // Emit initial value.
+        getCurrentWeekPlan().then(controller.add);
+        // Then re-emit on every table change.
+        sub = db
+            .tableUpdates(
+              TableUpdateQuery.onAllTables([weekPlans, dayPlans, meals]),
+            )
+            .listen((_) async {
+          controller.add(await getCurrentWeekPlan());
+        });
+      },
+      onCancel: () {
+        sub?.cancel();
+        controller.close();
+      },
+    );
+    return controller.stream;
   }
 
   /// Get the latest week plan with all nested data (one-shot).
@@ -48,6 +64,10 @@ class WeekPlanDao extends DatabaseAccessor<AppDatabase>
 
   /// Delete all week plans (cascade deletes days + meals).
   Future<void> deleteAll() => delete(weekPlans).go();
+
+  /// Delete a single week plan by ID (cascade deletes days + meals).
+  Future<void> deleteById(int id) =>
+      (delete(weekPlans)..where((t) => t.id.equals(id))).go();
 
   /// Builds a [WeekPlanWithDays] using bulk queries instead of N+1.
   Future<WeekPlanWithDays> _buildWeekPlanWithDays(WeekPlan wp) async {

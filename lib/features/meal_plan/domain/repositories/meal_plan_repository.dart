@@ -12,6 +12,7 @@ abstract class MealPlanRepository {
   Future<void> updateMeal(Meal meal);
   Future<void> updateMeals(List<Meal> meals);
   Future<void> deleteWeekPlans();
+  Future<void> deleteWeekPlanById(int weekPlanId);
   Future<void> swapMealsBetweenDays(int mealId, int targetDayPlanId);
   Future<void> shiftProgramByOneDay();
   Future<void> toggleMealConsumed(int mealId, bool consumed);

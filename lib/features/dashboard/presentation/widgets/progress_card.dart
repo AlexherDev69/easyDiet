@@ -45,15 +45,20 @@ class ProgressCard extends StatelessWidget {
           ),
           const SizedBox(height: 12),
 
-          // Progress bar
-          ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: LinearProgressIndicator(
-              value: progress,
-              minHeight: 10,
-              backgroundColor: theme.colorScheme.surfaceContainerHighest,
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                AppColors.accentPurple,
+          // Progress bar with entrance animation
+          TweenAnimationBuilder<double>(
+            tween: Tween(begin: 0, end: progress),
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeOutCubic,
+            builder: (context, animatedProgress, _) => ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: LinearProgressIndicator(
+                value: animatedProgress,
+                minHeight: 10,
+                backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  AppColors.accentPurple,
+                ),
               ),
             ),
           ),

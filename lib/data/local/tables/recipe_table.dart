@@ -1,5 +1,7 @@
 import 'package:drift/drift.dart';
 
+import '../converters/json_list_converter.dart';
+
 /// Base recipe data with macros and metadata.
 class Recipes extends Table {
   IntColumn get id => integer().autoIncrement()();
@@ -14,8 +16,11 @@ class Recipes extends Table {
   IntColumn get prepTimeMinutes => integer()();
   IntColumn get cookTimeMinutes => integer()();
   BoolColumn get isBatchFriendly => boolean()();
-  TextColumn get allergens => text()();
+  TextColumn get allergens =>
+      text().map(const JsonStringListConverter())();
   TextColumn get difficulty => text().withDefault(const Constant('EASY'))();
   TextColumn get dietType => text().withDefault(const Constant('OMNIVORE'))();
-  TextColumn get meatTypes => text().withDefault(const Constant('[]'))();
+  TextColumn get meatTypes => text()
+      .withDefault(const Constant('[]'))
+      .map(const JsonStringListConverter())();
 }

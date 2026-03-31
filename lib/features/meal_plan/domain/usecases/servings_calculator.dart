@@ -19,6 +19,8 @@ class ServingsCalculator {
     final targetCalories = dailyTarget * mealType.calorieShare;
     if (recipe.caloriesPerServing <= 0) return 1.0;
     final servings = targetCalories / recipe.caloriesPerServing;
-    return ((servings * 2).floor() / 2.0).clamp(0.5, maxServings);
+    // Round to nearest 0.5 instead of floor to avoid chronic calorie
+    // under-delivery for high-kcal recipes in small meal slots.
+    return ((servings * 2).round() / 2.0).clamp(0.5, maxServings);
   }
 }

@@ -1,0 +1,1558 @@
+{
+  "recipes": [
+    {
+      "name": "Porridge aux fruits rouges",
+      "description": "Un porridge onctueux aux flocons d'avoine garni de fruits rouges frais et d'un filet de miel",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 350,
+      "proteinGrams": 12,
+      "carbsGrams": 55,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 8,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN",
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser les flocons d'avoine et le lait dans une casserole.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire a feu moyen en remuant regulierement jusqu'a epaississement.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Retirer du feu et ajouter le miel.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Disposer les fruits rouges sur le dessus et servir chaud.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "flocons d'avoine",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "fruits rouges (frais ou surgeles)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de chia",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Oeufs brouilles aux herbes",
+      "description": "Des oeufs brouilles crémeux agrémentés de ciboulette, persil et servis sur du pain complet",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 320,
+      "proteinGrams": 22,
+      "carbsGrams": 24,
+      "fatGrams": 15,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 5,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS",
+        "GLUTEN",
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Casser les oeufs dans un bol et battre avec une fourchette.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer une noix de beurre dans une poele a feu doux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Verser les oeufs et remuer doucement avec une spatule jusqu'a obtenir une texture cremeuse.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter les herbes ciselees, saler et poivrer.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir immediatement sur les tranches de pain complet grillees.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "oeufs",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "beurre",
+          "quantity": 5,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "ciboulette fraiche",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "persil frais",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "pain complet",
+          "quantity": 1,
+          "unit": "tranche",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        },
+        {
+          "name": "poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Pancakes proteines banane",
+      "description": "Des pancakes moelleux a la banane et au fromage blanc, riches en proteines et faibles en sucre",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 380,
+      "proteinGrams": 28,
+      "carbsGrams": 45,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS",
+        "GLUTEN",
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Ecraser la banane a la fourchette dans un saladier.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter l'oeuf, le fromage blanc et la farine. Melanger jusqu'a obtenir une pate lisse.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Faire chauffer une poele antiadhesive a feu moyen.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Verser des petites louches de pate et cuire 2 minutes de chaque cote.",
+          "timerSeconds": 240
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Servir avec un filet de miel ou des fruits frais.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "banane mure",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "fromage blanc 0%",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "farine complete",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "levure chimique",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Smoothie bowl mangue",
+      "description": "Un smoothie bowl tropical a la mangue et banane, garni de granola et fruits frais",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 340,
+      "proteinGrams": 14,
+      "carbsGrams": 52,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE",
+        "GLUTEN",
+        "BIRCH_POLLEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mixer la mangue surgelee, la banane et le yaourt au blender jusqu'a obtenir une consistance epaisse.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Verser dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Disposer le granola, les tranches de kiwi et les graines de chia sur le dessus.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "mangue surgelee",
+          "quantity": 100,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "banane",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "yaourt nature",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "granola",
+          "quantity": 25,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "kiwi",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de chia",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Tartines avocat oeuf poche",
+      "description": "Des tartines de pain complet avec de l'avocat ecrase et un oeuf poche parfaitement coulant",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 380,
+      "proteinGrams": 16,
+      "carbsGrams": 30,
+      "fatGrams": 22,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 5,
+      "isBatchFriendly": false,
+      "difficulty": "MEDIUM",
+      "allergens": [
+        "EGGS",
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire griller les tranches de pain complet.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ecraser l'avocat a la fourchette avec le jus de citron, saler et poivrer.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Porter une casserole d'eau a fremissement et ajouter un filet de vinaigre.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Creer un tourbillon et y deposer l'oeuf delicatement. Cuire 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Tartiner l'avocat sur le pain, deposer l'oeuf poche et parsemer de graines de sesame.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "pain complet",
+          "quantity": 2,
+          "unit": "tranche",
+          "section": "PANTRY"
+        },
+        {
+          "name": "avocat",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "citron (jus)",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "vinaigre blanc",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "graines de sesame",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Yaourt granola maison",
+      "description": "Un yaourt nature accompagne de granola maison croustillant aux amandes et miel",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 310,
+      "proteinGrams": 15,
+      "carbsGrams": 40,
+      "fatGrams": 10,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE",
+        "GLUTEN",
+        "TREE_NUTS",
+        "BIRCH_POLLEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le yaourt dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter le granola maison par-dessus.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Disposer les fruits frais coupes en morceaux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter un filet de miel et servir.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "yaourt nature",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "granola maison",
+          "quantity": 35,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "amandes effilees",
+          "quantity": 10,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "myrtilles",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Overnight oats banane beurre de cacahuete",
+      "description": "Des flocons d'avoine prepares la veille avec du lait vegetal, de la banane et du beurre de cacahuete pour un petit-dejeuner proteine",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 380,
+      "proteinGrams": 14,
+      "carbsGrams": 48,
+      "fatGrams": 14,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN",
+        "TREE_NUTS",
+        "PEANUTS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Dans un bocal, melanger les flocons d'avoine et le lait vegetal.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter les graines de chia et bien melanger.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Couvrir et placer au refrigerateur toute la nuit.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Le matin, ajouter le beurre de cacahuete et les rondelles de banane sur le dessus.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "flocons d'avoine",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait d'avoine",
+          "quantity": 150,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "graines de chia",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "beurre de cacahuete",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "banane",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Smoothie bowl proteine fruits rouges",
+      "description": "Un smoothie bowl vegan aux fruits rouges, enrichi en proteines vegetales avec des graines de chanvre et de la banane",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 340,
+      "proteinGrams": 16,
+      "carbsGrams": 52,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Mixer la banane congelee, les fruits rouges congeles et le lait vegetal jusqu'a obtenir une texture epaisse.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Verser dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Garnir de graines de chanvre, de myrtilles fraiches et de flocons de noix de coco.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "banane congelee",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "FROZEN"
+        },
+        {
+          "name": "fruits rouges congeles",
+          "quantity": 100,
+          "unit": "g",
+          "section": "FROZEN"
+        },
+        {
+          "name": "lait d'avoine",
+          "quantity": 80,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "graines de chanvre",
+          "quantity": 2,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "flocons de noix de coco",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Tofu brouille aux legumes",
+      "description": "Une alternative vegan aux oeufs brouilles, avec du tofu soyeux assaisonne au curcuma et des legumes frais",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 280,
+      "proteinGrams": 18,
+      "carbsGrams": 12,
+      "fatGrams": 16,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "SOY"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Emietter le tofu ferme dans un bol avec les mains.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer l'huile d'olive dans une poele et faire revenir les poivrons et les epinards pendant 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter le tofu emiette, le curcuma, le paprika et la levure nutritionnelle. Melanger et cuire 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Assaisonner avec du sel et du poivre, servir chaud.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "tofu ferme",
+          "quantity": 150,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "curcuma",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "levure nutritionnelle",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Muffins oeufs dinde legumes",
+      "description": "Des muffins proteines a base de blancs d'oeufs et de dinde hachee avec des legumes, parfaits pour le meal prep",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 290,
+      "proteinGrams": 28,
+      "carbsGrams": 8,
+      "fatGrams": 14,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Prechauffer le four a 180°C et graisser un moule a muffins.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire revenir la dinde hachee dans une poele avec les poivrons et les epinards pendant 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Battre les oeufs dans un bol, ajouter le sel, le poivre et le paprika.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Repartir la viande et les legumes dans les moules, puis verser les oeufs battus par-dessus.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Enfourner pendant 20 minutes jusqu'a ce que les muffins soient dores.",
+          "timerSeconds": 1200
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "oeufs",
+          "quantity": 4,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "dinde hachee",
+          "quantity": 100,
+          "unit": "g",
+          "section": "MEAT_FISH"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "paprika",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Omelette blancs d'oeufs aux legumes",
+      "description": "Une omelette legere aux blancs d'oeufs garnie de tomates, epinards et champignons pour un petit-dejeuner riche en proteines",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 280,
+      "proteinGrams": 22,
+      "carbsGrams": 8,
+      "fatGrams": 12,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 8,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Battre les blancs d'oeufs avec une pincee de sel et de poivre.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer l'huile dans une poele et faire revenir les champignons emincees 3 minutes.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les epinards et les tomates, cuire 2 minutes.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Verser les blancs d'oeufs battus sur les legumes et cuire a feu doux pendant 3 minutes en formant l'omelette.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Plier l'omelette en deux et servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "blancs d'oeufs",
+          "quantity": 3,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "champignons",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 30,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "tomate",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Porridge quinoa fruits frais",
+      "description": "Un porridge sans gluten a base de quinoa cuit dans du lait vegetal, garni de fruits frais et de graines",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 360,
+      "proteinGrams": 14,
+      "carbsGrams": 50,
+      "fatGrams": 10,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Rincer le quinoa a l'eau froide dans une passoire fine.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Verser le quinoa et le lait vegetal dans une casserole, porter a ebullition.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Reduire le feu et laisser mijoter 15 minutes en remuant regulierement.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Servir dans un bol et garnir de fruits frais et de graines de tournesol.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "quinoa",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait d'avoine",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "myrtilles",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "fraises",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "graines de tournesol",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Hash patate douce sans allergenes",
+      "description": "Un hash de patate douce aux legumes colores, sans aucun allergene majeur, ideal pour un petit-dejeuner energetique",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 310,
+      "proteinGrams": 8,
+      "carbsGrams": 42,
+      "fatGrams": 12,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Couper la patate douce en petits des d'environ 1 cm.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire chauffer l'huile dans une grande poele et ajouter les des de patate douce. Cuire 10 minutes en remuant.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter les poivrons, l'oignon et les haricots noirs. Cuire 8 minutes.",
+          "timerSeconds": 480
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Assaisonner avec le cumin, le paprika fume, le sel et le poivre. Servir chaud.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "patate douce",
+          "quantity": 250,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "haricots noirs (en conserve)",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cumin",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika fume",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Crepes sarrasin oeuf jambon",
+      "description": "Galettes de sarrasin garnies d'un oeuf et de jambon de dinde, faibles en gras et riches en proteines",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 320,
+      "proteinGrams": 22,
+      "carbsGrams": 38,
+      "fatGrams": 8,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Preparer la pate : melanger la farine de sarrasin, l'oeuf et l'eau jusqu'a obtenir une pate lisse.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Cuire la galette dans une poele antiadhesive legerement huilee.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Retourner la galette, deposer le jambon de dinde et casser l'oeuf par-dessus.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Couvrir et cuire jusqu'a ce que le blanc soit pris.",
+          "timerSeconds": 180
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "farine de sarrasin",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 2,
+          "unit": "pieces",
+          "section": "DAIRY"
+        },
+        {
+          "name": "jambon de dinde",
+          "quantity": 2,
+          "unit": "tranches",
+          "section": "MEAT"
+        },
+        {
+          "name": "eau",
+          "quantity": 80,
+          "unit": "ml",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "OMNIVORE",
+      "meatTypes": [
+        "POULTRY"
+      ]
+    },
+    {
+      "name": "Bowl quinoa yaourt fruits rouges",
+      "description": "Un bowl de quinoa cuit au lait, garni de yaourt nature et de fruits rouges frais",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 340,
+      "proteinGrams": 14,
+      "carbsGrams": 56,
+      "fatGrams": 5,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 15,
+      "isBatchFriendly": true,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Rincer le quinoa et le cuire dans le lait a feu doux.",
+          "timerSeconds": 900
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Laisser tiedir puis verser dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Ajouter le yaourt nature et les fruits rouges.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Ajouter un filet de miel et servir.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "quinoa",
+          "quantity": 60,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait demi-ecreme",
+          "quantity": 150,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "yaourt nature",
+          "quantity": 100,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "fruits rouges (frais ou surgeles)",
+          "quantity": 80,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Riz de konjac oeuf poche epinards",
+      "description": "Riz de konjac tres leger accompagne d'un oeuf poche et d'epinards sautes a l'ail",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 250,
+      "proteinGrams": 16,
+      "carbsGrams": 22,
+      "fatGrams": 7,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 10,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "EGGS"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Rincer le riz de konjac et le faire revenir dans une poele a sec.",
+          "timerSeconds": 120
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Faire sauter les epinards avec l'ail emince.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Pocher l'oeuf dans de l'eau frémissante vinaigrée.",
+          "timerSeconds": 180
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Dresser le riz, les epinards et l'oeuf poche. Assaisonner.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "riz de konjac",
+          "quantity": 200,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "oeuf",
+          "quantity": 1,
+          "unit": "pieces",
+          "section": "DAIRY"
+        },
+        {
+          "name": "epinards frais",
+          "quantity": 100,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 1,
+          "unit": "gousse",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "vinaigre blanc",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sel et poivre",
+          "quantity": 1,
+          "unit": "pincee",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Bol fromage blanc granola fruits",
+      "description": "Fromage blanc onctueux avec granola croquant maison et fruits frais de saison, riche en calcium et proteines",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 310,
+      "proteinGrams": 20,
+      "carbsGrams": 40,
+      "fatGrams": 7,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": false,
+      "difficulty": "EASY",
+      "allergens": [
+        "LACTOSE",
+        "GLUTEN"
+      ],
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Verser le fromage blanc dans un bol.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter le granola et les fruits frais coupes en morceaux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Arroser d'un filet de miel et servir immediatement.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "fromage blanc 0%",
+          "quantity": 200,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "granola",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "banane",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "fruits rouges (frais ou surgeles)",
+          "quantity": 50,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "miel",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Shakshuka legere aux poivrons",
+      "description": "Des oeufs poches dans une sauce tomate epicee aux poivrons et cumin, un classique du Moyen-Orient ideal pour un brunch sain",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 320,
+      "proteinGrams": 18.0,
+      "carbsGrams": 22.0,
+      "fatGrams": 18.0,
+      "servings": 2,
+      "prepTimeMinutes": 10,
+      "cookTimeMinutes": 20,
+      "isBatchFriendly": false,
+      "allergens": [
+        "EGGS"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Faire revenir l'oignon emince et les poivrons coupes en lamelles dans l'huile d'olive pendant 5 minutes.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Ajouter l'ail emince, le cumin, le paprika et le piment doux. Remuer 1 minute.",
+          "timerSeconds": 60
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Verser les tomates concassees, assaisonner et laisser mijoter a feu doux pour reduire la sauce.",
+          "timerSeconds": 600
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Faire des petits puits dans la sauce et y casser les oeufs delicatement.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 5,
+          "instruction": "Couvrir et cuire a feu doux jusqu'a ce que les blancs soient pris mais les jaunes encore coulants.",
+          "timerSeconds": 300
+        },
+        {
+          "stepNumber": 6,
+          "instruction": "Parsemer de feta emiettee et de coriandre fraiche. Servir directement dans la poele avec du pain complet.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "oeufs",
+          "quantity": 4,
+          "unit": "unite",
+          "section": "DAIRY"
+        },
+        {
+          "name": "tomates concassees",
+          "quantity": 400,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "poivron rouge",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "poivron jaune",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "oignon",
+          "quantity": 1,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "ail",
+          "quantity": 2,
+          "unit": "gousses",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "cumin moulu",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "paprika doux",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "piment doux moulu",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        },
+        {
+          "name": "feta",
+          "quantity": 40,
+          "unit": "g",
+          "section": "DAIRY"
+        },
+        {
+          "name": "coriandre fraiche",
+          "quantity": 5,
+          "unit": "g",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "huile d'olive",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        }
+      ],
+      "dietType": "VEGETARIAN",
+      "meatTypes": []
+    },
+    {
+      "name": "Chia pudding cacao noisettes",
+      "description": "Un pudding de chia prepare la veille au lait vegetal et cacao sans sucre, garni de noisettes et de banane, riche en omega-3 et fibres",
+      "category": "BREAKFAST",
+      "caloriesPerServing": 330,
+      "proteinGrams": 12.0,
+      "carbsGrams": 36.0,
+      "fatGrams": 14.0,
+      "servings": 1,
+      "prepTimeMinutes": 5,
+      "cookTimeMinutes": 0,
+      "isBatchFriendly": true,
+      "allergens": [
+        "TREE_NUTS"
+      ],
+      "difficulty": "EASY",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "instruction": "Dans un bocal, melanger les graines de chia, le lait d'amande, le cacao en poudre et le sirop d'erable. Bien fouetter pour eviter les grumeaux.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 2,
+          "instruction": "Couvrir et placer au refrigerateur toute la nuit (minimum 4 heures).",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 3,
+          "instruction": "Le matin, verifier la texture et ajouter un peu de lait vegetal si trop epais.",
+          "timerSeconds": null
+        },
+        {
+          "stepNumber": 4,
+          "instruction": "Garnir de rondelles de banane, de noisettes concassees et d'une pincee de cannelle. Servir frais.",
+          "timerSeconds": null
+        }
+      ],
+      "ingredients": [
+        {
+          "name": "graines de chia",
+          "quantity": 40,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "lait d'amande non sucre",
+          "quantity": 200,
+          "unit": "ml",
+          "section": "DAIRY"
+        },
+        {
+          "name": "cacao en poudre non sucre",
+          "quantity": 1,
+          "unit": "c. a soupe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "sirop d'erable",
+          "quantity": 1,
+          "unit": "c. a cafe",
+          "section": "PANTRY"
+        },
+        {
+          "name": "banane",
+          "quantity": 0.5,
+          "unit": "unite",
+          "section": "PRODUCE"
+        },
+        {
+          "name": "noisettes",
+          "quantity": 15,
+          "unit": "g",
+          "section": "PANTRY"
+        },
+        {
+          "name": "cannelle moulue",
+          "quantity": 0.5,
+          "unit": "c. a cafe",
+          "section": "SPICES"
+        }
+      ],
+      "dietType": "VEGAN",
+      "meatTypes": []
+    }
+  ]
+}

@@ -35,7 +35,9 @@ class _AddItemDialogState extends State<AddItemDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
+    return ValueListenableBuilder<TextEditingValue>(
+      valueListenable: _nameController,
+      builder: (context, nameValue, _) => AlertDialog(
       title: const Text(
         'Ajouter un article',
         style: TextStyle(fontWeight: FontWeight.bold),
@@ -92,10 +94,11 @@ class _AddItemDialogState extends State<AddItemDialog> {
           child: const Text('Annuler'),
         ),
         TextButton(
-          onPressed: _nameController.text.trim().isEmpty ? null : _submit,
+          onPressed: nameValue.text.trim().isEmpty ? null : _submit,
           child: const Text('Ajouter'),
         ),
       ],
+    ),
     );
   }
 

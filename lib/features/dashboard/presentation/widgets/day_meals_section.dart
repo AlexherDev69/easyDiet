@@ -76,11 +76,24 @@ class DayMealsSection extends StatelessWidget {
     final widgets = <Widget>[];
     for (var i = 0; i < sorted.length; i++) {
       widgets.add(
-        _DashboardMealRow(
-          mealWithRecipe: sorted[i],
-          onToggleConsumed: () => onToggleConsumed(
-            sorted[i].meal.id,
-            sorted[i].meal.isConsumed,
+        TweenAnimationBuilder<double>(
+          key: ValueKey(sorted[i].meal.id),
+          tween: Tween(begin: 0, end: 1),
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeOutCubic,
+          builder: (context, value, child) => Opacity(
+            opacity: value,
+            child: Transform.translate(
+              offset: Offset(0, 12 * (1 - value)),
+              child: child,
+            ),
+          ),
+          child: _DashboardMealRow(
+            mealWithRecipe: sorted[i],
+            onToggleConsumed: () => onToggleConsumed(
+              sorted[i].meal.id,
+              sorted[i].meal.isConsumed,
+            ),
           ),
         ),
       );

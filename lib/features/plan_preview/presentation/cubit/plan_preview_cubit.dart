@@ -33,6 +33,9 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
   final ShoppingListGenerator _shoppingListGenerator;
   final PlanEditUseCase _planEditUseCase;
 
+  /// ID of the existing plan before we generate a new preview.
+  int? _previousWeekPlanId;
+
   Future<void> _generateNewPlan() async {
     emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
@@ -42,7 +45,12 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
         return;
       }
 
-      await _mealPlanRepository.deleteWeekPlans();
+      // Save the existing plan ID so we can clean up later.
+      final existingPlan = await _mealPlanRepository.getCurrentWeekPlan();
+      _previousWeekPlanId = existingPlan?.weekPlan.id;
+
+      // Generate the new plan without deleting the old one first.
+      // Old plans will be cleaned up on confirmPlan() or on close().
       await _mealPlanGenerator.generateWeekPlan(profile);
 
       final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
@@ -53,9 +61,17 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
     }
   }
 
+  bool _confirmed = false;
+
   Future<void> confirmPlan() async {
     emit(state.copyWith(isLoading: true, clearErrorMessage: true));
     try {
+      // Delete old plans now that the user has confirmed the preview.
+      if (_previousWeekPlanId != null) {
+        await _mealPlanRepository.deleteWeekPlanById(_previousWeekPlanId!);
+      }
+      _confirmed = true;
+
       final profile = await _userProfileRepository.getProfile();
       final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
       if (weekPlan != null) {
@@ -69,6 +85,22 @@ class PlanPreviewCubit extends Cubit<PlanPreviewState> {
       debugPrint('Error in confirmPlan: $e');
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
+  }
+
+  @override
+  Future<void> close() async {
+    // If the user navigated away without confirming, delete the preview plan
+    // and keep the original intact.
+    if (!_confirmed && state.weekPlan != null) {
+      try {
+        await _mealPlanRepository.deleteWeekPlanById(
+          state.weekPlan!.weekPlan.id,
+        );
+      } catch (_) {
+        // Best-effort cleanup.
+      }
+    }
+    return super.close();
   }
 
   // ── Move meal between days ──────────────────────────────────────

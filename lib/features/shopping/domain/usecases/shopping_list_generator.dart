@@ -300,8 +300,8 @@ class ShoppingListGenerator {
     'SEAFOOD': 'meat',
   };
 
-  static const _dryTspGrams = 3.0;
-  static const _dryTbspGrams = 10.0;
+  static const _dryTspGrams = 4.5;
+  static const _dryTbspGrams = 12.0;
 
   static const _dryIngredientPatterns = [
     'cumin', 'curcuma', 'paprika', 'cannelle', 'curry',

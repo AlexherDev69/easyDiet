@@ -181,28 +181,42 @@ class MealCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        IconButton(
-                          onPressed: onMove,
-                          tooltip: 'Deplacer',
-                          icon: Icon(
-                            Icons.swap_vert,
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                          iconSize: 20,
-                        ),
-                        IconButton(
-                          onPressed: onSwap,
-                          tooltip: 'Remplacer',
-                          icon: Icon(
-                            Icons.swap_horiz,
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                          iconSize: 20,
-                        ),
                         Checkbox(
                           value: isConsumed,
                           onChanged: (_) => onToggleConsumed(),
                           activeColor: AppColors.emeraldPrimary,
+                        ),
+                        PopupMenuButton<String>(
+                          iconSize: 20,
+                          icon: Icon(
+                            Icons.more_vert,
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                          tooltip: 'Actions',
+                          onSelected: (value) {
+                            if (value == 'move') onMove();
+                            if (value == 'swap') onSwap();
+                          },
+                          itemBuilder: (_) => [
+                            const PopupMenuItem(
+                              value: 'move',
+                              child: ListTile(
+                                leading: Icon(Icons.move_down),
+                                title: Text('Deplacer'),
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                            ),
+                            const PopupMenuItem(
+                              value: 'swap',
+                              child: ListTile(
+                                leading: Icon(Icons.find_replace),
+                                title: Text('Remplacer'),
+                                dense: true,
+                                contentPadding: EdgeInsets.zero,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

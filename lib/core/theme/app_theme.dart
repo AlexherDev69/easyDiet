@@ -309,6 +309,9 @@ class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.white,
+        elevation: 3,
+        shadowColor: AppColors.emeraldPrimary.withValues(alpha: 0.15),
+        surfaceTintColor: AppColors.emeraldPrimary.withValues(alpha: 0.05),
         indicatorColor: AppColors.emeraldSurface,
         iconTheme: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -392,6 +395,9 @@ class AppTheme {
       ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.darkSurface,
+        elevation: 3,
+        shadowColor: Colors.black45,
+        surfaceTintColor: AppColors.emeraldPrimaryDark.withValues(alpha: 0.08),
         indicatorColor: AppColors.emeraldDark.withValues(alpha: 0.3),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {

@@ -11,7 +11,7 @@ import '../cubit/batch_cooking_cubit.dart';
 import '../cubit/batch_cooking_state.dart';
 
 /// Batch cooking overview screen — port of BatchCookingScreen.kt.
-class BatchCookingPage extends StatelessWidget {
+class BatchCookingPage extends StatefulWidget {
   const BatchCookingPage({
     required this.dayPlanId,
     super.key,
@@ -20,10 +20,18 @@ class BatchCookingPage extends StatelessWidget {
   final int dayPlanId;
 
   @override
-  Widget build(BuildContext context) {
-    final cubit = context.read<BatchCookingCubit>();
-    cubit.loadBatchCooking(dayPlanId);
+  State<BatchCookingPage> createState() => _BatchCookingPageState();
+}
 
+class _BatchCookingPageState extends State<BatchCookingPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<BatchCookingCubit>().loadBatchCooking(widget.dayPlanId);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<BatchCookingCubit, BatchCookingState>(
       builder: (context, state) {
         return Scaffold(
@@ -70,7 +78,7 @@ class BatchCookingPage extends StatelessWidget {
           // Start batch cooking button
           _StartBatchCookingButton(
             onTap: () => context.push(
-              AppRoutes.batchCookingMode(dayPlanId),
+              AppRoutes.batchCookingMode(widget.dayPlanId),
             ),
           ),
           const SizedBox(height: 16),

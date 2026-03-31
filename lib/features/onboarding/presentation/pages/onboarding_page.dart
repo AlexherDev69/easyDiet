@@ -11,6 +11,7 @@ import '../widgets/body_metrics_step.dart';
 import '../widgets/goal_step.dart';
 import '../widgets/lifestyle_step.dart';
 import '../widgets/onboarding_illustration.dart';
+import '../widgets/onboarding_loading_animation.dart';
 import '../widgets/personal_info_step.dart';
 import '../widgets/plan_preview_step.dart';
 
@@ -22,39 +23,35 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<OnboardingCubit, OnboardingState>(
       listenWhen: (prev, curr) =>
-          prev.isOnboardingCompleted != curr.isOnboardingCompleted,
+          prev.isOnboardingCompleted != curr.isOnboardingCompleted ||
+          prev.errorMessage != curr.errorMessage,
       listener: (context, state) {
         if (state.isOnboardingCompleted) {
           context.go(AppRoutes.dashboard);
+        }
+        if (state.errorMessage != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Une erreur est survenue. Veuillez reessayer.',
+              ),
+              backgroundColor: Colors.red.shade700,
+              action: SnackBarAction(
+                label: 'Reessayer',
+                textColor: Colors.white,
+                onPressed: () {
+                  context.read<OnboardingCubit>().nextStep();
+                },
+              ),
+            ),
+          );
         }
       },
       child: BlocBuilder<OnboardingCubit, OnboardingState>(
         builder: (context, state) {
           // Full-screen loading overlay during plan generation / finish
           if (state.isLoading && state.currentStep != 5) {
-            return Scaffold(
-              body: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: CircularProgressIndicator(
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Preparation de votre plan...',
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return const OnboardingLoadingAnimation();
           }
 
           return PopScope(

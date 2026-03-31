@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:drift/drift.dart';
@@ -273,33 +272,24 @@ class MealPlanGenerator {
 
   // ── Parsing helpers ──────────────────────────────────────────────────
 
-  Set<MealType> _parseEnabledMealTypes(String jsonStr) {
-    try {
-      final names = (json.decode(jsonStr) as List).cast<String>();
-      final result = names
-          .map((n) => MealType.values
-              .where((m) => m.name == n || m.name.toUpperCase() == n)
-              .firstOrNull)
-          .whereType<MealType>()
-          .toSet();
-      return result.isNotEmpty ? result : MealType.values.toSet();
-    } catch (_) {
-      return MealType.values.toSet();
-    }
+  Set<MealType> _parseEnabledMealTypes(List<String> names) {
+    if (names.isEmpty) return MealType.values.toSet();
+    final result = names
+        .map((n) => MealType.values
+            .where((m) => m.name == n || m.name.toUpperCase() == n)
+            .firstOrNull)
+        .whereType<MealType>()
+        .toSet();
+    return result.isNotEmpty ? result : MealType.values.toSet();
   }
 
   Set<int> _parseFreeDays(
-    String freeDaysJson,
+    List<int> freeDays,
     int dietDaysPerWeek,
     int dietStartIndex,
   ) {
-    try {
-      final days = (json.decode(freeDaysJson) as List).cast<int>();
-      if (days.isNotEmpty) return days.toSet();
-      return _computeFreeDaysFallback(dietDaysPerWeek, dietStartIndex);
-    } catch (_) {
-      return _computeFreeDaysFallback(dietDaysPerWeek, dietStartIndex);
-    }
+    if (freeDays.isNotEmpty) return freeDays.toSet();
+    return _computeFreeDaysFallback(dietDaysPerWeek, dietStartIndex);
   }
 
   Set<int> _computeFreeDaysFallback(int dietDaysPerWeek, int dietStartIndex) {

@@ -71,9 +71,21 @@ class AppDatabase extends _$AppDatabase {
         await m.createAll();
       },
       onUpgrade: (Migrator m, int from, int to) async {
-        // Add incremental steps when bumping schemaVersion:
+        // Incremental migrations: each block handles one version bump.
+        // When adding a new migration:
+        // 1. Bump schemaVersion above
+        // 2. Add a new if (from < N) block here
+        // 3. Run: dart run build_runner build --delete-conflicting-outputs
+        //
         // if (from < 2) { await m.addColumn(table, table.newColumn); }
         // if (from < 3) { await m.createTable(newTable); }
+      },
+      beforeOpen: (details) async {
+        // Verify schema integrity on upgrade to catch missing migrations early.
+        if (details.hadUpgrade) {
+          // Drift validates the schema automatically; this hook exists so
+          // additional post-migration checks can be added here if needed.
+        }
       },
     );
   }

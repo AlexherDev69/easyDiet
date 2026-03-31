@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
@@ -371,7 +370,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
           (d) => d.name == profile.dietType,
           orElse: () => DietType.omnivore,
         ),
-        freeDays: ProfileJsonParser.parseIntSet(profile.freeDays),
+        freeDays: profile.freeDays.toSet(),
         batchCookingEnabled: profile.batchCookingSessionsPerWeek > 0,
         batchCookingSessions:
             profile.batchCookingSessionsPerWeek.clamp(1, 2),
@@ -441,14 +440,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         distinctDinners: Value(state.distinctDinners),
         distinctSnacks: Value(state.distinctSnacks),
         enabledMealTypes: Value(
-            json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
+            state.enabledMealTypes.map((m) => m.name).toList()),
         allergies:
-            json.encode(state.selectedAllergies.map((a) => a.name).toList()),
+            state.selectedAllergies.map((a) => a.name).toList(),
         customAllergies: '',
         excludedMeats: Value(
-            json.encode(state.excludedMeats.map((m) => m.name).toList())),
+            state.excludedMeats.map((m) => m.name).toList()),
         dietStartDate: AppDateUtils.toEpochMillis(startDate),
-        freeDays: Value(json.encode(state.freeDays.toList())),
+        freeDays: Value(state.freeDays.toList()),
         dailyCalorieTarget: state.calculatedCalories,
         dailyWaterMl: Value(state.calculatedWaterMl),
         batchCookingBeforeDiet: Value(state.batchCookingBeforeDiet),
@@ -538,14 +537,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         distinctDinners: Value(state.distinctDinners),
         distinctSnacks: Value(state.distinctSnacks),
         enabledMealTypes: Value(
-            json.encode(state.enabledMealTypes.map((m) => m.name).toList())),
+            state.enabledMealTypes.map((m) => m.name).toList()),
         allergies:
-            json.encode(state.selectedAllergies.map((a) => a.name).toList()),
+            state.selectedAllergies.map((a) => a.name).toList(),
         customAllergies: '',
         excludedMeats: Value(
-            json.encode(state.excludedMeats.map((m) => m.name).toList())),
+            state.excludedMeats.map((m) => m.name).toList()),
         dietStartDate: AppDateUtils.toEpochMillis(startDate),
-        freeDays: Value(json.encode(state.freeDays.toList())),
+        freeDays: Value(state.freeDays.toList()),
         dailyCalorieTarget: calories,
         dailyWaterMl: Value(waterMl),
         batchCookingBeforeDiet: Value(state.batchCookingBeforeDiet),

@@ -4,7 +4,7 @@ import '../../../../data/local/database.dart';
 
 /// State for the weight log screen.
 class WeightLogState extends Equatable {
-  WeightLogState({
+  const WeightLogState({
     this.allLogs = const [],
     this.totalLost = 0.0,
     this.avgLossPerWeek = 0.0,
@@ -19,8 +19,8 @@ class WeightLogState extends Equatable {
     this.isAggressiveLoss = false,
     this.isLoading = true,
     this.errorMessage,
-    DateTime? selectedDate,
-  }) : selectedDate = selectedDate ?? DateTime.now();
+    this.selectedDate,
+  });
 
   /// All logs sorted by date ascending.
   final List<WeightLog> allLogs;
@@ -40,8 +40,8 @@ class WeightLogState extends Equatable {
   final bool isLoading;
   final String? errorMessage;
 
-  /// Selected date for the weight entry.
-  final DateTime selectedDate;
+  /// Selected date for the weight entry (null = today).
+  final DateTime? selectedDate;
 
   @override
   List<Object?> get props => [

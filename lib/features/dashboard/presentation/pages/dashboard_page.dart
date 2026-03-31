@@ -287,8 +287,10 @@ class _BentoGrid extends StatelessWidget {
       return caloriesCard;
     }
 
+    final screenHeight = MediaQuery.of(context).size.height;
+    final bentoHeight = (screenHeight * 0.38).clamp(260.0, 380.0);
     return SizedBox(
-      height: 320,
+      height: bentoHeight,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

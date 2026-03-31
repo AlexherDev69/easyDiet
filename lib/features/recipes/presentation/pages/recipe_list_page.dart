@@ -76,7 +76,7 @@ class _RecipeListContent extends StatelessWidget {
   }
 }
 
-class _RecipeTabs extends StatelessWidget {
+class _RecipeTabs extends StatefulWidget {
   const _RecipeTabs({
     required this.selectedTab,
     required this.onSelectTab,
@@ -86,17 +86,51 @@ class _RecipeTabs extends StatelessWidget {
   final ValueChanged<int> onSelectTab;
 
   @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
+  State<_RecipeTabs> createState() => _RecipeTabsState();
+}
+
+class _RecipeTabsState extends State<_RecipeTabs>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
       length: 2,
-      initialIndex: selectedTab,
-      child: TabBar(
-        onTap: onSelectTab,
-        tabs: const [
-          Tab(text: 'Cette semaine'),
-          Tab(text: 'Toutes les recettes'),
-        ],
-      ),
+      initialIndex: widget.selectedTab,
+      vsync: this,
+    );
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        widget.onSelectTab(_tabController.index);
+      }
+    });
+  }
+
+  @override
+  void didUpdateWidget(_RecipeTabs oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedTab != widget.selectedTab &&
+        _tabController.index != widget.selectedTab) {
+      _tabController.animateTo(widget.selectedTab);
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBar(
+      controller: _tabController,
+      tabs: const [
+        Tab(text: 'Cette semaine'),
+        Tab(text: 'Toutes les recettes'),
+      ],
     );
   }
 }
