@@ -192,17 +192,15 @@ class $UserProfilesTable extends UserProfiles
     requiredDuringInsert: false,
     defaultValue: const Constant(2),
   );
-  static const VerificationMeta _allergiesMeta = const VerificationMeta(
-    'allergies',
-  );
   @override
-  late final GeneratedColumn<String> allergies = GeneratedColumn<String>(
-    'allergies',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<List<String>, String> allergies =
+      GeneratedColumn<String>(
+        'allergies',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<List<String>>($UserProfilesTable.$converterallergies);
   static const VerificationMeta _customAllergiesMeta = const VerificationMeta(
     'customAllergies',
   );
@@ -236,18 +234,16 @@ class $UserProfilesTable extends UserProfiles
     requiredDuringInsert: false,
     defaultValue: const Constant(2000),
   );
-  static const VerificationMeta _enabledMealTypesMeta = const VerificationMeta(
-    'enabledMealTypes',
-  );
   @override
-  late final GeneratedColumn<String> enabledMealTypes = GeneratedColumn<String>(
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+  enabledMealTypes = GeneratedColumn<String>(
     'enabled_meal_types',
     aliasedName,
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
     defaultValue: const Constant('["breakfast","lunch","dinner","snack"]'),
-  );
+  ).withConverter<List<String>>($UserProfilesTable.$converterenabledMealTypes);
   static const VerificationMeta _dietStartDateMeta = const VerificationMeta(
     'dietStartDate',
   );
@@ -259,18 +255,16 @@ class $UserProfilesTable extends UserProfiles
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _freeDaysMeta = const VerificationMeta(
-    'freeDays',
-  );
   @override
-  late final GeneratedColumn<String> freeDays = GeneratedColumn<String>(
-    'free_days',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('[]'),
-  );
+  late final GeneratedColumnWithTypeConverter<List<int>, String> freeDays =
+      GeneratedColumn<String>(
+        'free_days',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<int>>($UserProfilesTable.$converterfreeDays);
   static const VerificationMeta _batchCookingBeforeDietMeta =
       const VerificationMeta('batchCookingBeforeDiet');
   @override
@@ -286,18 +280,16 @@ class $UserProfilesTable extends UserProfiles
         ),
         defaultValue: const Constant(true),
       );
-  static const VerificationMeta _excludedMeatsMeta = const VerificationMeta(
-    'excludedMeats',
-  );
   @override
-  late final GeneratedColumn<String> excludedMeats = GeneratedColumn<String>(
+  late final GeneratedColumnWithTypeConverter<List<String>, String>
+  excludedMeats = GeneratedColumn<String>(
     'excluded_meats',
     aliasedName,
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
     defaultValue: const Constant('[]'),
-  );
+  ).withConverter<List<String>>($UserProfilesTable.$converterexcludedMeats);
   static const VerificationMeta _economicModeMeta = const VerificationMeta(
     'economicMode',
   );
@@ -530,14 +522,6 @@ class $UserProfilesTable extends UserProfiles
         ),
       );
     }
-    if (data.containsKey('allergies')) {
-      context.handle(
-        _allergiesMeta,
-        allergies.isAcceptableOrUnknown(data['allergies']!, _allergiesMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_allergiesMeta);
-    }
     if (data.containsKey('custom_allergies')) {
       context.handle(
         _customAllergiesMeta,
@@ -569,15 +553,6 @@ class $UserProfilesTable extends UserProfiles
         ),
       );
     }
-    if (data.containsKey('enabled_meal_types')) {
-      context.handle(
-        _enabledMealTypesMeta,
-        enabledMealTypes.isAcceptableOrUnknown(
-          data['enabled_meal_types']!,
-          _enabledMealTypesMeta,
-        ),
-      );
-    }
     if (data.containsKey('diet_start_date')) {
       context.handle(
         _dietStartDateMeta,
@@ -589,27 +564,12 @@ class $UserProfilesTable extends UserProfiles
     } else if (isInserting) {
       context.missing(_dietStartDateMeta);
     }
-    if (data.containsKey('free_days')) {
-      context.handle(
-        _freeDaysMeta,
-        freeDays.isAcceptableOrUnknown(data['free_days']!, _freeDaysMeta),
-      );
-    }
     if (data.containsKey('batch_cooking_before_diet')) {
       context.handle(
         _batchCookingBeforeDietMeta,
         batchCookingBeforeDiet.isAcceptableOrUnknown(
           data['batch_cooking_before_diet']!,
           _batchCookingBeforeDietMeta,
-        ),
-      );
-    }
-    if (data.containsKey('excluded_meats')) {
-      context.handle(
-        _excludedMeatsMeta,
-        excludedMeats.isAcceptableOrUnknown(
-          data['excluded_meats']!,
-          _excludedMeatsMeta,
         ),
       );
     }
@@ -716,10 +676,12 @@ class $UserProfilesTable extends UserProfiles
         DriftSqlType.int,
         data['${effectivePrefix}distinct_snacks'],
       )!,
-      allergies: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}allergies'],
-      )!,
+      allergies: $UserProfilesTable.$converterallergies.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}allergies'],
+        )!,
+      ),
       customAllergies: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}custom_allergies'],
@@ -732,26 +694,32 @@ class $UserProfilesTable extends UserProfiles
         DriftSqlType.int,
         data['${effectivePrefix}daily_water_ml'],
       )!,
-      enabledMealTypes: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}enabled_meal_types'],
-      )!,
+      enabledMealTypes: $UserProfilesTable.$converterenabledMealTypes.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}enabled_meal_types'],
+        )!,
+      ),
       dietStartDate: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}diet_start_date'],
       )!,
-      freeDays: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}free_days'],
-      )!,
+      freeDays: $UserProfilesTable.$converterfreeDays.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}free_days'],
+        )!,
+      ),
       batchCookingBeforeDiet: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
         data['${effectivePrefix}batch_cooking_before_diet'],
       )!,
-      excludedMeats: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}excluded_meats'],
-      )!,
+      excludedMeats: $UserProfilesTable.$converterexcludedMeats.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}excluded_meats'],
+        )!,
+      ),
       economicMode: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
         data['${effectivePrefix}economic_mode'],
@@ -771,6 +739,15 @@ class $UserProfilesTable extends UserProfiles
   $UserProfilesTable createAlias(String alias) {
     return $UserProfilesTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<List<String>, String> $converterallergies =
+      const JsonStringListConverter();
+  static TypeConverter<List<String>, String> $converterenabledMealTypes =
+      const JsonStringListConverter();
+  static TypeConverter<List<int>, String> $converterfreeDays =
+      const JsonIntListConverter();
+  static TypeConverter<List<String>, String> $converterexcludedMeats =
+      const JsonStringListConverter();
 }
 
 class UserProfile extends DataClass implements Insertable<UserProfile> {
@@ -791,15 +768,15 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
   final int distinctLunches;
   final int distinctDinners;
   final int distinctSnacks;
-  final String allergies;
+  final List<String> allergies;
   final String customAllergies;
   final int dailyCalorieTarget;
   final int dailyWaterMl;
-  final String enabledMealTypes;
+  final List<String> enabledMealTypes;
   final int dietStartDate;
-  final String freeDays;
+  final List<int> freeDays;
   final bool batchCookingBeforeDiet;
-  final String excludedMeats;
+  final List<String> excludedMeats;
   final bool economicMode;
   final bool onboardingCompleted;
   final int createdAt;
@@ -856,15 +833,31 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     map['distinct_lunches'] = Variable<int>(distinctLunches);
     map['distinct_dinners'] = Variable<int>(distinctDinners);
     map['distinct_snacks'] = Variable<int>(distinctSnacks);
-    map['allergies'] = Variable<String>(allergies);
+    {
+      map['allergies'] = Variable<String>(
+        $UserProfilesTable.$converterallergies.toSql(allergies),
+      );
+    }
     map['custom_allergies'] = Variable<String>(customAllergies);
     map['daily_calorie_target'] = Variable<int>(dailyCalorieTarget);
     map['daily_water_ml'] = Variable<int>(dailyWaterMl);
-    map['enabled_meal_types'] = Variable<String>(enabledMealTypes);
+    {
+      map['enabled_meal_types'] = Variable<String>(
+        $UserProfilesTable.$converterenabledMealTypes.toSql(enabledMealTypes),
+      );
+    }
     map['diet_start_date'] = Variable<int>(dietStartDate);
-    map['free_days'] = Variable<String>(freeDays);
+    {
+      map['free_days'] = Variable<String>(
+        $UserProfilesTable.$converterfreeDays.toSql(freeDays),
+      );
+    }
     map['batch_cooking_before_diet'] = Variable<bool>(batchCookingBeforeDiet);
-    map['excluded_meats'] = Variable<String>(excludedMeats);
+    {
+      map['excluded_meats'] = Variable<String>(
+        $UserProfilesTable.$converterexcludedMeats.toSql(excludedMeats),
+      );
+    }
     map['economic_mode'] = Variable<bool>(economicMode);
     map['onboarding_completed'] = Variable<bool>(onboardingCompleted);
     map['created_at'] = Variable<int>(createdAt);
@@ -932,17 +925,19 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       distinctLunches: serializer.fromJson<int>(json['distinctLunches']),
       distinctDinners: serializer.fromJson<int>(json['distinctDinners']),
       distinctSnacks: serializer.fromJson<int>(json['distinctSnacks']),
-      allergies: serializer.fromJson<String>(json['allergies']),
+      allergies: serializer.fromJson<List<String>>(json['allergies']),
       customAllergies: serializer.fromJson<String>(json['customAllergies']),
       dailyCalorieTarget: serializer.fromJson<int>(json['dailyCalorieTarget']),
       dailyWaterMl: serializer.fromJson<int>(json['dailyWaterMl']),
-      enabledMealTypes: serializer.fromJson<String>(json['enabledMealTypes']),
+      enabledMealTypes: serializer.fromJson<List<String>>(
+        json['enabledMealTypes'],
+      ),
       dietStartDate: serializer.fromJson<int>(json['dietStartDate']),
-      freeDays: serializer.fromJson<String>(json['freeDays']),
+      freeDays: serializer.fromJson<List<int>>(json['freeDays']),
       batchCookingBeforeDiet: serializer.fromJson<bool>(
         json['batchCookingBeforeDiet'],
       ),
-      excludedMeats: serializer.fromJson<String>(json['excludedMeats']),
+      excludedMeats: serializer.fromJson<List<String>>(json['excludedMeats']),
       economicMode: serializer.fromJson<bool>(json['economicMode']),
       onboardingCompleted: serializer.fromJson<bool>(
         json['onboardingCompleted'],
@@ -973,15 +968,15 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
       'distinctLunches': serializer.toJson<int>(distinctLunches),
       'distinctDinners': serializer.toJson<int>(distinctDinners),
       'distinctSnacks': serializer.toJson<int>(distinctSnacks),
-      'allergies': serializer.toJson<String>(allergies),
+      'allergies': serializer.toJson<List<String>>(allergies),
       'customAllergies': serializer.toJson<String>(customAllergies),
       'dailyCalorieTarget': serializer.toJson<int>(dailyCalorieTarget),
       'dailyWaterMl': serializer.toJson<int>(dailyWaterMl),
-      'enabledMealTypes': serializer.toJson<String>(enabledMealTypes),
+      'enabledMealTypes': serializer.toJson<List<String>>(enabledMealTypes),
       'dietStartDate': serializer.toJson<int>(dietStartDate),
-      'freeDays': serializer.toJson<String>(freeDays),
+      'freeDays': serializer.toJson<List<int>>(freeDays),
       'batchCookingBeforeDiet': serializer.toJson<bool>(batchCookingBeforeDiet),
-      'excludedMeats': serializer.toJson<String>(excludedMeats),
+      'excludedMeats': serializer.toJson<List<String>>(excludedMeats),
       'economicMode': serializer.toJson<bool>(economicMode),
       'onboardingCompleted': serializer.toJson<bool>(onboardingCompleted),
       'createdAt': serializer.toJson<int>(createdAt),
@@ -1006,15 +1001,15 @@ class UserProfile extends DataClass implements Insertable<UserProfile> {
     int? distinctLunches,
     int? distinctDinners,
     int? distinctSnacks,
-    String? allergies,
+    List<String>? allergies,
     String? customAllergies,
     int? dailyCalorieTarget,
     int? dailyWaterMl,
-    String? enabledMealTypes,
+    List<String>? enabledMealTypes,
     int? dietStartDate,
-    String? freeDays,
+    List<int>? freeDays,
     bool? batchCookingBeforeDiet,
-    String? excludedMeats,
+    List<String>? excludedMeats,
     bool? economicMode,
     bool? onboardingCompleted,
     int? createdAt,
@@ -1243,15 +1238,15 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
   final Value<int> distinctLunches;
   final Value<int> distinctDinners;
   final Value<int> distinctSnacks;
-  final Value<String> allergies;
+  final Value<List<String>> allergies;
   final Value<String> customAllergies;
   final Value<int> dailyCalorieTarget;
   final Value<int> dailyWaterMl;
-  final Value<String> enabledMealTypes;
+  final Value<List<String>> enabledMealTypes;
   final Value<int> dietStartDate;
-  final Value<String> freeDays;
+  final Value<List<int>> freeDays;
   final Value<bool> batchCookingBeforeDiet;
-  final Value<String> excludedMeats;
+  final Value<List<String>> excludedMeats;
   final Value<bool> economicMode;
   final Value<bool> onboardingCompleted;
   final Value<int> createdAt;
@@ -1304,7 +1299,7 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     this.distinctLunches = const Value.absent(),
     this.distinctDinners = const Value.absent(),
     this.distinctSnacks = const Value.absent(),
-    required String allergies,
+    required List<String> allergies,
     required String customAllergies,
     required int dailyCalorieTarget,
     this.dailyWaterMl = const Value.absent(),
@@ -1419,15 +1414,15 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
     Value<int>? distinctLunches,
     Value<int>? distinctDinners,
     Value<int>? distinctSnacks,
-    Value<String>? allergies,
+    Value<List<String>>? allergies,
     Value<String>? customAllergies,
     Value<int>? dailyCalorieTarget,
     Value<int>? dailyWaterMl,
-    Value<String>? enabledMealTypes,
+    Value<List<String>>? enabledMealTypes,
     Value<int>? dietStartDate,
-    Value<String>? freeDays,
+    Value<List<int>>? freeDays,
     Value<bool>? batchCookingBeforeDiet,
-    Value<String>? excludedMeats,
+    Value<List<String>>? excludedMeats,
     Value<bool>? economicMode,
     Value<bool>? onboardingCompleted,
     Value<int>? createdAt,
@@ -1526,7 +1521,9 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       map['distinct_snacks'] = Variable<int>(distinctSnacks.value);
     }
     if (allergies.present) {
-      map['allergies'] = Variable<String>(allergies.value);
+      map['allergies'] = Variable<String>(
+        $UserProfilesTable.$converterallergies.toSql(allergies.value),
+      );
     }
     if (customAllergies.present) {
       map['custom_allergies'] = Variable<String>(customAllergies.value);
@@ -1538,13 +1535,19 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       map['daily_water_ml'] = Variable<int>(dailyWaterMl.value);
     }
     if (enabledMealTypes.present) {
-      map['enabled_meal_types'] = Variable<String>(enabledMealTypes.value);
+      map['enabled_meal_types'] = Variable<String>(
+        $UserProfilesTable.$converterenabledMealTypes.toSql(
+          enabledMealTypes.value,
+        ),
+      );
     }
     if (dietStartDate.present) {
       map['diet_start_date'] = Variable<int>(dietStartDate.value);
     }
     if (freeDays.present) {
-      map['free_days'] = Variable<String>(freeDays.value);
+      map['free_days'] = Variable<String>(
+        $UserProfilesTable.$converterfreeDays.toSql(freeDays.value),
+      );
     }
     if (batchCookingBeforeDiet.present) {
       map['batch_cooking_before_diet'] = Variable<bool>(
@@ -1552,7 +1555,9 @@ class UserProfilesCompanion extends UpdateCompanion<UserProfile> {
       );
     }
     if (excludedMeats.present) {
-      map['excluded_meats'] = Variable<String>(excludedMeats.value);
+      map['excluded_meats'] = Variable<String>(
+        $UserProfilesTable.$converterexcludedMeats.toSql(excludedMeats.value),
+      );
     }
     if (economicMode.present) {
       map['economic_mode'] = Variable<bool>(economicMode.value);
@@ -1742,17 +1747,15 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
       'CHECK ("is_batch_friendly" IN (0, 1))',
     ),
   );
-  static const VerificationMeta _allergensMeta = const VerificationMeta(
-    'allergens',
-  );
   @override
-  late final GeneratedColumn<String> allergens = GeneratedColumn<String>(
-    'allergens',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
+  late final GeneratedColumnWithTypeConverter<List<String>, String> allergens =
+      GeneratedColumn<String>(
+        'allergens',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<List<String>>($RecipesTable.$converterallergens);
   static const VerificationMeta _difficultyMeta = const VerificationMeta(
     'difficulty',
   );
@@ -1777,18 +1780,16 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
     requiredDuringInsert: false,
     defaultValue: const Constant('OMNIVORE'),
   );
-  static const VerificationMeta _meatTypesMeta = const VerificationMeta(
-    'meatTypes',
-  );
   @override
-  late final GeneratedColumn<String> meatTypes = GeneratedColumn<String>(
-    'meat_types',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: false,
-    defaultValue: const Constant('[]'),
-  );
+  late final GeneratedColumnWithTypeConverter<List<String>, String> meatTypes =
+      GeneratedColumn<String>(
+        'meat_types',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      ).withConverter<List<String>>($RecipesTable.$convertermeatTypes);
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -1929,14 +1930,6 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
     } else if (isInserting) {
       context.missing(_isBatchFriendlyMeta);
     }
-    if (data.containsKey('allergens')) {
-      context.handle(
-        _allergensMeta,
-        allergens.isAcceptableOrUnknown(data['allergens']!, _allergensMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_allergensMeta);
-    }
     if (data.containsKey('difficulty')) {
       context.handle(
         _difficultyMeta,
@@ -1947,12 +1940,6 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
       context.handle(
         _dietTypeMeta,
         dietType.isAcceptableOrUnknown(data['diet_type']!, _dietTypeMeta),
-      );
-    }
-    if (data.containsKey('meat_types')) {
-      context.handle(
-        _meatTypesMeta,
-        meatTypes.isAcceptableOrUnknown(data['meat_types']!, _meatTypesMeta),
       );
     }
     return context;
@@ -2012,10 +1999,12 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
         DriftSqlType.bool,
         data['${effectivePrefix}is_batch_friendly'],
       )!,
-      allergens: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}allergens'],
-      )!,
+      allergens: $RecipesTable.$converterallergens.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}allergens'],
+        )!,
+      ),
       difficulty: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}difficulty'],
@@ -2024,10 +2013,12 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
         DriftSqlType.string,
         data['${effectivePrefix}diet_type'],
       )!,
-      meatTypes: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}meat_types'],
-      )!,
+      meatTypes: $RecipesTable.$convertermeatTypes.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}meat_types'],
+        )!,
+      ),
     );
   }
 
@@ -2035,6 +2026,11 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
   $RecipesTable createAlias(String alias) {
     return $RecipesTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<List<String>, String> $converterallergens =
+      const JsonStringListConverter();
+  static TypeConverter<List<String>, String> $convertermeatTypes =
+      const JsonStringListConverter();
 }
 
 class Recipe extends DataClass implements Insertable<Recipe> {
@@ -2050,10 +2046,10 @@ class Recipe extends DataClass implements Insertable<Recipe> {
   final int prepTimeMinutes;
   final int cookTimeMinutes;
   final bool isBatchFriendly;
-  final String allergens;
+  final List<String> allergens;
   final String difficulty;
   final String dietType;
-  final String meatTypes;
+  final List<String> meatTypes;
   const Recipe({
     required this.id,
     required this.name,
@@ -2087,10 +2083,18 @@ class Recipe extends DataClass implements Insertable<Recipe> {
     map['prep_time_minutes'] = Variable<int>(prepTimeMinutes);
     map['cook_time_minutes'] = Variable<int>(cookTimeMinutes);
     map['is_batch_friendly'] = Variable<bool>(isBatchFriendly);
-    map['allergens'] = Variable<String>(allergens);
+    {
+      map['allergens'] = Variable<String>(
+        $RecipesTable.$converterallergens.toSql(allergens),
+      );
+    }
     map['difficulty'] = Variable<String>(difficulty);
     map['diet_type'] = Variable<String>(dietType);
-    map['meat_types'] = Variable<String>(meatTypes);
+    {
+      map['meat_types'] = Variable<String>(
+        $RecipesTable.$convertermeatTypes.toSql(meatTypes),
+      );
+    }
     return map;
   }
 
@@ -2133,10 +2137,10 @@ class Recipe extends DataClass implements Insertable<Recipe> {
       prepTimeMinutes: serializer.fromJson<int>(json['prepTimeMinutes']),
       cookTimeMinutes: serializer.fromJson<int>(json['cookTimeMinutes']),
       isBatchFriendly: serializer.fromJson<bool>(json['isBatchFriendly']),
-      allergens: serializer.fromJson<String>(json['allergens']),
+      allergens: serializer.fromJson<List<String>>(json['allergens']),
       difficulty: serializer.fromJson<String>(json['difficulty']),
       dietType: serializer.fromJson<String>(json['dietType']),
-      meatTypes: serializer.fromJson<String>(json['meatTypes']),
+      meatTypes: serializer.fromJson<List<String>>(json['meatTypes']),
     );
   }
   @override
@@ -2155,10 +2159,10 @@ class Recipe extends DataClass implements Insertable<Recipe> {
       'prepTimeMinutes': serializer.toJson<int>(prepTimeMinutes),
       'cookTimeMinutes': serializer.toJson<int>(cookTimeMinutes),
       'isBatchFriendly': serializer.toJson<bool>(isBatchFriendly),
-      'allergens': serializer.toJson<String>(allergens),
+      'allergens': serializer.toJson<List<String>>(allergens),
       'difficulty': serializer.toJson<String>(difficulty),
       'dietType': serializer.toJson<String>(dietType),
-      'meatTypes': serializer.toJson<String>(meatTypes),
+      'meatTypes': serializer.toJson<List<String>>(meatTypes),
     };
   }
 
@@ -2175,10 +2179,10 @@ class Recipe extends DataClass implements Insertable<Recipe> {
     int? prepTimeMinutes,
     int? cookTimeMinutes,
     bool? isBatchFriendly,
-    String? allergens,
+    List<String>? allergens,
     String? difficulty,
     String? dietType,
-    String? meatTypes,
+    List<String>? meatTypes,
   }) => Recipe(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -2311,10 +2315,10 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
   final Value<int> prepTimeMinutes;
   final Value<int> cookTimeMinutes;
   final Value<bool> isBatchFriendly;
-  final Value<String> allergens;
+  final Value<List<String>> allergens;
   final Value<String> difficulty;
   final Value<String> dietType;
-  final Value<String> meatTypes;
+  final Value<List<String>> meatTypes;
   const RecipesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -2346,7 +2350,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
     required int prepTimeMinutes,
     required int cookTimeMinutes,
     required bool isBatchFriendly,
-    required String allergens,
+    required List<String> allergens,
     this.difficulty = const Value.absent(),
     this.dietType = const Value.absent(),
     this.meatTypes = const Value.absent(),
@@ -2414,10 +2418,10 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
     Value<int>? prepTimeMinutes,
     Value<int>? cookTimeMinutes,
     Value<bool>? isBatchFriendly,
-    Value<String>? allergens,
+    Value<List<String>>? allergens,
     Value<String>? difficulty,
     Value<String>? dietType,
-    Value<String>? meatTypes,
+    Value<List<String>>? meatTypes,
   }) {
     return RecipesCompanion(
       id: id ?? this.id,
@@ -2479,7 +2483,9 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
       map['is_batch_friendly'] = Variable<bool>(isBatchFriendly.value);
     }
     if (allergens.present) {
-      map['allergens'] = Variable<String>(allergens.value);
+      map['allergens'] = Variable<String>(
+        $RecipesTable.$converterallergens.toSql(allergens.value),
+      );
     }
     if (difficulty.present) {
       map['difficulty'] = Variable<String>(difficulty.value);
@@ -2488,7 +2494,9 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
       map['diet_type'] = Variable<String>(dietType.value);
     }
     if (meatTypes.present) {
-      map['meat_types'] = Variable<String>(meatTypes.value);
+      map['meat_types'] = Variable<String>(
+        $RecipesTable.$convertermeatTypes.toSql(meatTypes.value),
+      );
     }
     return map;
   }
@@ -5419,15 +5427,15 @@ typedef $$UserProfilesTableCreateCompanionBuilder =
       Value<int> distinctLunches,
       Value<int> distinctDinners,
       Value<int> distinctSnacks,
-      required String allergies,
+      required List<String> allergies,
       required String customAllergies,
       required int dailyCalorieTarget,
       Value<int> dailyWaterMl,
-      Value<String> enabledMealTypes,
+      Value<List<String>> enabledMealTypes,
       required int dietStartDate,
-      Value<String> freeDays,
+      Value<List<int>> freeDays,
       Value<bool> batchCookingBeforeDiet,
-      Value<String> excludedMeats,
+      Value<List<String>> excludedMeats,
       Value<bool> economicMode,
       Value<bool> onboardingCompleted,
       required int createdAt,
@@ -5451,15 +5459,15 @@ typedef $$UserProfilesTableUpdateCompanionBuilder =
       Value<int> distinctLunches,
       Value<int> distinctDinners,
       Value<int> distinctSnacks,
-      Value<String> allergies,
+      Value<List<String>> allergies,
       Value<String> customAllergies,
       Value<int> dailyCalorieTarget,
       Value<int> dailyWaterMl,
-      Value<String> enabledMealTypes,
+      Value<List<String>> enabledMealTypes,
       Value<int> dietStartDate,
-      Value<String> freeDays,
+      Value<List<int>> freeDays,
       Value<bool> batchCookingBeforeDiet,
-      Value<String> excludedMeats,
+      Value<List<String>> excludedMeats,
       Value<bool> economicMode,
       Value<bool> onboardingCompleted,
       Value<int> createdAt,
@@ -5559,9 +5567,10 @@ class $$UserProfilesTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get allergies => $composableBuilder(
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get allergies => $composableBuilder(
     column: $table.allergies,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<String> get customAllergies => $composableBuilder(
@@ -5579,9 +5588,10 @@ class $$UserProfilesTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get enabledMealTypes => $composableBuilder(
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get enabledMealTypes => $composableBuilder(
     column: $table.enabledMealTypes,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<int> get dietStartDate => $composableBuilder(
@@ -5589,19 +5599,21 @@ class $$UserProfilesTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get freeDays => $composableBuilder(
-    column: $table.freeDays,
-    builder: (column) => ColumnFilters(column),
-  );
+  ColumnWithTypeConverterFilters<List<int>, List<int>, String> get freeDays =>
+      $composableBuilder(
+        column: $table.freeDays,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
 
   ColumnFilters<bool> get batchCookingBeforeDiet => $composableBuilder(
     column: $table.batchCookingBeforeDiet,
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get excludedMeats => $composableBuilder(
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get excludedMeats => $composableBuilder(
     column: $table.excludedMeats,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<bool> get economicMode => $composableBuilder(
@@ -5853,7 +5865,7 @@ class $$UserProfilesTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get allergies =>
+  GeneratedColumnWithTypeConverter<List<String>, String> get allergies =>
       $composableBuilder(column: $table.allergies, builder: (column) => column);
 
   GeneratedColumn<String> get customAllergies => $composableBuilder(
@@ -5871,17 +5883,18 @@ class $$UserProfilesTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get enabledMealTypes => $composableBuilder(
-    column: $table.enabledMealTypes,
-    builder: (column) => column,
-  );
+  GeneratedColumnWithTypeConverter<List<String>, String> get enabledMealTypes =>
+      $composableBuilder(
+        column: $table.enabledMealTypes,
+        builder: (column) => column,
+      );
 
   GeneratedColumn<int> get dietStartDate => $composableBuilder(
     column: $table.dietStartDate,
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get freeDays =>
+  GeneratedColumnWithTypeConverter<List<int>, String> get freeDays =>
       $composableBuilder(column: $table.freeDays, builder: (column) => column);
 
   GeneratedColumn<bool> get batchCookingBeforeDiet => $composableBuilder(
@@ -5889,10 +5902,11 @@ class $$UserProfilesTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get excludedMeats => $composableBuilder(
-    column: $table.excludedMeats,
-    builder: (column) => column,
-  );
+  GeneratedColumnWithTypeConverter<List<String>, String> get excludedMeats =>
+      $composableBuilder(
+        column: $table.excludedMeats,
+        builder: (column) => column,
+      );
 
   GeneratedColumn<bool> get economicMode => $composableBuilder(
     column: $table.economicMode,
@@ -5956,15 +5970,15 @@ class $$UserProfilesTableTableManager
                 Value<int> distinctLunches = const Value.absent(),
                 Value<int> distinctDinners = const Value.absent(),
                 Value<int> distinctSnacks = const Value.absent(),
-                Value<String> allergies = const Value.absent(),
+                Value<List<String>> allergies = const Value.absent(),
                 Value<String> customAllergies = const Value.absent(),
                 Value<int> dailyCalorieTarget = const Value.absent(),
                 Value<int> dailyWaterMl = const Value.absent(),
-                Value<String> enabledMealTypes = const Value.absent(),
+                Value<List<String>> enabledMealTypes = const Value.absent(),
                 Value<int> dietStartDate = const Value.absent(),
-                Value<String> freeDays = const Value.absent(),
+                Value<List<int>> freeDays = const Value.absent(),
                 Value<bool> batchCookingBeforeDiet = const Value.absent(),
-                Value<String> excludedMeats = const Value.absent(),
+                Value<List<String>> excludedMeats = const Value.absent(),
                 Value<bool> economicMode = const Value.absent(),
                 Value<bool> onboardingCompleted = const Value.absent(),
                 Value<int> createdAt = const Value.absent(),
@@ -6018,15 +6032,15 @@ class $$UserProfilesTableTableManager
                 Value<int> distinctLunches = const Value.absent(),
                 Value<int> distinctDinners = const Value.absent(),
                 Value<int> distinctSnacks = const Value.absent(),
-                required String allergies,
+                required List<String> allergies,
                 required String customAllergies,
                 required int dailyCalorieTarget,
                 Value<int> dailyWaterMl = const Value.absent(),
-                Value<String> enabledMealTypes = const Value.absent(),
+                Value<List<String>> enabledMealTypes = const Value.absent(),
                 required int dietStartDate,
-                Value<String> freeDays = const Value.absent(),
+                Value<List<int>> freeDays = const Value.absent(),
                 Value<bool> batchCookingBeforeDiet = const Value.absent(),
-                Value<String> excludedMeats = const Value.absent(),
+                Value<List<String>> excludedMeats = const Value.absent(),
                 Value<bool> economicMode = const Value.absent(),
                 Value<bool> onboardingCompleted = const Value.absent(),
                 required int createdAt,
@@ -6100,10 +6114,10 @@ typedef $$RecipesTableCreateCompanionBuilder =
       required int prepTimeMinutes,
       required int cookTimeMinutes,
       required bool isBatchFriendly,
-      required String allergens,
+      required List<String> allergens,
       Value<String> difficulty,
       Value<String> dietType,
-      Value<String> meatTypes,
+      Value<List<String>> meatTypes,
     });
 typedef $$RecipesTableUpdateCompanionBuilder =
     RecipesCompanion Function({
@@ -6119,10 +6133,10 @@ typedef $$RecipesTableUpdateCompanionBuilder =
       Value<int> prepTimeMinutes,
       Value<int> cookTimeMinutes,
       Value<bool> isBatchFriendly,
-      Value<String> allergens,
+      Value<List<String>> allergens,
       Value<String> difficulty,
       Value<String> dietType,
-      Value<String> meatTypes,
+      Value<List<String>> meatTypes,
     });
 
 final class $$RecipesTableReferences
@@ -6254,9 +6268,10 @@ class $$RecipesTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get allergens => $composableBuilder(
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get allergens => $composableBuilder(
     column: $table.allergens,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<String> get difficulty => $composableBuilder(
@@ -6269,9 +6284,10 @@ class $$RecipesTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get meatTypes => $composableBuilder(
+  ColumnWithTypeConverterFilters<List<String>, List<String>, String>
+  get meatTypes => $composableBuilder(
     column: $table.meatTypes,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   Expression<bool> recipeStepsRefs(
@@ -6499,7 +6515,7 @@ class $$RecipesTableAnnotationComposer
     builder: (column) => column,
   );
 
-  GeneratedColumn<String> get allergens =>
+  GeneratedColumnWithTypeConverter<List<String>, String> get allergens =>
       $composableBuilder(column: $table.allergens, builder: (column) => column);
 
   GeneratedColumn<String> get difficulty => $composableBuilder(
@@ -6510,7 +6526,7 @@ class $$RecipesTableAnnotationComposer
   GeneratedColumn<String> get dietType =>
       $composableBuilder(column: $table.dietType, builder: (column) => column);
 
-  GeneratedColumn<String> get meatTypes =>
+  GeneratedColumnWithTypeConverter<List<String>, String> get meatTypes =>
       $composableBuilder(column: $table.meatTypes, builder: (column) => column);
 
   Expression<T> recipeStepsRefs<T extends Object>(
@@ -6633,10 +6649,10 @@ class $$RecipesTableTableManager
                 Value<int> prepTimeMinutes = const Value.absent(),
                 Value<int> cookTimeMinutes = const Value.absent(),
                 Value<bool> isBatchFriendly = const Value.absent(),
-                Value<String> allergens = const Value.absent(),
+                Value<List<String>> allergens = const Value.absent(),
                 Value<String> difficulty = const Value.absent(),
                 Value<String> dietType = const Value.absent(),
-                Value<String> meatTypes = const Value.absent(),
+                Value<List<String>> meatTypes = const Value.absent(),
               }) => RecipesCompanion(
                 id: id,
                 name: name,
@@ -6669,10 +6685,10 @@ class $$RecipesTableTableManager
                 required int prepTimeMinutes,
                 required int cookTimeMinutes,
                 required bool isBatchFriendly,
-                required String allergens,
+                required List<String> allergens,
                 Value<String> difficulty = const Value.absent(),
                 Value<String> dietType = const Value.absent(),
-                Value<String> meatTypes = const Value.absent(),
+                Value<List<String>> meatTypes = const Value.absent(),
               }) => RecipesCompanion.insert(
                 id: id,
                 name: name,

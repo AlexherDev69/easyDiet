@@ -21,6 +21,7 @@ import 'tables/shopping_item_table.dart';
 import 'tables/user_profile_table.dart';
 import 'tables/week_plan_table.dart';
 import 'tables/weight_log_table.dart';
+import 'converters/json_list_converter.dart';
 
 part 'database.g.dart';
 
