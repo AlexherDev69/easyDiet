@@ -4,24 +4,55 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
-/// Animated illustration displayed at the top of each onboarding step.
+/// Animated illustration with rotating gradient border for each onboarding step.
 ///
-/// Each step gets a unique CustomPainter drawing. All illustrations are
-/// 160x160 and use only AppColors constants for consistency with the theme.
-class OnboardingIllustration extends StatelessWidget {
+/// Each step gets a unique CustomPainter drawing inside a glass circle
+/// with a rotating [SweepGradient] border. Respects reduced-motion settings.
+class OnboardingIllustration extends StatefulWidget {
   const OnboardingIllustration({super.key, required this.step});
 
   final int step;
 
-  static const double _size = 160;
+  @override
+  State<OnboardingIllustration> createState() =>
+      _OnboardingIllustrationState();
+}
+
+class _OnboardingIllustrationState extends State<OnboardingIllustration>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _rotationController;
+
+  static const double _outerSize = 140;
+  static const double _innerSize = 120;
+  static const double _borderWidth = 3;
+
+  @override
+  void initState() {
+    super.initState();
+    _rotationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _rotationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final reduceMotion = MediaQuery.of(context).disableAnimations;
+
+    if (reduceMotion) {
+      _rotationController.stop();
+    } else if (!_rotationController.isAnimating) {
+      _rotationController.repeat();
+    }
 
     return TweenAnimationBuilder<double>(
-      // Re-trigger animation whenever the step changes by using a unique key
-      // on the parent (handled in _buildStepContent via KeyedSubtree).
       tween: Tween(begin: 0.0, end: 1.0),
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeOutBack,
@@ -35,16 +66,45 @@ class OnboardingIllustration extends StatelessWidget {
         );
       },
       child: SizedBox(
-        width: _size,
-        height: _size,
-        child: CustomPaint(
-          painter: _illustrationForStep(step, isDark),
+        width: _outerSize,
+        height: _outerSize,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Rotating gradient border ring
+            AnimatedBuilder(
+              animation: _rotationController,
+              builder: (context, child) {
+                return CustomPaint(
+                  size: const Size(_outerSize, _outerSize),
+                  painter: _GradientBorderPainter(
+                    rotation: reduceMotion ? 0 : _rotationController.value,
+                    borderWidth: _borderWidth,
+                  ),
+                );
+              },
+            ),
+            // Glass inner circle with illustration
+            Container(
+              width: _innerSize,
+              height: _innerSize,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isDark
+                    ? Colors.white.withValues(alpha: 0.08)
+                    : Colors.white.withValues(alpha: 0.6),
+              ),
+              child: CustomPaint(
+                painter: _illustrationForStep(widget.step, isDark),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  CustomPainter _illustrationForStep(int step, bool isDark) {
+  static CustomPainter _illustrationForStep(int step, bool isDark) {
     return switch (step) {
       0 => _PersonIllustrationPainter(isDark: isDark),
       1 => _BodyMetricsIllustrationPainter(isDark: isDark),
@@ -55,6 +115,47 @@ class OnboardingIllustration extends StatelessWidget {
       _ => _PersonIllustrationPainter(isDark: isDark),
     };
   }
+}
+
+/// Paints a rotating sweep gradient ring around the illustration.
+class _GradientBorderPainter extends CustomPainter {
+  const _GradientBorderPainter({
+    required this.rotation,
+    required this.borderWidth,
+  });
+
+  final double rotation;
+  final double borderWidth;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width / 2 - borderWidth / 2;
+
+    final gradient = SweepGradient(
+      startAngle: rotation * 2 * math.pi,
+      endAngle: rotation * 2 * math.pi + 2 * math.pi,
+      colors: const [
+        AppColors.emeraldPrimary,
+        AppColors.tealSecondary,
+        AppColors.accentPurple,
+        AppColors.emeraldPrimary,
+      ],
+    );
+
+    final paint = Paint()
+      ..shader = gradient.createShader(
+        Rect.fromCircle(center: center, radius: radius),
+      )
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = borderWidth;
+
+    canvas.drawCircle(center, radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(_GradientBorderPainter oldDelegate) =>
+      oldDelegate.rotation != rotation;
 }
 
 // ── Shared helpers ──────────────────────────────────────────────────────────

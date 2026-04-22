@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/quantity_formatter.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
-import '../../../../shared/widgets/solid_card.dart';
+import '../../../../shared/widgets/glass_card.dart';
+import '../../../../shared/widgets/recipe_thumb.dart';
 import '../../../onboarding/domain/models/meal_type.dart';
 
-/// Card for a single meal in the plan with swap, move, consume actions.
+/// Card for a single meal — gradient accent strip + uppercase type pill +
+/// recipe name + kcal/time row + 28x28 check tile.
 class MealCard extends StatelessWidget {
   const MealCard({
     required this.mealWithRecipe,
@@ -24,13 +28,10 @@ class MealCard extends StatelessWidget {
   final VoidCallback onToggleConsumed;
 
   MealType? get _mealType {
-    try {
-      return MealType.values.firstWhere(
-        (t) => t.name.toUpperCase() == mealWithRecipe.meal.mealType,
-      );
-    } catch (_) {
-      return null;
+    for (final t in MealType.values) {
+      if (t.name.toUpperCase() == mealWithRecipe.meal.mealType) return t;
     }
+    return null;
   }
 
   String get _mealTypeName =>
@@ -53,206 +54,240 @@ class MealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final isConsumed = mealWithRecipe.meal.isConsumed;
     final recipe = mealWithRecipe.recipe;
     final servings = mealWithRecipe.meal.servings;
-    final totalCalories = (recipe.caloriesPerServing * servings).round();
+    final totalKcal = (recipe.caloriesPerServing * servings).round();
+    final prepMinutes = recipe.prepTimeMinutes + recipe.cookTimeMinutes;
 
-    // Consumed meals use a muted card background so text stays readable.
-    final consumedBackgroundColor = theme.colorScheme.surfaceContainerHighest;
-
-    return SolidCard(
-      contentPadding: EdgeInsets.zero,
+    final content = GlassCard(
+      padding: const EdgeInsets.all(14),
+      borderRadius: 18,
+      accentColor: _mealTypeColor,
       onTap: onClick,
-      backgroundColor: isConsumed ? consumedBackgroundColor : null,
-      child: IntrinsicHeight(
-        child: Row(
-          children: [
-            // Color bar on the left
-            Container(
-              width: 5,
-              decoration: BoxDecoration(
-                color: _mealTypeColor,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        children: [
+          RecipeThumb(
+            imagePath: recipe.imagePath,
+            size: 56,
+            radius: 12,
+            fallbackColor: _mealTypeColor,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    // Meal type + servings + consumed icon
-                    Row(
-                      children: [
-                        Text(
-                          _mealTypeName,
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: _mealTypeColor,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.accentAmber.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            '${QuantityFormatter.formatServings(servings)} portions',
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.accentAmber,
-                            ),
-                          ),
-                        ),
-                        AnimatedScale(
-                          scale: isConsumed ? 1.0 : 0.0,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.elasticOut,
-                          child: isConsumed
-                              ? const Padding(
-                                  padding: EdgeInsets.only(left: 8),
-                                  child: Icon(
-                                    Icons.check_circle,
-                                    color: AppColors.emeraldPrimary,
-                                    size: 18,
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-
-                    // Recipe name — grey text when consumed to keep readability.
                     Text(
-                      recipe.name,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight:
-                            isConsumed ? FontWeight.normal : FontWeight.bold,
-                        color: isConsumed
-                            ? theme.colorScheme.onSurfaceVariant
-                            : null,
-                        decoration:
-                            isConsumed ? TextDecoration.lineThrough : null,
+                      _mealTypeName.toUpperCase(),
+                      style: GoogleFonts.nunito(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.6,
+                        color: _mealTypeColor,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(height: 8),
-
-                    // Calories + macros + actions
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text(
-                                '$totalCalories kcal',
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: _mealTypeColor,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              _MacroDot(
-                                color: AppColors.macroProtein,
-                                value: (recipe.proteinGrams * servings).round(),
-                              ),
-                              const SizedBox(width: 6),
-                              _MacroDot(
-                                color: AppColors.macroCarbs,
-                                value: (recipe.carbsGrams * servings).round(),
-                              ),
-                              const SizedBox(width: 6),
-                              _MacroDot(
-                                color: AppColors.macroFat,
-                                value: (recipe.fatGrams * servings).round(),
-                              ),
-                            ],
-                          ),
+                    const SizedBox(width: 6),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 1,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0F172A).withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(
+                        '${QuantityFormatter.formatServings(servings)} pers.',
+                        style: GoogleFonts.nunito(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF64748B),
                         ),
-                        Checkbox(
-                          value: isConsumed,
-                          onChanged: (_) => onToggleConsumed(),
-                          activeColor: AppColors.emeraldPrimary,
-                        ),
-                        PopupMenuButton<String>(
-                          iconSize: 20,
-                          icon: Icon(
-                            Icons.more_vert,
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                          tooltip: 'Actions',
-                          onSelected: (value) {
-                            if (value == 'move') onMove();
-                            if (value == 'swap') onSwap();
-                          },
-                          itemBuilder: (_) => [
-                            const PopupMenuItem(
-                              value: 'move',
-                              child: ListTile(
-                                leading: Icon(Icons.move_down),
-                                title: Text('Deplacer'),
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
-                            const PopupMenuItem(
-                              value: 'swap',
-                              child: ListTile(
-                                leading: Icon(Icons.find_replace),
-                                title: Text('Remplacer'),
-                                dense: true,
-                                contentPadding: EdgeInsets.zero,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
+                    ),
+                    const Spacer(),
+                    _MoreButton(onMove: onMove, onSwap: onSwap),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  recipe.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.nunito(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    height: 1.25,
+                    color: const Color(0xFF0F172A),
+                    decoration:
+                        isConsumed ? TextDecoration.lineThrough : null,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Row(
+                  children: [
+                    const Icon(
+                      LucideIcons.flame,
+                      size: 11,
+                      color: Color(0xFF64748B),
+                    ),
+                    const SizedBox(width: 3),
+                    Text(
+                      '$totalKcal kcal',
+                      style: GoogleFonts.nunito(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF64748B),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      width: 3,
+                      height: 3,
+                      decoration: BoxDecoration(
+                        color:
+                            const Color(0xFF64748B).withValues(alpha: 0.4),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(
+                      LucideIcons.clock,
+                      size: 11,
+                      color: Color(0xFF64748B),
+                    ),
+                    const SizedBox(width: 3),
+                    Text(
+                      prepMinutes > 0 ? '${prepMinutes}min' : 'pret',
+                      style: GoogleFonts.nunito(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF64748B),
+                      ),
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
+          const SizedBox(width: 12),
+          _CheckTile(
+            checked: isConsumed,
+            color: _mealTypeColor,
+            onTap: onToggleConsumed,
+          ),
+        ],
+      ),
+    );
+
+    return isConsumed ? Opacity(opacity: 0.72, child: content) : content;
+  }
+}
+
+class _CheckTile extends StatelessWidget {
+  const _CheckTile({
+    required this.checked,
+    required this.color,
+    required this.onTap,
+  });
+
+  final bool checked;
+  final Color color;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      label: checked ? 'Repas consomme' : 'Marquer comme consomme',
+      button: true,
+      toggled: checked,
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(9),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(9),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOut,
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              color: checked
+                  ? color
+                  : const Color(0xFF0F172A).withValues(alpha: 0.05),
+              borderRadius: BorderRadius.circular(9),
+              border: checked
+                  ? null
+                  : Border.all(
+                      color: const Color(0xFF0F172A).withValues(alpha: 0.15),
+                      width: 2,
+                    ),
+            ),
+            child: checked
+                ? const Icon(
+                    LucideIcons.check,
+                    size: 16,
+                    color: Colors.white,
+                  )
+                : null,
+          ),
         ),
       ),
     );
   }
 }
 
-class _MacroDot extends StatelessWidget {
-  const _MacroDot({required this.color, required this.value});
+class _MoreButton extends StatelessWidget {
+  const _MoreButton({required this.onMove, required this.onSwap});
 
-  final Color color;
-  final int value;
+  final VoidCallback onMove;
+  final VoidCallback onSwap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 6,
-          height: 6,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        ),
-        const SizedBox(width: 3),
-        Text(
-          '${value}g',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
+    return PopupMenuButton<String>(
+      iconSize: 18,
+      padding: EdgeInsets.zero,
+      icon: const Icon(
+        LucideIcons.ellipsisVertical,
+        size: 18,
+        color: Color(0xFF64748B),
+      ),
+      tooltip: 'Actions',
+      onSelected: (v) {
+        if (v == 'move') onMove();
+        if (v == 'swap') onSwap();
+      },
+      itemBuilder: (_) => [
+        PopupMenuItem(
+          value: 'move',
+          child: Row(
+            children: [
+              const Icon(LucideIcons.arrowRightLeft, size: 16),
+              const SizedBox(width: 8),
+              Text(
+                'Deplacer',
+                style: GoogleFonts.nunito(fontWeight: FontWeight.w700),
               ),
+            ],
+          ),
+        ),
+        PopupMenuItem(
+          value: 'swap',
+          child: Row(
+            children: [
+              const Icon(LucideIcons.replace, size: 16),
+              const SizedBox(width: 8),
+              Text(
+                'Remplacer',
+                style: GoogleFonts.nunito(fontWeight: FontWeight.w700),
+              ),
+            ],
+          ),
         ),
       ],
     );

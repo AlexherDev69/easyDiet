@@ -154,14 +154,15 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     final nextStep = state.currentStep + 1;
     emit(state.copyWith(currentStep: nextStep));
 
-    if (nextStep == 2) _calculateCalories();
-    if (nextStep == 5) {
-      // _generateAndShowPlan saves the profile itself - no need for double save
-      _generateAndShowPlan();
-    } else {
-      // Save progress after each step so data survives app restart
-      _savePartialProfile();
-    }
+    if (nextStep == 3) _calculateCalories();
+    _savePartialProfile();
+  }
+
+  /// Called from the Allergies step button: generate plan + advance to preview.
+  Future<void> generateAndShowPreview() async {
+    await _generateAndShowPlan();
+    if (state.generatedWeekPlan == null) return;
+    emit(state.copyWith(currentStep: state.currentStep + 1));
   }
 
   void previousStep() {
@@ -388,15 +389,6 @@ class OnboardingCubit extends Cubit<OnboardingState> {
         calculatedWaterMl: profile.dailyWaterMl,
       ));
 
-      // If resuming at plan preview, reload the plan
-      if (resumeStep == 5) {
-        final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
-        if (weekPlan != null) {
-          emit(state.copyWith(generatedWeekPlan: weekPlan));
-        } else {
-          _generateAndShowPlan();
-        }
-      }
     } catch (e) {
       debugPrint('Error in _checkOnboardingStatus: $e');
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
@@ -404,14 +396,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   Future<int> _determineResumeStep(UserProfile profile) async {
-    if (profile.name.isEmpty) return 0;
-    if (profile.heightCm == 0 || profile.weightKg == 0) return 1;
-    if (profile.dailyCalorieTarget == 0) return 2;
-    // Check if a plan already exists (step 5 was reached)
+    if (profile.name.isEmpty) return 1;
+    if (profile.heightCm == 0 || profile.weightKg == 0) return 2;
+    if (profile.dailyCalorieTarget == 0) return 3;
     final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
-    if (weekPlan != null) return 5;
-    // Steps 3-4 data is present, resume at step 4 (quick to pass)
-    return 4;
+    if (weekPlan != null) return 6;
+    return 5;
   }
 
   Future<void> _savePartialProfile() async {
@@ -489,8 +479,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
     ));
   }
 
+  /// Minimum duration the generation loading animation is displayed, so
+  /// that even when generation is near-instant the hero animation has time
+  /// to play out. Matches the progress bar duration in GenerationLoadingView.
+  static const _minGenerationAnimationDuration = Duration(milliseconds: 6500);
+
   Future<void> _generateAndShowPlan() async {
     emit(state.copyWith(isLoading: true, clearErrorMessage: true));
+    final minDelay = Future<void>.delayed(_minGenerationAnimationDuration);
     try {
       final weight = double.tryParse(state.weightKg);
       final height = int.tryParse(state.heightCm);
@@ -573,12 +569,15 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 
       final weekPlan = await _mealPlanRepository.getCurrentWeekPlan();
 
+      await minDelay;
+
       emit(state.copyWith(
         isLoading: false,
         generatedWeekPlan: weekPlan,
       ));
     } catch (e) {
       debugPrint('Error in _generateAndShowPlan: $e');
+      await minDelay;
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }

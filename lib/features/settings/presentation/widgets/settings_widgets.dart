@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_utils.dart';
+import '../../../../shared/widgets/glass_dialog.dart';
 import '../../../../shared/widgets/solid_card.dart';
 
 /// Section title (bold, 16px).
@@ -295,28 +296,35 @@ class RegenerateDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text(
-        'Plan mis a jour',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      content: const Text(
-        'Vos parametres de regime ont change. '
-        'Voulez-vous regenerer le plan de repas et la liste de courses ?',
-      ),
-      actions: [
-        TextButton(
-          onPressed: onDismiss,
-          child: const Text('Plus tard'),
-        ),
-        TextButton(
-          onPressed: onConfirm,
-          child: const Text(
-            'Regenerer',
-            style: TextStyle(color: AppColors.emeraldPrimary),
+    final theme = Theme.of(context);
+
+    return GlassDialogContent(
+      icon: Icons.refresh,
+      title: 'Plan mis a jour',
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Vos parametres de regime ont change. '
+            'Voulez-vous regenerer le plan de repas et la liste de courses ?',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
+          const SizedBox(height: 20),
+          GlassDialogActions(
+            secondary: GlassDialogButton(
+              label: 'Plus tard',
+              onPressed: onDismiss,
+            ),
+            primary: GlassDialogPrimaryButton(
+              label: 'Regenerer',
+              onPressed: onConfirm,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -334,25 +342,41 @@ class ResetDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Reinitialiser ?'),
-      content: const Text(
-        'Voulez-vous vraiment supprimer toutes vos donnees ? '
-        'Cette action est irreversible.',
+    final theme = Theme.of(context);
+
+    return GlassDialogContent(
+      icon: Icons.warning_amber_rounded,
+      iconGradient: LinearGradient(
+        colors: [
+          AppColors.accentRose,
+          AppColors.accentRose.withValues(alpha: 0.8),
+        ],
       ),
-      actions: [
-        TextButton(
-          onPressed: onDismiss,
-          child: const Text('Annuler'),
-        ),
-        TextButton(
-          onPressed: onConfirm,
-          style: TextButton.styleFrom(
-            foregroundColor: Theme.of(context).colorScheme.error,
+      title: 'Reinitialiser ?',
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'Voulez-vous vraiment supprimer toutes vos donnees ? '
+            'Cette action est irreversible.',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
           ),
-          child: const Text('Supprimer'),
-        ),
-      ],
+          const SizedBox(height: 20),
+          GlassDialogActions(
+            secondary: GlassDialogButton(
+              label: 'Annuler',
+              onPressed: onDismiss,
+            ),
+            primary: GlassDialogDangerButton(
+              label: 'Supprimer',
+              onPressed: onConfirm,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/widgets/gradient_title.dart';
+import '../../../../shared/widgets/pill_chip.dart';
 import '../../domain/models/allergy.dart';
 import '../../domain/models/excluded_meat.dart';
 
@@ -26,8 +28,7 @@ class AllergiesStep extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Allergies & restrictions',
-              style: theme.textTheme.headlineMedium),
+          const GradientTitle('Allergies & restrictions'),
           const SizedBox(height: 8),
           Text(
             'Selectionnez vos allergies et les viandes a exclure.',
@@ -37,33 +38,33 @@ class AllergiesStep extends StatelessWidget {
           ),
           const SizedBox(height: 24),
 
-          // Allergies
+          // Allergies — PillChip
           Text('Allergies', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
-            runSpacing: 4,
+            runSpacing: 8,
             children: Allergy.values.map((allergy) {
-              return FilterChip(
+              return PillChip(
+                label: allergy.displayName,
                 selected: selectedAllergies.contains(allergy),
-                label: Text(allergy.displayName),
-                onSelected: (_) => onToggleAllergy(allergy),
+                onTap: () => onToggleAllergy(allergy),
               );
             }).toList(),
           ),
           const SizedBox(height: 24),
 
-          // Excluded meats
+          // Excluded meats — PillChip
           Text('Viandes exclues', style: theme.textTheme.titleMedium),
           const SizedBox(height: 8),
           Wrap(
             spacing: 8,
-            runSpacing: 4,
+            runSpacing: 8,
             children: ExcludedMeat.values.map((meat) {
-              return FilterChip(
+              return PillChip(
+                label: meat.displayName,
                 selected: excludedMeats.contains(meat),
-                label: Text(meat.displayName),
-                onSelected: (_) => onToggleExcludedMeat(meat),
+                onTap: () => onToggleExcludedMeat(meat),
               );
             }).toList(),
           ),

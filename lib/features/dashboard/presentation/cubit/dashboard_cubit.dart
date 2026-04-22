@@ -182,14 +182,19 @@ class DashboardCubit extends Cubit<DashboardState> {
             .firstOrNull
         : null;
 
+    final nextMeal = _computeNextMeal(todayPlan);
+    final nextBatch = _computeNextBatchCooking(weekPlan, today);
+
     emit(state.copyWith(
       todayMeals: selectedDayPlan,
       todayCalories: calories,
       todayProtein: protein,
       todayCarbs: carbs,
       todayFat: fat,
-      nextMeal: _computeNextMeal(todayPlan),
-      nextBatchCooking: _computeNextBatchCooking(weekPlan, today),
+      nextMeal: nextMeal,
+      clearNextMeal: nextMeal == null,
+      nextBatchCooking: nextBatch,
+      clearNextBatchCooking: nextBatch == null,
       weekSchedule: weekSchedule,
       selectedDayIndex: todayIndex,
       selectedDayMeals: selectedMeals,
@@ -249,41 +254,30 @@ class DashboardCubit extends Cubit<DashboardState> {
   NextMealInfo? _computeNextMeal(DayPlanWithMeals? todayPlan) {
     if (todayPlan == null || todayPlan.dayPlan.isFreeDay) return null;
 
-    final now = DateTime.now();
-    final hour = now.hour;
-    final minute = now.minute;
-    final currentMinutes = hour * 60 + minute;
-
+    // Find the first unconsumed meal in canonical order. Returns null once
+    // every meal of the day has been checked off.
     const mealOrder = [
       MealType.breakfast,
       MealType.lunch,
       MealType.snack,
       MealType.dinner,
     ];
-    const mealThresholds = {
-      MealType.breakfast: 10 * 60, // 10:00
-      MealType.lunch: 14 * 60, // 14:00
-      MealType.snack: 17 * 60, // 17:00
-      MealType.dinner: 22 * 60, // 22:00
-    };
 
     for (final type in mealOrder) {
-      final threshold = mealThresholds[type]!;
-      if (currentMinutes < threshold) {
-        final meal = todayPlan.meals
-            .where(
-                (m) => !m.meal.isConsumed && m.meal.mealType == type.name.toUpperCase())
-            .firstOrNull;
-        if (meal != null) {
-          return NextMealInfo(
-            mealType: type,
-            recipeName: meal.recipe.name,
-            caloriesPerServing: meal.recipe.caloriesPerServing,
-            servings: meal.meal.servings,
-            prepTimeMinutes:
-                meal.recipe.prepTimeMinutes + meal.recipe.cookTimeMinutes,
-          );
-        }
+      final meal = todayPlan.meals
+          .where((m) =>
+              !m.meal.isConsumed &&
+              m.meal.mealType == type.name.toUpperCase())
+          .firstOrNull;
+      if (meal != null) {
+        return NextMealInfo(
+          mealType: type,
+          recipeName: meal.recipe.name,
+          caloriesPerServing: meal.recipe.caloriesPerServing,
+          servings: meal.meal.servings,
+          prepTimeMinutes:
+              meal.recipe.prepTimeMinutes + meal.recipe.cookTimeMinutes,
+        );
       }
     }
     return null;

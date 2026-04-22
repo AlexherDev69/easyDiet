@@ -22,6 +22,7 @@ import 'tables/user_profile_table.dart';
 import 'tables/week_plan_table.dart';
 import 'tables/weight_log_table.dart';
 import 'converters/json_list_converter.dart';
+import 'seeder/database_seeder.dart';
 
 part 'database.g.dart';
 
@@ -54,16 +55,16 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase.forTesting(super.e);
 
   // Schema version history:
-  //   v1 (current) — initial schema with 9 tables: UserProfiles, Recipes,
-  //                  RecipeSteps, Ingredients, WeekPlans, DayPlans, Meals,
-  //                  ShoppingItems, WeightLogs.
+  //   v1 — initial schema with 9 tables: UserProfiles, Recipes, RecipeSteps,
+  //        Ingredients, WeekPlans, DayPlans, Meals, ShoppingItems, WeightLogs.
+  //   v2 (current) — Recipes.imagePath TEXT NULLABLE (bundled Pexels photos).
   //
   // IMPORTANT: any future column addition or table change MUST bump this
   // value and add a corresponding migration block in [onUpgrade] below.
   // Drift will NOT call [onUpgrade] if the version stays at 1 — new columns
   // added without a version bump will simply be missing on existing installs.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
@@ -72,14 +73,10 @@ class AppDatabase extends _$AppDatabase {
         await m.createAll();
       },
       onUpgrade: (Migrator m, int from, int to) async {
-        // Incremental migrations: each block handles one version bump.
-        // When adding a new migration:
-        // 1. Bump schemaVersion above
-        // 2. Add a new if (from < N) block here
-        // 3. Run: dart run build_runner build --delete-conflicting-outputs
-        //
-        // if (from < 2) { await m.addColumn(table, table.newColumn); }
-        // if (from < 3) { await m.createTable(newTable); }
+        if (from < 2) {
+          await m.addColumn(recipes, recipes.imagePath);
+          await DatabaseSeeder(this).backfillImagePaths();
+        }
       },
       beforeOpen: (details) async {
         // Verify schema integrity on upgrade to catch missing migrations early.

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_utils.dart';
-import '../../../../shared/widgets/gradient_card.dart';
+import '../../../../shared/widgets/glass_card.dart';
 
 /// Weight loss progress bar + stats.
 class ProgressCard extends StatelessWidget {
@@ -28,12 +28,7 @@ class ProgressCard extends StatelessWidget {
     final progress =
         totalToLose > 0 ? (totalLost / totalToLose).clamp(0.0, 1.0) : 0.0;
 
-    return GradientCard(
-      gradientColors: [
-        AppColors.accentPurple.withValues(alpha: 0.06),
-        AppColors.accentPurpleLight.withValues(alpha: 0.10),
-      ],
-      elevation: 2,
+    return GlassCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

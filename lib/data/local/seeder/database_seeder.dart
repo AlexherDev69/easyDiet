@@ -72,6 +72,7 @@ class DatabaseSeeder {
               difficulty: Value(recipe['difficulty'] as String? ?? 'EASY'),
               dietType: Value(recipe['dietType'] as String? ?? 'OMNIVORE'),
               meatTypes: Value(meatTypes),
+              imagePath: Value(recipe['imagePath'] as String?),
             ),
           );
 
@@ -107,5 +108,39 @@ class DatabaseSeeder {
         }
       }
     });
+  }
+
+  /// Backfill `imagePath` for existing recipes after schema v2 migration.
+  /// Matches by recipe name, idempotent.
+  Future<void> backfillImagePaths() async {
+    final pathByName = <String, String>{};
+    for (final path in _recipeFiles) {
+      try {
+        final jsonString = await rootBundle.loadString(path);
+        final data = json.decode(jsonString) as Map<String, dynamic>;
+        final recipes = data['recipes'] as List<dynamic>;
+        for (final raw in recipes) {
+          final recipe = raw as Map<String, dynamic>;
+          final imagePath = recipe['imagePath'] as String?;
+          if (imagePath != null) {
+            pathByName[recipe['name'] as String] = imagePath;
+          }
+        }
+      } catch (e) {
+        debugPrint('DatabaseSeeder.backfill: failed to load $path - $e');
+      }
+    }
+    if (pathByName.isEmpty) return;
+
+    await _db.transaction(() async {
+      for (final entry in pathByName.entries) {
+        await (_db.update(_db.recipes)
+              ..where((r) => r.name.equals(entry.key)))
+            .write(RecipesCompanion(imagePath: Value(entry.value)));
+      }
+    });
+    debugPrint(
+      'DatabaseSeeder: backfilled imagePath for ${pathByName.length} recipes',
+    );
   }
 }

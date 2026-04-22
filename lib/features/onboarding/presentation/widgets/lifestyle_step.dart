@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../shared/widgets/free_days_section.dart';
-import '../../../../shared/widgets/solid_card.dart';
-import '../../../../shared/widgets/stepper_card.dart';
+import '../../../../shared/widgets/glass_card.dart';
+import '../../../../shared/widgets/gradient_title.dart';
+import '../../../../shared/widgets/pill_chip.dart';
 import '../../domain/models/meal_type.dart';
 
 /// Step 3: Organisation — diet start date, free days, batch cooking, shopping,
@@ -109,7 +111,7 @@ class _LifestyleStepState extends State<LifestyleStep> {
 
     return ListView(
       children: [
-        Text('Organisation', style: theme.textTheme.headlineMedium),
+        const GradientTitle('Organisation'),
         const SizedBox(height: 8),
         Text(
           'Adaptez le plan a votre rythme de vie.',
@@ -119,32 +121,32 @@ class _LifestyleStepState extends State<LifestyleStep> {
         ),
         const SizedBox(height: 24),
 
-        // Diet start date
+        // Diet start date — PillChip per option
         Text('Date de demarrage du regime',
             style: theme.textTheme.titleMedium),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
+          runSpacing: 8,
           children: [
-            FilterChip(
+            PillChip(
+              label: "Aujourd'hui",
               selected: _selectedOption == _DateOption.today,
-              onSelected: (_) => widget.onDietStartDateChange(_today),
-              label: const Text("Aujourd'hui"),
+              onTap: () => widget.onDietStartDateChange(_today),
             ),
-            FilterChip(
+            PillChip(
+              label: 'Demain',
               selected: _selectedOption == _DateOption.tomorrow,
-              onSelected: (_) => widget.onDietStartDateChange(_tomorrow),
-              label: const Text('Demain'),
+              onTap: () => widget.onDietStartDateChange(_tomorrow),
             ),
-            FilterChip(
+            PillChip(
+              label: _selectedOption == _DateOption.other &&
+                      widget.dietStartDate != null
+                  ? AppDateUtils.formatShortDate(widget.dietStartDate!)
+                  : 'Autre date',
               selected: _selectedOption == _DateOption.other,
-              onSelected: (_) => _showDatePicker(),
-              label: Text(
-                _selectedOption == _DateOption.other &&
-                        widget.dietStartDate != null
-                    ? AppDateUtils.formatShortDate(widget.dietStartDate!)
-                    : 'Autre date',
-              ),
+              onTap: _showDatePicker,
+              icon: const Icon(Icons.calendar_today_outlined),
             ),
           ],
         ),
@@ -157,20 +159,20 @@ class _LifestyleStepState extends State<LifestyleStep> {
         ),
         const SizedBox(height: 16),
 
-        // Batch cooking
-        _BatchCookingSection(
-          batchCookingEnabled: widget.batchCookingEnabled,
-          batchCooking: widget.batchCooking,
-          batchCookingBeforeDiet: widget.batchCookingBeforeDiet,
-          onBatchCookingEnabledChange: widget.onBatchCookingEnabledChange,
-          onBatchCookingChange: widget.onBatchCookingChange,
-          onBatchCookingBeforeDietChange: widget.onBatchCookingBeforeDietChange,
-          onShowInfo: widget.onShowBatchCookingInfo,
-        ),
-        const SizedBox(height: 16),
+        // Batch cooking — TEMPORAIREMENT MASQUE
+        // _BatchCookingSection(
+        //   batchCookingEnabled: widget.batchCookingEnabled,
+        //   batchCooking: widget.batchCooking,
+        //   batchCookingBeforeDiet: widget.batchCookingBeforeDiet,
+        //   onBatchCookingEnabledChange: widget.onBatchCookingEnabledChange,
+        //   onBatchCookingChange: widget.onBatchCookingChange,
+        //   onBatchCookingBeforeDietChange: widget.onBatchCookingBeforeDietChange,
+        //   onShowInfo: widget.onShowBatchCookingInfo,
+        // ),
+        // const SizedBox(height: 16),
 
-        // Shopping trips
-        StepperCard(
+        // Shopping trips — GlassCard stepper
+        _GlassStepperCard(
           label: 'Courses par semaine',
           value: widget.shoppingTrips,
           minValue: 1,
@@ -179,9 +181,8 @@ class _LifestyleStepState extends State<LifestyleStep> {
         ),
         const SizedBox(height: 16),
 
-        // Economic mode
-        SolidCard(
-          backgroundColor: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+        // Economic mode — GlassCard with Switch
+        GlassCard(
           child: Row(
             children: [
               Expanded(
@@ -209,23 +210,24 @@ class _LifestyleStepState extends State<LifestyleStep> {
         ),
         const SizedBox(height: 24),
 
-        // Meal types
+        // Meal types — PillChip
         Text('Repas inclus dans le plan',
             style: theme.textTheme.titleMedium),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
+          runSpacing: 8,
           children: MealType.values.map((mt) {
-            return FilterChip(
+            return PillChip(
+              label: mt.displayName,
               selected: widget.enabledMealTypes.contains(mt),
-              onSelected: (_) => widget.onToggleMealType(mt),
-              label: Text(mt.displayName),
+              onTap: () => widget.onToggleMealType(mt),
             );
           }).toList(),
         ),
         const SizedBox(height: 24),
 
-        // Recipe variety
+        // Recipe variety — GlassCard steppers
         Text('Variete des recettes', style: theme.textTheme.titleMedium),
         const SizedBox(height: 4),
         Text(
@@ -235,7 +237,7 @@ class _LifestyleStepState extends State<LifestyleStep> {
           ),
         ),
         const SizedBox(height: 12),
-        StepperCard(
+        _GlassStepperCard(
           label: 'Petits-dejeuners differents',
           value: widget.distinctBreakfasts,
           minValue: 1,
@@ -243,7 +245,7 @@ class _LifestyleStepState extends State<LifestyleStep> {
           onValueChange: widget.onDistinctBreakfastsChange,
         ),
         const SizedBox(height: 8),
-        StepperCard(
+        _GlassStepperCard(
           label: 'Dejeuners differents',
           value: widget.distinctLunches,
           minValue: 1,
@@ -251,7 +253,7 @@ class _LifestyleStepState extends State<LifestyleStep> {
           onValueChange: widget.onDistinctLunchesChange,
         ),
         const SizedBox(height: 8),
-        StepperCard(
+        _GlassStepperCard(
           label: 'Diners differents',
           value: widget.distinctDinners,
           minValue: 1,
@@ -259,7 +261,7 @@ class _LifestyleStepState extends State<LifestyleStep> {
           onValueChange: widget.onDistinctDinnersChange,
         ),
         const SizedBox(height: 8),
-        StepperCard(
+        _GlassStepperCard(
           label: 'Snacks differents',
           value: widget.distinctSnacks,
           minValue: 1,
@@ -275,7 +277,76 @@ class _LifestyleStepState extends State<LifestyleStep> {
 
 enum _DateOption { today, tomorrow, other }
 
+/// GlassCard-wrapped numeric stepper — same layout and semantics as StepperCard
+/// but uses the glassmorphism surface instead of SolidCard.
+class _GlassStepperCard extends StatelessWidget {
+  const _GlassStepperCard({
+    required this.label,
+    required this.value,
+    required this.minValue,
+    required this.maxValue,
+    required this.onValueChange,
+  });
+
+  final String label;
+  final int value;
+  final int minValue;
+  final int maxValue;
+  final ValueChanged<int> onValueChange;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return GlassCard(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(label, style: theme.textTheme.bodyLarge),
+          ),
+          IconButton(
+            onPressed:
+                value > minValue ? () => onValueChange(value - 1) : null,
+            icon: const Icon(Icons.remove),
+            tooltip: 'Retirer',
+            iconSize: 20,
+            constraints: const BoxConstraints.tightFor(
+              width: 48,
+              height: 48,
+            ),
+          ),
+          SizedBox(
+            width: 28,
+            child: Text(
+              '$value',
+              textAlign: TextAlign.center,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.emeraldPrimary,
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed:
+                value < maxValue ? () => onValueChange(value + 1) : null,
+            icon: const Icon(Icons.add),
+            tooltip: 'Ajouter',
+            iconSize: 20,
+            constraints: const BoxConstraints.tightFor(
+              width: 48,
+              height: 48,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 /// Batch cooking card with toggle, sessions stepper, before/after switch.
+/// Uses GlassCard as the outer surface; the inner stepper also uses glass.
+// ignore: unused_element
 class _BatchCookingSection extends StatelessWidget {
   const _BatchCookingSection({
     required this.batchCookingEnabled,
@@ -299,8 +370,7 @@ class _BatchCookingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return SolidCard(
-      backgroundColor: theme.colorScheme.surfaceContainerHighest,
+    return GlassCard(
       child: Column(
         children: [
           Row(
@@ -322,9 +392,9 @@ class _BatchCookingSection extends StatelessWidget {
                         width: 32,
                         height: 32,
                       ),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.info_outline,
-                        color: theme.colorScheme.primary,
+                        color: AppColors.emeraldPrimary,
                       ),
                     ),
                   ],
@@ -338,7 +408,8 @@ class _BatchCookingSection extends StatelessWidget {
           ),
           if (batchCookingEnabled) ...[
             const SizedBox(height: 12),
-            StepperCard(
+            // Inner stepper stays as a glass card for visual consistency
+            _GlassStepperCard(
               label: 'Sessions par semaine',
               value: batchCooking,
               minValue: 1,

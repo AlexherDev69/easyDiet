@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../shared/widgets/gradient_card.dart';
+import '../../../../shared/widgets/glass_card.dart';
 
 /// Small card displaying daily water intake target.
 class HydrationCard extends StatelessWidget {
@@ -16,13 +16,8 @@ class HydrationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return GradientCard(
-      gradientColors: [
-        AppColors.waterBlue.withValues(alpha: 0.08),
-        AppColors.waterBlueLight.withValues(alpha: 0.12),
-      ],
-      elevation: 2,
-      contentPadding: const EdgeInsets.all(14),
+    return GlassCard(
+      padding: const EdgeInsets.all(14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

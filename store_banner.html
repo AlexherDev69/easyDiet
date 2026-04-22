@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1024px;
+    height: 500px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+  .banner {
+    width: 1024px;
+    height: 500px;
+    background: linear-gradient(135deg, #059669 0%, #10B981 50%, #6EE7B7 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -80px;
+    width: 350px;
+    height: 350px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+  }
+  .banner::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -60px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 28px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    z-index: 1;
+  }
+  .app-name {
+    font-size: 56px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    z-index: 1;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .tagline {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
+    z-index: 1;
+    opacity: 0.95;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  .badges {
+    display: flex;
+    gap: 16px;
+    z-index: 1;
+    margin-top: 8px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 28px;
+    font-size: 15px;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <img class="logo" src="easydiet_icon_512.png" alt="EasyDiet">
+  <div class="app-name">EasyDiet</div>
+  <div class="tagline">Mangez mieux. Perdez du poids. Sans prise de tete.</div>
+  <div class="badges">
+    <div class="badge">+90 recettes</div>
+    <div class="badge">100% hors ligne</div>
+    <div class="badge">Gratuit</div>
+  </div>
+</div>
+</body>
+</html>

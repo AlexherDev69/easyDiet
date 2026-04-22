@@ -72,7 +72,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/porridge_aux_fruits_rouges.jpg"
     },
     {
       "name": "Oeufs brouilles aux herbes",
@@ -164,7 +165,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/oeufs_brouilles_aux_herbes.jpg"
     },
     {
       "name": "Pancakes proteines banane",
@@ -250,7 +252,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/pancakes_proteines_banane.jpg"
     },
     {
       "name": "Smoothie bowl mangue",
@@ -331,7 +334,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/smoothie_bowl_mangue.jpg"
     },
     {
       "name": "Tartines avocat oeuf poche",
@@ -422,7 +426,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/tartines_avocat_oeuf_poche.jpg"
     },
     {
       "name": "Yaourt granola maison",
@@ -498,7 +503,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/yaourt_granola_maison.jpg"
     },
     {
       "name": "Overnight oats banane beurre de cacahuete",
@@ -573,7 +579,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/overnight_oats_banane_beurre_de_cacahuete.jpg"
     },
     {
       "name": "Smoothie bowl proteine fruits rouges",
@@ -641,7 +648,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/smoothie_bowl_proteine_fruits_rouges.jpg"
     },
     {
       "name": "Tofu brouille aux legumes",
@@ -726,7 +734,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/tofu_brouille_aux_legumes.jpg"
     },
     {
       "name": "Muffins oeufs dinde legumes",
@@ -812,7 +821,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/muffins_oeufs_dinde_legumes.jpg"
     },
     {
       "name": "Omelette blancs d'oeufs aux legumes",
@@ -890,7 +900,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/omelette_blancs_d_oeufs_aux_legumes.jpg"
     },
     {
       "name": "Porridge quinoa fruits frais",
@@ -963,7 +974,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/porridge_quinoa_fruits_frais.jpg"
     },
     {
       "name": "Hash patate douce sans allergenes",
@@ -1046,7 +1058,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/hash_patate_douce_sans_allergenes.jpg"
     },
     {
       "name": "Crepes sarrasin oeuf jambon",
@@ -1121,7 +1134,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/crepes_sarrasin_oeuf_jambon.jpg"
     },
     {
       "name": "Bowl quinoa yaourt fruits rouges",
@@ -1194,7 +1208,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/bowl_quinoa_yaourt_fruits_rouges.jpg"
     },
     {
       "name": "Riz de konjac oeuf poche epinards",
@@ -1273,7 +1288,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/riz_de_konjac_oeuf_poche_epinards.jpg"
     },
     {
       "name": "Bol fromage blanc granola fruits",
@@ -1342,7 +1358,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/bol_fromage_blanc_granola_fruits.jpg"
     },
     {
       "name": "Shakshuka legere aux poivrons",
@@ -1467,7 +1484,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/shakshuka_legere_aux_poivrons.jpg"
     },
     {
       "name": "Chia pudding cacao noisettes",
@@ -1552,7 +1570,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/chia_pudding_cacao_noisettes.jpg"
     }
   ]
 }

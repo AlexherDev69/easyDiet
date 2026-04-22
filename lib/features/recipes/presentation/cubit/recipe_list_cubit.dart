@@ -29,7 +29,10 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   // ── Public actions ──────────────────────────────────────────────────
 
   void selectTab(int tab) {
-    emit(state.copyWith(selectedTab: tab, clearCategory: true));
+    // On ne reset PAS la catégorie : l'utilisateur veut conserver son
+    // filtre (Petit-dej / Dejeuner / …) en basculant entre "Cette
+    // semaine" et "Toutes les recettes".
+    emit(state.copyWith(selectedTab: tab));
   }
 
   void selectCategory(String? category) {

@@ -1,88 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
+import '../core/theme/app_colors.dart';
 import 'app_router.dart';
 
-/// Bottom navigation bar item definition.
 class _NavItem {
   const _NavItem({
     required this.label,
-    required this.selectedIcon,
-    required this.unselectedIcon,
+    required this.icon,
     required this.path,
   });
 
   final String label;
-  final IconData selectedIcon;
-  final IconData unselectedIcon;
+  final IconData icon;
   final String path;
 }
 
 const _navItems = [
   _NavItem(
     label: 'Accueil',
-    selectedIcon: Icons.dashboard,
-    unselectedIcon: Icons.dashboard_outlined,
+    icon: LucideIcons.house,
     path: AppRoutes.dashboard,
   ),
   _NavItem(
     label: 'Repas',
-    selectedIcon: Icons.restaurant_menu,
-    unselectedIcon: Icons.restaurant_menu_outlined,
+    icon: LucideIcons.utensils,
     path: AppRoutes.mealPlan,
   ),
   _NavItem(
     label: 'Courses',
-    selectedIcon: Icons.shopping_bag,
-    unselectedIcon: Icons.shopping_bag_outlined,
+    icon: LucideIcons.shoppingBag,
     path: AppRoutes.shoppingList,
   ),
   _NavItem(
     label: 'Recettes',
-    selectedIcon: Icons.menu_book,
-    unselectedIcon: Icons.menu_book_outlined,
+    icon: LucideIcons.bookOpen,
     path: AppRoutes.recipeList,
   ),
   _NavItem(
     label: 'Poids',
-    selectedIcon: Icons.monitor_weight,
-    unselectedIcon: Icons.monitor_weight_outlined,
+    icon: LucideIcons.circleGauge,
     path: AppRoutes.weightLog,
   ),
 ];
 
-/// Duration for the icon switch and scale bounce animation.
-const _kIconAnimationDuration = Duration(milliseconds: 250);
+const _kAnimationDuration = Duration(milliseconds: 260);
 
-/// Animated icon that bounces to filled when selected and fades to outlined
-/// when deselected. Uses [AnimatedSwitcher] so no [StatefulWidget] is needed.
-class _AnimatedNavIcon extends StatelessWidget {
-  const _AnimatedNavIcon({required this.item, required this.isSelected});
-
-  final _NavItem item;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: _kIconAnimationDuration,
-      // Scale bounce on entry: overshoots to 1.25 then settles at 1.0.
-      transitionBuilder: (child, animation) {
-        final scaleAnimation = Tween<double>(begin: 0.6, end: 1.0).animate(
-          CurvedAnimation(parent: animation, curve: Curves.elasticOut),
-        );
-        return ScaleTransition(scale: scaleAnimation, child: child);
-      },
-      child: Icon(
-        isSelected ? item.selectedIcon : item.unselectedIcon,
-        // ValueKey ensures AnimatedSwitcher detects the state change.
-        key: ValueKey<bool>(isSelected),
-      ),
-    );
-  }
-}
-
-/// Shell scaffold with a bottom navigation bar for the 5 main tabs.
+/// Shell scaffold with a floating pill-style bottom navigation bar.
 class ScaffoldWithNavBar extends StatelessWidget {
   const ScaffoldWithNavBar({required this.child, super.key});
 
@@ -92,18 +58,11 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final selectedIndex = _calculateSelectedIndex(context);
     return Scaffold(
+      extendBody: true,
       body: child,
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: _FloatingNavBar(
         selectedIndex: selectedIndex,
-        onDestinationSelected: (index) => context.go(_navItems[index].path),
-        destinations: [
-          for (var i = 0; i < _navItems.length; i++)
-            NavigationDestination(
-              icon: _AnimatedNavIcon(item: _navItems[i], isSelected: false),
-              selectedIcon: _AnimatedNavIcon(item: _navItems[i], isSelected: true),
-              label: _navItems[i].label,
-            ),
-        ],
+        onItemTapped: (index) => context.go(_navItems[index].path),
       ),
     );
   }
@@ -114,5 +73,192 @@ class ScaffoldWithNavBar extends StatelessWidget {
       if (location.startsWith(_navItems[i].path)) return i;
     }
     return 0;
+  }
+}
+
+/// Floating, pill-shaped nav bar with glass blur, layered shadow, gradient
+/// border, and a subtle idle float animation.
+class _FloatingNavBar extends StatefulWidget {
+  const _FloatingNavBar({
+    required this.selectedIndex,
+    required this.onItemTapped,
+  });
+
+  final int selectedIndex;
+  final ValueChanged<int> onItemTapped;
+
+  @override
+  State<_FloatingNavBar> createState() => _FloatingNavBarState();
+}
+
+class _FloatingNavBarState extends State<_FloatingNavBar>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _float;
+
+  @override
+  void initState() {
+    super.initState();
+    _float = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 3200),
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (MediaQuery.of(context).disableAnimations) {
+      _float.stop();
+      _float.value = 0.5;
+    }
+  }
+
+  @override
+  void dispose() {
+    _float.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // RepaintBoundary isolates the whole bar so the float animation never
+    // marks the scrolling page body dirty, and vice-versa.
+    return RepaintBoundary(
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+          child: AnimatedBuilder(
+            animation: _float,
+            builder: (context, child) {
+              final t = Curves.easeInOut.transform(_float.value);
+              final dy = -2.0 + t * -2.0;
+              return Transform.translate(
+                offset: Offset(0, dy),
+                child: child,
+              );
+            },
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(28),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.10),
+                    blurRadius: 24,
+                    offset: const Offset(0, 10),
+                  ),
+                  BoxShadow(
+                    color: AppColors.emeraldPrimary.withValues(alpha: 0.08),
+                    blurRadius: 32,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white.withValues(alpha: 0.96),
+                      Colors.white.withValues(alpha: 0.88),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(28),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.9),
+                    width: 1.2,
+                  ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    children: [
+                      for (var i = 0; i < _navItems.length; i++)
+                        _FloatingNavItem(
+                          item: _navItems[i],
+                          isSelected: widget.selectedIndex == i,
+                          onTap: () => widget.onItemTapped(i),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FloatingNavItem extends StatelessWidget {
+  const _FloatingNavItem({
+    required this.item,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final _NavItem item;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const selectedColor = AppColors.emeraldPrimary;
+    const unselectedColor = Color(0xFF64748B);
+    final itemColor = isSelected ? selectedColor : unselectedColor;
+
+    return Expanded(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(20),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AnimatedContainer(
+                  duration: _kAnimationDuration,
+                  curve: Curves.easeOutCubic,
+                  width: 44,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: isSelected
+                        ? AppColors.emeraldPrimary.withValues(alpha: 0.14)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    item.icon,
+                    size: 20,
+                    color: itemColor,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                AnimatedDefaultTextStyle(
+                  duration: _kAnimationDuration,
+                  style: GoogleFonts.nunito(
+                    fontSize: 11,
+                    fontWeight:
+                        isSelected ? FontWeight.w800 : FontWeight.w600,
+                    color: itemColor,
+                    letterSpacing: -0.1,
+                  ),
+                  child: Text(item.label),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -23,4 +23,5 @@ class Recipes extends Table {
   TextColumn get meatTypes => text()
       .withDefault(const Constant('[]'))
       .map(const JsonStringListConverter())();
+  TextColumn get imagePath => text().nullable()();
 }

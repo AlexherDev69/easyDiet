@@ -1,352 +1,225 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/utils/date_utils.dart';
-import '../../../../data/local/database.dart';
 import '../../../../navigation/app_router.dart';
+import '../../../../shared/widgets/blob_bg.dart';
+import '../../../../shared/widgets/generation_loading_view.dart';
+import '../../../meal_plan/presentation/widgets/move_meal_dialog.dart'
+    as meal_plan_dialogs;
 import '../../../onboarding/presentation/widgets/plan_preview_step.dart';
 import '../cubit/plan_preview_cubit.dart';
 import '../cubit/plan_preview_state.dart';
 
-/// Standalone plan preview screen — port of PlanPreviewScreen.kt.
+/// Standalone plan preview screen — redesigned to match the onboarding
+/// aesthetic (blob background, glass top bar, gradient action button).
 class PlanPreviewPage extends StatelessWidget {
   const PlanPreviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PlanPreviewCubit, PlanPreviewState>(
-      listenWhen: (prev, curr) {
-        if (!prev.showMoveDialog && curr.showMoveDialog) return true;
-        if (!prev.showReplaceDialog && curr.showReplaceDialog) return true;
-        return false;
-      },
-      listener: (context, state) {
-        final cubit = context.read<PlanPreviewCubit>();
-
-        if (state.showMoveDialog && state.movingMeal != null) {
-          _showMoveDialog(context, state, cubit);
-        }
-        if (state.showReplaceDialog && state.replacingMeal != null) {
-          _showReplaceDialog(context, state, cubit);
-        }
-      },
+    return BlocBuilder<PlanPreviewCubit, PlanPreviewState>(
       builder: (context, state) {
         final cubit = context.read<PlanPreviewCubit>();
 
+        if (state.isLoading) {
+          return const Scaffold(
+            backgroundColor: Colors.transparent,
+            body: GenerationLoadingView(),
+          );
+        }
+
         return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => context.pop(),
-              tooltip: 'Retour',
-            ),
-            title: const Text(
-              'Nouveau plan',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          body: Column(
+          backgroundColor: AppColors.emeraldBackground,
+          body: Stack(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: PlanPreviewStep(
-                    weekPlan: state.weekPlan,
-                    isLoading: state.isLoading,
-                    showMoveDialog: false,
-                    movingMeal: null,
-                    moveTargetDays: const [],
-                    onMoveMealClick: cubit.openMoveMealDialog,
-                    onSelectTargetDay: (_) {},
-                    onDismissMoveDialog: () {},
-                    onReplaceMealClick: cubit.openReplaceDialog,
-                    onSelectReplacement: (_, _) {},
-                    onDismissReplaceDialog: () {},
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: FilledButton(
-                    onPressed: state.weekPlan != null && !state.isLoading
-                        ? () async {
-                            await cubit.confirmPlan();
-                            if (context.mounted) {
-                              context.go(AppRoutes.dashboard);
-                            }
-                          }
-                        : null,
-                    style: FilledButton.styleFrom(
-                      backgroundColor: AppColors.emeraldPrimary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+              const BlobBG(),
+              SafeArea(
+                child: Column(
+                  children: [
+                    const _TopBar(),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+                        child: PlanPreviewStep(
+                          weekPlan: state.weekPlan,
+                          isLoading: state.isLoading,
+                          showMoveDialog: false,
+                          movingMeal: null,
+                          moveTargetDays: const [],
+                          onMoveMealClick: cubit.openMoveMealDialog,
+                          onSelectTargetDay: cubit.moveMealToDay,
+                          onDismissMoveDialog: cubit.dismissMoveDialog,
+                          onReplaceMealClick: cubit.openReplaceDialog,
+                          onSelectReplacement: cubit.replaceRecipe,
+                          onDismissReplaceDialog: cubit.dismissReplaceDialog,
+                        ),
                       ),
                     ),
-                    child: const Text(
-                      'Valider le plan',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+                      child: _ValidateButton(
+                        enabled: state.weekPlan != null && !state.isLoading,
+                        onPressed: () async {
+                          await cubit.confirmPlan();
+                          if (context.mounted) {
+                            context.go(AppRoutes.dashboard);
+                          }
+                        },
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
+              if (state.showMoveDialog && state.movingMeal != null)
+                meal_plan_dialogs.MoveMealDialog(
+                  movingMeal: state.movingMeal!,
+                  targetDays: state.moveTargetDays,
+                  onSelectDay: cubit.moveMealToDay,
+                  onDismiss: cubit.dismissMoveDialog,
+                ),
+              if (state.showReplaceDialog && state.replacingMeal != null)
+                ReplaceRecipeDialog(
+                  currentRecipeName: state.replacingMeal!.recipe.name,
+                  candidates: state.replacementCandidates,
+                  otherOccurrencesCount: state.otherOccurrencesCount,
+                  onSelectReplacement: cubit.replaceRecipe,
+                  onDismiss: cubit.dismissReplaceDialog,
+                ),
             ],
           ),
         );
       },
     );
   }
-
-  void _showMoveDialog(
-    BuildContext context,
-    PlanPreviewState state,
-    PlanPreviewCubit cubit,
-  ) {
-    final meal = state.movingMeal!;
-
-    showDialog<void>(
-      context: context,
-      useRootNavigator: true,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text(
-          'Deplacer le repas',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Echanger "${meal.recipe.name}" avec le meme type de repas d\'un autre jour :',
-            ),
-            const SizedBox(height: 12),
-            ...state.moveTargetDays.map((dayWithMeals) {
-              final dayName = AppDateUtils.getDayOfWeekFrench(
-                dayWithMeals.dayPlan.dayOfWeek,
-              );
-              final sameMeal = dayWithMeals.meals
-                  .where((m) => m.meal.mealType == meal.meal.mealType)
-                  .firstOrNull;
-              final targetRecipeName =
-                  sameMeal?.recipe.name ?? 'Aucun repas';
-
-              return SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pop(dialogContext);
-                    cubit.moveMealToDay(dayWithMeals.dayPlan.id);
-                  },
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          dayName,
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          targetRecipeName,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurfaceVariant,
-                                  ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            }),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(dialogContext);
-              cubit.dismissMoveDialog();
-            },
-            child: const Text('Annuler'),
-          ),
-        ],
-      ),
-    ).then((_) {
-      if (cubit.state.showMoveDialog) {
-        cubit.dismissMoveDialog();
-      }
-    });
-  }
-
-  void _showReplaceDialog(
-    BuildContext context,
-    PlanPreviewState state,
-    PlanPreviewCubit cubit,
-  ) {
-    final meal = state.replacingMeal!;
-    final sortedCandidates = List.of(state.replacementCandidates)
-      ..sort((a, b) => a.name.compareTo(b.name));
-
-    showDialog<void>(
-      context: context,
-      useRootNavigator: true,
-      builder: (dialogContext) => _ReplaceRecipePreviewDialog(
-        currentRecipeName: meal.recipe.name,
-        candidates: sortedCandidates,
-        otherOccurrencesCount: state.otherOccurrencesCount,
-        onSelectReplacement: (recipe, replaceAll) {
-          Navigator.pop(dialogContext);
-          cubit.replaceRecipe(recipe, replaceAll);
-        },
-        onDismiss: () {
-          Navigator.pop(dialogContext);
-          cubit.dismissReplaceDialog();
-        },
-      ),
-    ).then((_) {
-      if (cubit.state.showReplaceDialog) {
-        cubit.dismissReplaceDialog();
-      }
-    });
-  }
 }
 
-class _ReplaceRecipePreviewDialog extends StatefulWidget {
-  const _ReplaceRecipePreviewDialog({
-    required this.currentRecipeName,
-    required this.candidates,
-    required this.otherOccurrencesCount,
-    required this.onSelectReplacement,
-    required this.onDismiss,
-  });
-
-  final String currentRecipeName;
-  final List<Recipe> candidates;
-  final int otherOccurrencesCount;
-  final void Function(Recipe recipe, bool replaceAll) onSelectReplacement;
-  final VoidCallback onDismiss;
-
-  @override
-  State<_ReplaceRecipePreviewDialog> createState() =>
-      _ReplaceRecipePreviewDialogState();
-}
-
-class _ReplaceRecipePreviewDialogState
-    extends State<_ReplaceRecipePreviewDialog> {
-  Recipe? _selectedRecipe;
-  bool _showConfirmAll = false;
+class _TopBar extends StatelessWidget {
+  const _TopBar();
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    if (_showConfirmAll && _selectedRecipe != null) {
-      final count = widget.otherOccurrencesCount;
-      return AlertDialog(
-        title: const Text(
-          'Remplacer partout ?',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        content: Text(
-          '"${widget.currentRecipeName}" apparait aussi $count '
-          'autre${count > 1 ? 's' : ''} jour${count > 1 ? 's' : ''}. '
-          'Remplacer partout par "${_selectedRecipe!.name}" ?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () =>
-                widget.onSelectReplacement(_selectedRecipe!, false),
-            child: const Text('Ce jour uniquement'),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 20, 8),
+      child: Row(
+        children: [
+          _GlassIconButton(
+            icon: LucideIcons.arrowLeft,
+            onPressed: () => context.pop(),
           ),
-          TextButton(
-            onPressed: () =>
-                widget.onSelectReplacement(_selectedRecipe!, true),
-            child: const Text('Tout remplacer'),
-          ),
-        ],
-      );
-    }
-
-    return AlertDialog(
-      title: const Text(
-        'Choisir une recette',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      content: SizedBox(
-        width: double.maxFinite,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Remplacer "${widget.currentRecipeName}" par :',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Nouveau plan',
+              style: GoogleFonts.nunito(
+                fontSize: 18,
+                fontWeight: FontWeight.w800,
+                color: const Color(0xFF0F172A),
+                letterSpacing: -0.3,
               ),
             ),
-            const SizedBox(height: 12),
-            if (widget.candidates.isEmpty)
-              Text(
-                'Aucune recette compatible disponible.',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              )
-            else
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: widget.candidates.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 4),
-                  itemBuilder: (context, index) {
-                    final recipe = widget.candidates[index];
-                    return SizedBox(
-                      width: double.infinity,
-                      child: TextButton(
-                        onPressed: () {
-                          if (widget.otherOccurrencesCount > 0) {
-                            setState(() {
-                              _selectedRecipe = recipe;
-                              _showConfirmAll = true;
-                            });
-                          } else {
-                            widget.onSelectReplacement(recipe, false);
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(recipe.name),
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              '${recipe.caloriesPerServing} kcal',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _GlassIconButton extends StatelessWidget {
+  const _GlassIconButton({required this.icon, required this.onPressed});
+
+  final IconData icon;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(14),
+        child: Ink(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.7),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.7),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.04),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
-          ],
+            ],
+          ),
+          child: Icon(icon, size: 18, color: const Color(0xFF0F172A)),
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: widget.onDismiss,
-          child: const Text('Annuler'),
+    );
+  }
+}
+
+class _ValidateButton extends StatelessWidget {
+  const _ValidateButton({required this.enabled, required this.onPressed});
+
+  final bool enabled;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: enabled ? 1 : 0.5,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: enabled ? onPressed : null,
+          borderRadius: BorderRadius.circular(16),
+          child: Ink(
+            height: 56,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              gradient: const LinearGradient(
+                colors: [AppColors.emeraldPrimary, AppColors.emeraldDark],
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.emeraldPrimary.withValues(alpha: 0.35),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    LucideIcons.check,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Valider le plan',
+                    style: GoogleFonts.nunito(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.2,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
-      ],
+      ),
     );
   }
 }

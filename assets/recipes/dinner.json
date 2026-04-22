@@ -93,7 +93,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/poulet_roti_aux_herbes.jpg"
     },
     {
       "name": "Saumon grille citron aneth",
@@ -179,7 +180,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/saumon_grille_citron_aneth.jpg"
     },
     {
       "name": "Wok de legumes au tofu",
@@ -275,7 +277,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/wok_de_legumes_au_tofu.jpg"
     },
     {
       "name": "Gratin de courgettes",
@@ -371,7 +374,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/gratin_de_courgettes.jpg"
     },
     {
       "name": "Chili con carne allege",
@@ -478,7 +482,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "BEEF"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/chili_con_carne_allege.jpg"
     },
     {
       "name": "Curry de pois chiches",
@@ -572,7 +577,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/curry_de_pois_chiches.jpg"
     },
     {
       "name": "Filet de cabillaud en papillote",
@@ -661,7 +667,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/filet_de_cabillaud_en_papillote.jpg"
     },
     {
       "name": "Ratatouille provencale",
@@ -766,7 +773,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/ratatouille_provencale.jpg"
     },
     {
       "name": "Blanquette de veau allegee",
@@ -871,7 +879,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "VEAL"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/blanquette_de_veau_allegee.jpg"
     },
     {
       "name": "Tajine de poulet aux olives",
@@ -993,7 +1002,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/tajine_de_poulet_aux_olives.jpg"
     },
     {
       "name": "Dos de saumon en croute d'herbes",
@@ -1093,7 +1103,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/dos_de_saumon_en_croute_d_herbes.jpg"
     },
     {
       "name": "Poivrons farcis au quinoa",
@@ -1189,7 +1200,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/poivrons_farcis_au_quinoa.jpg"
     },
     {
       "name": "Gratin dauphinois leger",
@@ -1267,7 +1279,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/gratin_dauphinois_leger.jpg"
     },
     {
       "name": "Crevettes sautees a l'ail et brocolis",
@@ -1360,7 +1373,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "SHELLFISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/crevettes_sautees_a_l_ail_et_brocolis.jpg"
     },
     {
       "name": "Escalope de dinde aux champignons",
@@ -1452,7 +1466,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/escalope_de_dinde_aux_champignons.jpg"
     },
     {
       "name": "Lasagnes de legumes",
@@ -1554,7 +1569,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/lasagnes_de_legumes.jpg"
     },
     {
       "name": "Ragout de champignons et lentilles",
@@ -1677,7 +1693,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/ragout_de_champignons_et_lentilles.jpg"
     },
     {
       "name": "Poulet citron patate douce au four",
@@ -1773,7 +1790,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/poulet_citron_patate_douce_au_four.jpg"
     },
     {
       "name": "Aubergines gratinees a la tomate",
@@ -1863,7 +1881,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/aubergines_gratinees_a_la_tomate.jpg"
     },
     {
       "name": "Saumon citron ail au four",
@@ -1949,7 +1968,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/saumon_citron_ail_au_four.jpg"
     },
     {
       "name": "Dhal de lentilles corail epinards",
@@ -2055,7 +2075,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/dhal_de_lentilles_corail_epinards.jpg"
     },
     {
       "name": "Boulettes de boeuf sauce tomate",
@@ -2153,7 +2174,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "BEEF"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/boulettes_de_boeuf_sauce_tomate.jpg"
     },
     {
       "name": "Courgettes farcies au quinoa et legumes",
@@ -2241,7 +2263,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/courgettes_farcies_au_quinoa_et_legumes.jpg"
     },
     {
       "name": "Wok de crevettes aux legumes croquants",
@@ -2341,7 +2364,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "SHELLFISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/wok_de_crevettes_aux_legumes_croquants.jpg"
     },
     {
       "name": "Curry vert de tofu et legumes",
@@ -2437,7 +2461,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/curry_vert_de_tofu_et_legumes.jpg"
     },
     {
       "name": "Galettes de haricots noirs",
@@ -2527,7 +2552,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/galettes_de_haricots_noirs.jpg"
     },
     {
       "name": "Souris d agneau confite aux herbes",
@@ -2629,7 +2655,8 @@
           "unit": "c. a soupe",
           "section": "PANTRY"
         }
-      ]
+      ],
+      "imagePath": "assets/images/recipes/souris_d_agneau_confite_aux_herbes.jpg"
     },
     {
       "name": "Filet mignon de porc aux pommes",
@@ -2727,7 +2754,8 @@
           "unit": "pincee",
           "section": "PANTRY"
         }
-      ]
+      ],
+      "imagePath": "assets/images/recipes/filet_mignon_de_porc_aux_pommes.jpg"
     },
     {
       "name": "Cabillaud vapeur legumes",
@@ -2817,7 +2845,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/cabillaud_vapeur_legumes.jpg"
     },
     {
       "name": "Poulet sauce tomate couscous",
@@ -2915,7 +2944,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/poulet_sauce_tomate_couscous.jpg"
     },
     {
       "name": "Crevettes grillees quinoa brocoli",
@@ -3002,7 +3032,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "SHELLFISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/crevettes_grillees_quinoa_brocoli.jpg"
     },
     {
       "name": "Escalope de veau puree patate douce",
@@ -3077,7 +3108,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "VEAL"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/escalope_de_veau_puree_patate_douce.jpg"
     },
     {
       "name": "Pave de thon grille riz basmati",
@@ -3166,7 +3198,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/pave_de_thon_grille_riz_basmati.jpg"
     },
     {
       "name": "Steak hache 5% brocoli riz",
@@ -3233,7 +3266,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "BEEF"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/steak_hache_5_brocoli_riz.jpg"
     },
     {
       "name": "Sardines grillees citron tomates cerises",
@@ -3325,7 +3359,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/sardines_grillees_citron_tomates_cerises.jpg"
     },
     {
       "name": "Filet de maquereau moutarde legumes vapeur",
@@ -3423,7 +3458,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/filet_de_maquereau_moutarde_legumes_vapeur.jpg"
     },
     {
       "name": "Gratin saumon epinards",
@@ -3540,7 +3576,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/gratin_saumon_epinards.jpg"
     },
     {
       "name": "Buldak legeres aux legumes",
@@ -3663,7 +3700,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/buldak_legeres_aux_legumes.jpg"
     },
     {
       "name": "Ramen proteines au poulet et miso",
@@ -3780,7 +3818,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/ramen_proteines_au_poulet_et_miso.jpg"
     },
     {
       "name": "Nouilles udon au boeuf teriyaki et brocoli",
@@ -3890,7 +3929,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "BEEF"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/nouilles_udon_au_boeuf_teriyaki_et_brocoli.jpg"
     },
     {
       "name": "Poulet tikka masala leger",
@@ -4023,7 +4063,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/poulet_tikka_masala_leger.jpg"
     },
     {
       "name": "Poulet tandoori au yaourt",
@@ -4132,7 +4173,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/poulet_tandoori_au_yaourt.jpg"
     },
     {
       "name": "Butter chicken leger",
@@ -4265,7 +4307,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/butter_chicken_leger.jpg"
     },
     {
       "name": "Soupe miso proteines au tofu et champignons",
@@ -4373,7 +4416,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/soupe_miso_proteines_au_tofu_et_champignons.jpg"
     },
     {
       "name": "Paella legere aux fruits de mer",
@@ -4506,7 +4550,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "SHELLFISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/paella_legere_aux_fruits_de_mer.jpg"
     },
     {
       "name": "Jollof rice au poulet",
@@ -4620,7 +4665,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/jollof_rice_au_poulet.jpg"
     },
     {
       "name": "Moqueca de poisson a la bresilienne",
@@ -4736,7 +4782,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "FISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/moqueca_de_poisson_a_la_bresilienne.jpg"
     },
     {
       "name": "Tofu ferme sesame riz complet edamames",
@@ -4851,7 +4898,8 @@
         }
       ],
       "dietType": "VEGAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/tofu_ferme_sesame_riz_complet_edamames.jpg"
     },
     {
       "name": "Moules mariniere legere a la tomate",
@@ -4943,7 +4991,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "SHELLFISH"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/moules_mariniere_legere_a_la_tomate.jpg"
     },
     {
       "name": "Bibimbap vegetal au riz complet",
@@ -5076,7 +5125,8 @@
         }
       ],
       "dietType": "VEGETARIAN",
-      "meatTypes": []
+      "meatTypes": [],
+      "imagePath": "assets/images/recipes/bibimbap_vegetal_au_riz_complet.jpg"
     },
     {
       "name": "Nasi goreng allege poulet oeuf",
@@ -5192,7 +5242,8 @@
       "dietType": "OMNIVORE",
       "meatTypes": [
         "POULTRY"
-      ]
+      ],
+      "imagePath": "assets/images/recipes/nasi_goreng_allege_poulet_oeuf.jpg"
     }
   ]
 }

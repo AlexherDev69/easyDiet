@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../shared/widgets/pill_chip.dart';
 
 /// Category filter definition.
 class CategoryFilter {
@@ -23,7 +24,7 @@ const categoryFilters = [
   CategoryFilter(key: 'SNACK', label: 'Collation', color: AppColors.snackColor),
 ];
 
-/// Horizontal scrollable category filter chips.
+/// Horizontal scrollable category filter chips — PillChip style.
 class CategoryFilterChips extends StatelessWidget {
   const CategoryFilterChips({
     required this.selectedCategory,
@@ -37,40 +38,26 @@ class CategoryFilterChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 42,
+      height: 48,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              selected: selectedCategory == null,
-              onSelected: (_) => onSelectCategory(null),
-              label: const Text(
-                'Tout',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              selectedColor: AppColors.emeraldPrimary.withValues(alpha: 0.15),
-              checkmarkColor: AppColors.emeraldPrimary,
-            ),
+          PillChip(
+            label: 'Tout',
+            selected: selectedCategory == null,
+            onTap: () => onSelectCategory(null),
           ),
-          for (final filter in categoryFilters)
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: FilterChip(
-                selected: selectedCategory == filter.key,
-                onSelected: (_) => onSelectCategory(
-                  selectedCategory == filter.key ? null : filter.key,
-                ),
-                label: Text(
-                  filter.label,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-                selectedColor: filter.color.withValues(alpha: 0.15),
-                checkmarkColor: filter.color,
+          for (final filter in categoryFilters) ...[
+            const SizedBox(width: 8),
+            PillChip(
+              label: filter.label,
+              selected: selectedCategory == filter.key,
+              onTap: () => onSelectCategory(
+                selectedCategory == filter.key ? null : filter.key,
               ),
             ),
+          ],
         ],
       ),
     );

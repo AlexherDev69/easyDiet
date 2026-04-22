@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-/// Greeting header with settings button.
+import '../../../../core/theme/app_theme.dart';
+
+/// Greeting header with gradient first-name and circular settings button.
 class DashboardHeader extends StatelessWidget {
   const DashboardHeader({
     required this.userName,
@@ -21,39 +25,97 @@ class DashboardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final gradient = ExtendedColorsProvider.of(context).primaryGradient;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '$_greeting,',
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '$_greeting,',
+                style: GoogleFonts.nunito(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFF64748B),
+                ),
               ),
-            ),
-            Text(
-              userName,
-              style: theme.textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w800,
+              const SizedBox(height: 2),
+              ShaderMask(
+                shaderCallback: (rect) => gradient.createShader(rect),
+                blendMode: BlendMode.srcIn,
+                child: Text(
+                  userName,
+                  style: GoogleFonts.nunito(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.8,
+                    height: 1.1,
+                    color: Colors.white,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 12),
+        _SettingsButton(
+          isDark: isDark,
+          onTap: onSettingsClick,
+        ),
+      ],
+    );
+  }
+}
+
+class _SettingsButton extends StatelessWidget {
+  const _SettingsButton({required this.isDark, required this.onTap});
+
+  final bool isDark;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      shape: const CircleBorder(),
+      child: Ink(
+        width: 44,
+        height: 44,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white.withValues(alpha: isDark ? 0.12 : 0.65),
+          border: Border.all(
+            color: Colors.white.withValues(alpha: isDark ? 0.12 : 0.4),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
           ],
         ),
-        IconButton(
-          onPressed: onSettingsClick,
-          tooltip: 'Parametres',
-          style: IconButton.styleFrom(
-            backgroundColor: theme.colorScheme.surfaceContainerHighest,
-            fixedSize: const Size(44, 44),
-          ),
-          icon: Icon(
-            Icons.settings,
-            color: theme.colorScheme.onSurfaceVariant,
+        child: InkWell(
+          onTap: onTap,
+          customBorder: const CircleBorder(),
+          child: Tooltip(
+            message: 'Parametres',
+            child: const Center(
+              child: Icon(
+                LucideIcons.settings,
+                color: Color(0xFF475569),
+                size: 20,
+              ),
+            ),
           ),
         ),
-      ],
+      ),
     );
   }
 }

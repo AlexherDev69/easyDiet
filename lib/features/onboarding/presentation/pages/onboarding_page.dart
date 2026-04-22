@@ -1,21 +1,29 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../navigation/app_router.dart';
+import '../../../../shared/widgets/blob_bg.dart';
+import '../../../../shared/widgets/gradient_title.dart';
 import '../cubit/onboarding_cubit.dart';
 import '../cubit/onboarding_state.dart';
+import '../../../../shared/widgets/generation_loading_view.dart';
 import '../widgets/allergies_step.dart';
 import '../widgets/body_metrics_step.dart';
 import '../widgets/goal_step.dart';
 import '../widgets/lifestyle_step.dart';
-import '../widgets/onboarding_illustration.dart';
 import '../widgets/onboarding_loading_animation.dart';
 import '../widgets/personal_info_step.dart';
 import '../widgets/plan_preview_step.dart';
+import '../widgets/welcome_step.dart';
+import '../../../meal_plan/presentation/widgets/move_meal_dialog.dart' as meal_plan_dialogs;
 
-/// Main onboarding screen with progress bar, step content, navigation buttons.
+/// Main onboarding screen — handoff visual (BlobBG + hero icon + GradText).
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
 
@@ -32,7 +40,7 @@ class OnboardingPage extends StatelessWidget {
         if (state.errorMessage != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
+              content: const Text(
                 'Une erreur est survenue. Veuillez reessayer.',
               ),
               backgroundColor: Colors.red.shade700,
@@ -49,9 +57,15 @@ class OnboardingPage extends StatelessWidget {
       },
       child: BlocBuilder<OnboardingCubit, OnboardingState>(
         builder: (context, state) {
-          // Full-screen loading overlay during plan generation / finish
-          if (state.isLoading && state.currentStep != 5) {
-            return const OnboardingLoadingAnimation();
+          if (state.isLoading) {
+            // Step 5 = generating plan (pre-preview). Show hero loader.
+            final isGeneratingPlan = state.currentStep == 5;
+            return isGeneratingPlan
+                ? const Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: GenerationLoadingView(),
+                  )
+                : const OnboardingLoadingAnimation();
           }
 
           return PopScope(
@@ -62,41 +76,40 @@ class OnboardingPage extends StatelessWidget {
               }
             },
             child: Scaffold(
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  children: [
-                    // Progress bar
-                    _ProgressBar(
-                      currentStep: state.currentStep,
-                      totalSteps: state.totalSteps,
+              backgroundColor: AppColors.emeraldBackground,
+              body: Stack(
+                children: [
+                  const BlobBG(),
+                  SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 14, 20, 20),
+                      child: Column(
+                        children: [
+                          _ProgressBar(
+                            currentStep: state.currentStep,
+                            totalSteps: state.totalSteps,
+                          ),
+                          const SizedBox(height: 16),
+                          _HeroIcon(step: state.currentStep),
+                          const SizedBox(height: 14),
+                          _StepTitles(step: state.currentStep),
+                          const SizedBox(height: 18),
+                          Expanded(
+                            child: _buildStepContent(context, state),
+                          ),
+                          const SizedBox(height: 12),
+                          _NavBar(
+                            currentStep: state.currentStep,
+                            totalSteps: state.totalSteps,
+                            isValid: state.isCurrentStepValid,
+                          ),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 12),
-
-                    // Step dots + label
-                    _StepIndicator(
-                      currentStep: state.currentStep,
-                      totalSteps: state.totalSteps,
-                    ),
-                    const SizedBox(height: 24),
-
-                    // Step content
-                    Expanded(
-                      child: _buildStepContent(context, state),
-                    ),
-
-                    // Navigation buttons
-                    _NavigationButtons(
-                      currentStep: state.currentStep,
-                      totalSteps: state.totalSteps,
-                      isValid: state.isCurrentStepValid,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ),
           );
         },
       ),
@@ -111,84 +124,71 @@ class OnboardingPage extends StatelessWidget {
       child: KeyedSubtree(
         key: ValueKey(state.currentStep),
         child: switch (state.currentStep) {
-          0 => _StepWithIllustration(
-              step: 0,
-              child: PersonalInfoStep(
-                name: state.name,
-                age: state.age,
-                sex: state.sex,
-                onNameChange: cubit.updateName,
-                onAgeChange: cubit.updateAge,
-                onSexChange: cubit.updateSex,
-              ),
+          0 => const WelcomeStep(),
+          1 => PersonalInfoStep(
+              name: state.name,
+              age: state.age,
+              sex: state.sex,
+              onNameChange: cubit.updateName,
+              onAgeChange: cubit.updateAge,
+              onSexChange: cubit.updateSex,
             ),
-          1 => _StepWithIllustration(
-              step: 1,
-              child: BodyMetricsStep(
-                height: state.heightCm,
-                weight: state.weightKg,
-                onHeightChange: cubit.updateHeight,
-                onWeightChange: cubit.updateWeight,
-              ),
+          2 => BodyMetricsStep(
+              height: state.heightCm,
+              weight: state.weightKg,
+              onHeightChange: cubit.updateHeight,
+              onWeightChange: cubit.updateWeight,
             ),
-          2 => _StepWithIllustration(
-              step: 2,
-              child: GoalStep(
-                targetWeight: state.targetWeightKg,
-                currentWeight: state.weightKg,
-                lossPace: state.lossPace,
-                activityLevel: state.activityLevel,
-                dietType: state.dietType,
-                calculatedCalories: state.calculatedCalories,
-                calculatedWaterMl: state.calculatedWaterMl,
-                onTargetWeightChange: cubit.updateTargetWeight,
-                onLossPaceChange: cubit.updateLossPace,
-                onActivityLevelChange: cubit.updateActivityLevel,
-                onDietTypeChange: cubit.updateDietType,
-              ),
+          3 => GoalStep(
+              targetWeight: state.targetWeightKg,
+              currentWeight: state.weightKg,
+              lossPace: state.lossPace,
+              activityLevel: state.activityLevel,
+              dietType: state.dietType,
+              calculatedCalories: state.calculatedCalories,
+              calculatedWaterMl: state.calculatedWaterMl,
+              onTargetWeightChange: cubit.updateTargetWeight,
+              onLossPaceChange: cubit.updateLossPace,
+              onActivityLevelChange: cubit.updateActivityLevel,
+              onDietTypeChange: cubit.updateDietType,
             ),
-          3 => _StepWithIllustration(
-              step: 3,
-              child: LifestyleStep(
-                freeDays: state.freeDays,
-                batchCookingEnabled: state.batchCookingEnabled,
-                batchCooking: state.batchCookingSessions,
-                shoppingTrips: state.shoppingTrips,
-                distinctBreakfasts: state.distinctBreakfasts,
-                distinctLunches: state.distinctLunches,
-                distinctDinners: state.distinctDinners,
-                distinctSnacks: state.distinctSnacks,
-                enabledMealTypes: state.enabledMealTypes,
-                dietStartDate: state.dietStartDate,
-                batchCookingBeforeDiet: state.batchCookingBeforeDiet,
-                showBatchCookingInfo: state.showBatchCookingInfo,
-                economicMode: state.economicMode,
-                onToggleMealType: cubit.toggleMealType,
-                onToggleFreeDay: cubit.toggleFreeDay,
-                onBatchCookingEnabledChange: cubit.updateBatchCookingEnabled,
-                onBatchCookingChange: cubit.updateBatchCooking,
-                onShoppingTripsChange: cubit.updateShoppingTrips,
-                onDistinctBreakfastsChange: cubit.updateDistinctBreakfasts,
-                onDistinctLunchesChange: cubit.updateDistinctLunches,
-                onDistinctDinnersChange: cubit.updateDistinctDinners,
-                onDistinctSnacksChange: cubit.updateDistinctSnacks,
-                onDietStartDateChange: cubit.updateDietStartDate,
-                onBatchCookingBeforeDietChange: cubit.updateBatchCookingBeforeDiet,
-                onEconomicModeChange: cubit.updateEconomicMode,
-                onShowBatchCookingInfo: cubit.showBatchCookingInfo,
-                onHideBatchCookingInfo: cubit.hideBatchCookingInfo,
-              ),
+          4 => LifestyleStep(
+              freeDays: state.freeDays,
+              batchCookingEnabled: state.batchCookingEnabled,
+              batchCooking: state.batchCookingSessions,
+              shoppingTrips: state.shoppingTrips,
+              distinctBreakfasts: state.distinctBreakfasts,
+              distinctLunches: state.distinctLunches,
+              distinctDinners: state.distinctDinners,
+              distinctSnacks: state.distinctSnacks,
+              enabledMealTypes: state.enabledMealTypes,
+              dietStartDate: state.dietStartDate,
+              batchCookingBeforeDiet: state.batchCookingBeforeDiet,
+              showBatchCookingInfo: state.showBatchCookingInfo,
+              economicMode: state.economicMode,
+              onToggleMealType: cubit.toggleMealType,
+              onToggleFreeDay: cubit.toggleFreeDay,
+              onBatchCookingEnabledChange: cubit.updateBatchCookingEnabled,
+              onBatchCookingChange: cubit.updateBatchCooking,
+              onShoppingTripsChange: cubit.updateShoppingTrips,
+              onDistinctBreakfastsChange: cubit.updateDistinctBreakfasts,
+              onDistinctLunchesChange: cubit.updateDistinctLunches,
+              onDistinctDinnersChange: cubit.updateDistinctDinners,
+              onDistinctSnacksChange: cubit.updateDistinctSnacks,
+              onDietStartDateChange: cubit.updateDietStartDate,
+              onBatchCookingBeforeDietChange:
+                  cubit.updateBatchCookingBeforeDiet,
+              onEconomicModeChange: cubit.updateEconomicMode,
+              onShowBatchCookingInfo: cubit.showBatchCookingInfo,
+              onHideBatchCookingInfo: cubit.hideBatchCookingInfo,
             ),
-          4 => _StepWithIllustration(
-              step: 4,
-              child: AllergiesStep(
-                selectedAllergies: state.selectedAllergies,
-                excludedMeats: state.excludedMeats,
-                onToggleAllergy: cubit.toggleAllergy,
-                onToggleExcludedMeat: cubit.toggleExcludedMeat,
-              ),
+          5 => AllergiesStep(
+              selectedAllergies: state.selectedAllergies,
+              excludedMeats: state.excludedMeats,
+              onToggleAllergy: cubit.toggleAllergy,
+              onToggleExcludedMeat: cubit.toggleExcludedMeat,
             ),
-          5 => _buildPlanPreview(context, state, cubit),
+          6 => _buildPlanPreview(context, state, cubit),
           _ => const SizedBox.shrink(),
         },
       ),
@@ -220,18 +220,13 @@ class OnboardingPage extends StatelessWidget {
               cubit.replaceRecipe(recipe, replaceAll),
           onDismissReplaceDialog: cubit.dismissReplaceDialog,
         ),
-
-        // Move dialog overlay
         if (state.showMoveDialog && state.movingMeal != null)
-          MoveMealDialog(
-            mealName: state.movingMeal!.recipe.name,
-            mealType: state.movingMeal!.meal.mealType,
+          meal_plan_dialogs.MoveMealDialog(
+            movingMeal: state.movingMeal!,
             targetDays: state.moveTargetDays,
             onSelectDay: (id) => cubit.moveMealToDay(id),
             onDismiss: cubit.dismissMoveDialog,
           ),
-
-        // Replace dialog overlay
         if (state.showReplaceDialog && state.replacingMeal != null)
           ReplaceRecipeDialog(
             currentRecipeName: state.replacingMeal!.recipe.name,
@@ -246,68 +241,185 @@ class OnboardingPage extends StatelessWidget {
   }
 }
 
-// ── Internal widgets ──────────────────────────────────────────────────────
+// ── Progress bar (current segment wider) ───────────────────────────────────
 
 class _ProgressBar extends StatelessWidget {
-  const _ProgressBar({
-    required this.currentStep,
-    required this.totalSteps,
-  });
+  const _ProgressBar({required this.currentStep, required this.totalSteps});
 
   final int currentStep;
   final int totalSteps;
 
   @override
   Widget build(BuildContext context) {
-    final progress = (currentStep + 1) / totalSteps;
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(4),
-      child: LinearProgressIndicator(
-        value: progress,
-        minHeight: 8,
-        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
-        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.emeraldPrimary),
+    return SizedBox(
+      height: 6,
+      child: Row(
+        children: List.generate(totalSteps, (i) {
+          final done = i < currentStep;
+          final cur = i == currentStep;
+          return Expanded(
+            flex: cur ? 2 : 1,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 220),
+              curve: Curves.easeOut,
+              margin: EdgeInsets.only(right: i == totalSteps - 1 ? 0 : 6),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3),
+                gradient: cur
+                    ? const LinearGradient(
+                        colors: [
+                          AppColors.emeraldPrimary,
+                          AppColors.emeraldDark,
+                        ],
+                      )
+                    : null,
+                color: cur
+                    ? null
+                    : done
+                        ? AppColors.emeraldPrimary
+                        : const Color(0xFF0F172A).withValues(alpha: 0.08),
+                boxShadow: cur
+                    ? [
+                        BoxShadow(
+                          color:
+                              AppColors.emeraldPrimary.withValues(alpha: 0.35),
+                          blurRadius: 6,
+                          offset: const Offset(0, 2),
+                        ),
+                      ]
+                    : null,
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
 }
 
-class _StepIndicator extends StatelessWidget {
-  const _StepIndicator({
-    required this.currentStep,
-    required this.totalSteps,
-  });
+// ── Hero icon per step ──────────────────────────────────────────────────────
 
-  final int currentStep;
-  final int totalSteps;
+class _HeroIcon extends StatelessWidget {
+  const _HeroIcon({required this.step});
+
+  final int step;
+
+  static const _meta = [
+    (LucideIcons.sparkles, Color(0xFF10B981)),
+    (LucideIcons.user, Color(0xFF8B5CF6)),
+    (LucideIcons.ruler, Color(0xFF0EA5E9)),
+    (LucideIcons.target, Color(0xFFF43F5E)),
+    (LucideIcons.activity, Color(0xFFF59E0B)),
+    (LucideIcons.leaf, Color(0xFF10B981)),
+    (LucideIcons.calendarCheck, Color(0xFF10B981)),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final idx = step.clamp(0, _meta.length - 1);
+    final (icon, tint) = _meta[idx];
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Stack(
+      alignment: Alignment.center,
       children: [
-        Row(
-          children: List.generate(totalSteps, (index) {
-            return Container(
-              width: 8,
-              height: 8,
-              margin: const EdgeInsets.only(right: 6),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: index <= currentStep
-                    ? AppColors.emeraldPrimary
-                    : theme.colorScheme.outlineVariant,
+        Container(
+          width: 120,
+          height: 120,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: RadialGradient(
+              center: const Alignment(-0.3, -0.4),
+              colors: [
+                tint,
+                tint.withValues(alpha: 0.55),
+                tint.withValues(alpha: 0.2),
+              ],
+              stops: const [0, 0.6, 1],
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: tint.withValues(alpha: 0.35),
+                blurRadius: 28,
+                offset: const Offset(0, 16),
               ),
-            );
-          }),
+            ],
+          ),
         ),
+        Container(
+          width: 140,
+          height: 140,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: tint.withValues(alpha: 0.35),
+            ),
+          ),
+        ),
+        Icon(icon, size: 52, color: Colors.white),
+      ],
+    );
+  }
+}
+
+// ── Step title block (eyebrow + gradient title + subtitle) ─────────────────
+
+class _StepTitles extends StatelessWidget {
+  const _StepTitles({required this.step});
+
+  final int step;
+
+  static const _titles = [
+    ('Bienvenue', 'EasyDiet',
+        'Votre plan de repas, sur mesure et hors-ligne.'),
+    ('Faisons connaissance', 'Parlez-nous de vous',
+        'Ces infos restent sur votre appareil.'),
+    ('Vos mesures', 'Votre silhouette',
+        'Pour adapter vos besoins energetiques.'),
+    ('Votre objectif', 'Quel rythme ?',
+        'Choisissez une cadence soutenable.'),
+    ('Votre quotidien', 'Mode de vie',
+        'Activite, repas et organisation.'),
+    ('Derniere etape', 'Allergies',
+        'Nous les eviterons dans vos recettes.'),
+    ('Votre plan', 'Apercu de la semaine',
+        'Ajustez avant de valider.'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final idx = step.clamp(0, _titles.length - 1);
+    final (eyebrow, title, sub) = _titles[idx];
+
+    return Column(
+      children: [
         Text(
-          'Etape ${currentStep + 1} / $totalSteps',
-          style: theme.textTheme.labelMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
+          eyebrow.toUpperCase(),
+          style: GoogleFonts.nunito(
+            fontSize: 11,
+            fontWeight: FontWeight.w800,
+            letterSpacing: 1.2,
+            color: AppColors.emeraldDark,
+          ),
+        ),
+        const SizedBox(height: 4),
+        GradientTitle(
+          title,
+          style: GoogleFonts.nunito(
+            fontSize: 26,
+            fontWeight: FontWeight.w800,
+            letterSpacing: -0.5,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          sub,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.nunito(
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+            height: 1.45,
+            color: const Color(0xFF475569),
           ),
         ),
       ],
@@ -315,8 +427,10 @@ class _StepIndicator extends StatelessWidget {
   }
 }
 
-class _NavigationButtons extends StatelessWidget {
-  const _NavigationButtons({
+// ── Bottom navigation ───────────────────────────────────────────────────────
+
+class _NavBar extends StatelessWidget {
+  const _NavBar({
     required this.currentStep,
     required this.totalSteps,
     required this.isValid,
@@ -329,73 +443,154 @@ class _NavigationButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<OnboardingCubit>();
+    final isLast = currentStep >= totalSteps - 1;
+    final isPreGenerate = currentStep == totalSteps - 2;
+
+    final String label;
+    final VoidCallback? action;
+    if (isLast) {
+      label = 'Valider le plan';
+      action = isValid ? cubit.finishOnboarding : null;
+    } else if (isPreGenerate) {
+      label = 'Creer mon plan';
+      action = isValid ? cubit.generateAndShowPreview : null;
+    } else if (currentStep == 0) {
+      label = 'Commencer';
+      action = isValid ? cubit.nextStep : null;
+    } else {
+      label = 'Suivant';
+      action = isValid ? cubit.nextStep : null;
+    }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        if (currentStep > 0)
-          OutlinedButton(
-            onPressed: cubit.previousStep,
-            style: OutlinedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Text('Precedent'),
-          )
-        else
-          const Spacer(),
-        if (currentStep < totalSteps - 1)
-          FilledButton(
-            onPressed: isValid ? cubit.nextStep : null,
-            style: FilledButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Text('Suivant',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          )
-        else
-          FilledButton(
-            onPressed: isValid ? cubit.finishOnboarding : null,
-            style: FilledButton.styleFrom(
-              backgroundColor: AppColors.emeraldPrimary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-            child: const Text('Terminer',
-                style: TextStyle(fontWeight: FontWeight.bold)),
-          ),
+        if (currentStep > 0) ...[
+          _GlassBackButton(onPressed: cubit.previousStep),
+          const SizedBox(width: 10),
+        ],
+        Expanded(
+          child: _GradientNextButton(label: label, onPressed: action),
+        ),
       ],
     );
   }
 }
 
-/// Wraps a step widget with its illustration centered above it.
-///
-/// Uses a [Column] so the illustration sits directly above the step content.
-/// The step content is placed inside an [Expanded] + [SingleChildScrollView]
-/// so long forms (e.g. LifestyleStep) remain scrollable without the
-/// illustration being pushed off screen.
-class _StepWithIllustration extends StatelessWidget {
-  const _StepWithIllustration({
-    required this.step,
-    required this.child,
-  });
+class _GlassBackButton extends StatelessWidget {
+  const _GlassBackButton({required this.onPressed});
 
-  final int step;
-  final Widget child;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(child: OnboardingIllustration(step: step)),
-        const SizedBox(height: 16),
-        Expanded(child: child),
-      ],
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(16),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            child: Container(
+              height: 54,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.55),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.6),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    LucideIcons.chevronLeft,
+                    size: 16,
+                    color: Color(0xFF475569),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Precedent',
+                    style: GoogleFonts.nunito(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                      color: const Color(0xFF0F172A),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _GradientNextButton extends StatelessWidget {
+  const _GradientNextButton({required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final disabled = onPressed == null;
+
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 180),
+      opacity: disabled ? 0.45 : 1,
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          onTap: onPressed,
+          borderRadius: BorderRadius.circular(16),
+          child: Container(
+            height: 54,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [AppColors.emeraldPrimary, AppColors.emeraldDark],
+              ),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: disabled
+                  ? null
+                  : [
+                      BoxShadow(
+                        color:
+                            AppColors.emeraldPrimary.withValues(alpha: 0.45),
+                        blurRadius: 28,
+                        offset: const Offset(0, 12),
+                      ),
+                    ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  label,
+                  style: GoogleFonts.nunito(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.1,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                const Icon(
+                  LucideIcons.chevronRight,
+                  size: 16,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

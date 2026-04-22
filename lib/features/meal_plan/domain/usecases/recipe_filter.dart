@@ -1,4 +1,5 @@
 import '../../../../data/local/database.dart';
+import '../../../onboarding/domain/models/allergy.dart';
 import '../../../onboarding/domain/models/diet_type.dart';
 import '../../../onboarding/domain/models/excluded_meat.dart';
 
@@ -46,29 +47,44 @@ class RecipeFilter {
     }).toList();
   }
 
+  /// Maps stored allergy entries (enum `.name` like `gluten`, `treeNuts`) to
+  /// the canonical JSON keys (`GLUTEN`, `TREE_NUTS`) used in recipe data.
+  /// Unknown entries (legacy uppercase or custom-allergy passthrough) are
+  /// kept as-is after uppercasing.
   static Set<String> parseAllergies(
     List<String> allergies,
     String customAllergies,
   ) {
+    final mapped = allergies.map((n) {
+      final match = Allergy.values.where((a) => a.name == n).firstOrNull;
+      return match?.jsonKey ?? n.toUpperCase();
+    });
     final custom = customAllergies.trim().isNotEmpty
-        ? customAllergies.split(',').map((s) => s.trim().toUpperCase()).toList()
-        : <String>[];
-    return {...allergies, ...custom};
+        ? customAllergies.split(',').map((s) => s.trim().toUpperCase())
+        : const <String>[];
+    return {...mapped, ...custom};
   }
 
+  /// Maps stored excluded-meat entries (enum `.name` like `pork`, `allMeat`)
+  /// to the canonical JSON keys used in recipe `meatTypes`. Aggregate values
+  /// (`allMeat`, `allFish`) expand to multiple keys via `ExcludedMeat.jsonKeys`.
   static Set<String> parseExcludedMeats(List<String> excludedMeats) {
     final expanded = <String>{};
     for (final name in excludedMeats) {
-      if (name == ExcludedMeat.allMeat.name.toUpperCase() ||
-          name == 'ALL_MEAT') {
-        expanded.addAll([
-          'PORK', 'BEEF', 'POULTRY', 'VEAL', 'LAMB', 'FISH', 'SHELLFISH',
-        ]);
-      } else if (name == ExcludedMeat.allFish.name.toUpperCase() ||
-          name == 'ALL_FISH') {
-        expanded.addAll(['FISH', 'SHELLFISH']);
+      final match = ExcludedMeat.values.where((m) => m.name == name).firstOrNull;
+      if (match != null) {
+        expanded.addAll(match.jsonKeys);
       } else {
-        expanded.add(name);
+        // Legacy data: accept already-uppercase keys and the historical
+        // `ALL_MEAT` / `ALL_FISH` aliases.
+        switch (name) {
+          case 'ALL_MEAT':
+            expanded.addAll(ExcludedMeat.allMeat.jsonKeys);
+          case 'ALL_FISH':
+            expanded.addAll(ExcludedMeat.allFish.jsonKeys);
+          default:
+            expanded.add(name);
+        }
       }
     }
     return expanded;

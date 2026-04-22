@@ -72,6 +72,46 @@ class AppRoutes {
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
+/// Fade transition — used for shell tab switches.
+CustomTransitionPage<T> _fadePage<T>({required Widget child, LocalKey? key}) =>
+    CustomTransitionPage<T>(
+      key: key,
+      transitionDuration: const Duration(milliseconds: 220),
+      reverseTransitionDuration: const Duration(milliseconds: 180),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final fade = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutCubic,
+        );
+        return FadeTransition(opacity: fade, child: child);
+      },
+      child: child,
+    );
+
+/// Slide-from-right + fade transition — used for pushed detail screens.
+CustomTransitionPage<T> _slidePage<T>({required Widget child, LocalKey? key}) =>
+    CustomTransitionPage<T>(
+      key: key,
+      transitionDuration: const Duration(milliseconds: 280),
+      reverseTransitionDuration: const Duration(milliseconds: 220),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final curved = CurvedAnimation(
+          parent: animation,
+          curve: Curves.easeOutCubic,
+          reverseCurve: Curves.easeInCubic,
+        );
+        final slide = Tween<Offset>(
+          begin: const Offset(0.06, 0),
+          end: Offset.zero,
+        ).animate(curved);
+        return FadeTransition(
+          opacity: curved,
+          child: SlideTransition(position: slide, child: child),
+        );
+      },
+      child: child,
+    );
+
 /// Creates the app router with the given initial location.
 GoRouter createAppRouter(String initialLocation) => GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -102,10 +142,8 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
       routes: [
         GoRoute(
           path: AppRoutes.dashboard,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            transitionsBuilder: (context, animation, _, child) =>
-                FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 150),
+          pageBuilder: (context, state) => _fadePage(
+            key: state.pageKey,
             child: BlocProvider(
               create: (_) => DashboardCubit(
                 userProfileRepository: getIt<UserProfileRepository>(),
@@ -120,10 +158,8 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.mealPlan,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            transitionsBuilder: (context, animation, _, child) =>
-                FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 150),
+          pageBuilder: (context, state) => _fadePage(
+            key: state.pageKey,
             child: BlocProvider(
               create: (_) => MealPlanCubit(
                 mealPlanRepository: getIt<MealPlanRepository>(),
@@ -138,10 +174,8 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.shoppingList,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            transitionsBuilder: (context, animation, _, child) =>
-                FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 150),
+          pageBuilder: (context, state) => _fadePage(
+            key: state.pageKey,
             child: BlocProvider(
               create: (_) => ShoppingCubit(
                 shoppingRepository: getIt<ShoppingRepository>(),
@@ -155,10 +189,8 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.recipeList,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            transitionsBuilder: (context, animation, _, child) =>
-                FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 150),
+          pageBuilder: (context, state) => _fadePage(
+            key: state.pageKey,
             child: BlocProvider(
               create: (_) => RecipeListCubit(
                 recipeRepository: getIt<RecipeRepository>(),
@@ -170,10 +202,8 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.weightLog,
-          pageBuilder: (context, state) => CustomTransitionPage(
-            transitionsBuilder: (context, animation, _, child) =>
-                FadeTransition(opacity: animation, child: child),
-            transitionDuration: const Duration(milliseconds: 150),
+          pageBuilder: (context, state) => _fadePage(
+            key: state.pageKey,
             child: BlocProvider(
               create: (_) => WeightLogCubit(
                 weightLogRepository: getIt<WeightLogRepository>(),
@@ -192,36 +222,42 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
     // ── Detail screens (full screen, no bottom bar) ─────────────────
     GoRoute(
       path: '/recipes/:id',
-      builder: (context, state) {
+      pageBuilder: (context, state) {
         final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
         final servings = double.tryParse(
                 state.uri.queryParameters['servings'] ?? '') ??
             0;
-        return BlocProvider(
-          create: (_) => RecipeDetailCubit(
-            recipeRepository: getIt<RecipeRepository>(),
-          ),
-          child: RecipeDetailPage(
-            recipeId: id,
-            planServings: servings,
+        return _slidePage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (_) => RecipeDetailCubit(
+              recipeRepository: getIt<RecipeRepository>(),
+            ),
+            child: RecipeDetailPage(
+              recipeId: id,
+              planServings: servings,
+            ),
           ),
         );
       },
       routes: [
         GoRoute(
           path: 'cooking',
-          builder: (context, state) {
+          pageBuilder: (context, state) {
             final id = int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
             final servings = double.tryParse(
                     state.uri.queryParameters['servings'] ?? '') ??
                 0;
-            return BlocProvider(
-              create: (_) => RecipeDetailCubit(
-                recipeRepository: getIt<RecipeRepository>(),
-              ),
-              child: CookingModePage(
-                recipeId: id,
-                planServings: servings,
+            return _slidePage(
+              key: state.pageKey,
+              child: BlocProvider(
+                create: (_) => RecipeDetailCubit(
+                  recipeRepository: getIt<RecipeRepository>(),
+                ),
+                child: CookingModePage(
+                  recipeId: id,
+                  planServings: servings,
+                ),
               ),
             );
           },
@@ -230,41 +266,53 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
     ),
     GoRoute(
       path: '/batch-cooking/:dayPlanId',
-      builder: (context, state) {
+      pageBuilder: (context, state) {
         final dayPlanId = int.tryParse(state.pathParameters['dayPlanId'] ?? '');
         if (dayPlanId == null) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Erreur')),
-            body: const Center(child: Text('Route invalide')),
+          return _slidePage(
+            key: state.pageKey,
+            child: Scaffold(
+              appBar: AppBar(title: const Text('Erreur')),
+              body: const Center(child: Text('Route invalide')),
+            ),
           );
         }
-        return BlocProvider(
-          create: (_) => BatchCookingCubit(
-            mealPlanRepository: getIt<MealPlanRepository>(),
-            recipeRepository: getIt<RecipeRepository>(),
+        return _slidePage(
+          key: state.pageKey,
+          child: BlocProvider(
+            create: (_) => BatchCookingCubit(
+              mealPlanRepository: getIt<MealPlanRepository>(),
+              recipeRepository: getIt<RecipeRepository>(),
+            ),
+            child: BatchCookingPage(dayPlanId: dayPlanId),
           ),
-          child: BatchCookingPage(dayPlanId: dayPlanId),
         );
       },
       routes: [
         GoRoute(
           path: 'mode',
-          builder: (context, state) {
+          pageBuilder: (context, state) {
             final dayPlanId =
                 int.tryParse(state.pathParameters['dayPlanId'] ?? '');
             if (dayPlanId == null) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('Erreur')),
-            body: const Center(child: Text('Route invalide')),
-          );
-        }
-            return BlocProvider(
-              create: (_) => BatchCookingModeCubit(
-                mealPlanRepository: getIt<MealPlanRepository>(),
-                recipeRepository: getIt<RecipeRepository>(),
-                batchStepOptimizer: getIt<BatchStepOptimizer>(),
+              return _slidePage(
+                key: state.pageKey,
+                child: Scaffold(
+                  appBar: AppBar(title: const Text('Erreur')),
+                  body: const Center(child: Text('Route invalide')),
+                ),
+              );
+            }
+            return _slidePage(
+              key: state.pageKey,
+              child: BlocProvider(
+                create: (_) => BatchCookingModeCubit(
+                  mealPlanRepository: getIt<MealPlanRepository>(),
+                  recipeRepository: getIt<RecipeRepository>(),
+                  batchStepOptimizer: getIt<BatchStepOptimizer>(),
+                ),
+                child: BatchCookingModePage(dayPlanId: dayPlanId),
               ),
-              child: BatchCookingModePage(dayPlanId: dayPlanId),
             );
           },
         ),
@@ -272,40 +320,52 @@ GoRouter createAppRouter(String initialLocation) => GoRouter(
     ),
     GoRoute(
       path: AppRoutes.settings,
-      builder: (context, state) => BlocProvider(
-        create: (_) => SettingsCubit(
-          userProfileRepository: getIt<UserProfileRepository>(),
-          mealPlanRepository: getIt<MealPlanRepository>(),
-          weightLogRepository: getIt<WeightLogRepository>(),
-          calorieCalculator: getIt<CalorieCalculator>(),
+      pageBuilder: (context, state) => _slidePage(
+        key: state.pageKey,
+        child: BlocProvider(
+          create: (_) => SettingsCubit(
+            userProfileRepository: getIt<UserProfileRepository>(),
+            mealPlanRepository: getIt<MealPlanRepository>(),
+            weightLogRepository: getIt<WeightLogRepository>(),
+            calorieCalculator: getIt<CalorieCalculator>(),
+          ),
+          child: const SettingsPage(),
         ),
-        child: const SettingsPage(),
       ),
     ),
     GoRoute(
       path: AppRoutes.aboutCalculations,
-      builder: (context, state) => const AboutCalculationsPage(),
+      pageBuilder: (context, state) => _slidePage(
+        key: state.pageKey,
+        child: const AboutCalculationsPage(),
+      ),
     ),
     GoRoute(
       path: AppRoutes.planConfig,
-      builder: (context, state) => BlocProvider(
-        create: (_) => PlanConfigCubit(
-          userProfileRepository: getIt<UserProfileRepository>(),
+      pageBuilder: (context, state) => _slidePage(
+        key: state.pageKey,
+        child: BlocProvider(
+          create: (_) => PlanConfigCubit(
+            userProfileRepository: getIt<UserProfileRepository>(),
+          ),
+          child: const PlanConfigPage(),
         ),
-        child: const PlanConfigPage(),
       ),
     ),
     GoRoute(
       path: AppRoutes.planPreview,
-      builder: (context, state) => BlocProvider(
-        create: (_) => PlanPreviewCubit(
-          mealPlanRepository: getIt<MealPlanRepository>(),
-          mealPlanGenerator: getIt<MealPlanGenerator>(),
-          userProfileRepository: getIt<UserProfileRepository>(),
-          shoppingListGenerator: getIt<ShoppingListGenerator>(),
-          planEditUseCase: getIt<PlanEditUseCase>(),
+      pageBuilder: (context, state) => _slidePage(
+        key: state.pageKey,
+        child: BlocProvider(
+          create: (_) => PlanPreviewCubit(
+            mealPlanRepository: getIt<MealPlanRepository>(),
+            mealPlanGenerator: getIt<MealPlanGenerator>(),
+            userProfileRepository: getIt<UserProfileRepository>(),
+            shoppingListGenerator: getIt<ShoppingListGenerator>(),
+            planEditUseCase: getIt<PlanEditUseCase>(),
+          ),
+          child: const PlanPreviewPage(),
         ),
-        child: const PlanPreviewPage(),
       ),
     ),
   ],

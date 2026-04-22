@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_utils.dart';
+import 'pill_chip.dart';
 
 /// Section to pick free (cheat) days — max 3.
 class FreeDaysSection extends StatelessWidget {
@@ -31,13 +32,13 @@ class FreeDaysSection extends StatelessWidget {
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
-          runSpacing: 4,
+          runSpacing: 8,
           children: List.generate(7, (index) {
             // index is 0-based (0=Mon, 6=Sun), matching Kotlin's forEachIndexed.
-            return FilterChip(
+            return PillChip(
+              label: AppDateUtils.getDayOfWeekFrench(index + 1),
               selected: freeDays.contains(index),
-              label: Text(AppDateUtils.getDayOfWeekFrench(index + 1)),
-              onSelected: (_) => onToggleFreeDay(index),
+              onTap: () => onToggleFreeDay(index),
             );
           }),
         ),

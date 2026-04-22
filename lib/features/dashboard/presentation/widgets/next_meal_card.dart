@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../shared/widgets/gradient_card.dart';
+import '../../../../shared/widgets/glass_card.dart';
 import '../../../onboarding/domain/models/meal_type.dart';
 import '../../domain/models/dashboard_models.dart';
 
-/// Small card showing the next upcoming meal.
+/// "Prochain repas" card with left accent strip + gradient icon tile.
 class NextMealCard extends StatelessWidget {
   const NextMealCard({
     required this.nextMeal,
+    this.onTap,
     super.key,
   });
 
   final NextMealInfo nextMeal;
+  final VoidCallback? onTap;
 
   Color get _mealColor {
     switch (nextMeal.mealType) {
@@ -29,46 +33,85 @@ class NextMealCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final totalCalories =
         (nextMeal.caloriesPerServing * nextMeal.servings).round();
+    final color = _mealColor;
 
-    return GradientCard(
-      gradientColors: [
-        _mealColor.withValues(alpha: 0.08),
-        _mealColor.withValues(alpha: 0.12),
-      ],
-      elevation: 2,
-      contentPadding: const EdgeInsets.all(14),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return GlassCard(
+      padding: const EdgeInsets.all(16),
+      borderRadius: 20,
+      accentColor: color,
+      onTap: onTap,
+      child: Row(
         children: [
-          Icon(
-            Icons.schedule,
-            color: _mealColor,
-            size: 28,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            nextMeal.mealType.displayName,
-            style: theme.textTheme.labelMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+          Container(
+            width: 54,
+            height: 54,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  color.withValues(alpha: 0.25),
+                  color.withValues(alpha: 0.18),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: color.withValues(alpha: 0.25),
+              ),
+            ),
+            child: Icon(
+              LucideIcons.utensils,
+              size: 24,
+              color: color,
             ),
           ),
-          const SizedBox(height: 2),
-          Text(
-            nextMeal.recipeName,
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'PROCHAIN REPAS - ${nextMeal.mealType.displayName.toUpperCase()}',
+                  style: GoogleFonts.nunito(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.5,
+                    color: color,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  nextMeal.recipeName,
+                  style: GoogleFonts.nunito(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    height: 1.25,
+                    color: const Color(0xFF0F172A),
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '$totalCalories kcal - ${nextMeal.servings.toStringAsFixed(nextMeal.servings.truncateToDouble() == nextMeal.servings ? 0 : 1)} portion',
+                  style: GoogleFonts.nunito(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF64748B),
+                  ),
+                ),
+              ],
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
           ),
-          Text(
-            '$totalCalories kcal',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: _mealColor,
-            ),
+          const Icon(
+            LucideIcons.chevronRight,
+            size: 20,
+            color: Color(0xFF94A3B8),
           ),
         ],
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../data/local/models/meal_with_recipe.dart';
-import '../../../../shared/widgets/solid_card.dart';
+import '../../../../shared/widgets/glass_card.dart';
 import '../../../onboarding/domain/models/meal_type.dart';
 
 /// List of meals for the selected day with toggle consumed checkbox.
@@ -11,12 +11,14 @@ class DayMealsSection extends StatelessWidget {
     required this.meals,
     required this.isFreeDay,
     required this.onToggleConsumed,
+    required this.onOpenRecipe,
     super.key,
   });
 
   final List<MealWithRecipe> meals;
   final bool isFreeDay;
   final void Function(int mealId, bool currentlyConsumed) onToggleConsumed;
+  final void Function(int recipeId) onOpenRecipe;
 
   static const _mealOrder = [
     MealType.breakfast,
@@ -29,7 +31,7 @@ class DayMealsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return SolidCard(
+    return GlassCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -94,6 +96,7 @@ class DayMealsSection extends StatelessWidget {
               sorted[i].meal.id,
               sorted[i].meal.isConsumed,
             ),
+            onOpenRecipe: () => onOpenRecipe(sorted[i].recipe.id),
           ),
         ),
       );
@@ -112,10 +115,12 @@ class _DashboardMealRow extends StatelessWidget {
   const _DashboardMealRow({
     required this.mealWithRecipe,
     required this.onToggleConsumed,
+    required this.onOpenRecipe,
   });
 
   final MealWithRecipe mealWithRecipe;
   final VoidCallback onToggleConsumed;
+  final VoidCallback onOpenRecipe;
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +133,10 @@ class _DashboardMealRow extends StatelessWidget {
         (mealWithRecipe.recipe.caloriesPerServing * mealWithRecipe.meal.servings)
             .round();
 
+    // L'`InkWell` enveloppe la zone titre+kcal pour ouvrir la recette.
+    // L'`IconButton` à gauche reste indépendant et continue de gérer
+    // le toggle consommé : Material absorbe ses taps avant qu'ils
+    // remontent à l'InkWell parent.
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -145,38 +154,53 @@ class _DashboardMealRow extends StatelessWidget {
           ),
           const SizedBox(width: 4),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  mealTypeName,
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: mealTypeColor,
-                  ),
+            child: InkWell(
+              onTap: onOpenRecipe,
+              borderRadius: BorderRadius.circular(8),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            mealTypeName,
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: mealTypeColor,
+                            ),
+                          ),
+                          Text(
+                            mealWithRecipe.recipe.name,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight: isConsumed
+                                  ? FontWeight.normal
+                                  : FontWeight.w600,
+                              decoration: isConsumed
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      '$totalCalories kcal',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: isConsumed
+                            ? AppColors.emeraldPrimary
+                            : theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  mealWithRecipe.recipe.name,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    fontWeight:
-                        isConsumed ? FontWeight.normal : FontWeight.w600,
-                    decoration:
-                        isConsumed ? TextDecoration.lineThrough : null,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            '$totalCalories kcal',
-            style: theme.textTheme.bodySmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: isConsumed
-                  ? AppColors.emeraldPrimary
-                  : theme.colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
         ],

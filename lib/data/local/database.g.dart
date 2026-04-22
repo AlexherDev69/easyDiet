@@ -1790,6 +1790,17 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
         requiredDuringInsert: false,
         defaultValue: const Constant('[]'),
       ).withConverter<List<String>>($RecipesTable.$convertermeatTypes);
+  static const VerificationMeta _imagePathMeta = const VerificationMeta(
+    'imagePath',
+  );
+  @override
+  late final GeneratedColumn<String> imagePath = GeneratedColumn<String>(
+    'image_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -1808,6 +1819,7 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
     difficulty,
     dietType,
     meatTypes,
+    imagePath,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -1942,6 +1954,12 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
         dietType.isAcceptableOrUnknown(data['diet_type']!, _dietTypeMeta),
       );
     }
+    if (data.containsKey('image_path')) {
+      context.handle(
+        _imagePathMeta,
+        imagePath.isAcceptableOrUnknown(data['image_path']!, _imagePathMeta),
+      );
+    }
     return context;
   }
 
@@ -2019,6 +2037,10 @@ class $RecipesTable extends Recipes with TableInfo<$RecipesTable, Recipe> {
           data['${effectivePrefix}meat_types'],
         )!,
       ),
+      imagePath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}image_path'],
+      ),
     );
   }
 
@@ -2050,6 +2072,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
   final String difficulty;
   final String dietType;
   final List<String> meatTypes;
+  final String? imagePath;
   const Recipe({
     required this.id,
     required this.name,
@@ -2067,6 +2090,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
     required this.difficulty,
     required this.dietType,
     required this.meatTypes,
+    this.imagePath,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2095,6 +2119,9 @@ class Recipe extends DataClass implements Insertable<Recipe> {
         $RecipesTable.$convertermeatTypes.toSql(meatTypes),
       );
     }
+    if (!nullToAbsent || imagePath != null) {
+      map['image_path'] = Variable<String>(imagePath);
+    }
     return map;
   }
 
@@ -2116,6 +2143,9 @@ class Recipe extends DataClass implements Insertable<Recipe> {
       difficulty: Value(difficulty),
       dietType: Value(dietType),
       meatTypes: Value(meatTypes),
+      imagePath: imagePath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imagePath),
     );
   }
 
@@ -2141,6 +2171,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
       difficulty: serializer.fromJson<String>(json['difficulty']),
       dietType: serializer.fromJson<String>(json['dietType']),
       meatTypes: serializer.fromJson<List<String>>(json['meatTypes']),
+      imagePath: serializer.fromJson<String?>(json['imagePath']),
     );
   }
   @override
@@ -2163,6 +2194,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
       'difficulty': serializer.toJson<String>(difficulty),
       'dietType': serializer.toJson<String>(dietType),
       'meatTypes': serializer.toJson<List<String>>(meatTypes),
+      'imagePath': serializer.toJson<String?>(imagePath),
     };
   }
 
@@ -2183,6 +2215,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
     String? difficulty,
     String? dietType,
     List<String>? meatTypes,
+    Value<String?> imagePath = const Value.absent(),
   }) => Recipe(
     id: id ?? this.id,
     name: name ?? this.name,
@@ -2200,6 +2233,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
     difficulty: difficulty ?? this.difficulty,
     dietType: dietType ?? this.dietType,
     meatTypes: meatTypes ?? this.meatTypes,
+    imagePath: imagePath.present ? imagePath.value : this.imagePath,
   );
   Recipe copyWithCompanion(RecipesCompanion data) {
     return Recipe(
@@ -2235,6 +2269,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
           : this.difficulty,
       dietType: data.dietType.present ? data.dietType.value : this.dietType,
       meatTypes: data.meatTypes.present ? data.meatTypes.value : this.meatTypes,
+      imagePath: data.imagePath.present ? data.imagePath.value : this.imagePath,
     );
   }
 
@@ -2256,7 +2291,8 @@ class Recipe extends DataClass implements Insertable<Recipe> {
           ..write('allergens: $allergens, ')
           ..write('difficulty: $difficulty, ')
           ..write('dietType: $dietType, ')
-          ..write('meatTypes: $meatTypes')
+          ..write('meatTypes: $meatTypes, ')
+          ..write('imagePath: $imagePath')
           ..write(')'))
         .toString();
   }
@@ -2279,6 +2315,7 @@ class Recipe extends DataClass implements Insertable<Recipe> {
     difficulty,
     dietType,
     meatTypes,
+    imagePath,
   );
   @override
   bool operator ==(Object other) =>
@@ -2299,7 +2336,8 @@ class Recipe extends DataClass implements Insertable<Recipe> {
           other.allergens == this.allergens &&
           other.difficulty == this.difficulty &&
           other.dietType == this.dietType &&
-          other.meatTypes == this.meatTypes);
+          other.meatTypes == this.meatTypes &&
+          other.imagePath == this.imagePath);
 }
 
 class RecipesCompanion extends UpdateCompanion<Recipe> {
@@ -2319,6 +2357,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
   final Value<String> difficulty;
   final Value<String> dietType;
   final Value<List<String>> meatTypes;
+  final Value<String?> imagePath;
   const RecipesCompanion({
     this.id = const Value.absent(),
     this.name = const Value.absent(),
@@ -2336,6 +2375,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
     this.difficulty = const Value.absent(),
     this.dietType = const Value.absent(),
     this.meatTypes = const Value.absent(),
+    this.imagePath = const Value.absent(),
   });
   RecipesCompanion.insert({
     this.id = const Value.absent(),
@@ -2354,6 +2394,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
     this.difficulty = const Value.absent(),
     this.dietType = const Value.absent(),
     this.meatTypes = const Value.absent(),
+    this.imagePath = const Value.absent(),
   }) : name = Value(name),
        description = Value(description),
        category = Value(category),
@@ -2383,6 +2424,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
     Expression<String>? difficulty,
     Expression<String>? dietType,
     Expression<String>? meatTypes,
+    Expression<String>? imagePath,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2402,6 +2444,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
       if (difficulty != null) 'difficulty': difficulty,
       if (dietType != null) 'diet_type': dietType,
       if (meatTypes != null) 'meat_types': meatTypes,
+      if (imagePath != null) 'image_path': imagePath,
     });
   }
 
@@ -2422,6 +2465,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
     Value<String>? difficulty,
     Value<String>? dietType,
     Value<List<String>>? meatTypes,
+    Value<String?>? imagePath,
   }) {
     return RecipesCompanion(
       id: id ?? this.id,
@@ -2440,6 +2484,7 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
       difficulty: difficulty ?? this.difficulty,
       dietType: dietType ?? this.dietType,
       meatTypes: meatTypes ?? this.meatTypes,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
 
@@ -2498,6 +2543,9 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
         $RecipesTable.$convertermeatTypes.toSql(meatTypes.value),
       );
     }
+    if (imagePath.present) {
+      map['image_path'] = Variable<String>(imagePath.value);
+    }
     return map;
   }
 
@@ -2519,7 +2567,8 @@ class RecipesCompanion extends UpdateCompanion<Recipe> {
           ..write('allergens: $allergens, ')
           ..write('difficulty: $difficulty, ')
           ..write('dietType: $dietType, ')
-          ..write('meatTypes: $meatTypes')
+          ..write('meatTypes: $meatTypes, ')
+          ..write('imagePath: $imagePath')
           ..write(')'))
         .toString();
   }
@@ -6118,6 +6167,7 @@ typedef $$RecipesTableCreateCompanionBuilder =
       Value<String> difficulty,
       Value<String> dietType,
       Value<List<String>> meatTypes,
+      Value<String?> imagePath,
     });
 typedef $$RecipesTableUpdateCompanionBuilder =
     RecipesCompanion Function({
@@ -6137,6 +6187,7 @@ typedef $$RecipesTableUpdateCompanionBuilder =
       Value<String> difficulty,
       Value<String> dietType,
       Value<List<String>> meatTypes,
+      Value<String?> imagePath,
     });
 
 final class $$RecipesTableReferences
@@ -6288,6 +6339,11 @@ class $$RecipesTableFilterComposer
   get meatTypes => $composableBuilder(
     column: $table.meatTypes,
     builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<String> get imagePath => $composableBuilder(
+    column: $table.imagePath,
+    builder: (column) => ColumnFilters(column),
   );
 
   Expression<bool> recipeStepsRefs(
@@ -6454,6 +6510,11 @@ class $$RecipesTableOrderingComposer
     column: $table.meatTypes,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get imagePath => $composableBuilder(
+    column: $table.imagePath,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$RecipesTableAnnotationComposer
@@ -6528,6 +6589,9 @@ class $$RecipesTableAnnotationComposer
 
   GeneratedColumnWithTypeConverter<List<String>, String> get meatTypes =>
       $composableBuilder(column: $table.meatTypes, builder: (column) => column);
+
+  GeneratedColumn<String> get imagePath =>
+      $composableBuilder(column: $table.imagePath, builder: (column) => column);
 
   Expression<T> recipeStepsRefs<T extends Object>(
     Expression<T> Function($$RecipeStepsTableAnnotationComposer a) f,
@@ -6653,6 +6717,7 @@ class $$RecipesTableTableManager
                 Value<String> difficulty = const Value.absent(),
                 Value<String> dietType = const Value.absent(),
                 Value<List<String>> meatTypes = const Value.absent(),
+                Value<String?> imagePath = const Value.absent(),
               }) => RecipesCompanion(
                 id: id,
                 name: name,
@@ -6670,6 +6735,7 @@ class $$RecipesTableTableManager
                 difficulty: difficulty,
                 dietType: dietType,
                 meatTypes: meatTypes,
+                imagePath: imagePath,
               ),
           createCompanionCallback:
               ({
@@ -6689,6 +6755,7 @@ class $$RecipesTableTableManager
                 Value<String> difficulty = const Value.absent(),
                 Value<String> dietType = const Value.absent(),
                 Value<List<String>> meatTypes = const Value.absent(),
+                Value<String?> imagePath = const Value.absent(),
               }) => RecipesCompanion.insert(
                 id: id,
                 name: name,
@@ -6706,6 +6773,7 @@ class $$RecipesTableTableManager
                 difficulty: difficulty,
                 dietType: dietType,
                 meatTypes: meatTypes,
+                imagePath: imagePath,
               ),
           withReferenceMapper: (p0) => p0
               .map(

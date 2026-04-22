@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/quantity_formatter.dart';
+import '../../../../shared/widgets/glass_dialog.dart';
 import '../../../../data/local/database.dart';
 import '../../../batch_cooking/domain/usecases/batch_step_optimizer.dart';
 import '../cubit/recipe_detail_cubit.dart';
@@ -181,30 +182,39 @@ class _CookingModePageState extends State<CookingModePage> {
         .where((t) => t.remainingSeconds > 0)
         .length;
 
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('Quitter la cuisson ?'),
-        content: Text(
-          'Vous avez $timerCount minuteur${timerCount > 1 ? 's' : ''} '
-          'en cours. Ils seront perdus si vous quittez.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Continuer'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(dialogContext); // close dialog
-              Navigator.pop(context); // exit cooking
-            },
-            child: const Text(
-              'Quitter',
-              style: TextStyle(color: AppColors.accentRose),
+      builder: (dialogContext) => GlassDialogContent(
+        icon: Icons.exit_to_app,
+        title: 'Quitter la cuisson ?',
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Vous avez $timerCount minuteur${timerCount > 1 ? 's' : ''} '
+              'en cours. Ils seront perdus si vous quittez.',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color:
+                        Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+            const SizedBox(height: 20),
+            GlassDialogActions(
+              secondary: GlassDialogButton(
+                label: 'Continuer',
+                onPressed: () => Navigator.pop(dialogContext),
+              ),
+              primary: GlassDialogDangerButton(
+                label: 'Quitter',
+                onPressed: () {
+                  Navigator.pop(dialogContext); // close dialog
+                  Navigator.pop(context); // exit cooking
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

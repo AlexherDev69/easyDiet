@@ -1,22 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/utils/decimal_input_formatter.dart';
 import '../../../../navigation/app_router.dart';
-import '../../../../shared/widgets/sync_text_field.dart';
+import '../../../../shared/widgets/blob_bg.dart';
+import '../../../../shared/widgets/glass_dialog.dart';
+import '../../../../shared/widgets/gradient_title.dart';
 import '../../../onboarding/domain/models/models.dart';
 import '../cubit/settings_cubit.dart';
 import '../cubit/settings_state.dart';
+import '../widgets/settings_primitives.dart';
 import '../widgets/settings_widgets.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<SettingsCubit, SettingsState>(
+      listenWhen: (prev, curr) =>
+          (!prev.showRegenerateDialog && curr.showRegenerateDialog) ||
+          (!prev.showResetDialog && curr.showResetDialog),
+      listener: (context, state) {
+        final cubit = context.read<SettingsCubit>();
+        if (state.showRegenerateDialog) {
+          _showRegenerateDialog(context, cubit);
+        }
+        if (state.showResetDialog) {
+          _showResetDialog(context, cubit);
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            children: [
+              const Positioned.fill(child: BlobBG()),
+              Positioned.fill(
+                child: SafeArea(
+                  child: state.isLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.emeraldPrimary,
+                          ),
+                        )
+                      : _Content(state: state),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _showRegenerateDialog(BuildContext context, SettingsCubit cubit) {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       barrierDismissible: true,
       builder: (_) => BlocProvider.value(
@@ -36,7 +78,7 @@ class SettingsPage extends StatelessWidget {
   }
 
   void _showResetDialog(BuildContext context, SettingsCubit cubit) {
-    showDialog<void>(
+    showGlassDialog<void>(
       context: context,
       barrierDismissible: true,
       builder: (_) => BlocProvider.value(
@@ -61,95 +103,954 @@ class SettingsPage extends StatelessWidget {
       }
     });
   }
+}
+
+class _Content extends StatelessWidget {
+  const _Content({required this.state});
+
+  final SettingsState state;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SettingsCubit, SettingsState>(
-      listenWhen: (previous, current) =>
-          (!previous.showRegenerateDialog && current.showRegenerateDialog) ||
-          (!previous.showResetDialog && current.showResetDialog),
-      listener: (context, state) {
-        final cubit = context.read<SettingsCubit>();
-        if (state.showRegenerateDialog) {
-          _showRegenerateDialog(context, cubit);
-        }
-        if (state.showResetDialog) {
-          _showResetDialog(context, cubit);
-        }
-      },
-      builder: (context, state) {
-        if (state.isLoading) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'Parametres',
-                style: TextStyle(fontWeight: FontWeight.w800),
-              ),
-            ),
-            body: const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.emeraldPrimary,
-              ),
-            ),
-          );
-        }
-
-        final cubit = context.read<SettingsCubit>();
-
-        return Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => context.pop(),
-              tooltip: 'Retour',
-            ),
-            title: const Text(
-              'Parametres',
-              style: TextStyle(fontWeight: FontWeight.w800),
-            ),
-            actions: [
-              TextButton(
-                onPressed: cubit.saveProfile,
-                child: Text(
-                  state.isSaved ? 'Enregistre !' : 'Enregistrer',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.emeraldPrimary,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 8),
-                _ProfileSection(state: state, cubit: cubit),
-                const SizedBox(height: 16),
-                const SettingsDivider(),
-                const SizedBox(height: 16),
-                _ObjectiveSection(state: state, cubit: cubit),
-                const SizedBox(height: 16),
-                const SettingsDivider(),
-                const SizedBox(height: 16),
-                _AllergiesSection(state: state, cubit: cubit),
-                const SizedBox(height: 16),
-                _ObjectiveSummary(state: state),
-                const SizedBox(height: 24),
-                _ResetButton(onPressed: cubit.showResetDialog),
-                const SizedBox(height: 16),
-              ],
-            ),
-          ),
-        );
-      },
+    final cubit = context.read<SettingsCubit>();
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 40),
+      children: [
+        _Header(state: state, onSave: cubit.saveProfile),
+        const SizedBox(height: 14),
+        _ProfileSection(state: state, cubit: cubit),
+        _DietSection(state: state, cubit: cubit),
+        _PlanSection(state: state, cubit: cubit),
+        _AdvancedSection(state: state, cubit: cubit),
+        _AboutSection(),
+        const SizedBox(height: 8),
+        _ResetButton(onPressed: cubit.showResetDialog),
+      ],
     );
   }
 }
 
-// ── Regenerate dialog wrapper ────────────────────────────────────────
+class _Header extends StatelessWidget {
+  const _Header({required this.state, required this.onSave});
+
+  final SettingsState state;
+  final VoidCallback onSave;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        BackPill(onTap: () => context.pop()),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'COMPTE',
+                style: GoogleFonts.nunito(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 1.2,
+                  color: const Color(0xFF64748B),
+                ),
+              ),
+              GradientTitle(
+                'Parametres',
+                style: GoogleFonts.nunito(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -0.5,
+                ),
+              ),
+            ],
+          ),
+        ),
+        TextButton(
+          onPressed: onSave,
+          child: Text(
+            state.isSaved ? 'Enregistre' : 'Enregistrer',
+            style: GoogleFonts.nunito(
+              fontSize: 13,
+              fontWeight: FontWeight.w800,
+              color: AppColors.emeraldPrimary,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Profile ─────────────────────────────────────────────────────────
+
+class _ProfileSection extends StatelessWidget {
+  const _ProfileSection({required this.state, required this.cubit});
+
+  final SettingsState state;
+  final SettingsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingsSection(
+      eyebrow: 'Vous',
+      title: 'Profil',
+      children: [
+        SettingsRow(
+          icon: LucideIcons.user,
+          color: AppColors.emeraldPrimary,
+          label: 'Nom',
+          value: state.name.isEmpty ? '—' : state.name,
+          onTap: () => _editText(
+            context,
+            title: 'Nom',
+            initial: state.name,
+            keyboardType: TextInputType.name,
+            onSave: cubit.updateName,
+          ),
+        ),
+        SettingsRow(
+          icon: LucideIcons.cake,
+          color: const Color(0xFFF59E0B),
+          label: 'Age',
+          value: state.age.isEmpty ? '—' : '${state.age} ans',
+          onTap: () => _editText(
+            context,
+            title: 'Age',
+            initial: state.age,
+            keyboardType: TextInputType.number,
+            onSave: cubit.updateAge,
+          ),
+        ),
+        SettingsRow(
+          icon: LucideIcons.users,
+          color: const Color(0xFF8B5CF6),
+          label: 'Sexe',
+          value: state.sex.displayName,
+          onTap: () => _pickSex(context, state.sex, cubit.updateSex),
+        ),
+        SettingsRow(
+          icon: LucideIcons.ruler,
+          color: const Color(0xFF0EA5E9),
+          label: 'Taille',
+          value: state.heightCm.isEmpty ? '—' : '${state.heightCm} cm',
+          onTap: () => _editText(
+            context,
+            title: 'Taille (cm)',
+            initial: state.heightCm,
+            keyboardType: TextInputType.number,
+            onSave: cubit.updateHeight,
+          ),
+        ),
+        SettingsRow(
+          icon: LucideIcons.scale,
+          color: const Color(0xFFF43F5E),
+          label: 'Poids actuel',
+          value: state.weightKg.isEmpty ? '—' : '${state.weightKg} kg',
+          onTap: () => _editText(
+            context,
+            title: 'Poids (kg)',
+            initial: state.weightKg,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            onSave: cubit.updateWeight,
+          ),
+        ),
+        SettingsRow(
+          icon: LucideIcons.target,
+          color: AppColors.emeraldDark,
+          label: 'Poids cible',
+          value:
+              state.targetWeightKg.isEmpty ? '—' : '${state.targetWeightKg} kg',
+          last: true,
+          onTap: () => _editText(
+            context,
+            title: 'Poids cible (kg)',
+            initial: state.targetWeightKg,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            onSave: cubit.updateTargetWeight,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Diet ────────────────────────────────────────────────────────────
+
+class _DietSection extends StatelessWidget {
+  const _DietSection({required this.state, required this.cubit});
+
+  final SettingsState state;
+  final SettingsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingsSection(
+      eyebrow: 'Alimentation',
+      title: 'Regime',
+      children: [
+        const SizedBox(height: 4),
+        _DietTilesRow(selected: state.dietType, onSelect: cubit.updateDietType),
+        const SizedBox(height: 14),
+        const SettingsRowDivider(),
+        const SizedBox(height: 12),
+        _ChipsBlock(
+          icon: LucideIcons.triangleAlert,
+          iconColor: const Color(0xFFF59E0B),
+          title: 'Allergies & intolerances',
+          children: Allergy.values
+              .map((a) => SettingsChip(
+                    label: a.displayName,
+                    active: state.selectedAllergies.contains(a),
+                    color: const Color(0xFFF59E0B),
+                    onTap: () => cubit.toggleAllergy(a),
+                  ))
+              .toList(),
+        ),
+        const SizedBox(height: 12),
+        const SettingsRowDivider(),
+        const SizedBox(height: 12),
+        _ChipsBlock(
+          icon: LucideIcons.beef,
+          iconColor: const Color(0xFFF43F5E),
+          title: 'Viandes exclues',
+          children: ExcludedMeat.values
+              .map((m) => SettingsChip(
+                    label: m.displayName,
+                    active: state.excludedMeats.contains(m),
+                    color: const Color(0xFFF43F5E),
+                    onTap: () => cubit.toggleExcludedMeat(m),
+                  ))
+              .toList(),
+        ),
+        const SizedBox(height: 6),
+        const SettingsRowDivider(),
+        SettingsSwitchRow(
+          icon: LucideIcons.wallet,
+          color: AppColors.emeraldDark,
+          label: 'Mode economique',
+          subtitle: 'Privilegier les ingredients communs',
+          value: state.economicMode,
+          onChanged: cubit.updateEconomicMode,
+          last: true,
+        ),
+      ],
+    );
+  }
+}
+
+class _DietTilesRow extends StatelessWidget {
+  const _DietTilesRow({required this.selected, required this.onSelect});
+
+  final DietType selected;
+  final ValueChanged<DietType> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    const tiles = <({DietType type, String label, IconData icon})>[
+      (type: DietType.omnivore, label: 'Omnivore', icon: LucideIcons.beef),
+      (type: DietType.vegetarian, label: 'Vegetarien', icon: LucideIcons.leaf),
+      (type: DietType.vegan, label: 'Vegan', icon: LucideIcons.leaf),
+    ];
+    return Row(
+      children: [
+        for (var i = 0; i < tiles.length; i++) ...[
+          if (i > 0) const SizedBox(width: 8),
+          Expanded(
+            child: _DietTile(
+              type: tiles[i].type,
+              label: tiles[i].label,
+              icon: tiles[i].icon,
+              active: selected == tiles[i].type,
+              onTap: () => onSelect(tiles[i].type),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _DietTile extends StatelessWidget {
+  const _DietTile({
+    required this.type,
+    required this.label,
+    required this.icon,
+    required this.active,
+    required this.onTap,
+  });
+
+  final DietType type;
+  final String label;
+  final IconData icon;
+  final bool active;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(14),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(14),
+        child: Container(
+          height: 62,
+          decoration: BoxDecoration(
+            gradient: active
+                ? const LinearGradient(
+                    colors: [AppColors.emeraldPrimary, Color(0xFF059669)])
+                : null,
+            color: active ? null : Colors.white.withValues(alpha: 0.55),
+            borderRadius: BorderRadius.circular(14),
+            border: active
+                ? null
+                : Border.all(
+                    color: Colors.white.withValues(alpha: 0.5),
+                  ),
+            boxShadow: active
+                ? [
+                    BoxShadow(
+                      color: AppColors.emeraldPrimary.withValues(alpha: 0.32),
+                      blurRadius: 18,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 18,
+                color: active ? Colors.white : const Color(0xFF475569),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                label,
+                style: GoogleFonts.nunito(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w800,
+                  color: active ? Colors.white : const Color(0xFF0F172A),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ChipsBlock extends StatelessWidget {
+  const _ChipsBlock({
+    required this.icon,
+    required this.iconColor,
+    required this.title,
+    required this.children,
+  });
+
+  final IconData icon;
+  final Color iconColor;
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 14, color: iconColor),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: GoogleFonts.nunito(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.2,
+                color: const Color(0xFF0F172A),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Wrap(
+          spacing: 6,
+          runSpacing: 6,
+          children: children,
+        ),
+      ],
+    );
+  }
+}
+
+// ── Plan ────────────────────────────────────────────────────────────
+
+class _PlanSection extends StatelessWidget {
+  const _PlanSection({required this.state, required this.cubit});
+
+  final SettingsState state;
+  final SettingsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingsSection(
+      eyebrow: 'Structure',
+      title: 'Plan',
+      children: [
+        SettingsSwitchRow(
+          icon: LucideIcons.coffee,
+          color: const Color(0xFFF59E0B),
+          label: 'Petit-dejeuner',
+          value: state.enabledMealTypes.contains(MealType.breakfast),
+          onChanged: (_) => cubit.toggleMealType(MealType.breakfast),
+        ),
+        SettingsSwitchRow(
+          icon: LucideIcons.utensils,
+          color: AppColors.emeraldPrimary,
+          label: 'Dejeuner',
+          value: state.enabledMealTypes.contains(MealType.lunch),
+          onChanged: (_) => cubit.toggleMealType(MealType.lunch),
+        ),
+        SettingsSwitchRow(
+          icon: LucideIcons.cookie,
+          color: const Color(0xFFEC4899),
+          label: 'Collation',
+          value: state.enabledMealTypes.contains(MealType.snack),
+          onChanged: (_) => cubit.toggleMealType(MealType.snack),
+        ),
+        SettingsSwitchRow(
+          icon: LucideIcons.moon,
+          color: const Color(0xFF6366F1),
+          label: 'Diner',
+          value: state.enabledMealTypes.contains(MealType.dinner),
+          onChanged: (_) => cubit.toggleMealType(MealType.dinner),
+        ),
+        const SizedBox(height: 6),
+        const SettingsRowDivider(),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            const Icon(
+              LucideIcons.calendarX,
+              size: 14,
+              color: Color(0xFF8B5CF6),
+            ),
+            const SizedBox(width: 8),
+            Text(
+              'Jours libres (hors plan)',
+              style: GoogleFonts.nunito(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.2,
+                color: const Color(0xFF0F172A),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        _FreeDaysRow(freeDays: state.freeDays, onToggle: cubit.toggleFreeDay),
+        const SizedBox(height: 4),
+      ],
+    );
+  }
+}
+
+class _FreeDaysRow extends StatelessWidget {
+  const _FreeDaysRow({required this.freeDays, required this.onToggle});
+
+  final Set<int> freeDays;
+  final ValueChanged<int> onToggle;
+
+  @override
+  Widget build(BuildContext context) {
+    const labels = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    return Row(
+      children: [
+        for (var i = 0; i < labels.length; i++) ...[
+          if (i > 0) const SizedBox(width: 6),
+          Expanded(
+            child: _FreeDayTile(
+              label: labels[i],
+              active: freeDays.contains(i),
+              onTap: () => onToggle(i),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _FreeDayTile extends StatelessWidget {
+  const _FreeDayTile({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(11),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(11),
+        child: Container(
+          height: 36,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: active
+                ? const Color(0xFF8B5CF6)
+                : const Color(0xFF0F172A).withValues(alpha: 0.04),
+            borderRadius: BorderRadius.circular(11),
+            border: Border.all(
+              color: active
+                  ? const Color(0xFF8B5CF6)
+                  : const Color(0xFF0F172A).withValues(alpha: 0.06),
+            ),
+            boxShadow: active
+                ? [
+                    BoxShadow(
+                      color: const Color(0xFF8B5CF6).withValues(alpha: 0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 4),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Text(
+            label,
+            style: GoogleFonts.nunito(
+              fontSize: 11,
+              fontWeight: FontWeight.w800,
+              color: active ? Colors.white : const Color(0xFF64748B),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Advanced (keeps existing extra fields) ──────────────────────────
+
+class _AdvancedSection extends StatelessWidget {
+  const _AdvancedSection({required this.state, required this.cubit});
+
+  final SettingsState state;
+  final SettingsCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return SettingsSection(
+      eyebrow: 'Avance',
+      title: 'Reglages fins',
+      children: [
+        _InlinePicker<LossPace>(
+          label: 'Rythme de perte',
+          options: LossPace.values,
+          selected: state.lossPace,
+          labelOf: (v) => v.displayName,
+          onSelect: cubit.updateLossPace,
+        ),
+        const SettingsRowDivider(),
+        _InlinePicker<ActivityLevel>(
+          label: 'Activite',
+          options: ActivityLevel.values,
+          selected: state.activityLevel,
+          labelOf: (v) => v.displayName,
+          onSelect: cubit.updateActivityLevel,
+        ),
+        const SettingsRowDivider(),
+        _StepperRow(
+          label: 'Petits-dej. differents',
+          value: state.distinctBreakfasts,
+          min: 1,
+          max: 6,
+          enabled: state.enabledMealTypes.contains(MealType.breakfast),
+          onChanged: cubit.updateDistinctBreakfasts,
+        ),
+        const SettingsRowDivider(),
+        _StepperRow(
+          label: 'Dejeuners differents',
+          value: state.distinctLunches,
+          min: 1,
+          max: 7,
+          enabled: state.enabledMealTypes.contains(MealType.lunch),
+          onChanged: cubit.updateDistinctLunches,
+        ),
+        const SettingsRowDivider(),
+        _StepperRow(
+          label: 'Diners differents',
+          value: state.distinctDinners,
+          min: 1,
+          max: 7,
+          enabled: state.enabledMealTypes.contains(MealType.dinner),
+          onChanged: cubit.updateDistinctDinners,
+        ),
+        const SettingsRowDivider(),
+        _StepperRow(
+          label: 'Snacks differents',
+          value: state.distinctSnacks,
+          min: 1,
+          max: 5,
+          enabled: state.enabledMealTypes.contains(MealType.snack),
+          onChanged: cubit.updateDistinctSnacks,
+        ),
+        const SettingsRowDivider(),
+        // Batch cooking — TEMPORAIREMENT MASQUE
+        // _StepperRow(
+        //   label: 'Sessions batch cooking',
+        //   value: state.batchCookingSessions,
+        //   min: 1,
+        //   max: 2,
+        //   enabled: true,
+        //   onChanged: cubit.updateBatchCooking,
+        // ),
+        // const SettingsRowDivider(),
+        _StepperRow(
+          label: 'Courses / semaine',
+          value: state.shoppingTrips,
+          min: 1,
+          max: 2,
+          enabled: true,
+          onChanged: cubit.updateShoppingTrips,
+          last: true,
+        ),
+      ],
+    );
+  }
+}
+
+class _InlinePicker<T> extends StatelessWidget {
+  const _InlinePicker({
+    required this.label,
+    required this.options,
+    required this.selected,
+    required this.labelOf,
+    required this.onSelect,
+  });
+
+  final String label;
+  final List<T> options;
+  final T selected;
+  final String Function(T) labelOf;
+  final ValueChanged<T> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.nunito(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFF0F172A),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Wrap(
+            spacing: 6,
+            runSpacing: 6,
+            children: options
+                .map((o) => SettingsChip(
+                      label: labelOf(o),
+                      active: selected == o,
+                      onTap: () => onSelect(o),
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StepperRow extends StatelessWidget {
+  const _StepperRow({
+    required this.label,
+    required this.value,
+    required this.min,
+    required this.max,
+    required this.enabled,
+    required this.onChanged,
+    this.last = false,
+  });
+
+  final String label;
+  final int value;
+  final int min;
+  final int max;
+  final bool enabled;
+  final ValueChanged<int> onChanged;
+  final bool last;
+
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: enabled ? 1 : 0.4,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                style: GoogleFonts.nunito(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: const Color(0xFF0F172A),
+                ),
+              ),
+            ),
+            _StepBtn(
+              icon: LucideIcons.minus,
+              onTap: enabled && value > min ? () => onChanged(value - 1) : null,
+            ),
+            Container(
+              width: 32,
+              alignment: Alignment.center,
+              child: Text(
+                '$value',
+                style: GoogleFonts.nunito(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800,
+                  color: const Color(0xFF0F172A),
+                ),
+              ),
+            ),
+            _StepBtn(
+              icon: LucideIcons.plus,
+              onTap: enabled && value < max ? () => onChanged(value + 1) : null,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _StepBtn extends StatelessWidget {
+  const _StepBtn({required this.icon, required this.onTap});
+
+  final IconData icon;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final disabled = onTap == null;
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(8),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          width: 28,
+          height: 28,
+          decoration: BoxDecoration(
+            color: const Color(0xFF0F172A).withValues(alpha: 0.05),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(
+            icon,
+            size: 14,
+            color: disabled
+                ? const Color(0xFF94A3B8)
+                : const Color(0xFF0F172A),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── About ───────────────────────────────────────────────────────────
+
+class _AboutSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SettingsSection(
+      eyebrow: 'Application',
+      title: 'A propos',
+      children: [
+        const SettingsRow(
+          icon: LucideIcons.info,
+          color: Color(0xFF0EA5E9),
+          label: 'Version',
+          value: '1.4.2',
+        ),
+        SettingsRow(
+          icon: LucideIcons.calculator,
+          color: const Color(0xFF8B5CF6),
+          label: 'Calculs nutritionnels',
+          value: 'Mifflin-St Jeor',
+          last: true,
+          onTap: () => context.push(AppRoutes.aboutCalculations),
+        ),
+      ],
+    );
+  }
+}
+
+// ── Reset button ────────────────────────────────────────────────────
+
+class _ResetButton extends StatelessWidget {
+  const _ResetButton({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          height: 52,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: const Color(0xFFF43F5E).withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: const Color(0xFFF43F5E).withValues(alpha: 0.28),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                LucideIcons.trash2,
+                size: 16,
+                color: Color(0xFFBE123C),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Reinitialiser l'application",
+                style: GoogleFonts.nunito(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 0.1,
+                  color: const Color(0xFFBE123C),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Helpers: dialogs ────────────────────────────────────────────────
+
+Future<void> _editText(
+  BuildContext context, {
+  required String title,
+  required String initial,
+  required TextInputType keyboardType,
+  required ValueChanged<String> onSave,
+}) async {
+  final controller = TextEditingController(text: initial);
+  final result = await showGlassDialog<String>(
+    context: context,
+    builder: (dialogCtx) => GlassDialogContent(
+      icon: Icons.edit_outlined,
+      title: title,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: controller,
+            autofocus: true,
+            keyboardType: keyboardType,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          const SizedBox(height: 14),
+          GlassDialogActions(
+            secondary: GlassDialogButton(
+              label: 'Annuler',
+              onPressed: () => Navigator.of(dialogCtx).pop(),
+            ),
+            primary: GlassDialogPrimaryButton(
+              label: 'Enregistrer',
+              onPressed: () =>
+                  Navigator.of(dialogCtx).pop(controller.text.trim()),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+  if (result != null) onSave(result);
+}
+
+Future<void> _pickSex(
+  BuildContext context,
+  Sex current,
+  ValueChanged<Sex> onSelect,
+) async {
+  final result = await showGlassDialog<Sex>(
+    context: context,
+    builder: (dialogCtx) => GlassDialogContent(
+      icon: Icons.person_outline,
+      title: 'Sexe',
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (final s in Sex.values)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: GlassDialogListTile(
+                onTap: () => Navigator.of(dialogCtx).pop(s),
+                title: Text(
+                  s.displayName,
+                  style: GoogleFonts.nunito(
+                    fontSize: 14,
+                    fontWeight: current == s
+                        ? FontWeight.w800
+                        : FontWeight.w600,
+                    color: current == s
+                        ? AppColors.emeraldPrimary
+                        : const Color(0xFF0F172A),
+                  ),
+                ),
+                trailing: current == s
+                    ? const Icon(
+                        LucideIcons.check,
+                        color: AppColors.emeraldPrimary,
+                        size: 18,
+                      )
+                    : null,
+              ),
+            ),
+        ],
+      ),
+    ),
+  );
+  if (result != null) onSelect(result);
+}
+
+// ── Existing dialog wrappers (unchanged) ────────────────────────────
 
 class _RegenerateDialogWrapper extends StatelessWidget {
   const _RegenerateDialogWrapper({required this.onConfirmed});
@@ -159,8 +1060,8 @@ class _RegenerateDialogWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SettingsCubit, SettingsState>(
-      listenWhen: (previous, current) =>
-          previous.showRegenerateDialog && !current.showRegenerateDialog,
+      listenWhen: (prev, curr) =>
+          prev.showRegenerateDialog && !curr.showRegenerateDialog,
       listener: (context, state) {
         if (ModalRoute.of(context)?.isCurrent ?? false) {
           Navigator.of(context).pop();
@@ -182,8 +1083,6 @@ class _RegenerateDialogWrapper extends StatelessWidget {
   }
 }
 
-// ── Reset dialog wrapper ─────────────────────────────────────────────
-
 class _ResetDialogWrapper extends StatelessWidget {
   const _ResetDialogWrapper({required this.onConfirmed});
 
@@ -192,8 +1091,8 @@ class _ResetDialogWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SettingsCubit, SettingsState>(
-      listenWhen: (previous, current) =>
-          previous.showResetDialog && !current.showResetDialog,
+      listenWhen: (prev, curr) =>
+          prev.showResetDialog && !curr.showResetDialog,
       listener: (context, state) {
         if (ModalRoute.of(context)?.isCurrent ?? false) {
           Navigator.of(context).pop();
@@ -213,452 +1112,4 @@ class _ResetDialogWrapper extends StatelessWidget {
       },
     );
   }
-}
-
-// ── Profile section ─────────────────────────────────────────────────
-
-class _ProfileSection extends StatelessWidget {
-  const _ProfileSection({required this.state, required this.cubit});
-
-  final SettingsState state;
-  final SettingsCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SettingsSectionTitle('Profil'),
-        const SizedBox(height: 8),
-        SyncTextField(
-          value: state.name,
-          onChanged: cubit.updateName,
-          decoration: _inputDecoration('Prenom'),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(
-              child: SyncTextField(
-                value: state.age,
-                onChanged: (v) {
-                  if (v.length <= 3 &&
-                      v.split('').every(
-                          (c) => '0123456789'.contains(c))) {
-                    cubit.updateAge(v);
-                  }
-                },
-                decoration: _inputDecoration('Age'),
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: SyncTextField(
-                value: state.heightCm,
-                onChanged: (v) {
-                  if (v.length <= 3) cubit.updateHeight(v);
-                },
-                decoration: _inputDecoration('Taille (cm)'),
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 8),
-        ChipRow(
-          options: Sex.values,
-          selected: state.sex,
-          labelOf: (s) => s.displayName,
-          onSelected: cubit.updateSex,
-        ),
-      ],
-    );
-  }
-}
-
-// ── Objective section ───────────────────────────────────────────────
-
-class _ObjectiveSection extends StatelessWidget {
-  const _ObjectiveSection({required this.state, required this.cubit});
-
-  final SettingsState state;
-  final SettingsCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SettingsSectionTitle('Objectif'),
-        const SizedBox(height: 8),
-        _WeightFields(state: state, cubit: cubit),
-        const SizedBox(height: 12),
-        const SettingsSubSectionTitle('Regime alimentaire'),
-        const SizedBox(height: 4),
-        ChipRow(
-          options: DietType.values,
-          selected: state.dietType,
-          labelOf: (d) => d.displayName,
-          onSelected: cubit.updateDietType,
-        ),
-        const SizedBox(height: 8),
-        const SettingsSubSectionTitle('Rythme de perte'),
-        const SizedBox(height: 4),
-        ChipRow(
-          options: LossPace.values,
-          selected: state.lossPace,
-          labelOf: (lp) => lp.displayName,
-          onSelected: cubit.updateLossPace,
-        ),
-        const SettingsSubSectionTitle('Activite'),
-        const SizedBox(height: 4),
-        ChipRow(
-          options: ActivityLevel.values,
-          selected: state.activityLevel,
-          labelOf: (al) => al.displayName,
-          onSelected: cubit.updateActivityLevel,
-        ),
-        const SizedBox(height: 8),
-        const SettingsSubSectionTitle('Date de demarrage'),
-        const SizedBox(height: 4),
-        DietStartDateSelector(
-          dietStartDate: state.dietStartDate,
-          onDateChange: cubit.updateDietStartDate,
-        ),
-        const SizedBox(height: 8),
-        const SettingsSubSectionTitle('Jours libres (sans regime)'),
-        const SizedBox(height: 4),
-        Text(
-          '${state.dietDaysPerWeek} jours de regime / '
-          '${state.freeDays.length} jours libres',
-          style: TextStyle(
-            fontSize: 12,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 8),
-        FreeDaysChips(
-          freeDays: state.freeDays,
-          onToggle: cubit.toggleFreeDay,
-        ),
-        const SizedBox(height: 4),
-        StepperField(
-          label: 'Sessions batch cooking',
-          value: state.batchCookingSessions,
-          min: 1,
-          max: 2,
-          onChanged: cubit.updateBatchCooking,
-        ),
-        BatchCookingToggle(
-          batchCookingBeforeDiet: state.batchCookingBeforeDiet,
-          onChanged: cubit.updateBatchCookingBeforeDiet,
-        ),
-        const SizedBox(height: 4),
-        StepperField(
-          label: 'Courses / sem.',
-          value: state.shoppingTrips,
-          min: 1,
-          max: 2,
-          onChanged: cubit.updateShoppingTrips,
-        ),
-        const SizedBox(height: 8),
-        _EconomicModeRow(
-          economicMode: state.economicMode,
-          onChanged: cubit.updateEconomicMode,
-        ),
-        const SizedBox(height: 12),
-        const SettingsSubSectionTitle('Repas inclus'),
-        const SizedBox(height: 4),
-        Wrap(
-          spacing: 8,
-          children: MealType.values.map((mt) {
-            return FilterChip(
-              selected: state.enabledMealTypes.contains(mt),
-              onSelected: (_) => cubit.toggleMealType(mt),
-              label: Text(mt.displayName),
-            );
-          }).toList(),
-        ),
-        const SizedBox(height: 12),
-        const SettingsSubSectionTitle('Variete des recettes'),
-        const SizedBox(height: 4),
-        _RecipeVarietySteppers(state: state, cubit: cubit),
-      ],
-    );
-  }
-}
-
-// ── Weight fields ───────────────────────────────────────────────────
-
-class _WeightFields extends StatelessWidget {
-  const _WeightFields({required this.state, required this.cubit});
-
-  final SettingsState state;
-  final SettingsCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: SyncTextField(
-            value: state.weightKg,
-            onChanged: cubit.updateWeight,
-            decoration: _inputDecoration('Poids (kg)'),
-            keyboardType:
-                const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [DecimalInputFormatter()],
-          ),
-        ),
-        const SizedBox(width: 8),
-        Expanded(
-          child: SyncTextField(
-            value: state.targetWeightKg,
-            onChanged: cubit.updateTargetWeight,
-            decoration: InputDecoration(
-              labelText: 'Cible (kg)',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              errorText: state.targetWeightError,
-            ),
-            keyboardType:
-                const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [DecimalInputFormatter()],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// ── Economic mode row ───────────────────────────────────────────────
-
-class _EconomicModeRow extends StatelessWidget {
-  const _EconomicModeRow({
-    required this.economicMode,
-    required this.onChanged,
-  });
-
-  final bool economicMode;
-  final ValueChanged<bool> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Mode economique',
-                style: TextStyle(fontWeight: FontWeight.w600),
-              ),
-              Text(
-                'Ingredients communs entre recettes',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Switch(
-          value: economicMode,
-          onChanged: onChanged,
-        ),
-      ],
-    );
-  }
-}
-
-// ── Recipe variety steppers ─────────────────────────────────────────
-
-class _RecipeVarietySteppers extends StatelessWidget {
-  const _RecipeVarietySteppers({required this.state, required this.cubit});
-
-  final SettingsState state;
-  final SettingsCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (state.enabledMealTypes.contains(MealType.breakfast))
-          StepperField(
-            label: 'Petits-dej. differents',
-            value: state.distinctBreakfasts,
-            min: 1,
-            max: 6,
-            onChanged: cubit.updateDistinctBreakfasts,
-          ),
-        if (state.enabledMealTypes.contains(MealType.lunch))
-          StepperField(
-            label: 'Dejeuners differents',
-            value: state.distinctLunches,
-            min: 1,
-            max: 7,
-            onChanged: cubit.updateDistinctLunches,
-          ),
-        if (state.enabledMealTypes.contains(MealType.dinner))
-          StepperField(
-            label: 'Diners differents',
-            value: state.distinctDinners,
-            min: 1,
-            max: 7,
-            onChanged: cubit.updateDistinctDinners,
-          ),
-        if (state.enabledMealTypes.contains(MealType.snack))
-          StepperField(
-            label: 'Snacks differents',
-            value: state.distinctSnacks,
-            min: 1,
-            max: 5,
-            onChanged: cubit.updateDistinctSnacks,
-          ),
-      ],
-    );
-  }
-}
-
-// ── Allergies section ───────────────────────────────────────────────
-
-class _AllergiesSection extends StatelessWidget {
-  const _AllergiesSection({required this.state, required this.cubit});
-
-  final SettingsState state;
-  final SettingsCubit cubit;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SettingsSectionTitle('Allergies'),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 4,
-          children: Allergy.values.map((a) {
-            return FilterChip(
-              selected: state.selectedAllergies.contains(a),
-              onSelected: (_) => cubit.toggleAllergy(a),
-              label: Text(a.displayName),
-            );
-          }).toList(),
-        ),
-        const SizedBox(height: 16),
-        const SettingsSectionTitle('Viandes exclues'),
-        const SizedBox(height: 4),
-        Text(
-          'Excluez certaines viandes selon vos '
-          'convictions ou preferences.',
-          style: TextStyle(
-            fontSize: 12,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 4,
-          children: ExcludedMeat.values.map((m) {
-            return FilterChip(
-              selected: state.excludedMeats.contains(m),
-              onSelected: (_) => cubit.toggleExcludedMeat(m),
-              label: Text(m.displayName),
-            );
-          }).toList(),
-        ),
-      ],
-    );
-  }
-}
-
-// ── Objective summary ───────────────────────────────────────────────
-
-class _ObjectiveSummary extends StatelessWidget {
-  const _ObjectiveSummary({required this.state});
-
-  final SettingsState state;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (state.calculatedCalories > 0)
-          ObjectiveCard(
-            text: 'Objectif : ${state.calculatedCalories} kcal / jour',
-            color: AppColors.emeraldPrimary,
-            backgroundColor:
-                AppColors.emeraldPrimary.withValues(alpha: 0.08),
-          ),
-        if (state.calculatedWaterMl > 0) ...[
-          const SizedBox(height: 8),
-          ObjectiveCard(
-            text:
-                'Hydratation : ${(state.calculatedWaterMl / 1000).toStringAsFixed(1)} L / jour',
-            color: AppColors.waterBlue,
-            backgroundColor:
-                AppColors.waterBlue.withValues(alpha: 0.08),
-          ),
-        ],
-        const SizedBox(height: 8),
-        TextButton(
-          onPressed: () => context.push(AppRoutes.aboutCalculations),
-          child: const Text(
-              'Comment sont calcules ces objectifs ?'),
-        ),
-      ],
-    );
-  }
-}
-
-// ── Reset button ────────────────────────────────────────────────────
-
-class _ResetButton extends StatelessWidget {
-  const _ResetButton({required this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: FilledButton(
-        onPressed: onPressed,
-        style: FilledButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.error,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        child: const Text(
-          "Reinitialiser l'application",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-}
-
-// ── Shared input decoration ─────────────────────────────────────────
-
-InputDecoration _inputDecoration(String label) {
-  return InputDecoration(
-    labelText: label,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-  );
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../shared/widgets/glass_dialog.dart';
 import '../../../onboarding/domain/models/supermarket_section.dart';
 
 /// Dialog to manually add a shopping item.
@@ -37,68 +38,67 @@ class _AddItemDialogState extends State<AddItemDialog> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: _nameController,
-      builder: (context, nameValue, _) => AlertDialog(
-      title: const Text(
-        'Ajouter un article',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: _nameController,
-            decoration: const InputDecoration(labelText: 'Nom'),
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _quantityController,
-                  decoration: const InputDecoration(labelText: 'Quantite'),
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
-                  ],
+      builder: (context, nameValue, _) => GlassDialogContent(
+        icon: Icons.add_shopping_cart,
+        title: 'Ajouter un article',
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(labelText: 'Nom'),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _quantityController,
+                    decoration: const InputDecoration(labelText: 'Quantite'),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[\d.]')),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: TextField(
-                  controller: _unitController,
-                  decoration: const InputDecoration(labelText: 'Unite'),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: TextField(
+                    controller: _unitController,
+                    decoration: const InputDecoration(labelText: 'Unite'),
+                  ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            DropdownButtonFormField<SupermarketSection>(
+              initialValue: _selectedSection,
+              decoration: const InputDecoration(labelText: 'Rayon'),
+              items: SupermarketSection.values
+                  .map((s) => DropdownMenuItem(
+                        value: s,
+                        child: Text(s.displayName),
+                      ))
+                  .toList(),
+              onChanged: (value) {
+                if (value != null) setState(() => _selectedSection = value);
+              },
+            ),
+            const SizedBox(height: 16),
+            GlassDialogActions(
+              secondary: GlassDialogButton(
+                label: 'Annuler',
+                onPressed: widget.onDismiss,
               ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          DropdownButtonFormField<SupermarketSection>(
-            initialValue: _selectedSection,
-            decoration: const InputDecoration(labelText: 'Rayon'),
-            items: SupermarketSection.values
-                .map((s) => DropdownMenuItem(
-                      value: s,
-                      child: Text(s.displayName),
-                    ))
-                .toList(),
-            onChanged: (value) {
-              if (value != null) setState(() => _selectedSection = value);
-            },
-          ),
-        ],
+              primary: GlassDialogPrimaryButton(
+                label: 'Ajouter',
+                onPressed: nameValue.text.trim().isEmpty ? null : _submit,
+              ),
+            ),
+          ],
+        ),
       ),
-      actions: [
-        TextButton(
-          onPressed: widget.onDismiss,
-          child: const Text('Annuler'),
-        ),
-        TextButton(
-          onPressed: nameValue.text.trim().isEmpty ? null : _submit,
-          child: const Text('Ajouter'),
-        ),
-      ],
-    ),
     );
   }
 

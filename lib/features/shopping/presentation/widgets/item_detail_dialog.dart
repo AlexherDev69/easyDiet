@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../core/utils/quantity_formatter.dart';
+import '../../../../shared/widgets/glass_dialog.dart';
 import '../../domain/models/ingredient_source.dart';
 
 /// Dialog showing ingredient sources for a shopping item.
@@ -24,50 +25,37 @@ class ItemDetailDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return AlertDialog(
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return GlassDialogContent(
+      icon: Icons.info_outline,
+      title: _capitalize(itemName),
+      subtitle: 'Total : $totalQuantity',
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            _capitalize(itemName),
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text(
-            'Total : $totalQuantity',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: AppColors.emeraldPrimary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
-      content: sources.isEmpty
-          ? Text(
+          if (sources.isEmpty)
+            Text(
               'Aucun detail disponible',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             )
-          : Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (var i = 0; i < sources.length; i++) ...[
-                  _SourceRow(source: sources[i]),
-                  if (i < sources.length - 1)
-                    Divider(
-                      height: 12,
-                      color: theme.colorScheme.outlineVariant
-                          .withValues(alpha: 0.3),
-                    ),
-                ],
-              ],
-            ),
-      actions: [
-        TextButton(
-          onPressed: onDismiss,
-          child: const Text('Fermer'),
-        ),
-      ],
+          else
+            for (var i = 0; i < sources.length; i++) ...[
+              _SourceRow(source: sources[i]),
+              if (i < sources.length - 1)
+                Divider(
+                  height: 12,
+                  color: theme.colorScheme.outlineVariant
+                      .withValues(alpha: 0.3),
+                ),
+            ],
+          const SizedBox(height: 16),
+          GlassDialogButton(
+            label: 'Fermer',
+            onPressed: onDismiss,
+          ),
+        ],
+      ),
     );
   }
 

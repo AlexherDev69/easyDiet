@@ -139,6 +139,7 @@ class ShoppingListGenerator {
             dayOfWeek: day.dayPlan.dayOfWeek,
             quantity: normalizedQty,
             unit: normalizedUnit,
+            mealType: mealWithRecipe.meal.mealType,
           );
 
           final normalizedSection =
@@ -252,7 +253,23 @@ class ShoppingListGenerator {
       _ => (quantity, unit),
     };
 
-    // Normalize "unite" to specific unit for known ingredients
+    // Convert weight-based quantities to piece-count for countable produce
+    // (e.g. 150 g of oignon → 1 unite @ 150 g/piece).
+    final pieceWeight = _ingredientPieceWeight[ingredientKey];
+    if (pieceWeight != null) {
+      final (gramsPerPiece, canonicalUnit) = pieceWeight;
+      if (baseUnit == 'g') {
+        return (baseQty / gramsPerPiece, canonicalUnit);
+      }
+      if (baseUnit == 'unite' && canonicalUnit != 'unite') {
+        return (baseQty, canonicalUnit);
+      }
+      if (baseUnit == canonicalUnit) {
+        return (baseQty, canonicalUnit);
+      }
+    }
+
+    // Legacy unit rename (e.g. sauce tomate "ml" → "g")
     final override = _ingredientUnitOverride[ingredientKey];
     if (override != null && baseUnit == override.$1) {
       return (baseQty, override.$2);
@@ -290,8 +307,31 @@ class ShoppingListGenerator {
   };
 
   static const _ingredientUnitOverride = {
-    'ail': ('unite', 'gousses'),
     'sauce tomate': ('ml', 'g'),
+  };
+
+  /// Avg weight per piece for countable produce. Used to merge recipes that
+  /// list the same ingredient in grams vs. units.
+  /// Format: ingredientKey → (gramsPerPiece, canonicalUnit).
+  static const _ingredientPieceWeight = <String, (double, String)>{
+    'oignon': (150, 'unite'),
+    'ail': (5, 'gousses'),
+    'brocoli': (500, 'unite'),
+    'echalote': (30, 'unite'),
+    'tomate': (120, 'unite'),
+    'carotte': (80, 'unite'),
+    'poivron': (150, 'unite'),
+    'poivron rouge': (150, 'unite'),
+    'poivron jaune': (150, 'unite'),
+    'poivron vert': (150, 'unite'),
+    'courgette': (200, 'unite'),
+    'citron': (100, 'unite'),
+    'concombre': (300, 'unite'),
+    'pomme': (180, 'unite'),
+    'banane': (120, 'unite'),
+    'avocat': (200, 'unite'),
+    'aubergine': (300, 'unite'),
+    'patate douce': (200, 'unite'),
   };
 
   static const _sectionAliases = {
@@ -354,17 +394,20 @@ class _IngredientSource {
     required this.dayOfWeek,
     required this.quantity,
     required this.unit,
+    required this.mealType,
   });
 
   final String recipeName;
   final int dayOfWeek;
   final double quantity;
   final String unit;
+  final String mealType;
 
   Map<String, dynamic> toJson() => {
         'recipeName': recipeName,
         'dayOfWeek': dayOfWeek,
         'quantity': quantity,
         'unit': unit,
+        'mealType': mealType,
       };
 }

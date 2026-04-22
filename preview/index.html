@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375, initial-scale=1">
+<title>EasyDiet - Onboarding Redesign</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --emerald: #10B981;
+  --emerald-dark: #059669;
+  --emerald-light: #6EE7B7;
+  --emerald-surface: #ECFDF5;
+  --emerald-glow: rgba(16, 185, 129, 0.15);
+  --purple: #8B5CF6;
+  --purple-light: #C4B5FD;
+  --amber: #F59E0B;
+  --bg: #FAFBFC;
+  --surface: #FFFFFF;
+  --text: #1A1A2E;
+  --text-secondary: #6B7280;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+.phone-frame {
+  width: 375px;
+  min-height: 812px;
+  margin: 20px auto;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+/* ── Background blobs ── */
+.bg-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: 0;
+}
+.bg-blob-1 {
+  width: 300px; height: 300px;
+  background: var(--emerald-light);
+  top: -80px; right: -60px;
+}
+.bg-blob-2 {
+  width: 200px; height: 200px;
+  background: var(--purple-light);
+  bottom: 120px; left: -40px;
+}
+
+/* ── Content ── */
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 60px 24px 24px;
+  min-height: 812px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Progress bar ── */
+.progress-container {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.progress-segment {
+  flex: 1;
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(16, 185, 129, 0.15);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.progress-segment.active {
+  background: var(--emerald);
+  box-shadow: 0 0 12px var(--emerald-glow);
+}
+.progress-segment.completed {
+  background: var(--emerald);
+}
+
+.step-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+
+/* ── Illustration ── */
+.illustration-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.illustration {
+  width: 140px;
+  height: 140px;
+  border-radius: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  position: relative;
+  background: linear-gradient(135deg, var(--emerald-surface) 0%, rgba(139, 92, 246, 0.06) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+.illustration::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 74px;
+  background: conic-gradient(from 0deg, var(--emerald), var(--emerald-light), transparent 60%);
+  opacity: 0.3;
+  z-index: -1;
+  animation: spin 8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Titles ── */
+h1 {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--text) 0%, var(--emerald-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+/* ── Glass cards ── */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 16px;
+}
+
+/* ── Input fields ── */
+.input-group {
+  margin-bottom: 20px;
+}
+.input-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.input-field {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #E5E7EB;
+  border-radius: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  transition: all 0.2s ease;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 4px var(--emerald-glow);
+}
+.input-field::placeholder {
+  color: #C4C8D0;
+  font-weight: 400;
+}
+.input-suffix {
+  position: relative;
+}
+.input-suffix .unit {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--emerald);
+}
+
+/* ── Chips / Selection ── */
+.chip-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.chip {
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 2px solid #E5E7EB;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--surface);
+}
+.chip.selected {
+  background: var(--emerald);
+  border-color: var(--emerald);
+  color: white;
+  box-shadow: 0 4px 16px var(--emerald-glow);
+}
+.chip:hover:not(.selected) {
+  border-color: var(--emerald-light);
+  background: var(--emerald-surface);
+}
+
+/* ── Icon input ── */
+.icon-input {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 2px solid #E5E7EB;
+  border-radius: 14px;
+  background: var(--surface);
+  transition: all 0.2s ease;
+}
+.icon-input:focus-within {
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 4px var(--emerald-glow);
+}
+.icon-input .icon {
+  font-size: 20px;
+  opacity: 0.5;
+}
+.icon-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+}
+.icon-input input::placeholder {
+  color: #C4C8D0;
+  font-weight: 400;
+}
+.icon-input .unit-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--emerald);
+  background: var(--emerald-surface);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+/* ── Spacer ── */
+/* ── Day tabs ── */
+.day-tab {
+  background: var(--emerald-surface);
+  color: var(--text-secondary);
+}
+.day-tab.active {
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-dark));
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+.day-tab:not(.active):hover {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--emerald-dark);
+}
+#dayPlanCard {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#dayPlanCard.slide-out-left {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+#dayPlanCard.slide-out-right {
+  transform: translateX(30px);
+  opacity: 0;
+}
+#dayPlanCard.slide-in-left {
+  transform: translateX(30px);
+  opacity: 0;
+}
+#dayPlanCard.slide-in-right {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+.day-tabs {
+  scrollbar-width: none;
+}
+.day-tabs::-webkit-scrollbar {
+  display: none;
+}
+.day-tab {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transform: scale(1);
+}
+.day-tab.active {
+  transform: scale(1.08);
+}
+/* Meal row staggered entrance */
+.meal-row {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: mealSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.meal-row:nth-child(1) { animation-delay: 0.05s; }
+.meal-row:nth-child(2) { animation-delay: 0.12s; }
+.meal-row:nth-child(3) { animation-delay: 0.19s; }
+@keyframes mealSlideIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Kcal counter animation */
+@keyframes kcalPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.kcal-pop {
+  animation: kcalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.15s;
+  opacity: 0;
+}
+
+.flex-spacer { flex: 1; }
+
+/* ── Navigation buttons ── */
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  padding-bottom: 20px;
+}
+.btn-back {
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 2px solid #E5E7EB;
+  background: transparent;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-back:hover {
+  border-color: var(--emerald-light);
+  color: var(--emerald-dark);
+}
+.btn-next {
+  flex: 1;
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 20px var(--emerald-glow);
+}
+.btn-next:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.3);
+}
+
+/* ── Step navigation ── */
+.step { display: none; }
+.step.active { display: flex; flex-direction: column; min-height: calc(812px - 120px); }
+
+/* ── Page indicator dots ── */
+.page-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: #E5E7EB;
+  transition: all 0.3s ease;
+}
+.dot.active {
+  width: 24px;
+  background: var(--emerald);
+}
+</style>
+</head>
+<body>
+
+<div class="phone-frame">
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+
+  <div class="content">
+    <!-- Progress -->
+    <div class="progress-container" id="progress"></div>
+    <div class="step-label" id="stepLabel"></div>
+
+    <!-- ── STEP 0: Personal Info ── -->
+    <div class="step active" id="step0">
+      <div class="illustration-container">
+        <div class="illustration">&#129489;</div>
+      </div>
+      <h1>Faisons connaissance</h1>
+      <p class="subtitle">Quelques infos pour personnaliser votre experience.</p>
+
+      <div class="glass-card">
+        <div class="input-group">
+          <div class="icon-input">
+            <span class="icon">&#128100;</span>
+            <input type="text" placeholder="Votre prenom" value="Alex">
+          </div>
+        </div>
+        <div class="input-group" style="margin-bottom:0">
+          <div class="icon-input">
+            <span class="icon">&#127874;</span>
+            <input type="number" placeholder="Age" value="28">
+            <span class="unit-badge">ans</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-label">Sexe</div>
+      <div class="chip-group">
+        <div class="chip selected">Homme</div>
+        <div class="chip">Femme</div>
+      </div>
+
+      <div class="flex-spacer"></div>
+      <div class="nav-buttons">
+        <button class="btn-next" onclick="goTo(1)">Suivant</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Body Metrics ── -->
+    <div class="step" id="step1">
+      <div class="illustration-container">
+        <div class="illustration">&#9878;&#65039;</div>
+      </div>
+      <h1>Vos mensurations</h1>
+      <p class="subtitle">Pour calculer vos besoins caloriques quotidiens.</p>
+
+      <div class="glass-card">
+        <div class="input-group">
+          <div class="icon-input">
+            <span class="icon">&#128207;</span>
+            <input type="number" placeholder="Taille" value="178">
+            <span class="unit-badge">cm</span>
+          </div>
+        </div>
+        <div class="input-group" style="margin-bottom:0">
+          <div class="icon-input">
+            <span class="icon">&#9878;</span>
+            <input type="number" placeholder="Poids" value="82">
+            <span class="unit-badge">kg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-spacer"></div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goTo(0)">Retour</button>
+        <button class="btn-next" onclick="goTo(2)">Suivant</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Goal ── -->
+    <div class="step" id="step2">
+      <div class="illustration-container">
+        <div class="illustration">&#127919;</div>
+      </div>
+      <h1>Votre objectif</h1>
+      <p class="subtitle">Definissez votre poids cible et votre rythme.</p>
+
+      <div class="glass-card">
+        <div class="input-group">
+          <div class="input-label">Poids cible</div>
+          <div class="icon-input">
+            <span class="icon">&#127919;</span>
+            <input type="number" placeholder="Poids cible" value="75">
+            <span class="unit-badge">kg</span>
+          </div>
+        </div>
+        <div class="input-label">Rythme de perte</div>
+        <div class="chip-group">
+          <div class="chip">Leger</div>
+          <div class="chip selected">Modere</div>
+          <div class="chip">Intensif</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px">
+        <div class="input-label">Niveau d'activite</div>
+        <div class="chip-group">
+          <div class="chip">Sedentaire</div>
+          <div class="chip selected">Modere</div>
+          <div class="chip">Actif</div>
+          <div class="chip">Sportif</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px">
+        <div class="glass-card" style="background: linear-gradient(135deg, var(--emerald-surface), rgba(16,185,129,0.08)); border-color: rgba(16,185,129,0.2);">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="font-size:28px;">&#128293;</div>
+            <div>
+              <div style="font-size:13px; color:var(--text-secondary); font-weight:600;">Objectif quotidien</div>
+              <div style="font-size:24px; font-weight:800; color:var(--emerald-dark);">1 850 kcal</div>
+            </div>
+            <div style="margin-left:auto; text-align:right;">
+              <div style="font-size:13px; color:var(--text-secondary); font-weight:600;">Eau</div>
+              <div style="font-size:18px; font-weight:700; color:#3B82F6;">1.8 L</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-spacer"></div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goTo(1)">Retour</button>
+        <button class="btn-next" onclick="goTo(3)">Suivant</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Lifestyle ── -->
+    <div class="step" id="step3">
+      <div class="illustration-container">
+        <div class="illustration">&#127860;</div>
+      </div>
+      <h1>Votre mode de vie</h1>
+      <p class="subtitle">Adaptez le plan a vos habitudes alimentaires.</p>
+
+      <div class="glass-card">
+        <div class="input-label">Repas actifs</div>
+        <div class="chip-group" style="margin-bottom:16px">
+          <div class="chip selected" style="font-size:13px">&#127749; Petit-dej</div>
+          <div class="chip selected" style="font-size:13px">&#127789; Dejeuner</div>
+          <div class="chip selected" style="font-size:13px">&#127769; Diner</div>
+          <div class="chip" style="font-size:13px">&#127846; Snack</div>
+        </div>
+
+        <div class="input-label">Jours libres</div>
+        <div class="chip-group">
+          <div class="chip" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">L</div>
+          <div class="chip" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">M</div>
+          <div class="chip" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">M</div>
+          <div class="chip" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">J</div>
+          <div class="chip" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">V</div>
+          <div class="chip selected" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">S</div>
+          <div class="chip selected" style="min-width:42px;text-align:center;padding:10px 12px;font-size:13px">D</div>
+        </div>
+      </div>
+
+      <div class="glass-card">
+        <div class="input-label">Regime alimentaire</div>
+        <div class="chip-group">
+          <div class="chip selected">&#129385; Omnivore</div>
+          <div class="chip">&#129388; Vegetarien</div>
+          <div class="chip">&#127793; Vegan</div>
+        </div>
+      </div>
+
+      <div class="flex-spacer"></div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goTo(2)">Retour</button>
+        <button class="btn-next" onclick="goTo(4)">Suivant</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Allergies ── -->
+    <div class="step" id="step4">
+      <div class="illustration-container">
+        <div class="illustration" style="background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(139,92,246,0.04));">&#128737;</div>
+      </div>
+      <h1>Allergies & exclusions</h1>
+      <p class="subtitle">Selectionnez les aliments a exclure de vos plans.</p>
+
+      <div class="glass-card">
+        <div class="input-label">Allergies</div>
+        <div class="chip-group" style="margin-bottom:16px">
+          <div class="chip">&#127854; Gluten</div>
+          <div class="chip selected">&#129472; Lactose</div>
+          <div class="chip">&#129370; Oeufs</div>
+          <div class="chip">&#129408; Crustaces</div>
+          <div class="chip">&#129372; Arachides</div>
+          <div class="chip">&#127858; Soja</div>
+        </div>
+
+        <div class="input-label">Viandes exclues</div>
+        <div class="chip-group">
+          <div class="chip">&#128004; Boeuf</div>
+          <div class="chip">&#128055; Porc</div>
+          <div class="chip selected">&#129424; Agneau</div>
+          <div class="chip">&#128020; Volaille</div>
+          <div class="chip">&#128031; Poisson</div>
+        </div>
+      </div>
+
+      <div class="flex-spacer"></div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goTo(3)">Retour</button>
+        <button class="btn-next" onclick="goTo(5)">Suivant</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 5: Plan Preview ── -->
+    <div class="step" id="step5">
+      <div class="illustration-container">
+        <div class="illustration" style="background: linear-gradient(135deg, var(--emerald-surface), rgba(245,158,11,0.08));">&#128197;</div>
+      </div>
+      <h1>Votre plan est pret !</h1>
+      <p class="subtitle">Voici un apercu de votre semaine. Vous pourrez ajuster les repas ensuite.</p>
+
+      <!-- Day tabs -->
+      <div class="day-tabs" style="display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;">
+        <button class="day-tab active" onclick="selectDay(this,0)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Lun</button>
+        <button class="day-tab" onclick="selectDay(this,1)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Mar</button>
+        <button class="day-tab" onclick="selectDay(this,2)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Mer</button>
+        <button class="day-tab" onclick="selectDay(this,3)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Jeu</button>
+        <button class="day-tab" onclick="selectDay(this,4)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Ven</button>
+        <button class="day-tab" onclick="selectDay(this,5)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Sam</button>
+        <button class="day-tab" onclick="selectDay(this,6)" style="white-space:nowrap;padding:8px 14px;border-radius:20px;border:none;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.25s ease;">Dim</button>
+      </div>
+
+      <div class="glass-card" style="padding:16px;" id="dayPlanCard">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div style="font-weight:800; font-size:15px;" id="dayLabel">Lundi</div>
+          <div style="font-size:13px; color:var(--emerald); font-weight:700;" id="dayKcal">1 842 kcal</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;" id="dayMeals">
+        </div>
+      </div>
+
+      <div class="flex-spacer"></div>
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="goTo(4)">Retour</button>
+        <button class="btn-next" style="background: linear-gradient(135deg, var(--emerald), #047857);">Commencer !</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const totalSteps = 6;
+let currentStep = 0;
+
+function updateProgress() {
+  const container = document.getElementById('progress');
+  container.innerHTML = '';
+  for (let i = 0; i < totalSteps; i++) {
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment' + (i < currentStep ? ' completed' : '') + (i === currentStep ? ' active' : '');
+    container.appendChild(seg);
+  }
+  document.getElementById('stepLabel').textContent = `Etape ${currentStep + 1} sur ${totalSteps}`;
+}
+
+function goTo(step) {
+  document.getElementById('step' + currentStep).classList.remove('active');
+  currentStep = step;
+  document.getElementById('step' + currentStep).classList.add('active');
+  updateProgress();
+  window.scrollTo(0, 0);
+}
+
+// Toggle chips
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    chip.classList.toggle('selected');
+  });
+});
+
+updateProgress();
+
+// ── Day plan data for step 6 ──
+const dayPlans = [
+  { label:'Lundi', kcal:'1 842 kcal', meals:[
+    {emoji:'&#127749;',type:'Petit-dejeuner',name:'Porridge banane-cannelle',kcal:'420 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Bowl poulet-quinoa',kcal:'650 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Saumon grille legumes',kcal:'580 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]},
+  { label:'Mardi', kcal:'1 795 kcal', meals:[
+    {emoji:'&#129382;',type:'Petit-dejeuner',name:'Smoothie bowl fruits rouges',kcal:'380 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Wrap dinde-avocat',kcal:'620 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Pates completes bolognaise',kcal:'590 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]},
+  { label:'Mercredi', kcal:'1 810 kcal', meals:[
+    {emoji:'&#127749;',type:'Petit-dejeuner',name:'Tartines avocat-oeuf',kcal:'400 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Salade cesar poulet',kcal:'610 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Curry de lentilles',kcal:'550 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]},
+  { label:'Jeudi', kcal:'1 860 kcal', meals:[
+    {emoji:'&#129382;',type:'Petit-dejeuner',name:'Pancakes proteinés',kcal:'440 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Buddha bowl saumon',kcal:'670 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Poulet roti patates douces',kcal:'560 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]},
+  { label:'Vendredi', kcal:'1 780 kcal', meals:[
+    {emoji:'&#127749;',type:'Petit-dejeuner',name:'Overnight oats myrtilles',kcal:'370 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Risotto champignons',kcal:'640 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Filet de cabillaud',kcal:'570 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]},
+  { label:'Samedi', kcal:'1 900 kcal', meals:[
+    {emoji:'&#129382;',type:'Petit-dejeuner',name:'Granola yaourt grec',kcal:'430 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Burger maison complet',kcal:'720 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Soupe thai crevettes',kcal:'540 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]},
+  { label:'Dimanche', kcal:'1 750 kcal', meals:[
+    {emoji:'&#127749;',type:'Petit-dejeuner',name:'French toast fruits frais',kcal:'410 kcal',color:'var(--emerald-surface)',kcalColor:'var(--emerald)'},
+    {emoji:'&#127789;',type:'Dejeuner',name:'Tajine poulet-citron',kcal:'630 kcal',color:'rgba(59,130,246,0.06)',kcalColor:'#3B82F6'},
+    {emoji:'&#127769;',type:'Diner',name:'Omelette legumes gratin',kcal:'510 kcal',color:'rgba(139,92,246,0.06)',kcalColor:'var(--purple)'}
+  ]}
+];
+
+let currentDayIndex = 0;
+let autoplayInterval = null;
+let isAnimating = false;
+
+function renderDay(index) {
+  const day = dayPlans[index];
+  document.getElementById('dayLabel').textContent = day.label;
+  const kcalEl = document.getElementById('dayKcal');
+  kcalEl.textContent = day.kcal;
+  kcalEl.className = 'kcal-pop';
+  const container = document.getElementById('dayMeals');
+  container.innerHTML = day.meals.map(m => `
+    <div class="meal-row" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:${m.color};border-radius:12px;">
+      <span style="font-size:18px;">${m.emoji}</span>
+      <div style="flex:1;">
+        <div style="font-size:12px;color:var(--text-secondary);font-weight:600;">${m.type}</div>
+        <div style="font-size:14px;font-weight:700;">${m.name}</div>
+      </div>
+      <div style="font-size:12px;color:${m.kcalColor};font-weight:700;">${m.kcal}</div>
+    </div>
+  `).join('');
+}
+
+function selectDay(btn, index, direction) {
+  if (isAnimating || index === currentDayIndex) return;
+  isAnimating = true;
+  const dir = direction || (index > currentDayIndex ? 'left' : 'right');
+
+  // Update tabs
+  document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else document.querySelectorAll('.day-tab')[index].classList.add('active');
+
+  // Scroll tab into view
+  const activeTab = document.querySelectorAll('.day-tab')[index];
+  activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+  // Slide out
+  const card = document.getElementById('dayPlanCard');
+  card.classList.add(dir === 'left' ? 'slide-out-left' : 'slide-out-right');
+
+  setTimeout(() => {
+    // Update content
+    currentDayIndex = index;
+    renderDay(index);
+
+    // Prep slide-in from opposite side
+    card.classList.remove('slide-out-left', 'slide-out-right');
+    card.classList.add(dir === 'left' ? 'slide-in-left' : 'slide-in-right');
+
+    // Force reflow then animate in
+    void card.offsetWidth;
+    card.classList.remove('slide-in-left', 'slide-in-right');
+
+    setTimeout(() => { isAnimating = false; }, 400);
+  }, 350);
+}
+
+function autoplayNext() {
+  const next = (currentDayIndex + 1) % dayPlans.length;
+  selectDay(null, next, 'left');
+}
+
+function startAutoplay() {
+  stopAutoplay();
+  autoplayInterval = setInterval(autoplayNext, 2500);
+}
+
+function stopAutoplay() {
+  if (autoplayInterval) {
+    clearInterval(autoplayInterval);
+    autoplayInterval = null;
+  }
+}
+
+// Manual click pauses autoplay for 6s then resumes
+document.querySelectorAll('.day-tab').forEach((tab, i) => {
+  tab.addEventListener('click', () => {
+    stopAutoplay();
+    selectDay(tab, i);
+    setTimeout(startAutoplay, 6000);
+  });
+});
+
+// Start autoplay when step 6 is visible
+const origGoTo = goTo;
+goTo = function(step) {
+  origGoTo(step);
+  if (step === 5) {
+    currentDayIndex = 0;
+    renderDay(0);
+    document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.day-tab')[0].classList.add('active');
+    setTimeout(startAutoplay, 1500);
+  } else {
+    stopAutoplay();
+  }
+};
+
+// Init first day
+renderDay(0);
+</script>
+</body>
+</html>

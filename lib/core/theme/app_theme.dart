@@ -151,29 +151,6 @@ class AppTheme {
     outlineVariant: AppColors.gray200,
   );
 
-  // ── Dark scheme ───────────────────────────────────────────────────────
-
-  static final _darkColorScheme = ColorScheme.dark(
-    primary: AppColors.emeraldPrimaryDark,
-    onPrimary: AppColors.darkBackground,
-    primaryContainer: AppColors.emeraldDark.withValues(alpha: 0.3),
-    onPrimaryContainer: AppColors.emeraldPrimaryDark,
-    secondary: AppColors.emeraldSecondaryDark,
-    onSecondary: AppColors.darkBackground,
-    secondaryContainer: AppColors.tealSecondary.withValues(alpha: 0.2),
-    onSecondaryContainer: AppColors.emeraldSecondaryDark,
-    tertiary: AppColors.accentAmber,
-    onTertiary: AppColors.gray900,
-    surface: AppColors.darkSurface,
-    onSurface: AppColors.gray100,
-    surfaceContainerHighest: AppColors.darkSurfaceVariant,
-    onSurfaceVariant: AppColors.gray400,
-    error: AppColors.errorRedDark,
-    onError: AppColors.errorRed,
-    outline: AppColors.gray600,
-    outlineVariant: AppColors.gray700,
-  );
-
   // ── Typography ────────────────────────────────────────────────────────
 
   static TextTheme _buildTextTheme() {
@@ -259,9 +236,14 @@ class AppTheme {
       textTheme: textTheme,
       scaffoldBackgroundColor: AppColors.emeraldBackground,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
+        // Transparent so the emerald scaffold background shows through.
+        // scrolledUnderElevation: 0 prevents Material 3 from tinting the bar
+        // with the surface colour when the user scrolls beneath it.
+        backgroundColor: Colors.transparent,
         foregroundColor: AppColors.gray900,
         elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
         centerTitle: true,
         titleTextStyle: textTheme.titleLarge?.copyWith(
           color: AppColors.gray900,
@@ -337,89 +319,4 @@ class AppTheme {
     );
   }
 
-  static ThemeData dark() {
-    final textTheme = _buildTextTheme();
-    return ThemeData(
-      useMaterial3: true,
-      colorScheme: _darkColorScheme,
-      textTheme: textTheme,
-      scaffoldBackgroundColor: AppColors.darkBackground,
-      appBarTheme: AppBarTheme(
-        backgroundColor: AppColors.darkSurface,
-        foregroundColor: AppColors.gray100,
-        elevation: 0,
-        centerTitle: true,
-        titleTextStyle: textTheme.titleLarge?.copyWith(
-          color: AppColors.gray100,
-        ),
-      ),
-      cardTheme: CardThemeData(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.xl),
-        ),
-        color: AppColors.darkSurface,
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.emeraldPrimaryDark,
-          foregroundColor: AppColors.darkBackground,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: textTheme.labelLarge,
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.emeraldPrimaryDark,
-          side: const BorderSide(color: AppColors.emeraldPrimaryDark),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: textTheme.labelLarge,
-        ),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          backgroundColor: AppColors.emeraldPrimaryDark,
-          foregroundColor: AppColors.darkBackground,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: textTheme.labelLarge,
-        ),
-      ),
-      navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: AppColors.darkSurface,
-        elevation: 3,
-        shadowColor: Colors.black45,
-        surfaceTintColor: AppColors.emeraldPrimaryDark.withValues(alpha: 0.08),
-        indicatorColor: AppColors.emeraldDark.withValues(alpha: 0.3),
-        iconTheme: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return const IconThemeData(color: AppColors.emeraldPrimaryDark);
-          }
-          return const IconThemeData(color: AppColors.gray500);
-        }),
-        labelTextStyle: WidgetStateProperty.resolveWith((states) {
-          if (states.contains(WidgetState.selected)) {
-            return GoogleFonts.nunito(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: AppColors.emeraldPrimaryDark,
-            );
-          }
-          return GoogleFonts.nunito(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: AppColors.gray500,
-          );
-        }),
-      ),
-    );
-  }
 }

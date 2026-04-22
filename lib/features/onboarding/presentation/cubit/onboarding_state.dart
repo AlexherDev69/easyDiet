@@ -43,7 +43,7 @@ class OnboardingState extends Equatable {
     this.calculatedWaterMl = 0,
     this.isLoading = false,
     this.isOnboardingCompleted = false,
-    this.totalSteps = 6,
+    this.totalSteps = 7,
     this.generatedWeekPlan,
     this.showMoveDialog = false,
     this.movingMeal,
@@ -148,12 +148,14 @@ class OnboardingState extends Equatable {
   bool get isCurrentStepValid {
     switch (currentStep) {
       case 0:
+        return true; // Welcome
+      case 1:
         final ageInt = int.tryParse(age);
         return name.trim().isNotEmpty &&
             ageInt != null &&
             ageInt >= 10 &&
             ageInt <= 120;
-      case 1:
+      case 2:
         final h = int.tryParse(heightCm);
         final w = double.tryParse(weightKg);
         return h != null &&
@@ -162,18 +164,18 @@ class OnboardingState extends Equatable {
             w != null &&
             w >= 30 &&
             w <= 300;
-      case 2:
+      case 3:
         final target = double.tryParse(targetWeightKg);
         final current = double.tryParse(weightKg);
         return target != null &&
             target >= 30 &&
             target <= 300 &&
             (current == null || target < current);
-      case 3:
-        return freeDays.length <= 3; // at least 4 diet days
       case 4:
-        return true;
+        return freeDays.length <= 3;
       case 5:
+        return true;
+      case 6:
         return generatedWeekPlan != null;
       default:
         return false;
